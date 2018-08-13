@@ -51,6 +51,7 @@ dependencies {
     compile 'com.justkiddingbaby:vercodeedittext:1.0.5'
 
 
-
+    //很多的工具类
+    implementation 'com.blankj:utilcode:1.19.0'
 
 }
