@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.blankj.utilcode.util.Utils;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -50,6 +52,7 @@ public class AppTool {
             HttpTool.init(application);
             MapDB.init(isDebugIn);
             TakePhotoSimpleFragment.init();
+            Utils.init(application);
         }
     }
 
