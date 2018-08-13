@@ -12,6 +12,9 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
+import com.blankj.utilcode.util.Utils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -48,6 +51,7 @@ public class WzToast {
     public void showWzToast(final Object toastStr, final long time) {
         if (StringTool.isEmpty("" + toastStr)) return;
         if (!CommonTool.isForeground(AppTool.getApplication())) return;
+        ToastUtils.showLong(""+toastStr);
         //Snackbar.make(AppTool.currActivity.getWindow().getDecorView(),""+toastStr,Snackbar.LENGTH_SHORT).show();
         //if(true)return;
         AppTool.uiHandler.post(new Runnable() {
