@@ -51,14 +51,16 @@ public class WzToast {
     public void showWzToast(final Object toastStr, final long time) {
         if (StringTool.isEmpty("" + toastStr)) return;
         if (!CommonTool.isForeground(AppTool.getApplication())) return;
-        ToastUtils.showLong(""+toastStr);
-        if(true)return;
+
         //Snackbar.make(AppTool.currActivity.getWindow().getDecorView(),""+toastStr,Snackbar.LENGTH_SHORT).show();
         //if(true)return;
         AppTool.uiHandler.post(new Runnable() {
             @Override
             public void run() {
                 try {
+                    ToastUtils.showLong(""+toastStr);
+                    if(true)return;
+
                     if (toast == null) {
                         toast = Toast.makeText(AppTool.getApplication(), "", Toast.LENGTH_SHORT);
                     }
