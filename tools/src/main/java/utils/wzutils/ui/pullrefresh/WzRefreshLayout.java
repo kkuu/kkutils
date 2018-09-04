@@ -16,6 +16,8 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
+import utils.wzutils.common.UiTool;
+
 
 /***
  *    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
@@ -37,29 +39,29 @@ public class WzRefreshLayout extends SmartRefreshLayout {
     public void stopRefresh(PageControl pageControl) {
         finishRefresh();
         finishLoadMore();
-//        if(pageControl.getCurrPage()==1){
-//            finishRefresh();
-//        }else {
-//            finishLoadMore();
-//        }
     }
 
-
-
-
-//    public SmartRefreshLayout finishLoadMore(int delayed, final boolean success, final boolean noMoreData) {
-//        return super.finishLoadMore(0,success,noMoreData);
-//    }
-//
     @Override
     public SmartRefreshLayout finishRefresh(int delayed, boolean success) {
         return super.finishRefresh(0, success);
     }
 
 
-
-
-
+    /***
+     * 可以设置这个背景颜色
+     * @param resColor
+     */
+    public void setRefreshPrimaryColor(final int resColor){
+        post(new Runnable() {
+            @Override
+            public void run() {
+                ClassicsHeader classicsHeader= (ClassicsHeader) getRefreshHeader();
+                classicsHeader.setPrimaryColor(UiTool.getColorByResId(resColor));
+                ClassicsFooter classicsFooter= (ClassicsFooter) getRefreshFooter();
+                classicsFooter.setPrimaryColor(UiTool.getColorByResId(resColor));
+            }
+        });
+    }
 
 
 
