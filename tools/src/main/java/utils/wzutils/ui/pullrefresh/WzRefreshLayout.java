@@ -106,7 +106,7 @@ public class WzRefreshLayout extends SmartRefreshLayout {
         });
     }
 
-    public void bindLoadData(final LoadListDataInterface loadListDataInterface, final PageControl pageControl) {
+    public void bindLoadData(final PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
         setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
