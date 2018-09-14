@@ -61,7 +61,7 @@ public class BroadcastReceiverTool {
         }
     }
 
-    public static class LiftFragment extends WzParentFragmentLife {
+    public static class LiftFragment extends Fragment {
         ArrayList<BroadcastReceiver> broadcastReceivers = new ArrayList<>();
 
         public static void bindAction(FragmentActivity activity, final BroadCastWork runnable,String... actions ) {
