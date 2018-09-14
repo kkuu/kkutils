@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
@@ -39,6 +40,17 @@ public class WzRefreshLayout extends SmartRefreshLayout {
     public void stopRefresh(PageControl pageControl) {
         finishRefresh();
         finishLoadMore();
+    }
+
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {//设置手指按下的时候 就不要自动加载更多
+        if(event.getAction()==MotionEvent.ACTION_DOWN){
+            setEnableAutoLoadMore(false);
+        }else if(event.getAction()==MotionEvent.ACTION_UP||event.getAction()==MotionEvent.ACTION_CANCEL){
+            setEnableAutoLoadMore(true);
+        }
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
