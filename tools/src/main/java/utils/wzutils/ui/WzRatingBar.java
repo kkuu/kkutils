@@ -115,9 +115,21 @@ public class WzRatingBar extends LinearLayout {
             }else {
                 imageView.setImageResource(resStarDrawableIdEmpty);
             }
+            imageView.setPadding(itemPaddingLeft,itemPaddingTop,itemPaddingRight,itemPaddingBottom);
         }
         if(onWzRatingBarChangeListener!=null){
             onWzRatingBarChangeListener.onRatingChanged(this,rating,fromUser);
         }
+    }
+
+    int itemPaddingLeft;
+    int itemPaddingTop;
+    int itemPaddingRight;
+    int itemPaddingBottom;
+    public void setItemPadding(int left, int top, int right, int bottom){
+       this.itemPaddingLeft=left;
+       this.itemPaddingTop=top;
+       this.itemPaddingRight=right;
+       this.itemPaddingBottom=bottom;
     }
 }
