@@ -12,6 +12,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import utils.wzutils.AppTool;
 import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.LogTool;
@@ -260,6 +263,76 @@ public class DialogTool {
         } catch (Exception e) {
             LogTool.ex(e);
         }
+        return dialog;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static interface MultiChoiceListener{
+        void onChoose(DialogInterface dialogInterface, List<Integer> choose);
+    }
+
+    /***
+     * 多选
+     * @param title
+     * @param data 多选数据
+     * @param choose  默认是否选中， length 必须和data 一样
+     * @param queding
+     * @param quxiao
+     * @param multiChoiceListener
+     * @return
+     */
+    public static AlertDialog showMultiChoiceDialog(String title, CharSequence[] data, boolean[] choose, String queding, String quxiao, final MultiChoiceListener multiChoiceListener) {
+        final List<Integer>chooseList=new ArrayList<>();
+        AlertDialog dialog = null;
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(AppTool.currActivity);
+            if (!StringTool.isEmpty(title)) {
+                builder.setTitle(title);
+            }
+            final boolean[] finalChoose = new boolean[data.length];
+            dialog=builder.setMultiChoiceItems(data, choose, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    finalChoose[which]=isChecked;
+                }
+            }).setPositiveButton(queding, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    chooseList.clear();
+                    for(int i=0;i<finalChoose.length;i++){
+                        if(finalChoose[i]){
+                            chooseList.add(i);
+                        }
+                    }
+                    if(multiChoiceListener!=null){
+                        multiChoiceListener.onChoose(dialog,chooseList);
+                    }
+                }
+            }).setNegativeButton(quxiao, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).create();
+            dialog.show();
+
+        } catch (Exception var10) {
+            LogTool.ex(var10);
+        }
+
         return dialog;
     }
 }
