@@ -2,6 +2,7 @@ package utils.wzutils.common;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 /**
  * Created by ishare on 2016/6/23.
@@ -39,6 +40,18 @@ public class MathTool {
      */
     public static double chu(double d1, double d2) {
         return getBig(d1).divide(getBig(d2)).doubleValue();
+    }
+
+
+    /***
+     * double 转string ， 不会出现科学计数法
+     * @param d
+     * @return
+     */
+    public static String toString(double d){
+        NumberFormat numberFormat=NumberFormat.getInstance();
+        numberFormat.setMaximumFractionDigits(10000);
+        return numberFormat.format(d);
     }
 
 
