@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import utils.wzutils.AppTool;
@@ -303,7 +304,8 @@ public class DialogTool {
             if (!StringTool.isEmpty(title)) {
                 builder.setTitle(title);
             }
-            final boolean[] finalChoose = new boolean[data.length];
+            if(choose==null)choose=new boolean[data.length];
+            final boolean[] finalChoose = Arrays.copyOf(choose,choose.length);
             dialog=builder.setMultiChoiceItems(data, choose, new DialogInterface.OnMultiChoiceClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
