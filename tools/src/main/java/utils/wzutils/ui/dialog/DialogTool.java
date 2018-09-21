@@ -282,7 +282,7 @@ public class DialogTool {
 
 
     public static interface MultiChoiceListener{
-        void onChoose(DialogInterface dialogInterface, List<Integer> choose);
+        void onChoose(DialogInterface dialogInterface, List<Integer> choose,boolean[] chooseAll);
     }
 
     /***
@@ -319,7 +319,7 @@ public class DialogTool {
                         }
                     }
                     if(multiChoiceListener!=null){
-                        multiChoiceListener.onChoose(dialog,chooseList);
+                        multiChoiceListener.onChoose(dialog,chooseList,finalChoose);
                     }
                 }
             }).setNegativeButton(quxiao, new DialogInterface.OnClickListener() {
