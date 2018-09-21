@@ -272,8 +272,8 @@ public class HttpRequest {
     }
 
     public void printLogPost() {
-        if(requestMethod!=RequestMethod.POST)return;
-        LogTool.s("请求完成了" + getRequestMethod() + "\t  耗时：" + (System.currentTimeMillis() - timeBeginRequest) + "\t:" + getUrlStr());
+       // if(requestMethod!=RequestMethod.POST)return;
+       // LogTool.s("请求完成了" + getRequestMethod() + "\t  耗时：" + (System.currentTimeMillis() - timeBeginRequest) + "\t:" + getUrlStr());
         LogTool.s("请求参数: ");
         Iterator iterator = getQueryMap().entrySet().iterator();
         while (iterator.hasNext()) {
