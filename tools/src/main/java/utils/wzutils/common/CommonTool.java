@@ -382,6 +382,25 @@ public class CommonTool {
         //activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
 
+
+    /**
+     * 设置输入界面一直显示出来
+     * @param activity
+     */
+    public static void setSoftInputAdjustPan(Activity activity){
+        if(activity==null)return;
+        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
+
+    /***
+     * 禁止截屏
+     * @param activity
+     */
+    public static void JingZhiJieTu(Activity activity){
+        if(activity==null)return;
+        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+    }
+
     /***
      * 循环滚动的 position 计算
      *
@@ -460,5 +479,8 @@ public class CommonTool {
     public static boolean notEmptyList(List list) {
         return list != null && !list.isEmpty();
     }
+
+
+
 }
 
