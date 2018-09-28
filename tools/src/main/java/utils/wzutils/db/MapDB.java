@@ -10,6 +10,7 @@ import utils.wzutils.JsonTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.StringTool;
 import utils.wzutils.encypt.AESTool;
+import utils.wzutils.encypt.Md5Tool;
 
 /**
  * Created by kk on 2016/5/11.
@@ -110,7 +111,7 @@ public class MapDB {
 
 
     private static SharedPreferences getShare(String key) {
-        return AppTool.getApplication().getSharedPreferences(getDbName()+"--"+key, Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
+        return AppTool.getApplication().getSharedPreferences(getDbName()+"--"+ Md5Tool.md5(key), Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
     }
 
     public static String getDbName() {
