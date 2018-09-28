@@ -52,7 +52,7 @@ public class MapDB {
                 valueSave=AESTool.encrypt(valueSave,pwd);
             }
             try {
-                getShare().edit().putString(key, valueSave).apply();//apply 异步提交， commit 同步提交
+                getShare(key).edit().putString(key, valueSave).apply();//apply 异步提交， commit 同步提交
                 LogTool.s("保存了一个对象到本地： key= " + key);
             } catch (Exception e) {
                 LogTool.ex(e);
@@ -71,7 +71,7 @@ public class MapDB {
         try {
             boolean encrypt= StringTool.notEmpty(pwd);
             if(encrypt)key= AESTool.encrypt(key,pwd);
-            String value = getShare().getString(key, "");
+            String value = getShare(key).getString(key, "");
             if(encrypt)value=AESTool.decrypt(value,pwd);
 
             if(StringTool.isEmpty(value)&&defaultObj!=null)return defaultObj;
@@ -88,7 +88,7 @@ public class MapDB {
         try {
             boolean encrypt= StringTool.notEmpty(pwd);
             if(encrypt)key= AESTool.encrypt(key,pwd);
-            String value = getShare().getString(key, "");
+            String value = getShare(key).getString(key, "");
             if(encrypt)value=AESTool.decrypt(value,pwd);
             t = JsonTool.toJavaList(value, tClass);
             LogTool.s("从本地读取了一个对象: key=" + key);
@@ -109,8 +109,8 @@ public class MapDB {
 
 
 
-    private static SharedPreferences getShare() {
-        return AppTool.getApplication().getSharedPreferences(getDbName(), Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
+    private static SharedPreferences getShare(String key) {
+        return AppTool.getApplication().getSharedPreferences(getDbName()+"--"+key, Context.MODE_PRIVATE |Context.MODE_MULTI_PROCESS);
     }
 
     public static String getDbName() {
