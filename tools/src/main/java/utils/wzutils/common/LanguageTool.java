@@ -13,7 +13,7 @@ import utils.wzutils.db.MapDB;
 
 public class LanguageTool {
 
-    public  int language=1;//1 中文 2英文
+    public  static int language=1;//1 中文 2英文
 
     /***
      * 初始化 本地语言， 第一个启动页调用
