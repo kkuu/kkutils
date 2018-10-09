@@ -20,6 +20,7 @@ import utils.wzutils.ui.WzSimpleRecycleView;
 import utils.wzutils.ui.bigimage.WzBigImgListFragment;
 import utils.wzutils.ui.pullrefresh.WzRefreshImp;
 import utils.wzutils.ui.takephoto.TakePhotoSimpleFragment;
+import utils.wzutils.ui.webview.X5WebView;
 
 
 /**
@@ -53,6 +54,7 @@ public class AppTool {
             MapDB.init(isDebugIn);
             TakePhotoSimpleFragment.init();
             Utils.init(application);
+            X5WebView.init(application);
         }
     }
 
