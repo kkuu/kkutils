@@ -64,7 +64,7 @@ public class LanguageTool {
 
         if(restartActivity!=null){
             Intent intent=new Intent(AppTool.getApplication(), restartActivity);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             AppTool.getApplication().startActivity(intent);
         }
     }
