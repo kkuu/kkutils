@@ -37,6 +37,25 @@ public class WebViewTool {
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setDefaultTextEncodingName("UTF-8");
 
+        {//腾讯X5的
+            webSettings.setJavaScriptEnabled(true);
+            webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+            webSettings.setAllowFileAccess(true);
+            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+            webSettings.setSupportZoom(true);
+            webSettings.setBuiltInZoomControls(true);
+            webSettings.setUseWideViewPort(true);
+            webSettings.setSupportMultipleWindows(true);
+            webSettings.setAppCacheEnabled(true);
+            webSettings.setDomStorageEnabled(true);
+            webSettings.setGeolocationEnabled(true);
+            webSettings.setAppCacheMaxSize(Long.MAX_VALUE);
+            webSettings.setPluginState(WebSettings.PluginState.ON_DEMAND);
+            webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        }
+
+
+
 
 
         {// 4.4以上的 webview不能同时加载  http  和https ，需要加下面的代码
