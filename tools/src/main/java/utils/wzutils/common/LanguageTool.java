@@ -60,7 +60,8 @@ public class LanguageTool {
         resources.updateConfiguration(config, dm);
         if(activity!=null)activity.getResources().updateConfiguration(config, dm);
 
-        MapDB.saveObj("language",isCn?1:2);
+        language=isCn?1:2;
+        MapDB.saveObj("language",language);
 
         if(restartActivity!=null){
             Intent intent=new Intent(AppTool.getApplication(), restartActivity);
