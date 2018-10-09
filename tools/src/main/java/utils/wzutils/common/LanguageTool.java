@@ -64,6 +64,7 @@ public class LanguageTool {
         MapDB.saveObj("language",language);
 
         if(restartActivity!=null){
+            LayoutInflaterTool.clearAll();
             Intent intent=new Intent(AppTool.getApplication(), restartActivity);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             AppTool.getApplication().startActivity(intent);
