@@ -66,6 +66,8 @@ public class LanguageTool {
             Intent intent=new Intent(AppTool.getApplication(), restartActivity);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             AppTool.getApplication().startActivity(intent);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0);
         }
     }
 }

@@ -53,7 +53,7 @@ public class MapDB {
                 valueSave=AESTool.encrypt(valueSave,pwd);
             }
             try {
-                getShare(key).edit().putString(key, valueSave).apply();//apply 异步提交， commit 同步提交
+                getShare(key).edit().putString(key, valueSave).commit();//apply 异步提交， commit 同步提交
                 LogTool.s("保存了一个对象到本地： key= " + key);
             } catch (Exception e) {
                 LogTool.ex(e);
