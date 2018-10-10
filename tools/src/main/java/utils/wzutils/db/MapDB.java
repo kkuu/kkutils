@@ -54,7 +54,7 @@ public class MapDB {
             }
             try {
                 getShare(key).edit().putString(key, valueSave).commit();//apply 异步提交， commit 同步提交
-                LogTool.s("保存了一个对象到本地： key= " + key);
+                LogTool.s("保存了一个对象到本地： key= " + key+"  \n"+value);
             } catch (Exception e) {
                 LogTool.ex(e);
             }
