@@ -9,6 +9,7 @@ import android.widget.EditText;
 import utils.wzutils.AppTool;
 import utils.wzutils.HttpTool;
 import utils.wzutils.common.CommonTool;
+import utils.wzutils.common.LanguageTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.PwdTool;
 import utils.wzutils.http.HttpRequest;
@@ -27,11 +28,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClickWz(View v) {
 
-                EditText text=findViewById(R.id.editText);
 
-                if(!PwdTool.isPwdOk(text.getText().toString())){
-                    CommonTool.showToast("密码过于简单");
-                }
+                new LanguageTool().initLanguage(MainActivity.this);
 
             }
         });
