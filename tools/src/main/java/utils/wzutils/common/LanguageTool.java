@@ -12,20 +12,27 @@ import utils.wzutils.AppTool;
 import utils.wzutils.db.MapDB;
 
 public class LanguageTool {
-
-    public static Locale currLocale=Locale.SIMPLIFIED_CHINESE;
     /***
      * 初始化 本地语言， 第一个启动页调用
      * @param activity
      */
     public void initLanguage(Activity activity) {
+
         String localeStr = MapDB.loadObjByDefault("locale", String.class, "");
         if(StringTool.notEmpty(localeStr)){
-            currLocale=Locale.forLanguageTag(localeStr);
-        }else {
-            currLocale=getLanguage();
+            Locale currLocale=Locale.forLanguageTag(localeStr);
+            setLanguage(activity, null, currLocale);
         }
-        setLanguage(activity, null, currLocale);
+    }
+
+    public boolean isSimpleChinese(){
+        return Locale.SIMPLIFIED_CHINESE.equals(getLanguage());
+    }
+    public boolean isEn(){
+        return Locale.ENGLISH.equals(getLanguage());
+    }
+    public boolean isTw(){
+        return Locale.TAIWAN.equals(getLanguage());
     }
 
     public Locale getLanguage() {
