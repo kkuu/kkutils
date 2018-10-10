@@ -258,17 +258,24 @@ public class HttpRequest {
         return sb.toString();
     }
 
-    public void printLogGet() {
-        StringBuffer sb = new StringBuffer(getRequestMethod() + "\t:" + getUrlStr());
-        if (!getUrlStr().contains("?")) {
+    /***
+     * 获取请求连接， get的
+     * @return
+     */
+    public String getUrlRequestGet(){
+        StringBuffer sb = new StringBuffer(getUrlStr());
+        if (!sb.toString().contains("?")) {
             sb.append("?");
         }
-        Iterator iterator = getQueryMap().entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry entry = (Map.Entry) iterator.next();
+        Iterator iterator = this.getQueryMap().entrySet().iterator();
+        while(iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry)iterator.next();
             sb.append("&" + entry.getKey() + "=" + entry.getValue());
         }
-        LogTool.s("请求完成了: " + sb.toString());
+        return sb.toString();
+    }
+    public void printLogGet() {
+        LogTool.s("请求完成了: " + getRequestMethod()+"  "+getUrlRequestGet());
     }
 
     public void printLogPost() {
