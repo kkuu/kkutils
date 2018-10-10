@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">tools</string>
+
+    <string name="REFRESH_FOOTER_PULLUP">上拉加載更多</string>
+    <string name="REFRESH_FOOTER_RELEASE">釋放立即加載</string>
+    <string name="REFRESH_FOOTER_LOADING">正在加載...</string>
+    <string name="REFRESH_FOOTER_REFRESHING">正在刷新...</string>
+    <string name="REFRESH_FOOTER_FINISH">加載完成</string>
+    <string name="REFRESH_FOOTER_FAILED">加載失敗</string>
+    <string name="REFRESH_FOOTER_ALLLOADED">沒有更多數據了</string>
+
+    <string name="REFRESH_HEADER_PULLDOWN">下拉可以刷新</string>
+    <string name="REFRESH_HEADER_REFRESHING">正在刷新...</string>
+    <string name="REFRESH_HEADER_LOADING">正在加載...</string>
+    <string name="REFRESH_HEADER_RELEASE">釋放立即刷新</string>
+    <string name="REFRESH_HEADER_FINISH">刷新完成</string>
+    <string name="REFRESH_HEADER_FAILED">刷新失敗</string>
+
+    <string name="banben_mingcheng">版本名稱：</string>
+    <string name="gengxin_shijian">更新時間：</string>
+    <string name="gengxin_daxiao">更新大小：</string>
+    <string name="gengxin_neirong">更新內容：</string>
+    <string name="ninyou_xinde_banben">您有新的版本</string>
+    <string name="tuichu_chengxu">退出程序</string>
+    <string name="quxiao">取消</string>
+    <string name="liji_gengxin">立即更新</string>
+    <string name="houtai_xiazai">後臺下載</string>
+    <string name="zhengzai_nuli_xiazai">正在努力下載</string>
+
+    <string name="dengdai">請稍等</string>
+
+</resources>
+
