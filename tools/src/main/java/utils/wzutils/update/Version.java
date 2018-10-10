@@ -12,6 +12,7 @@ import android.net.Uri;
 import java.io.File;
 
 import utils.wzutils.AppTool;
+import utils.wzutils.R;
 import utils.wzutils.common.FileTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.StringTool;
@@ -41,24 +42,24 @@ public class Version {
         boolean hasNew = currVersionCode < newVersion.versionCode;
         newVersion.updateDesc = "" + newVersion.updateDesc.replace("\\n", "\n");
         if (hasNew) {//有新的版本
-            String showText = "版本名称："
+            String showText = context.getString(R.string.banben_mingcheng)
                     + newVersion.versionName
-                    + "\n更新时间： "
+                    + context.getString(R.string.gengxin_shijian)
                     + newVersion.updateTime
-                    + "\n更新大小："
+                    + context.getString(R.string.gengxin_daxiao)
                     + newVersion.versionSize
-                    + "\n更新内容： \n"
+                    + context.getString(R.string.gengxin_neirong)
                     + newVersion.updateDesc;
 
             final AlertDialog dialogShowMsg = new AlertDialog.Builder(context)
-                    .setTitle("您有新的版本")
+                    .setTitle(R.string.ninyou_xinde_banben)
                     .setMessage(showText)
                     .create();
 
             final boolean isForce = "1".equals(newVersion.isForce);
             if (isForce) {//强制更新
                 dialogShowMsg.setCancelable(false);
-                dialogShowMsg.setButton(ProgressDialog.BUTTON_NEGATIVE, "退出程序", new DialogInterface.OnClickListener() {
+                dialogShowMsg.setButton(ProgressDialog.BUTTON_NEGATIVE, context.getString(R.string.tuichu_chengxu), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         AppTool.exitApp();
@@ -66,14 +67,14 @@ public class Version {
                 });
             } else {
                 dialogShowMsg.setCancelable(true);
-                dialogShowMsg.setButton(ProgressDialog.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+                dialogShowMsg.setButton(ProgressDialog.BUTTON_NEGATIVE, context.getString(R.string.quxiao), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialogShowMsg.dismiss();
                     }
                 });
             }
-            dialogShowMsg.setButton(ProgressDialog.BUTTON_POSITIVE, "立即更新", new DialogInterface.OnClickListener() {
+            dialogShowMsg.setButton(ProgressDialog.BUTTON_POSITIVE, context.getString(R.string.liji_gengxin), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     showDownLoadProgressDialog(context, newVersion, isForce);
@@ -96,7 +97,7 @@ public class Version {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMax(100);
         progressDialog.setCancelable(false);
-        progressDialog.setTitle("正在努力下载");
+        progressDialog.setTitle(context.getString(R.string.zhengzai_nuli_xiazai));
         String path= FileTool.getCacheDir("apk")+"tem.apk";
 
         final long id = WzDownLoadTool.downLoad( newVersion.updateUrl,path, new WzDownLoadTool.DownLoadProgressListener() {
@@ -118,14 +119,14 @@ public class Version {
             }
         });
         if (!isForce) {
-            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, context.getString(R.string.quxiao), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     WzDownLoadTool.removeDownLoad(id);
                     progressDialog.dismiss();
                 }
             });
-            progressDialog.setButton(ProgressDialog.BUTTON_POSITIVE, "后台下载", new DialogInterface.OnClickListener() {
+            progressDialog.setButton(ProgressDialog.BUTTON_POSITIVE, context.getString(R.string.houtai_xiazai), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     progressDialog.dismiss();

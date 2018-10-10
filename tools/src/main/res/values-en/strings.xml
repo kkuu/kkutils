@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">tools</string>
+
+    <string name="REFRESH_FOOTER_PULLUP">Pull more</string>
+    <string name="REFRESH_FOOTER_RELEASE">Release immediately loaded</string>
+    <string name="REFRESH_FOOTER_LOADING">Loading...</string>
+    <string name="REFRESH_FOOTER_REFRESHING">Refreshing...</string>
+    <string name="REFRESH_FOOTER_FINISH">Loaded</string>
+    <string name="REFRESH_FOOTER_FAILED">Load failure</string>
+    <string name="REFRESH_FOOTER_ALLLOADED">No more data</string>
+
+    <string name="REFRESH_HEADER_PULLDOWN">Pull-down refreshes</string>
+    <string name="REFRESH_HEADER_REFRESHING">Refreshing...</string>
+    <string name="REFRESH_HEADER_LOADING">Loading...</string>
+    <string name="REFRESH_HEADER_RELEASE">Release immediately refresh</string>
+    <string name="REFRESH_HEADER_FINISH">Refresh complete</string>
+    <string name="REFRESH_HEADER_FAILED">Refresh failed</string>
+
+
+    <string name="banben_mingcheng">Version Name:</string>
+    <string name="gengxin_shijian">Update Time:</string>
+    <string name="gengxin_daxiao">Update Size:</string>
+    <string name="gengxin_neirong">Update Content:</string>
+    <string name="ninyou_xinde_banben">You have the new version</string>
+    <string name="tuichu_chengxu">Exit</string>
+    <string name="quxiao">Cancel</string>
+    <string name="liji_gengxin">Update</string>
+    <string name="houtai_xiazai">Background Download</string>
+    <string name="zhengzai_nuli_xiazai">Is struggling to download</string>
+
+
+
+</resources>
+
