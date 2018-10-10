@@ -14,6 +14,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import utils.wzutils.common.CommonTool;
+import utils.wzutils.common.LayoutInflaterTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.db.MapDB;
 import utils.wzutils.ui.WzSimpleRecycleView;
@@ -55,6 +56,8 @@ public class AppTool {
             TakePhotoSimpleFragment.init();
             Utils.init(application);
             X5WebView.init(application);
+            LayoutInflaterTool.clearAll();
+
         }
     }
 
