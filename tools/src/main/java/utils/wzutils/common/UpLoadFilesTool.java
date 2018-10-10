@@ -75,12 +75,12 @@ public class UpLoadFilesTool {
                                         try {
                                             if (dataOk) {
                                                 if (upLoadFilesListener != null) {
-                                                    upLoadFilesListener.onUpLoadFileEnd(upLoadData.file.getAbsolutePath(), serverPath);
+                                                    upLoadFilesListener.onUpLoadFileEnd(upLoadData, serverPath);
                                                 }
                                                 localPathToServerPathMap.put(upLoadData.file.getAbsolutePath(), serverPath);//用这个做中间转换保证 上传顺序
                                             } else {
                                                 if (upLoadFilesListener != null) {
-                                                    upLoadFilesListener.onUpLoadFileEnd(upLoadData.file.getAbsolutePath(), "");
+                                                    upLoadFilesListener.onUpLoadFileEnd(upLoadData, "");
                                                 }
                                             }
                                         } catch (Exception e) {
@@ -134,13 +134,14 @@ public class UpLoadFilesTool {
     }
 
     public interface UpLoadFilesListener {
-        void onUpLoadFileEnd(String localPath, String serverPath);
+        void onUpLoadFileEnd(UpLoadData upLoadData, String serverPath);
 
         void onUpLoadFileEndAll(List<String> serverPaths);
     }
 
     public static class UpLoadData {
         public File file;//要上传的文件
+        public File inputFile;//最原始的文件
         /***
          * 需要在上传成功之后调用下面这一句， 其他的 在监听器里面调用， 能保证顺序
          *  upLoadData.upLoadImpSuccess.onSuccess(data.isDataOk(),serverPath);
@@ -159,6 +160,7 @@ public class UpLoadFilesTool {
         }
         public UpLoadData(File file) {
             this.file = file;
+            this.inputFile=file;
         }
     }
 }
