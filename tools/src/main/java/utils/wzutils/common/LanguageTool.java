@@ -42,7 +42,6 @@ public class LanguageTool {
     /***
      *  @param activity
      * @param restartActivity  重新启动的 activity ， 启动页， null 不重启
-     * @param isCn
      */
     public void setLanguage(Activity activity, Class restartActivity, Locale locale) {
         Resources resources = AppTool.getApplication().getResources();// 获得res资源对象
