@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import java.io.Serializable;
 
 import utils.wzutils.AppTool;
+import utils.wzutils.R;
 import utils.wzutils.common.LogTool;
 
 /**
@@ -92,7 +93,7 @@ public class WzParentActivity extends AppCompatActivity implements Serializable 
     public void showWaitingDialog(String msg) {
         try {
             if (TextUtils.isEmpty(msg)) {
-                msg = "请稍等";
+                msg = getString(R.string.dengdai);
             }
             final String msgFnal = msg;
             runOnUiThread(new Runnable() {
