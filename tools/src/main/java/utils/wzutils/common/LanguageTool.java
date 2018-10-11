@@ -11,6 +11,13 @@ import java.util.Locale;
 import utils.wzutils.AppTool;
 import utils.wzutils.db.MapDB;
 
+/***
+ * bug
+ * 1， 使用webview 后会导致 重置为系统默认语言， 需要在webview 界面结束时再调用initLanguage
+ * 2.  需要在每个activity oncreate 里面调用initLanguage
+ *
+ *
+ */
 public class LanguageTool {
     /***
      * 初始化 本地语言， 第一个启动页调用
