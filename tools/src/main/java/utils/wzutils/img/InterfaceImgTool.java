@@ -26,6 +26,7 @@ public interface InterfaceImgTool {
      */
     void loadImage(Context context, Object src, ImageView imageView, int width, int height);
 
+    void preloadImage(Context context,Object src,int width,int height);
 
     /**
      * 清除缓存

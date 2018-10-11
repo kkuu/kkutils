@@ -168,6 +168,24 @@ public class ImgTool {
             LogTool.ex(e);
         }
     }
+    /**
+     * 预加载一张图片到, 指定需求宽高
+     *
+     * @param src       图片地址
+     * @param width     需要的宽
+     * @param height    需要的高
+     */
+    public static void preLoadImage(Object src,  int width, int height) {
+        try {
+            if (src == null) return;
+            Context context = AppTool.getApplication();
+            src = convertSrc(src);
+            src = convertSrc(src, width, height);
+            imgToolInterface.preloadImage(context, src, width, height);
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
 
     public static boolean isEmpty(Object src) {
         return src == null || StringTool.isEmpty("" + src);
@@ -192,6 +210,8 @@ public class ImgTool {
         }
         return src;
     }
+
+
 
     public static Object convertSrc(Object src) {
         if (isEmpty(src)) {

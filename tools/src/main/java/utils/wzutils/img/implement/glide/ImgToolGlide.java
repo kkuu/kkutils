@@ -130,7 +130,11 @@ public class ImgToolGlide implements InterfaceImgTool {
 
     @Override
     public void loadImage( Context context, Object src, final ImageView imageView, int width, int height) {
-        if(context==null)context=imageView.getContext();
+        RequestBuilder requestBuilder=initBuilder(context,src,imageView,width,height);
+        requestBuilder.into(imageView);
+    }
+    public RequestBuilder initBuilder(Context context, Object src, final ImageView imageView, int width, int height){
+        if(context==null&&imageView!=null)context=imageView.getContext();
         if(context==null)context=AppTool.currActivity;
         src = convertSrc(src);
         DiskCacheStrategy diskCacheStrategy = DiskCacheStrategy.ALL;
@@ -146,27 +150,12 @@ public class ImgToolGlide implements InterfaceImgTool {
                 .apply(options)
                 .transition(new DrawableTransitionOptions().crossFade(100))
                 .listener(requestListener);
-
-        requestBuilder.into(imageView);
-//        if(imageView.getMeasuredWidth()>0){//设置了宽高的，
-//            requestBuilder.into(imageView);
-//        }else {//没设置宽高的
-//            requestBuilder.into(new SimpleTarget() {
-//                @Override
-//                public void onResourceReady(Object resource, Transition transition) {
-//                    if(resource==null)return;
-//                    if(resource instanceof Bitmap)imageView.setImageBitmap((Bitmap) resource);
-//                    else if(resource  instanceof Drawable)
-//                    {
-//                        imageView.setImageDrawable((Drawable) resource);
-//                        if(resource instanceof GifDrawable){
-//                            ((GifDrawable) resource).start();
-//                        }
-//                    }
-//                }
-//            });
-//        }
-
+        return requestBuilder;
+    }
+    @Override
+    public void preloadImage(Context context, Object src, int width, int height) {
+        RequestBuilder requestBuilder=initBuilder(context,src,null,width,height);
+        requestBuilder.preload(width,height);
     }
 
     @Override

@@ -20,4 +20,8 @@
         tools:layout_editor_absoluteY="128dp" />
 
 
+    <ImageView
+        android:id="@+id/imgv"
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
 </LinearLayout>
