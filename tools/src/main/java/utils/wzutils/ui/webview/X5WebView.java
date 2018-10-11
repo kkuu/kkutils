@@ -17,6 +17,14 @@ import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
+/***
+ * webview  通用bug
+ * 1. 会导致系统语言重置
+ * {@link utils.wzutils.common.LanguageTool}
+ * 2.不能用 LayoutInflaterTool 加载界面， 也就是不能用 子线程加载， 部分手机会崩溃，或者白屏
+ *
+ *
+ */
 public class X5WebView extends WebView {
 	TextView title;
 	private WebViewClient client = new WebViewClient() {
