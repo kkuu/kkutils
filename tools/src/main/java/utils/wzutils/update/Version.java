@@ -44,11 +44,11 @@ public class Version {
         if (hasNew) {//有新的版本
             String showText = context.getString(R.string.banben_mingcheng)
                     + newVersion.versionName
-                    + context.getString(R.string.gengxin_shijian)
+                    + "\n"+context.getString(R.string.gengxin_shijian)
                     + newVersion.updateTime
-                    + context.getString(R.string.gengxin_daxiao)
+                    + "\n"+context.getString(R.string.gengxin_daxiao)
                     + newVersion.versionSize
-                    + context.getString(R.string.gengxin_neirong)
+                    + "\n"+context.getString(R.string.gengxin_neirong)
                     + newVersion.updateDesc;
 
             final AlertDialog dialogShowMsg = new AlertDialog.Builder(context)
