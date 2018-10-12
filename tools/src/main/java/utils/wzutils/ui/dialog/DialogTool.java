@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import utils.wzutils.AppTool;
+import utils.wzutils.R;
 import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.StringTool;
@@ -254,7 +255,7 @@ public class DialogTool {
                         }
                     })
                     .setNeutralButton(neutralButton,onNeutralButtonItemClickListener)
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(AppTool.getApplication().getString(R.string.quxiao), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }
