@@ -2,6 +2,7 @@ package utils.wzutils.http;
 
 
 import java.io.Serializable;
+import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -22,6 +23,7 @@ import utils.wzutils.ui.pullrefresh.PageControl;
  * http 请求的参数
  */
 public class HttpRequest {
+    public Proxy proxy;//设置代理
     public long timeBeginRequest = 0;//开始请求的时间
     public String cacheStr = "";
     private String urlStr = "";

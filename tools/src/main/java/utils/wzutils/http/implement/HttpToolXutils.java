@@ -10,6 +10,7 @@ import org.xutils.x;
 
 import java.io.File;
 import java.io.Serializable;
+import java.net.Proxy;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -153,6 +154,7 @@ public class HttpToolXutils implements InterfaceHttpTool {
         requestParams.setCancelFast(httpRequest.isCancelFast());
         requestParams.setConnectTimeout(1000 * 60);//超时
         requestParams.setReadTimeout(1000*60);//文件上传不限制，这个是文件上传的
+        requestParams.setProxy(httpRequest.proxy);//设置代理
 
         requestParams.setMethod(HttpMethod.valueOf(httpRequest.getRequestMethod().name()));
 
