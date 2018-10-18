@@ -86,7 +86,7 @@ public class UiTool {
             if (timeNow - preBackToQuitTime < 2000) {
                 //AppTool.currActivity.moveTaskToBack(true);
 
-                AppTool.exitApp();
+                AppTool.backToHome();
             } else {
                 CommonTool.showToast(textToast);
             }

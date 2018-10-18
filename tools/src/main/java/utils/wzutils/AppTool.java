@@ -86,13 +86,20 @@ public class AppTool {
     }
 
     /***
-     * 退出应用程序
+     * 退出到桌面
      */
-    public static void exitApp() {
+    public static void backToHome() {
         try {
             AppTool.currActivity.moveTaskToBack(true);
-            if(true)return;
-            // getApplication().sendBroadcast(new Intent("actionExit"));
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
+    /***
+     * 退出应用程序
+     */
+    public static void exitApp(){
+        try {
             finishAllActivity();
             System.exit(0);
         } catch (Exception e) {
