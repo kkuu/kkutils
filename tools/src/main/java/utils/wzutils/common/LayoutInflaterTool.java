@@ -50,7 +50,13 @@ public class LayoutInflaterTool {
     //Context context;
     private LayoutInflaterTool(Context context, int maxAutoInitSize, int resource) {
         if (context == null) {
-            context =AppTool.getApplication();
+            if(AppTool.currActivity!=null)
+            {
+                context=AppTool.currActivity;
+            }
+            else {
+                context =AppTool.getApplication();
+            }
         }
         //this.context=context;
         layoutInflater = LayoutInflater.from(context);
