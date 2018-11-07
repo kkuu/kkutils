@@ -21,6 +21,7 @@ import utils.wzutils.common.thread.ThreadTool;
  * Created by kk on 2015/4/1.
  * <p>
  * 大量加载layout
+ * 有些项目里面不能用， 可以调用 stopUse 停止使用
  */
 public class LayoutInflaterTool {
     static HashSet<Integer> resourceExclude=new HashSet<>();
@@ -32,6 +33,16 @@ public class LayoutInflaterTool {
     String group = "";
     boolean isIniting = false;//是否正在初始化
     boolean canUseInThread = true;//是否可以在线程里面初始化,某些设备上 不能在线程里面用这个
+
+    static boolean stopUse=false;
+    /***
+     * 停止使用
+     */
+    public static void stopUse(){
+        stopUse=true;
+    }
+
+
     HashMap<Integer, Queue<View>> views = new HashMap<Integer, Queue<View>>();
     public static void addExcludeResource(Integer ...resource){
         resourceExclude.addAll(Arrays.asList(resource));
@@ -170,7 +181,7 @@ public class LayoutInflaterTool {
 
     private void initViews() {
         // LogTool.s("layouttool--"+ViewTool.getNameById(resource, R.layout.class));
-        if (!canUseInThread) return;
+        if (!canUseInThread||stopUse) return;
         if(resourceExclude.contains(resource))return;
         if (getQueueViews(resource).size() < minAutoInitSize && !isIniting) {//
             isIniting = true;
