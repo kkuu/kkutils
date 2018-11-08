@@ -103,11 +103,7 @@ public class WzRefreshLayout extends SmartRefreshLayout {
 
 
 
-
-
-    static {
-         final int tvColor=Color.parseColor("#979797");
-         final int bgColor=Color.parseColor("#35384B");
+    public static void setDefaultColor(final int bgColor, final int tvColor){
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
             @NonNull
             @Override
@@ -141,6 +137,13 @@ public class WzRefreshLayout extends SmartRefreshLayout {
                 return classics;
             }
         });
+    }
+
+
+    static {
+         final int tvColor=Color.parseColor("#979797");
+         final int bgColor=Color.parseColor("#35384B");
+         setDefaultColor(bgColor,tvColor);
     }
 
     public void bindLoadDataAndRefresh(final PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
