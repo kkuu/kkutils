@@ -38,6 +38,7 @@ public class MainActivity extends WzParentActivity {
             @Override
             public void onClickWz(View v) {
 
+                //a
                 ImgTool.loadImage("http://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201312%2F17%2F105435eqfkekxfckcxc06c.jpg&thumburl=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D1741197912%2C1193459822%26fm%3D26%26gp%3D0.jpg",imgv);
 
 
