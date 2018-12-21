@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.0'
     //seekbar
     //很多的工具类
-    implementation 'com.blankj:utilcode:1.19.0'
+    implementation 'com.blankj:utilcode:1.22.4'
     implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1310_43612_sharewithdownload_withoutGame_obfs_20180706_163319.jar')
 
     //底部导航栏
