@@ -275,53 +275,53 @@ public class ParentRecycleViewWz extends RecyclerView {
     public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
     }
 
-//    @Override
-//    public boolean onInterceptTouchEvent(MotionEvent e) {
-//        final int action = MotionEventCompat.getActionMasked(e);
-//        final int actionIndex = MotionEventCompat.getActionIndex(e);
-//
-//        switch (action) {
-//            case MotionEvent.ACTION_DOWN:
-//                mScrollPointerId = MotionEventCompat.getPointerId(e, 0);
-//                mInitialTouchX = (int) (e.getX() + 0.5f);
-//                mInitialTouchY = (int) (e.getY() + 0.5f);
-//                return super.onInterceptTouchEvent(e);
-//
-//            case MotionEventCompat.ACTION_POINTER_DOWN:
-//                mScrollPointerId = MotionEventCompat.getPointerId(e, actionIndex);
-//                mInitialTouchX = (int) (MotionEventCompat.getX(e, actionIndex) + 0.5f);
-//                mInitialTouchY = (int) (MotionEventCompat.getY(e, actionIndex) + 0.5f);
-//                return super.onInterceptTouchEvent(e);
-//
-//            case MotionEvent.ACTION_MOVE: {
-//                final int index = MotionEventCompat.findPointerIndex(e, mScrollPointerId);
-//                if (index < 0) {
-//                    return false;
-//                }
-//
-//                final int x = (int) (MotionEventCompat.getX(e, index) + 0.5f);
-//                final int y = (int) (MotionEventCompat.getY(e, index) + 0.5f);
-//                if (getScrollState() != SCROLL_STATE_DRAGGING) {
-//                    final int dx = x - mInitialTouchX;
-//                    final int dy = y - mInitialTouchY;
-//                    final boolean canScrollHorizontally = getLayoutManager().canScrollHorizontally();
-//                    final boolean canScrollVertically = getLayoutManager().canScrollVertically();
-//                    boolean startScroll = false;
-//                    if (canScrollHorizontally && Math.abs(dx) > mTouchSlop && (Math.abs(dx) >= Math.abs(dy) || canScrollVertically)) {//主要是这里，  需要判断 后面半截
-//                        startScroll = true;
-//                    }
-//                    if (canScrollVertically && Math.abs(dy) > mTouchSlop && (Math.abs(dy) >= Math.abs(dx) || canScrollHorizontally)) {//主要是这里，  需要判断 后面半截
-//                        startScroll = true;
-//                    }
-//                    return startScroll && super.onInterceptTouchEvent(e);
-//                }
-//                return super.onInterceptTouchEvent(e);
-//            }
-//
-//            default:
-//                return super.onInterceptTouchEvent(e);
-//        }
-//    }
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent e) {
+        final int action = MotionEventCompat.getActionMasked(e);
+        final int actionIndex = MotionEventCompat.getActionIndex(e);
+
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                mScrollPointerId = MotionEventCompat.getPointerId(e, 0);
+                mInitialTouchX = (int) (e.getX() + 0.5f);
+                mInitialTouchY = (int) (e.getY() + 0.5f);
+                return super.onInterceptTouchEvent(e);
+
+            case MotionEventCompat.ACTION_POINTER_DOWN:
+                mScrollPointerId = MotionEventCompat.getPointerId(e, actionIndex);
+                mInitialTouchX = (int) (MotionEventCompat.getX(e, actionIndex) + 0.5f);
+                mInitialTouchY = (int) (MotionEventCompat.getY(e, actionIndex) + 0.5f);
+                return super.onInterceptTouchEvent(e);
+
+            case MotionEvent.ACTION_MOVE: {
+                final int index = MotionEventCompat.findPointerIndex(e, mScrollPointerId);
+                if (index < 0) {
+                    return false;
+                }
+
+                final int x = (int) (MotionEventCompat.getX(e, index) + 0.5f);
+                final int y = (int) (MotionEventCompat.getY(e, index) + 0.5f);
+                if (getScrollState() != SCROLL_STATE_DRAGGING) {
+                    final int dx = x - mInitialTouchX;
+                    final int dy = y - mInitialTouchY;
+                    final boolean canScrollHorizontally = getLayoutManager().canScrollHorizontally();
+                    final boolean canScrollVertically = getLayoutManager().canScrollVertically();
+                    boolean startScroll = false;
+                    if (canScrollHorizontally && Math.abs(dx) > mTouchSlop && (Math.abs(dx) >= Math.abs(dy) || canScrollVertically)) {//主要是这里，  需要判断 后面半截
+                        startScroll = true;
+                    }
+                    if (canScrollVertically && Math.abs(dy) > mTouchSlop && (Math.abs(dy) >= Math.abs(dx) || canScrollHorizontally)) {//主要是这里，  需要判断 后面半截
+                        startScroll = true;
+                    }
+                    return startScroll && super.onInterceptTouchEvent(e);
+                }
+                return super.onInterceptTouchEvent(e);
+            }
+
+            default:
+                return super.onInterceptTouchEvent(e);
+        }
+    }
 
 
     /***
