@@ -136,7 +136,7 @@ public class WzSimpleRecycleView<E> extends ParentRecycleViewWz {
             int resId = 0;
             View itemView = null;
             if (emptyView != null && emptyType == viewType) {//显示空控件
-                //UiTool.setWH(emptyView, wzRecycleView.getMeasuredWidth(), wzRecycleView.getMeasuredHeight());
+                UiTool.setWH(emptyView, wzRecycleView.getMeasuredWidth(), wzRecycleView.getMeasuredHeight());
                 itemView = emptyView;
             } else {
                 for (int i = 0; i < wzRecycleView.types.length; i++) {
