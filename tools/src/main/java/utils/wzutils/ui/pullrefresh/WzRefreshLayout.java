@@ -147,6 +147,10 @@ public class WzRefreshLayout extends SmartRefreshLayout {
     }
 
     public void bindLoadDataAndRefresh(final PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
+       bindLoadDataAndRefreshNotRefresh(pageControl,loadListDataInterface);
+        autoRefresh();
+    }
+    public void bindLoadDataAndRefreshNotRefresh(final PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
         setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
@@ -158,9 +162,7 @@ public class WzRefreshLayout extends SmartRefreshLayout {
                 loadListDataInterface.loadData(pageControl.init());
             }
         });
-        autoRefresh();
     }
-
     public static interface LoadListDataInterface{
         public void loadData(final int page);
     }
