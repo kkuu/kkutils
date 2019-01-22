@@ -59,6 +59,7 @@ public class TakePhotoSimpleFragment extends WzTakePhotoFragment {
         for(String data:datas){
             AlbumFile albumFile=new AlbumFile();
             albumFile.setPath(data);
+            result.add(albumFile);
         }
         Album.image(this) // Image selection.
                 .multipleChoice()
