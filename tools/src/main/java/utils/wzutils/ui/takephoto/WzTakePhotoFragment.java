@@ -30,6 +30,7 @@ import utils.wzutils.common.UpLoadFilesTool;
 import utils.wzutils.parent.WzParentFragmentLife;
 import utils.wzutils.parent.WzViewOnclickListener;
 import utils.wzutils.ui.WzSimpleRecycleView;
+import utils.wzutils.ui.dialog.DialogTool;
 
 /**
  * Created by ishare on 2016/6/14.
@@ -120,7 +121,7 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
 
     public View initContentView() {
         recycleView = new WzSimpleRecycleView(getContext());
-        recycleView.setBackgroundColor(Color.WHITE);
+      //  recycleView.setBackgroundColor(Color.WHITE);
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         recycleView.setLayoutParams(lp);
         parent = recycleView;
@@ -200,18 +201,13 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
                             @Override
                             public void onClickWz(View v) {
                                 try {
-                                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                                            .setMessage("是否删除这张图片？")
-                                            .setPositiveButton("确定删除", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    datas.remove(path);
-                                                    initListView();
-                                                }
-                                            })
-                                            .setNegativeButton("取消", null)
-                                            .create();
-                                    alertDialog.show();
+                                    DialogTool.initNormalQueDingDialog("", "是否删除这张图片？", "确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            datas.remove(path);
+                                            initListView();
+                                        }
+                                    },"取消").show();
                                 } catch (Exception e) {
                                     LogTool.ex(e);
                                 }
