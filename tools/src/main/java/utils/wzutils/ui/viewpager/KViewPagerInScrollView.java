@@ -48,7 +48,7 @@ public class KViewPagerInScrollView extends ViewPager {
     public void initSelected(int i){
         View child = getChildAt(i);
         if(child==null)return;
-        child.measure(MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE/2,MeasureSpec.AT_MOST), MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE/2,MeasureSpec.AT_MOST));
+        child.measure(MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE/2,MeasureSpec.AT_MOST), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
         int h = child.getMeasuredHeight();
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
         if (layoutParams == null) {
