@@ -201,13 +201,7 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
                             @Override
                             public void onClickWz(View v) {
                                 try {
-                                    DialogTool.initNormalQueDingDialog("", "是否删除这张图片？", "确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            datas.remove(path);
-                                            initListView();
-                                        }
-                                    },"取消").show();
+                                    showDeleteDialog(datas,path,WzTakePhotoFragment.this);
                                 } catch (Exception e) {
                                     LogTool.ex(e);
                                 }
@@ -302,6 +296,21 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
         UpLoadFilesTool.upLoadImages(upLoadDataList, upLoadImp, upLoadFilesListener);
     }
 
+    public static void showDeleteDialog(final List<String> datas, final String path, final WzTakePhotoFragment currFragment){
+        try {
+            DialogTool.initNormalQueDingDialog("", "是否删除这张图片？", "确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    datas.remove(path);
+                    currFragment.initListView();
+                }
+            },"取消").show();
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+
+    }
+
     public static interface OnAddPhotoInitDataListener extends Serializable {
         void onInitData(WzTakePhotoFragment currFragment, List<String> datas, final int positon, int type, final View itemView);
     }
@@ -385,24 +394,15 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
                 @Override
                 public void onClickWz(View v) {
                     try {
-                        AlertDialog alertDialog = new AlertDialog.Builder(AppTool.currActivity)
-                                .setMessage("是否删除这张图片？")
-                                .setPositiveButton("确定删除", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        datas.remove(path);
-                                        currFragment.initListView();
-                                    }
-                                })
-                                .setNegativeButton("取消", null)
-                                .create();
-                        alertDialog.show();
+                        showDeleteDialog(datas,path,currFragment);
                     } catch (Exception e) {
                         LogTool.ex(e);
                     }
                 }
             });
         }
+
+
     }
 
 }
