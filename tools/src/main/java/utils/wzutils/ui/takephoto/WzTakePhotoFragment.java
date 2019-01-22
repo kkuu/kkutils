@@ -298,7 +298,7 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
 
     public static void showDeleteDialog(final List<String> datas, final String path, final WzTakePhotoFragment currFragment){
         try {
-            DialogTool.initNormalQueDingDialog("", "是否删除这张图片？", "确定", new DialogInterface.OnClickListener() {
+            DialogTool.initNormalQueDingDialog("", "是否删除这张图片？", "删除", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     datas.remove(path);
