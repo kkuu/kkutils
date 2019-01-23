@@ -13,7 +13,22 @@ import com.flyco.tablayout.SlidingTabLayout;
 import java.util.List;
 
 
-
+/***
+ *
+ * <tjyutils.ui.KTabLayout
+ *             android:id="@+id/tab"
+ *             android:layout_width="match_parent"
+ *             android:layout_height="40dp"
+ *             app:tl_tab_space_equal="true"
+ *             ></tjyutils.ui.KTabLayout>
+ *
+ *         <utils.wzutils.ui.WzViewPager
+ *             android:id="@+id/viewPager"
+ *             android:layout_width="match_parent"
+ *             android:layout_height="match_parent"></utils.wzutils.ui.WzViewPager>
+ *
+ *
+ */
 public class KTabLayout extends SlidingTabLayout {
     public KTabLayout(Context context) {
         super(context);
