@@ -41,22 +41,14 @@ public class KTabLayout extends SlidingTabLayout {
         setIndicatorColor(Color.parseColor("#E2231A"));
     }
 
-
     public void initViewPager(FragmentManager fragmentManager, ViewPager viewPager, final List<Fragment> fragments, List<String> titles) {
-        viewPager.setOffscreenPageLimit(fragments.size());
-        viewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
-            @Override
-            public Fragment getItem(int i) {
-                return fragments.get(i);
-            }
-
-            @Override
-            public int getCount() {
-                return fragments.size();
-            }
-        });
-        setViewPager(viewPager, titles.toArray(new String[0]));
+        initViewPager(null,fragmentManager,viewPager,fragments,titles.toArray(new String[0]));
     }
+    public void initViewPager(FragmentManager fragmentManager, ViewPager viewPager, final List<Fragment> fragments, String ...titles) {
+       initViewPager(null,fragmentManager,viewPager,fragments,titles);
+    }
+
+
     public void initViewPager(KTabLaoutBuilder kTabLaoutBuilder,FragmentManager fragmentManager, ViewPager viewPager, final List<Fragment> fragments, String ...titles) {
         if(kTabLaoutBuilder!=null){
             kTabLaoutBuilder.build(this);
@@ -75,6 +67,10 @@ public class KTabLayout extends SlidingTabLayout {
         });
         setViewPager(viewPager, titles);
     }
+
+
+
+
     public static abstract class KTabLaoutBuilder{
         public abstract void build(KTabLayout tabLayout);
     }
