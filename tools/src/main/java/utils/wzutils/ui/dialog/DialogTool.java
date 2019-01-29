@@ -25,6 +25,7 @@ import utils.wzutils.R;
 import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.StringTool;
+import utils.wzutils.common.ViewTool;
 import utils.wzutils.parent.WzViewOnclickListener;
 
 /**
@@ -167,10 +168,10 @@ public class DialogTool {
      * @param inputType
      * @return
      */
-    public static Dialog initNormalInputDialog(String title, String msg, String queding, final OnDialogInputEnd onDialogInputEnd, String quxiao  ,String defalutStr,String hint,int inputType) {
+    public static Dialog initNormalInputDialog(String title, String msg, String queding, final OnDialogInputEnd onDialogInputEnd, String quxiao  ,String defalutStr,int inputType) {
 
         final EditText tv_dialog_input=new EditText(AppTool.currActivity);
-        tv_dialog_input.setHint(hint);
+        tv_dialog_input.setTag("tv_dialog_input");
         tv_dialog_input.setText(defalutStr);
         tv_dialog_input.setInputType(inputType);
         RelativeLayout relativeLayout=new RelativeLayout(AppTool.currActivity);
