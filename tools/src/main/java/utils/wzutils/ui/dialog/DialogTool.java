@@ -1,6 +1,7 @@
 package utils.wzutils.ui.dialog;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
@@ -10,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.PopupWindow;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,8 +113,12 @@ public class DialogTool {
      * @return
      */
     public static Dialog initNormalQueDingDialog(String title, String msg, String queding, final DialogInterface.OnClickListener queDingOnClickListener, String quxiao) {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AppTool.currActivity);
+        AlertDialog.Builder dialogBuilder = initNormalQueDingBuilder(title,msg,queding,queDingOnClickListener,quxiao);
+        return dialogBuilder.create();
+    }
 
+    public static AlertDialog.Builder initNormalQueDingBuilder(String title, String msg, String queding, final DialogInterface.OnClickListener queDingOnClickListener, String quxiao) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AppTool.currActivity);
         if (StringTool.notEmpty(title)) {
             dialogBuilder.setTitle(title);
         }
@@ -129,7 +137,6 @@ public class DialogTool {
                 }
             }
         });
-
         if(StringTool.notEmpty(quxiao)){
             dialogBuilder.setNegativeButton(quxiao, new DialogInterface.OnClickListener() {
                 @Override
@@ -142,10 +149,70 @@ public class DialogTool {
                 }
             });
         }
-
-
-        return dialogBuilder.create();
+        return dialogBuilder;
     }
+    public static interface OnDialogInputEnd{
+        void onInputEnd(EditText editText);
+    }
+
+    /***
+     * 弹出输入框
+     * @param title
+     * @param msg
+     * @param queding
+     * @param onDialogInputEnd
+     * @param quxiao
+     * @param defalutStr
+     * @param hint
+     * @param inputType
+     * @return
+     */
+    public static Dialog initNormalInputDialog(String title, String msg, String queding, final OnDialogInputEnd onDialogInputEnd, String quxiao  ,String defalutStr,String hint,int inputType) {
+
+        final EditText tv_dialog_input=new EditText(AppTool.currActivity);
+        tv_dialog_input.setHint(hint);
+        tv_dialog_input.setText(defalutStr);
+        tv_dialog_input.setInputType(inputType);
+        RelativeLayout relativeLayout=new RelativeLayout(AppTool.currActivity);
+        RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.setMargins( CommonTool.dip2px(20),0,CommonTool.dip2px(20),0);
+        relativeLayout.addView(tv_dialog_input,lp);
+
+
+        AlertDialog.Builder dialogBuilder = initNormalQueDingBuilder(title, msg, queding, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                    try {
+                        if(onDialogInputEnd!=null){
+                            onDialogInputEnd.onInputEnd(tv_dialog_input);
+                        }
+                        }catch (Exception e){
+                        LogTool.ex(e);
+                    }
+            }
+        }, quxiao);
+
+
+        dialogBuilder.setView(relativeLayout);
+
+        AlertDialog dialog=dialogBuilder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                tv_dialog_input.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        InputMethodManager inputmanger = (InputMethodManager) AppTool.currActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputmanger.showSoftInput(tv_dialog_input,0);
+                    }
+                },1);
+
+            }
+        });
+        return dialog;
+    }
+
+
 
     /**
      * 需要在show 之后
