@@ -13,12 +13,53 @@ import utils.wzutils.common.thread.ThreadTool;
  * abc on 2017/6/9.
  */
 public class UpLoadFilesTool {
+
+    /***
+     *
+     * @param path  上传数据
+     * @param upLoadImp  上传的具体实现，由外部实现
+     */
+    public static void upLoadImageStr(String path, final UpLoadImp upLoadImp) {
+        upLoadImage(UpLoadData.init(path),upLoadImp);
+    }
+    /***
+     * 多图上传
+     * @param upLoadImp
+     * @param upLoadFilesListener  上传监听
+     */
+    public static void upLoadImagesStr(final List<String> paths, final UpLoadImp upLoadImp, final UpLoadFilesListener upLoadFilesListener) {
+        upLoadImages(UpLoadData.init(paths),upLoadImp,upLoadFilesListener);
+    }
+    /***
+     * 多文件上传  注意是文件。。 如果是图片用上面的， 可以帮助压缩
+     * @param paths
+     * @param upLoadImp
+     * @param upLoadFilesListener
+     */
+    public static void upLoadFilesStr(final List<String> paths, final UpLoadImp upLoadImp, final UpLoadFilesListener upLoadFilesListener) {
+       upLoadFiles(UpLoadData.init(paths),upLoadImp,upLoadFilesListener);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /***
      *
      * @param upLoadData  上传数据
      * @param upLoadImp  上传的具体实现，由外部实现
      */
-    public static void upImage(final UpLoadData upLoadData, final UpLoadImp upLoadImp) {
+    public static void upLoadImage(final UpLoadData upLoadData, final UpLoadImp upLoadImp) {
         if (upLoadData.file.length() > 300 * 1024) {//图片太大， 需要压缩
             ImgLocalTool.convertToSmallBitmap(upLoadData.file.getAbsolutePath(), 800, 1200, new ImgLocalTool.OnConvertSuccessListener() {
                 @Override
@@ -43,7 +84,7 @@ public class UpLoadFilesTool {
         upLoadFiles(upLoadDataList, new UpLoadImp() {
             @Override
             public void upLoadImpl(UpLoadData upLoadData) {
-                upImage(upLoadData,upLoadImp);
+                upLoadImage(upLoadData,upLoadImp);
             }
         },upLoadFilesListener);
     }
