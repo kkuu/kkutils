@@ -162,5 +162,20 @@ public class UpLoadFilesTool {
             this.file = file;
             this.inputFile=file;
         }
+
+
+        public static UpLoadData init(String path){
+            return new UpLoadData(new File(path));
+        }
+        public static List<UpLoadData> init(String... path){
+            ArrayList<UpLoadFilesTool.UpLoadData> upLoadDataList=new ArrayList<>();
+            for(String p:path){
+                upLoadDataList.add(UpLoadData.init(p));
+            }
+            return upLoadDataList;
+        }
+        public static List<UpLoadData> init(List<String> list){
+            return init(list.toArray(new String[1]));
+        }
     }
 }
