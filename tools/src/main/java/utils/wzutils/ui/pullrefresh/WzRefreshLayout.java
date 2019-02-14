@@ -42,6 +42,7 @@ public class WzRefreshLayout extends SmartRefreshLayout {
     }
 
     public void init(){
+        setEnableOverScrollBounce(false);
         initHeaderAndFooter();
     }
     public void stopRefresh(PageControl pageControl) {
