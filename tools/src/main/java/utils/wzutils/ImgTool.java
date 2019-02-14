@@ -207,7 +207,7 @@ public class ImgTool {
             if (h < 1 || h > maxHeight) {
                 h = maxHeight;
             }
-            src += "?x-oss-process=image/resize,w_" + w + ",h_" + h + "/format,webp" + "/quality,q_75";
+            src += "?x-oss-process=image/resize,w_" + w + ",h_" + h + "/format,webp" + "/quality,q_80";
         }
         return src;
     }
