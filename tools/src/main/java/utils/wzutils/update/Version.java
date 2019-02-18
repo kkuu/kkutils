@@ -51,6 +51,7 @@ public class Version {
                     + "\n"+context.getString(R.string.gengxin_neirong)
                     + newVersion.updateDesc;
 
+
             final AlertDialog dialogShowMsg = new AlertDialog.Builder(context)
                     .setTitle(R.string.ninyou_xinde_banben)
                     .setMessage(showText)
