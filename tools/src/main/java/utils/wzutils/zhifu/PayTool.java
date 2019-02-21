@@ -166,7 +166,7 @@ public class PayTool {
     public static final int resultCode_failure=1998;
 
 
-    public abstract class OnPayResultListener {
+    public static abstract class OnPayResultListener {
         void onSuccess(final String msg){
             AppTool.uiHandler.post(new Runnable() {
                 @Override
