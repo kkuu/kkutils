@@ -12,6 +12,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 
+import utils.wzutils.AppTool;
 import utils.wzutils.JsonTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.thread.ThreadTool;
@@ -28,6 +29,12 @@ import utils.wzutils.common.thread.ThreadTool;
  */
 public class PayTool {
 
+    /***
+     * 需要把 alipaySdk-20160825.jar 添加到实际工程
+     * @param activity
+     * @param payInfo
+     * @param onPayResultListener
+     */
     public static void pay_zhifubao(final Activity activity, final String payInfo, final OnPayResultListener onPayResultListener) {
         LogTool.s("支付宝参数： " + payInfo);
         ThreadTool.execute(new Runnable() {
@@ -159,10 +166,36 @@ public class PayTool {
     public static final int resultCode_failure=1998;
 
 
-    public interface OnPayResultListener {
-        void onSuccess(String msg);
+    public abstract class OnPayResultListener {
+        void onSuccess(final String msg){
+            AppTool.uiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        onSuccessUi(msg);
+                    }catch (Exception e){
+                        LogTool.ex(e);
+                    }
+                }
+            });
+        }
 
-        void onFailure(String msg);
+        void onFailure(final String msg){
+            AppTool.uiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        onFailureUi(msg);
+                    }catch (Exception e){
+                        LogTool.ex(e);
+                    }
+                }
+            });
+        };
+
+        public abstract void onSuccessUi(String msg);
+
+        public abstract void onFailureUi(String msg);
     }
 
 }
