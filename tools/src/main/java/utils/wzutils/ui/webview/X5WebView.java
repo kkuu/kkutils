@@ -3,8 +3,10 @@ package utils.wzutils.ui.webview;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.smtt.sdk.ValueCallback;
+import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
@@ -49,6 +53,10 @@ public class X5WebView extends WebView {
 
 	private void initWebViewSettings() {
 		WebSettings webSetting = this.getSettings();
+		webSetting.setAllowFileAccess(true);//访问文件
+		webSetting.setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);//混合协议，  http  https
+
+
 		webSetting.setDisplayZoomControls(false);
 		webSetting.setJavaScriptEnabled(true);
 		webSetting.setJavaScriptCanOpenWindowsAutomatically(true);
@@ -72,6 +80,33 @@ public class X5WebView extends WebView {
 		// this.getSettingsExtension().setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY);//extension
 		// settings 的设计
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //	@Override
 //	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
