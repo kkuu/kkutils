@@ -30,7 +30,10 @@ import utils.wzutils.common.thread.ThreadTool;
 public class PayTool {
 
     /***
-     * 需要把 alipaySdk-20160825.jar 添加到实际工程
+     * 需要把 alipaySdk_15.5.9_20181123210601.aar 添加到实际工程libs 下面
+     *
+     * 增加 implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
+     *
      * @param activity
      * @param payInfo
      * @param onPayResultListener
