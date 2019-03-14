@@ -19,6 +19,8 @@ public class MediaRecoderTool {
     public MediaRecorder mMediaRecorder;
     public boolean isOpenCamera = false;//摄像头是否打开了
     public int rotation=90;//横屏用0  竖屏用90
+    public int width=1280;
+    public int height=720;
     /***
      * 视频录制才需要调用
      *
@@ -208,8 +210,7 @@ public class MediaRecoderTool {
             e.printStackTrace();
         }
     }
-    int width=1280;
-    int height=720;
+
     /***
      * 初始化视频录制
      */
