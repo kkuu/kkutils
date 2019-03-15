@@ -79,6 +79,40 @@ public class MediaRecoderTool {
             e.printStackTrace();
         }
     }
+    int cameraType= Camera.CameraInfo.CAMERA_FACING_FRONT;
+    public void changeCamera() {
+        cameraType=cameraType== Camera.CameraInfo.CAMERA_FACING_FRONT? Camera.CameraInfo.CAMERA_FACING_BACK: Camera.CameraInfo.CAMERA_FACING_FRONT;
+        release();
+        initCamera();
+    }
+
+    /***
+     * 打开摄像头
+     * @return
+     */
+    public Camera openCamera(){
+        int cameraCount = Camera.getNumberOfCameras();
+        Camera.CameraInfo info = new Camera.CameraInfo();
+        for(int cameraIndex = 0; cameraIndex<cameraCount; cameraIndex++){
+            Camera.getCameraInfo(cameraIndex, info);
+            if(info.facing == cameraType){
+                try {
+                    camera=Camera.open(cameraIndex);
+                }catch (Exception e){
+                    for(int i = 0; i<cameraCount; i++){//可能其他地方 还有引用。。 全部关了再打开
+                        try {
+                            Camera.open(i).release();
+                        }catch (Exception e2){
+                            LogTool.ex(e2);
+                        }
+                    }
+                    camera=Camera.open(cameraIndex);
+                }
+            }
+        }
+        return camera;
+    }
+
 
     /***
      * 初始化相机
@@ -87,13 +121,9 @@ public class MediaRecoderTool {
         try {
             if (surfaceView != null) {
                 if (!isOpenCamera) {
-                    camera = Camera.open();
+                    camera =openCamera();
                     //camera.getParameters().setFocusMode("auto");
                     camera.setDisplayOrientation(rotation);
-
-
-
-
                     camera.setPreviewDisplay(surfaceView.getHolder());
                     setFocus();//必须在unlock之前
                     camera.unlock();
@@ -104,6 +134,41 @@ public class MediaRecoderTool {
             e.printStackTrace();
         }
     }
+    /***
+     * 初始化视频录制
+     */
+    public void initMedia(String path) {
+        try {
+            mMediaRecorder = new MediaRecorder();
+            initCamera();
+            if (camera != null) {
+                mMediaRecorder.setCamera(camera);
+            }
+            mMediaRecorder.setOutputFile(path);
+            mMediaRecorder.setPreviewDisplay(surfaceView.getHolder().getSurface());
+            mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);// 视频源
+            mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);// 音频源
+
+            mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);// 视频输出格式
+            mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);// 音频格式
+            mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);// 视频录制格式
+
+            mMediaRecorder.setVideoSize(width, height);// 设置分辨率：
+            mMediaRecorder.setVideoEncodingBitRate(8 * width * height);// 设置帧频率，然后就清晰了
+
+            // mMediaRecorder.setVideoFrameRate(16);// 这个我把它去掉了，感觉没什么用
+            if(cameraType==Camera.CameraInfo.CAMERA_FACING_BACK){
+                mMediaRecorder.setOrientationHint(rotation);// 输出旋转90度，保持竖屏录制,最好和摄像头保持一致，前置摄像头要再加180，也就是270
+            }else {
+                mMediaRecorder.setOrientationHint(rotation+180);// 输出旋转90度，保持竖屏录制,最好和摄像头保持一致，前置摄像头要再加180，也就是270
+            }
+            mMediaRecorder.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     /***
      * 设置连续对焦，初始化的时候必须在  camera.unlock();之前调用
@@ -169,8 +234,6 @@ public class MediaRecoderTool {
     /**
      * 获取视频size
      * @param sizes
-     * @param w
-     * @param h
      * @return
      */
     public Camera.Size getOptimalVideoSize(List<Camera.Size> sizes) {
@@ -211,40 +274,8 @@ public class MediaRecoderTool {
         }
     }
 
-    /***
-     * 初始化视频录制
-     */
-    public void initMedia(String path) {
-        try {
-            mMediaRecorder = new MediaRecorder();
-            initCamera();
-            if (camera != null) {
-                mMediaRecorder.setCamera(camera);
-            }
-            mMediaRecorder.setPreviewDisplay(surfaceView.getHolder().getSurface());
-            mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);// 视频源
-            mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);// 音频源
-
-            mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);// 视频输出格式
-            mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);// 音频格式
-            mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);// 视频录制格式
 
 
-            // mMediaRecorder.setVideoFrameRate(16);// 这个我把它去掉了，感觉没什么用
-            mMediaRecorder.setOrientationHint(rotation);// 输出旋转90度，保持竖屏录制,最好和摄像头保持一致，前置摄像头要再加180，也就是270
-            // mediaRecorder.setMaxDuration(Constant.MAXVEDIOTIME * 1000);
-
-            mMediaRecorder.setVideoSize(width, height);// 设置分辨率：
-            mMediaRecorder.setVideoEncodingBitRate(8 * width * height);// 设置帧频率，然后就清晰了
-
-
-            mMediaRecorder.setOutputFile(path);
-            mMediaRecorder.prepare();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     /***
      * 初始化音频录制
