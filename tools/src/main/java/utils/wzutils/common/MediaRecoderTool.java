@@ -214,7 +214,7 @@ public class MediaRecoderTool {
     /***
      * 初始化视频录制
      */
-    void initMedia(String path) {
+    public void initMedia(String path) {
         try {
             mMediaRecorder = new MediaRecorder();
             initCamera();
@@ -250,7 +250,7 @@ public class MediaRecoderTool {
      * 初始化音频录制
      * @param path
      */
-    void initAudioRecoder(String path) {
+    public void initAudioRecoder(String path) {
         try {
             mMediaRecorder = new MediaRecorder();
             mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);// 音频源
@@ -284,8 +284,17 @@ public class MediaRecoderTool {
         }
     }
 
-
-    static  MediaPlayer mediaPlayer=new MediaPlayer();
+    //释放资源  onSaveInstanceState onDestroy 都要调用
+    public void release(){
+        if (camera != null) {
+            camera.setPreviewCallback(null) ;
+            camera.stopPreview();
+            camera.release();
+            camera = null;
+            isOpenCamera=false;
+        }
+    }
+    public static  MediaPlayer mediaPlayer=new MediaPlayer();
 
     /**
      * 全局共用一个media播放
