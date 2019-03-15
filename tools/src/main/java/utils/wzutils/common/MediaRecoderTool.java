@@ -64,7 +64,7 @@ public class MediaRecoderTool {
     /***
      * 对焦一次
      */
-    void autoFocus() {
+    public void autoFocus() {
         try {
             if (camera != null) {
                 camera.autoFocus(new Camera.AutoFocusCallback() {
@@ -83,7 +83,7 @@ public class MediaRecoderTool {
     /***
      * 初始化相机
      */
-    void initCamera() {
+    public void initCamera() {
         try {
             if (surfaceView != null) {
                 if (!isOpenCamera) {
@@ -108,7 +108,7 @@ public class MediaRecoderTool {
     /***
      * 设置连续对焦，初始化的时候必须在  camera.unlock();之前调用
      */
-    void setFocus() {
+    public void setFocus() {
         Camera.Parameters parameters = camera.getParameters();
         // parameters.setPictureFormat(PixelFormat.JPEG);
         parameters.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
@@ -134,7 +134,7 @@ public class MediaRecoderTool {
      * @param h
      * @return
      */
-    private Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
+    public Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
         final double ASPECT_TOLERANCE = 0.1;
         double targetRatio = (double) w / h;
         if (sizes == null) return null;
@@ -173,7 +173,7 @@ public class MediaRecoderTool {
      * @param h
      * @return
      */
-    private Camera.Size getOptimalVideoSize(List<Camera.Size> sizes) {
+    public Camera.Size getOptimalVideoSize(List<Camera.Size> sizes) {
 
         Camera.Size optimalSize = null;
         // Try to find an size match aspect ratio and size
