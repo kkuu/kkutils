@@ -91,6 +91,7 @@ public class DialogTool {
         Dialog dialog = new Dialog(AppTool.currActivity);
         try {
             if (dialog != null) {
+                dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
                 dialog.getWindow().setDimAmount(0.4f);
                 dialog.setContentView(contentView);
                 if (dpJianJu > -1) {
