@@ -21,6 +21,8 @@ public class MediaRecoderTool {
     public int rotation=90;//横屏用0  竖屏用90
     public int width=1280;
     public int height=720;
+    public int cameraType= Camera.CameraInfo.CAMERA_FACING_FRONT;
+
     /***
      * 视频录制才需要调用
      *
@@ -33,7 +35,7 @@ public class MediaRecoderTool {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
-                    initCamera();
+                    initCamera();//初始化相机
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -42,7 +44,7 @@ public class MediaRecoderTool {
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
                 try {
-                    autoFocus();
+                    autoFocus();//自动对焦
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -50,7 +52,8 @@ public class MediaRecoderTool {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-                stop();
+                stop();//停止录制
+                release();//释放资源
             }
         });
         surfaceView.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +82,10 @@ public class MediaRecoderTool {
             e.printStackTrace();
         }
     }
-    int cameraType= Camera.CameraInfo.CAMERA_FACING_FRONT;
     public void changeCamera() {
+        surfaceView.setVisibility(View.GONE);//会调用 surfaceView  destory
         cameraType=cameraType== Camera.CameraInfo.CAMERA_FACING_FRONT? Camera.CameraInfo.CAMERA_FACING_BACK: Camera.CameraInfo.CAMERA_FACING_FRONT;
-        release();
-        initCamera();
+        surfaceView.setVisibility(View.VISIBLE);//会调用 surfaceView  create
     }
 
     /***
@@ -315,7 +317,9 @@ public class MediaRecoderTool {
         }
     }
 
-    //释放资源  onSaveInstanceState onDestroy 都要调用
+    /***
+     * 释放资源
+     */
     public void release(){
         if (camera != null) {
             camera.setPreviewCallback(null) ;
