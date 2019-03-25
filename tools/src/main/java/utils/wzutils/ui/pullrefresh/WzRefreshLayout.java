@@ -147,9 +147,10 @@ public class WzRefreshLayout extends SmartRefreshLayout {
          setDefaultColor(bgColor,tvColor);
     }
 
-    public void bindLoadDataAndRefresh(final PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
-       bindLoadDataAndRefreshNotRefresh(pageControl,loadListDataInterface);
-        autoRefresh();
+    public void bindLoadDataAndRefresh( PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
+        if(pageControl==null)pageControl=new PageControl();
+        bindLoadDataAndRefreshNotRefresh(pageControl,loadListDataInterface);
+        loadListDataInterface.loadData(pageControl.init());
     }
     public void bindLoadDataAndRefreshNotRefresh(final PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
         setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
