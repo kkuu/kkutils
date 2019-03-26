@@ -41,16 +41,21 @@ public class GlideConfiguration extends AppGlideModule {
         //initMemoryCache(builder);
 
       //  initExecutor(builder);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            builder.setDefaultRequestOptions(
-                    new RequestOptions()
-                            .format(DecodeFormat.PREFER_ARGB_8888));
-        }else {
-            builder.setDefaultRequestOptions(
-                    new RequestOptions()
-                            .format(DecodeFormat.PREFER_RGB_565)
-                            .disallowHardwareConfig());
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            builder.setDefaultRequestOptions(
+//                    new RequestOptions()
+//                            .format(DecodeFormat.PREFER_ARGB_8888));
+//        }else {
+//            builder.setDefaultRequestOptions(
+//                    new RequestOptions()
+//                            .format(DecodeFormat.PREFER_RGB_565)
+//                            .disallowHardwareConfig());
+//        }
+
+        builder.setDefaultRequestOptions(
+                new RequestOptions()
+                        .format(DecodeFormat.PREFER_RGB_565)
+                        .disallowHardwareConfig());
     }
 
     public void registerComponents(Context context, Registry registry) {
