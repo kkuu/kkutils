@@ -88,7 +88,7 @@ public class DialogTool {
      * @return
      */
     public static Dialog initNormalDialog(View contentView, int dpJianJu) {
-        Dialog dialog = new Dialog(AppTool.currActivity);
+        Dialog dialog = new AppCompatDialog(AppTool.currActivity);
         try {
             if (dialog != null) {
                 dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
