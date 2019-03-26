@@ -1,6 +1,7 @@
 package utils.wzutils.img.implement.glide;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
@@ -13,6 +14,7 @@ import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.load.engine.executor.GlideExecutor;
 import com.bumptech.glide.module.AppGlideModule;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -39,9 +41,16 @@ public class GlideConfiguration extends AppGlideModule {
         //initMemoryCache(builder);
 
       //  initExecutor(builder);
-
-        builder.setDecodeFormat(DecodeFormat.PREFER_RGB_565);//确实省了内存， 暂时没发现什么问题包括透明图片
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            builder.setDefaultRequestOptions(
+                    new RequestOptions()
+                            .format(DecodeFormat.PREFER_ARGB_8888));
+        }else {
+            builder.setDefaultRequestOptions(
+                    new RequestOptions()
+                            .format(DecodeFormat.PREFER_RGB_565)
+                            .disallowHardwareConfig());
+        }
     }
 
     public void registerComponents(Context context, Registry registry) {
