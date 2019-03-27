@@ -119,10 +119,13 @@ public class LunBoTool {
                     adsContainer.setTag(data);
                 }
                 vg_viewpager_btn.removeAllViews();
-                for (int i = 0; i < lunBoDatas.size(); i++) {
-                    View dotBtn = LayoutInflaterTool.getInflater(20, dotBtnLayoutResId).inflate();
-                    vg_viewpager_btn.addView(dotBtn);
+                if(lunBoDatas.size()>1){
+                    for (int i = 0; i < lunBoDatas.size(); i++) {
+                        View dotBtn = LayoutInflaterTool.getInflater(20, dotBtnLayoutResId).inflate();
+                        vg_viewpager_btn.addView(dotBtn);
+                    }
                 }
+
             }
 
             final PagerAdapter adAdapter = new PagerAdapter() {

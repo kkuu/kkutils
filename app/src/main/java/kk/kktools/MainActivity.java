@@ -42,7 +42,7 @@ public class MainActivity extends WzParentActivity {
         addItem("测试大图", null, new WzViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new WzBigImgListFragment().go(1, TestData.getTestImgUrlList(7));
+                new WzBigImgListFragment().go(0, TestData.getTestImgUrlList(2));
             }
         });
 
