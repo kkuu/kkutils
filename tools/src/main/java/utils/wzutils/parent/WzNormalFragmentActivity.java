@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import utils.wzutils.AppTool;
 import utils.wzutils.common.LogTool;
@@ -25,7 +27,7 @@ import utils.wzutils.common.ViewTool;
   </RelativeLayout>
 
  */
-public abstract class WzNormalFragmentActivity extends WzParentActivity {
+public  class WzNormalFragmentActivity extends WzParentActivity {
 
     Fragment currentFragment = null;
     /***
@@ -79,23 +81,17 @@ public abstract class WzNormalFragmentActivity extends WzParentActivity {
         fromFragment.startActivityForResult(intent, requestCode);
     }
 
-    /***
-     * 返回当前界面资源文件
-     * @return
-     */
-    public abstract int getContentViewId();
 
-    /***
-     * 返回当前界面用于替换fragment 的id
-     * @return
-     */
-    public abstract int getContentFragmentId();
 
+    public int parentId=ViewTool.initKey();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getContentViewId());
-        ViewTool.initViews(getWindow().getDecorView(), this, null);
+        parentId=ViewTool.initKey();
+        FrameLayout frameLayout=new FrameLayout(this);
+        frameLayout.setId(parentId);
+        setContentView(frameLayout);
+//        ViewTool.initViews(getWindow().getDecorView(), this, null);
 
         try {
             Fragment fragment = (Fragment) getIntent().getSerializableExtra("fragment");
@@ -113,7 +109,7 @@ public abstract class WzNormalFragmentActivity extends WzParentActivity {
             transaction.hide(currentFragment);
         }
         if (!fragment.isAdded()) {
-            transaction.add(getContentFragmentId(), fragment);
+            transaction.add(parentId, fragment);
         } else {
             transaction.show(fragment);
         }

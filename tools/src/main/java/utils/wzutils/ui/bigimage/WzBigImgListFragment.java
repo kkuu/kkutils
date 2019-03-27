@@ -2,26 +2,21 @@ package utils.wzutils.ui.bigimage;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.view.ViewGroup;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.wzutils.AppTool;
-import utils.wzutils.ImgTool;
-import utils.wzutils.common.CommonTool;
-import utils.wzutils.common.LogTool;
+import utils.wzutils.R;
+import utils.wzutils.parent.WzNormalFragmentActivity;
 import utils.wzutils.parent.WzParentFragment;
 import utils.wzutils.ui.lunbo.LunBoTool;
 
 /**
  * abc on 2017/9/15.
  *
- * WzBigImgListFragment.init(R.layout.include_lunbo_container,R.id.adsContainer,R.id.vg_viewpager_btn,R.layout.include_lunbo_dot_kuang,R.id.cb_dot);
+ * WzBigImgListFragment.init(R.layout.fragmentLayoutId,R.id.viewPagerResId,R.id.dotParentResId,R.layout.dotItemLayoutId,R.id.cb_dot);
  * 同轮播的初始化
  *
  */
@@ -30,24 +25,29 @@ public class WzBigImgListFragment extends WzParentFragment {
     List<String> stringArrayList = new ArrayList<>();
     int currentIndex;
 
-    public static int include_lunbo_container;
-    public static int adsContainer;
-    public  static int vg_viewpager_btn;
-    public static int include_lunbo_dot_kuang;
+    public static int fragmentLayoutId;
+    public static int viewPagerResId;
+    public  static int dotParentResId;
+    public static int dotItemLayoutId;
     public  static int cb_dot;
 
-    public static void init(int include_lunbo_container,int adsContainer,int vg_viewpager_btn,int include_lunbo_dot_kuang,int cb_dot){
-        WzBigImgListFragment.include_lunbo_container=include_lunbo_container;
-        WzBigImgListFragment.adsContainer=adsContainer;
-        WzBigImgListFragment.vg_viewpager_btn=vg_viewpager_btn;
-        WzBigImgListFragment.include_lunbo_dot_kuang=include_lunbo_dot_kuang;
+
+    public static void init(int fragmentLayoutId,int viewPagerResId,int dotParentResId,int dotItemLayoutId,int cb_dot){
+        WzBigImgListFragment.fragmentLayoutId = fragmentLayoutId;
+        WzBigImgListFragment.viewPagerResId =viewPagerResId;
+        WzBigImgListFragment.dotParentResId =dotParentResId;
+        WzBigImgListFragment.dotItemLayoutId=dotItemLayoutId;
         WzBigImgListFragment.cb_dot=cb_dot;
     };
 
+    static {
+        WzBigImgListFragment.init(R.layout.lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.lunbo_item,R.id.cb_dot);
+
+    }
 
     @Override
     public int initContentViewId() {
-        return include_lunbo_container;
+        return fragmentLayoutId;
     }
 
     @Override
@@ -64,8 +64,8 @@ public class WzBigImgListFragment extends WzParentFragment {
             lunBoDataArrayList.add(lunBoData);
         }
 
-        LunBoTool.initAdsBigImage(parent,adsContainer, vg_viewpager_btn,include_lunbo_dot_kuang, cb_dot, 0, lunBoDataArrayList);
-        ((ViewPager) parent.findViewById(adsContainer)).setCurrentItem(currentIndex);
+        LunBoTool.initAdsBigImage(parent, viewPagerResId, dotParentResId,dotItemLayoutId, cb_dot, 0, lunBoDataArrayList);
+        ((ViewPager) parent.findViewById(viewPagerResId)).setCurrentItem(currentIndex);
     }
     @Override
     public void initListener() {
@@ -88,6 +88,6 @@ public class WzBigImgListFragment extends WzParentFragment {
         bundle.putStringArrayList("stringArrayList", arrayList);
         bundle.putInt("currentIndex", currentIndex);
         setArguments(bundle);
-      //  super.go();
+        new WzNormalFragmentActivity().go(this);
     }
 }

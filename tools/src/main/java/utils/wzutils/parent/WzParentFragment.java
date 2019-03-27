@@ -181,4 +181,34 @@ public abstract class WzParentFragment extends Fragment implements Serializable 
     }
     public void setOnPause(){
     }
+
+
+
+
+
+
+    public void go() {
+        try {
+            go(null);
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
+    public void go(Bundle bundle) {
+        try {
+            if(bundle!=null)setArguments(bundle);
+            new WzNormalFragmentActivity().go(this);
+            currentFragment=this;
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
+    public void goForResult(WzParentFragment parentFragment,int requestCode) {
+        try {
+            new WzNormalFragmentActivity().goForResult(this,parentFragment,requestCode);
+            currentFragment=this;
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
 }

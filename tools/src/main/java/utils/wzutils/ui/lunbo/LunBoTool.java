@@ -264,11 +264,11 @@ public class LunBoTool {
      >
 
      <utils.wzutils.ui.WzViewPager
-     android:id="@+id/adsContainer"
+     android:id="@+id/viewPagerResId"
      android:layout_width="match_parent"
      android:layout_height="match_parent"/>
      <LinearLayout
-     android:id="@+id/vg_viewpager_btn"
+     android:id="@+id/dotParentResId"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_alignParentBottom="true"

@@ -6,8 +6,10 @@
     android:layout_height="match_parent" android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <utils.wzutils.ui.WzSimpleRecycleView
-        android:id="@+id/recycleView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></utils.wzutils.ui.WzSimpleRecycleView>
+
+    <TextView
+        android:id="@+id/tv_main_title" android:text="测试"
+        android:layout_width="match_parent" android:textSize="14dp"
+        android:layout_height="40dp" android:gravity="center" />
+    <View android:background="@color/huise" android:layout_width="match_parent" android:layout_height="1px"></View>
 </LinearLayout>
