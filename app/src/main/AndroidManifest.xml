@@ -5,7 +5,7 @@
     <application
         android:icon="@drawable/ic_launcher_background"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppThemeToolsLib">
         <activity
             android:name="kk.kktools.MainActivity"  android:screenOrientation="portrait" >
             <intent-filter>

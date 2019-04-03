@@ -6,10 +6,8 @@
         android:largeHeap="true"
         android:resizeableActivity="true"
         android:maxAspectRatio="2.1"
-
         android:allowBackup="true"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="true" >
 
 
         <activity  android:name="utils.wzutils.parent.WzNormalFragmentActivity"  android:screenOrientation="portrait" />
