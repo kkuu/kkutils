@@ -12,17 +12,23 @@ public class PageControl<T> implements Serializable {
     public static int noMoreDataPage=-1;//没有更多数据的时候 的当前页
 
     MapListTool<T> mapListTool = new MapListTool<T>();
-    private int initPageSize = 20;
-    private int pageSize = initPageSize;//一页的数据大小
-    private int firstPageNum = 1;//第一页的 索引
-    private int currPageNum = firstPageNum;//当前是第几页
+
+
+
+    public static int defaultPageSize=20;//至少要超过手机一屏幕的显示
+    public int initPageSize = defaultPageSize;
+    public int pageSize = initPageSize;//一页的数据大小
+    public int firstPageNum = 1;//第一页的 索引
+    public int currPageNum = firstPageNum;//当前是第几页
 
     public void setHasMoreData(boolean hasMoreData) {
         this.hasMoreData = hasMoreData;
     }
 
     boolean hasMoreData=true;//是否还有下一页
-
+    public static void setDefaultPageSize(int defaultPageSize) {
+        PageControl.defaultPageSize = defaultPageSize;
+    }
     public PageControl() {
         init();
     }
