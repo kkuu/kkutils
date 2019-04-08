@@ -342,7 +342,7 @@ public class HttpRequest {
             String key = getCacheKey();
             if (!StringTool.isEmpty(key)) {
                 this.cacheStr = cacheStr;
-                MapDB.saveObj(getCacheKey(), cacheStr);
+                MapDB.saveObj(false,getCacheKey(), cacheStr);
                 LogTool.s("保存了接口缓存：");
             }
         } catch (Exception e) {

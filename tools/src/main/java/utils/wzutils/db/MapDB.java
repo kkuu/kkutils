@@ -24,12 +24,12 @@ public class MapDB {
     }
     /***
      * 保存一个对象到本地
-     *
+     *@param sync      * 是否同步提交
      * @param key
      * @param value
      */
-    public static void saveObj(String key, Object value) {
-        saveObjEncrypt(key,value,null);
+    public static void saveObj(boolean sync,String key, Object value) {
+        saveObjEncrypt(sync,key,value,null);
     }
     public static <T> T loadObj(String key, Class<T> tClass) {
         return loadObjByDefault(key,tClass,null);
@@ -42,8 +42,13 @@ public class MapDB {
     }
 
 
-
-    public static void saveObjEncrypt(String key, Object value,String pwd) {
+    /***
+     * @param sync      * 是否同步提交
+     * @param key
+     * @param value
+     * @param pwd
+     */
+    public static void saveObjEncrypt(boolean sync,String key, Object value,String pwd) {
         try {
             String valueSave = JsonTool.toJsonStr(value);
 
@@ -53,7 +58,13 @@ public class MapDB {
                 valueSave=AESTool.encrypt(valueSave,pwd);
             }
             try {
-                getShare(key).edit().putString(key, valueSave).commit();//apply 异步提交， commit 同步提交
+                if(sync){
+                    getShare(key).edit().putString(key, valueSave).commit();//apply 异步提交， commit 同步提交
+                }else {
+                    getShare(key).edit().putString(key, valueSave).apply();//apply 异步提交， commit 同步提交
+                }
+
+
                 LogTool.s("保存了一个对象到本地： key= " + key+"  \n"+value);
             } catch (Exception e) {
                 LogTool.ex(e);

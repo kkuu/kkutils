@@ -80,7 +80,7 @@ public class LanguageTool {
         if (activity != null) activity.getResources().updateConfiguration(config, dm);
 
 
-        MapDB.saveObj("locale", locale);
+        MapDB.saveObj(true,"locale", locale);
 
         if (restartActivity != null) {
             LayoutInflaterTool.clearAll();
