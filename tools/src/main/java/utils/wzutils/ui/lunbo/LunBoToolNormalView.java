@@ -15,7 +15,7 @@ public class LunBoToolNormalView {
     public static void initAds(final ViewPager adsContainer, final LinearLayout vg_viewpager_btn, final int dotBtnLayoutResId, final int dotBtnCompoundButtonResId, final int count, final LunBoGetView lunBoGetView) {
         try {
 
-            adsContainer.setOffscreenPageLimit(count);
+            adsContainer.setOffscreenPageLimit(1);//如果子控件是列表，设置大了就会多加载很多
             /**
              * 添加底部小点
              */
