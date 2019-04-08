@@ -234,7 +234,7 @@ public class WzTakePhotoTool {
         if (outPutFile != null) {
             path = outPutFile.getAbsolutePath();
         }
-        MapDB.saveObj(keyCurrPath, path);
+        MapDB.saveObj(true,keyCurrPath, path);
     }
 
     /***

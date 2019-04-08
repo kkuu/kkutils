@@ -24,7 +24,7 @@ public class MapDB {
     }
     /***
      * 保存一个对象到本地
-     *@param sync      * 是否同步提交
+     *@param sync      * 是否同步提交 true,同步
      * @param key
      * @param value
      */
@@ -43,7 +43,7 @@ public class MapDB {
 
 
     /***
-     * @param sync      * 是否同步提交
+     * @param sync      * 是否同步提交  true,同步
      * @param key
      * @param value
      * @param pwd
