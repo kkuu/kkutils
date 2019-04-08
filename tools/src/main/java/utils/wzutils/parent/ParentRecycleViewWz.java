@@ -254,6 +254,12 @@ public class ParentRecycleViewWz extends RecyclerView {
 
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.set(lineWidth, lineWidth, lineWidth,lineWidth);
+
+            }
+            @Override
             public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.onDraw(c, parent, state);
                 {//水平
