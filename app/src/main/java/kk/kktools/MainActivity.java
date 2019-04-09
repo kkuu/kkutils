@@ -45,6 +45,12 @@ public class MainActivity extends WzParentActivity {
                 new WzBigImgListFragment().go(0, TestData.getTestImgUrlList(2));
             }
         });
+        addItem("测试CoordinatorLayout", null, new WzViewOnclickListener() {
+            @Override
+            public void onClickWz(View v) {
+                new TestCoordinatorLayoutFragment().go();
+            }
+        });
 
         refresh();
     }

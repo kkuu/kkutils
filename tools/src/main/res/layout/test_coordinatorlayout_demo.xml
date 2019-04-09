@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:orientation="vertical">
+        <TextView android:layout_width="match_parent" android:layout_height="50dp" android:text="标题" android:gravity="center" android:textColor="@color/heise" android:background="@color/huise"/>
+
+            <utils.wzutils.ui.pullrefresh.WzRefreshLayout
+                android:id="@+id/wz_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <android.support.design.widget.CoordinatorLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <android.support.design.widget.AppBarLayout
+                        app:elevation="0dp" android:background="#00000000"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView android:contentDescription="滚动的"  app:layout_scrollFlags="scroll|exitUntilCollapsed" android:layout_width="match_parent" android:layout_height="100dp" android:text="滚动的" android:gravity="center" android:textColor="@color/heise" android:background="@color/huise"/>
+                        <TextView android:contentDescription="不滚动的"   android:layout_width="match_parent" android:layout_height="50dp" android:text="不滚动的" android:gravity="center" android:textColor="@color/heise" android:background="@color/hongse"/>
+                    </android.support.design.widget.AppBarLayout>
+                    <utils.wzutils.ui.WzSimpleRecycleView
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" ></utils.wzutils.ui.WzSimpleRecycleView>
+                </android.support.design.widget.CoordinatorLayout>
+            </utils.wzutils.ui.pullrefresh.WzRefreshLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
