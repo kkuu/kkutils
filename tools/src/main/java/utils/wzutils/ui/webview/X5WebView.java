@@ -21,6 +21,10 @@ import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
+import java.util.Map;
+
+import utils.wzutils.common.LogTool;
+
 /***
  * webview  通用bug
  * 1. 会导致系统语言重置
@@ -81,34 +85,19 @@ public class X5WebView extends WebView {
 		// settings 的设计
 	}
 
+	@Override
+	public void loadUrl(String s) {
+		LogTool.s("webview 加载了Url：  "+s);
+		super.loadUrl(s);
 
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//	@Override
+	@Override
+	public void loadUrl(String s, Map<String, String> map) {
+		LogTool.s("webview 加载了Url：  "+s);
+		super.loadUrl(s, map);
+	}
+	//	@Override
 //	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
 //		boolean ret = super.drawChild(canvas, child, drawingTime);
 //		canvas.save();
