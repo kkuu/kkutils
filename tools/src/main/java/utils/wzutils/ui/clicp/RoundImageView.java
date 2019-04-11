@@ -16,8 +16,10 @@ import android.graphics.Region;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.system.Os;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -36,6 +38,8 @@ import utils.wzutils.ui.WzImageView;
 public class RoundImageView extends WzImageView {
     private float[] radii = new float[8];   // top-left, top-right, bottom-right, bottom-left
     private Path mClipPath;                 // 剪裁区域路径
+    Path mClipPath28;//api 大于27 的时候用这个裁剪
+
     private Paint mPaint;                   // 画笔
     private boolean mRoundAsCircle = true; // 圆形
     private RectF mLayer;                   // 画布图层大小
@@ -84,8 +88,11 @@ public class RoundImageView extends WzImageView {
         } else {
             mClipPath.addRoundRect(mLayer, radii, Path.Direction.CW);
         }
-    }
 
+        mClipPath28=new Path();
+        mClipPath28.addRect(mLayer, Path.Direction.CW);
+        mClipPath28.op(this.mClipPath, Path.Op.DIFFERENCE);
+    }
     /***
      * view
      * 就用ondraw ， viewgroup 就用 dispatchDraw
@@ -94,9 +101,15 @@ public class RoundImageView extends WzImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.saveLayer(mLayer, null, Canvas.ALL_SAVE_FLAG);//必须， 否则效果不对
-        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));//设置合成模式
         super.onDraw(canvas);//其实不止 imageview ， 所有的view 都可以 实现圆角效果
-        canvas.drawPath(mClipPath,mPaint);//不能直接画， 一定用 drawPath
+
+        if(Build.VERSION.SDK_INT<=27){
+            mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));//设置合成模式
+            canvas.drawPath(mClipPath,mPaint);//不能直接画， 一定用 drawPath
+        }else {
+            mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));//设置合成模式
+            canvas.drawPath(mClipPath28,mPaint);//不能直接画， 一定用 drawPath
+        }
         canvas.restore();
     }
 
