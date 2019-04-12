@@ -31,6 +31,7 @@ public class StatusBarTool {
      */
     public static void setStatusBarColor(Activity activity, int color,boolean isLayoutFullScreen){
         try {
+            LogTool.s("setStatusBarColor "+activity);
             boolean isLight= ColorUtils.calculateLuminance(color)>=0.5;
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){//android 6 上才可设置状态栏浅色， 对应文字深色， android 5 没法改文字颜色，所以不能用浅色
@@ -75,6 +76,7 @@ public class StatusBarTool {
      * @param activity
      */
     public static void setStatusBarTouMing(Activity activity){
+        LogTool.s("setStatusBarTouMing "+activity);
         Window window = activity.getWindow();
 
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);//设置状态栏颜色白色
