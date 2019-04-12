@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <item android:drawable="@drawable/lunbo_dot_huise"></item>
+    <item android:top="130dp" >
+        <bitmap  android:gravity="top|center_horizontal"  android:src="@drawable/lunbo_dot_huise"></bitmap>
+    </item>
+    <item  android:bottom="70dp">
+        <bitmap   android:gravity="bottom|center_horizontal" android:src="@drawable/lunbo_dot_huise"></bitmap>
+    </item>
+</layer-list>
