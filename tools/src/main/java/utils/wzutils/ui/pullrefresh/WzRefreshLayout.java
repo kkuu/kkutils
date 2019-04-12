@@ -42,6 +42,7 @@ public class WzRefreshLayout extends SmartRefreshLayout {
     }
 
     public void init(){
+        setDragRate(1);
         setEnableOverScrollBounce(false);
         initHeaderAndFooter();
     }
