@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" android:orientation="vertical">
-        <TextView android:layout_width="match_parent" android:layout_height="50dp" android:text="标题" android:gravity="center" android:textColor="@color/heise" android:background="@color/huise"/>
+        <TextView android:id="@+id/btn_choose_dizhi"  android:layout_width="match_parent" android:layout_height="50dp" android:text="选择收货地址" android:gravity="center" android:textColor="@color/heise" android:background="@color/huise"/>
 
             <utils.wzutils.ui.pullrefresh.WzRefreshLayout
                 android:id="@+id/wz_refresh"

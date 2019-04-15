@@ -18,6 +18,7 @@ import utils.wzutils.common.LogTool;
 import utils.wzutils.common.PwdTool;
 import utils.wzutils.common.TestData;
 import utils.wzutils.common.UiTool;
+import utils.wzutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
 import utils.wzutils.http.HttpRequest;
 import utils.wzutils.http.HttpUiCallBack;
 import utils.wzutils.parent.WzNormalFragmentActivity;
@@ -45,7 +46,7 @@ public class MainActivity extends WzParentActivity {
                 new WzBigImgListFragment().go(0, TestData.getTestImgUrlList(2));
             }
         });
-        addItem("测试CoordinatorLayout", null, new WzViewOnclickListener() {
+        addItem("测试CoordinatorLayout,和选择收货地址", null, new WzViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
                 new TestCoordinatorLayoutFragment().go();

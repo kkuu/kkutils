@@ -9,4 +9,11 @@
     <color name="hongse">#E2231A</color>
     <color name="heise">#000000</color>
 
+
+    <color name="kk_tv_h0">#000000</color>
+    <color name="kk_tv_h1">#333333</color>
+    <color name="kk_tv_h2">#666666</color>
+    <color name="kk_tv_h3">#999999</color>
+    <color name="kk_tv_h4">#bdbebe</color>
+    <color name="kk_tv_h5">#d7d7d7</color>
 </resources>

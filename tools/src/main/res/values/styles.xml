@@ -7,4 +7,29 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="kk_textview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/kk_tv_h1</item>
+        <item name="android:textColorHint">@color/kk_tv_h4</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+    </style>
+
+
+    <style name="line_h">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/kk_tv_h5</item>
+    </style>
+    <style name="line_v">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/kk_tv_h5</item>
+    </style>
+
+
+
 </resources>

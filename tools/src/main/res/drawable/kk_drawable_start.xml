@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
-    <item android:drawable="@drawable/lunbo_dot_huise"></item>
+    <item android:drawable="@drawable/kk_lunbo_dot_huise"></item>
     <item android:top="130dp" >
-        <bitmap  android:gravity="top|center_horizontal"  android:src="@drawable/lunbo_dot_huise"></bitmap>
+        <bitmap  android:gravity="top|center_horizontal"  android:src="@drawable/kk_lunbo_dot_huise"></bitmap>
     </item>
     <item  android:bottom="70dp">//这个 距离和gravity 要这样写， 5.0 android 否则显示有问题
-        <bitmap   android:gravity="bottom|center_horizontal" android:src="@drawable/lunbo_dot_huise"></bitmap>
+        <bitmap   android:gravity="bottom|center_horizontal" android:src="@drawable/kk_lunbo_dot_huise"></bitmap>
     </item>
 </layer-list>

@@ -41,7 +41,7 @@ public class WzBigImgListFragment extends WzParentFragment {
     };
 
     static {
-        WzBigImgListFragment.init(R.layout.lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.lunbo_item,R.id.cb_dot);
+        WzBigImgListFragment.init(R.layout.kk_lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.kk_lunbo_item,R.id.cb_dot);
 
     }
 

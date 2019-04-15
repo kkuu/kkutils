@@ -1,16 +1,23 @@
 package kk.kktools;
 
+import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
 
+import utils.wzutils.common.LogTool;
 import utils.wzutils.common.TestData;
+import utils.wzutils.common.UiTool;
+import utils.wzutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
 import utils.wzutils.parent.WzParentFragment;
+import utils.wzutils.parent.WzViewOnclickListener;
 import utils.wzutils.ui.WzSimpleRecycleView;
 
 public class TestCoordinatorLayoutFragment extends WzParentFragment {
     WzSimpleRecycleView recycler_view;
+    TextView btn_choose_dizhi;
     @Override
     public int initContentViewId() {
-        return R.layout.test_coordinatorlayout_demo;
+        return R.layout.kk_test_coordinatorlayout_demo;
     }
 
     @Override
@@ -22,8 +29,25 @@ public class TestCoordinatorLayoutFragment extends WzParentFragment {
                 super.initData(position, type, itemView);
             }
         });
+        btn_choose_dizhi.setOnClickListener(new WzViewOnclickListener() {
+            @Override
+            public void onClickWz(View v) {
+                new KK_XuanZheShouHuoDiZhiFragment().goForResult(TestCoordinatorLayoutFragment.this,1);
+            }
+        });
     }
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if(data!=null&&data.getExtras()!=null){
+                KK_XuanZheShouHuoDiZhiFragment.DiZhiChoose diZhiChoose = KK_XuanZheShouHuoDiZhiFragment.getDiZhiByIntent(data);
+                UiTool.setTextView(btn_choose_dizhi, diZhiChoose.address_province+" "+diZhiChoose.address_city+" "+diZhiChoose.address_area);
+            }
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+    }
     @Override
     public void initListener() {
 
