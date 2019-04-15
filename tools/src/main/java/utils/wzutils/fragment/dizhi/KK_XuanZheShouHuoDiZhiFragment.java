@@ -23,7 +23,7 @@ import utils.wzutils.ui.WzSimpleRecycleView;
  */
 
 public class KK_XuanZheShouHuoDiZhiFragment extends WzParentFragment {
-    WzSimpleRecycleView recycleView;
+    public WzSimpleRecycleView recycleView;
     @Override
     public int initContentViewId() {
         return R.layout.kk_normal_list;
@@ -55,7 +55,7 @@ public class KK_XuanZheShouHuoDiZhiFragment extends WzParentFragment {
     }
     public int maxDep=1000;//最大选择层级 4是城市  5是地区
     public static final int maxDepCity=4;//选城市传这个
-    KK_DiZhi currKKDiZhi =null;
+    public KK_DiZhi currKKDiZhi =null;
     public void loadData(final KK_DiZhi KKDiZhi){
         currKKDiZhi = KKDiZhi;
         recycleView.scrollToPosition(0);
@@ -111,7 +111,7 @@ public class KK_XuanZheShouHuoDiZhiFragment extends WzParentFragment {
         }
         return new DiZhiChoose();
     }
-    DiZhiChoose diZhiChoose=new DiZhiChoose();
+    public DiZhiChoose diZhiChoose=new DiZhiChoose();
     public static class DiZhiChoose implements Serializable {
         public String address_country="中国";
         public String address_province="";
