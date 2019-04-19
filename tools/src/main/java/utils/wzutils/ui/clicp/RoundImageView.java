@@ -27,7 +27,6 @@ public class RoundImageView extends WzImageView {
 
     public void init(){
         roundViewTool=new RoundViewTool(this);
-        roundViewTool.setRoundCornerDp(20);
 
     }
     @Override

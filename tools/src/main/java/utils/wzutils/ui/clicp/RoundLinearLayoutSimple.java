@@ -31,7 +31,7 @@ public class RoundLinearLayoutSimple extends LinearLayout {
 
     public void init(){
         roundViewTool=new RoundViewTool(this);
-        roundViewTool.setRoundCornerDp(20);
+        //roundViewTool.setRoundCornerDp(20);
 
     }
     @Override
