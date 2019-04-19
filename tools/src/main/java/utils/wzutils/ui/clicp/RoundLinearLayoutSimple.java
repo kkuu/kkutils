@@ -3,26 +3,30 @@ package utils.wzutils.ui.clicp;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-import utils.wzutils.ui.WzImageView;
-
-public class RoundImageView extends WzImageView {
+public class RoundLinearLayoutSimple extends LinearLayout {
     public RoundViewTool roundViewTool;
-    public RoundImageView(Context context) {
+    public RoundLinearLayoutSimple(Context context) {
         super(context);
         init();
     }
 
-    public RoundImageView(Context context, AttributeSet attrs) {
+    public RoundLinearLayoutSimple(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public RoundImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RoundLinearLayoutSimple(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
+
+    public RoundLinearLayoutSimple(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+    }
+
 
 
     public void init(){
