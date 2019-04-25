@@ -36,47 +36,47 @@ public class RecycleViewTool {
 
 
 
-//    /***
-//     * 初始化 网格线
-//     * @param spanCount
-//     * @param lineWidth
-//     * @param color
-//     */
-//    public static RecyclerView.ItemDecoration initGridLineSimple( final int padding, final int spanCount, final int lineWidth, final int color){
-//
-//        return  new RecyclerView.ItemDecoration() {
-//            Paint paint=new Paint();
-//            {
-//                paint.setColor(color);
-//                paint.setAntiAlias(true);
-//            }
-//            @Override
-//            public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-//                super.onDrawOver(c, parent, state);
-//
-//                {//水平
-//                    int count=(int)(parent.getChildCount()*1.0/spanCount+0.9999999999);
-//                    if(count>1){
-//                        for(int i=1;i<count;i++){
-//                            int preLineIndex=(i-1)*spanCount+1;//用上一行的第一个来作为线的top
-//                            int top=parent.getChildAt(preLineIndex).getBottom()+padding/2;
-//                            c.drawRect(padding, top, parent.getWidth()-padding, top+lineWidth, paint);
-//                        }
-//                    }
-//                }
-//                {//竖直
-//                    int itemW=parent.getWidth()/spanCount;
-//                    int step=itemW;
-//                    int top=padding;
-//                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
-//                    itemW+=step;
-//                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
-//                    itemW+=step;
-//                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
-//                }
-//            }
-//        };
-//    }
+    /***
+     * 初始化 网格线
+     * @param spanCount
+     * @param lineWidth
+     * @param color
+     */
+    public static RecyclerView.ItemDecoration initGridLineSimple( final int padding, final int spanCount, final int lineWidth, final int color){
+
+        return  new RecyclerView.ItemDecoration() {
+            Paint paint=new Paint();
+            {
+                paint.setColor(color);
+                paint.setAntiAlias(true);
+            }
+            @Override
+            public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.onDrawOver(c, parent, state);
+
+                {//水平
+                    int count=(int)(parent.getChildCount()*1.0/spanCount+0.9999999999);
+                    if(count>1){
+                        for(int i=1;i<count;i++){
+                            int preLineIndex=(i-1)*spanCount+1;//用上一行的第一个来作为线的top
+                            int top=parent.getChildAt(preLineIndex).getBottom()+padding/2;
+                            c.drawRect(padding, top, parent.getWidth()-padding, top+lineWidth, paint);
+                        }
+                    }
+                }
+                {//竖直
+                    int itemW=parent.getWidth()/spanCount;
+                    int step=itemW;
+                    int top=padding;
+                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
+                    itemW+=step;
+                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
+                    itemW+=step;
+                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
+                }
+            }
+        };
+    }
 
 
 
