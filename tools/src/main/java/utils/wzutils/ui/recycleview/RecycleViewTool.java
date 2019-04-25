@@ -42,14 +42,20 @@ public class RecycleViewTool {
      * @param lineWidth
      * @param color
      */
-    public static RecyclerView.ItemDecoration initGridLineSimple( final int padding, final int spanCount, final int lineWidth, final int color){
-
+    public static RecyclerView.ItemDecoration initGridLineSimple( final int paddingIn, final int spanCount, final int lineWidth, final int color){
         return  new RecyclerView.ItemDecoration() {
             Paint paint=new Paint();
+            int padding=CommonTool.dip2px(paddingIn);
+
             {
                 paint.setColor(color);
                 paint.setAntiAlias(true);
             }
+
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+            }
+
             @Override
             public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.onDrawOver(c, parent, state);
