@@ -38,7 +38,6 @@ public class RecycleViewTool {
 
     /***
      * 初始化 网格线
-     * @param recyclerView
      * @param spanCount
      * @param lineWidth
      * @param color
