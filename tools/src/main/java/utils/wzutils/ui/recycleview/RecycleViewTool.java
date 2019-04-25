@@ -4,7 +4,9 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.view.ViewGroup;
 
 import utils.wzutils.R;
 import utils.wzutils.common.CommonTool;
@@ -12,6 +14,27 @@ import utils.wzutils.common.LogTool;
 import utils.wzutils.common.UiTool;
 
 public class RecycleViewTool {
+
+    /***
+     * 必须用的 StaggeredGridLayoutManager  这个才能调用
+     * @param itemView
+     */
+    public static void setStaggeredGridFullSpan(View itemView) {
+        try {
+            StaggeredGridLayoutManager.LayoutParams layoutParams =
+                    new StaggeredGridLayoutManager.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setFullSpan(true);
+            itemView.setLayoutParams(layoutParams);
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
+
+
+
+
     public static interface OnItemSizeChange{
         public void onItemSizeChange(RecyclerView recyclerView, int position,View itemView, int width);
     }
