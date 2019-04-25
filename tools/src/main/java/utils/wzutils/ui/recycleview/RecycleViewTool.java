@@ -1,6 +1,7 @@
 package utils.wzutils.ui.recycleview;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
@@ -10,10 +11,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import utils.wzutils.R;
 import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.LogTool;
-import utils.wzutils.common.UiTool;
 
 public class RecycleViewTool {
 
@@ -44,60 +43,45 @@ public class RecycleViewTool {
      * @param lineWidth
      * @param color
      */
-    public static void initGridItemDecoration(RecyclerView recyclerView, final int spanCount,  final int lineWidth, final int color){
-       removeAllDecoration(recyclerView);
-        final Paint paint=new Paint();
-        paint.setColor(color);
-        paint.setAntiAlias(true);
-        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-                outRect.set(lineWidth, lineWidth, lineWidth,lineWidth);
-            }
+    public static RecyclerView.ItemDecoration initGridLineSimple( final int padding, final int spanCount, final int lineWidth, final int color){
 
+        return  new RecyclerView.ItemDecoration() {
+            Paint paint=new Paint();
+            {
+                paint.setColor(color);
+                paint.setAntiAlias(true);
+            }
             @Override
             public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.onDrawOver(c, parent, state);
+
                 {//水平
                     int count=(int)(parent.getChildCount()*1.0/spanCount+0.9999999999);
-                    int step=parent.getHeight()/count;
                     if(count>1){
                         for(int i=1;i<count;i++){
-                            int top=i*step;
-                            c.drawRect(0, top, parent.getWidth(), top+lineWidth, paint);
+                            int preLineIndex=(i-1)*spanCount+1;//用上一行的第一个来作为线的top
+                            int top=parent.getChildAt(preLineIndex).getBottom()+padding/2;
+                            c.drawRect(padding, top, parent.getWidth()-padding, top+lineWidth, paint);
                         }
                     }
                 }
                 {//竖直
                     int itemW=parent.getWidth()/spanCount;
                     int step=itemW;
-                    c.drawRect(itemW, 0, itemW+lineWidth, parent.getHeight(), paint);
+                    int top=padding;
+                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
                     itemW+=step;
-                    c.drawRect(itemW, 0, itemW+lineWidth, parent.getHeight(), paint);
+                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
                     itemW+=step;
-                    c.drawRect(itemW, 0, itemW+lineWidth, parent.getHeight(), paint);
+                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
                 }
             }
-        });
+        };
     }
 
 
-    /***
-     * 删除所有间隔线
-     * @param recyclerView
-     */
-    public static void removeAllDecoration(RecyclerView recyclerView){
-        try {
-            for(int i=0;i<recyclerView.getItemDecorationCount();i++){//删掉以前的
-                recyclerView.removeItemDecorationAt(i);
-                i--;
-            }
-        }catch (Exception e){
-            LogTool.ex(e);
-        }
 
-    }
+
 
 
 
@@ -126,8 +110,9 @@ public class RecycleViewTool {
      * @param headCount  占据一行的  head 数量
      * @param paddingDp  间距
      * @param onItemSizeChange 用于可能需要根据item 宽来动态设置view 宽的情况
+     * @param itemDecorationEnd 可用于自定义间隔， 默认可不传
      */
-    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount, final int paddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange){
+    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount, final int paddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
         GridLayoutManager layoutManager=null;
 
         {//判断是否设置过， 设置过就不要设置了，不然ui 刷新会出问题
@@ -158,6 +143,16 @@ public class RecycleViewTool {
             final double jiangeCount=spanCount+1;
             final int padding= CommonTool.dip2px(paddingDp);
             recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                @Override
+                public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                    super.onDrawOver(c, parent, state);
+                    try {
+                        if(itemDecorationEnd!=null)itemDecorationEnd.onDrawOver(c,parent,state);
+                    }catch (Exception e){
+                        LogTool.ex(e);
+                    }
+                }
+
                 @Override
                 public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                     super.getItemOffsets(outRect, view, parent, state);
@@ -193,10 +188,36 @@ public class RecycleViewTool {
                     }catch (Exception e){
                         LogTool.ex(e);
                     }
+
+                    try {
+                        if(itemDecorationEnd!=null)itemDecorationEnd.getItemOffsets(outRect,view,parent,state);
+                    }catch (Exception e){
+                        LogTool.ex(e);
+                    }
                 }
             });
 
         }
+    }
+
+
+
+
+
+    /***
+     * 删除所有间隔线
+     * @param recyclerView
+     */
+    public static void removeAllDecoration(RecyclerView recyclerView){
+        try {
+            for(int i=0;i<recyclerView.getItemDecorationCount();i++){//删掉以前的
+                recyclerView.removeItemDecorationAt(i);
+                i--;
+            }
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
     }
     public static interface OnItemSizeChange{
         public void onItemSizeChange(RecyclerView recyclerView, int position,View itemView, int width);
