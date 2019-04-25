@@ -1,5 +1,7 @@
 package utils.wzutils.ui.recycleview;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,6 +18,7 @@ import utils.wzutils.common.UiTool;
 public class RecycleViewTool {
 
     /***
+     * 设置某一项铺满
      * 必须用的 StaggeredGridLayoutManager  这个才能调用
      * @param itemView
      */
@@ -34,10 +37,56 @@ public class RecycleViewTool {
 
 
 
+    /***
+     * 初始化 网格线
+     * @param recyclerView
+     * @param spanCount
+     * @param lineWidth
+     * @param color
+     */
+    public static void initGridItemDecoration(RecyclerView recyclerView, final int spanCount,  final int lineWidth, final int color){
+       removeAllDecoration(recyclerView);
+        final Paint paint=new Paint();
+        paint.setColor(color);
+        paint.setAntiAlias(true);
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.set(lineWidth, lineWidth, lineWidth,lineWidth);
+            }
 
-    public static interface OnItemSizeChange{
-        public void onItemSizeChange(RecyclerView recyclerView, int position,View itemView, int width);
+            @Override
+            public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.onDrawOver(c, parent, state);
+                {//水平
+                    int count=(int)(parent.getChildCount()*1.0/spanCount+0.9999999999);
+                    int step=parent.getHeight()/count;
+                    if(count>1){
+                        for(int i=1;i<count;i++){
+                            int top=i*step;
+                            c.drawRect(0, top, parent.getWidth(), top+lineWidth, paint);
+                        }
+                    }
+                }
+                {//竖直
+                    int itemW=parent.getWidth()/spanCount;
+                    int step=itemW;
+                    c.drawRect(itemW, 0, itemW+lineWidth, parent.getHeight(), paint);
+                    itemW+=step;
+                    c.drawRect(itemW, 0, itemW+lineWidth, parent.getHeight(), paint);
+                    itemW+=step;
+                    c.drawRect(itemW, 0, itemW+lineWidth, parent.getHeight(), paint);
+                }
+            }
+        });
     }
+
+
+    /***
+     * 删除所有间隔线
+     * @param recyclerView
+     */
     public static void removeAllDecoration(RecyclerView recyclerView){
         try {
             for(int i=0;i<recyclerView.getItemDecorationCount();i++){//删掉以前的
@@ -49,6 +98,9 @@ public class RecycleViewTool {
         }
 
     }
+
+
+
     public static void initRecycleViewLinearlayout(RecyclerView recyclerView,int paddingDp ){
         removeAllDecoration(recyclerView);
         final int padding= CommonTool.dip2px(paddingDp);
@@ -146,6 +198,8 @@ public class RecycleViewTool {
 
         }
     }
-
+    public static interface OnItemSizeChange{
+        public void onItemSizeChange(RecyclerView recyclerView, int position,View itemView, int width);
+    }
 
 }

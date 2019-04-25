@@ -237,54 +237,6 @@ public class ParentRecycleViewWz extends RecyclerView {
     }
 
 
-    /***
-     * 初始化 网格线
-     * @param recyclerView
-     * @param spanCount
-     * @param lineWidth
-     * @param color
-     */
-    public static void initGridItemDecoration(RecyclerView recyclerView, final int spanCount,  final int lineWidth, final int color){
-        if(recyclerView.getItemDecorationCount()>0){
-            recyclerView.removeItemDecorationAt(0);
-        }
-        final Paint paint=new Paint();
-        paint.setColor(color);
-        paint.setAntiAlias(true);
-
-        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-                outRect.set(lineWidth, lineWidth, lineWidth,lineWidth);
-
-            }
-            @Override
-            public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                super.onDraw(c, parent, state);
-                {//水平
-                    int count=(int)(parent.getChildCount()*1.0/spanCount+0.9999999999);
-                    int step=parent.getHeight()/count;
-                    if(count>1){
-                        for(int i=1;i<count;i++){
-                            int top=i*step;
-                            c.drawRect(0, top, parent.getWidth(), top+lineWidth, paint);
-                        }
-                    }
-                }
-                {//竖直
-                    int itemW=parent.getWidth()/spanCount;
-                    int step=itemW;
-                    c.drawRect(itemW, 0, itemW+lineWidth, parent.getHeight(), paint);
-                    itemW+=step;
-                    c.drawRect(itemW, 0, itemW+lineWidth, parent.getHeight(), paint);
-                    itemW+=step;
-                    c.drawRect(itemW, 0, itemW+lineWidth, parent.getHeight(), paint);
-                }
-            }
-        });
-    }
-
 
 
 
