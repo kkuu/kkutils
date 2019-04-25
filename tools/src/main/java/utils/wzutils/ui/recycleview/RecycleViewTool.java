@@ -52,24 +52,33 @@ public class RecycleViewTool {
      * @param paddingDp  间距
      * @param onItemSizeChange 用于可能需要根据item 宽来动态设置view 宽的情况
      */
-    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount, final int paddingDp, final OnItemSizeChange onItemSizeChange){
-        GridLayoutManager layoutManager=new GridLayoutManager(recyclerView.getContext(),spanCount);
+    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount, final int paddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange){
+        GridLayoutManager layoutManager=null;
 
-        if(headCount>0){
-            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    if(position<headCount){
-                        return spanCount;
-                    }
-                    return 1;
-                }
-            });
+        {//判断是否设置过， 设置过就不要设置了，不然ui 刷新会出问题
+            RecyclerView.LayoutManager layoutManagerOld= recyclerView.getLayoutManager();
+            if(layoutManagerOld!=null&&layoutManagerOld instanceof GridLayoutManager){
+                layoutManager= (GridLayoutManager) layoutManagerOld;
+            }else {
+                layoutManager=new GridLayoutManager(recyclerView.getContext(),spanCount);
+                recyclerView.setLayoutManager(layoutManager);
+            }
         }
-        recyclerView.setLayoutManager(layoutManager);
+
+
+        layoutManager.setSpanCount(spanCount);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if(position<headCount){
+                    return spanCount;
+                }
+                return 1;
+            }
+        });
 
         {//设置间隔
-            removeAllDecoration(recyclerView);
+            RecycleViewTool.removeAllDecoration(recyclerView);
 
             final double jiangeCount=spanCount+1;
             final int padding= CommonTool.dip2px(paddingDp);
@@ -114,4 +123,6 @@ public class RecycleViewTool {
 
         }
     }
+
+
 }
