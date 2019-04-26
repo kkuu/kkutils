@@ -3,7 +3,10 @@ package utils.wzutils.ui.bigimage;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.WindowManager;
 
+
+import com.blankj.utilcode.util.BarUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +56,9 @@ public class WzBigImgListFragment extends WzParentFragment {
     @Override
     public void initData() {
         parent.setBackgroundColor(Color.BLACK);
+        getActivity(). getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        BarUtils.setNavBarColor(getActivity(),Color.BLACK);
+
         if(getArguments()!=null){
             stringArrayList = getArguments().getStringArrayList("stringArrayList");
             currentIndex = getArguments().getInt("currentIndex", 0);
