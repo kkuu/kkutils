@@ -90,24 +90,7 @@ public class RecycleViewTool {
 
 
 
-    public static void initRecycleViewLinearlayout(RecyclerView recyclerView,int paddingDp ){
-        removeAllDecoration(recyclerView);
-        final int padding= CommonTool.dip2px(paddingDp);
-        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-                try {
-                    int position = parent.getChildAdapterPosition(view);
-                    boolean isLastItem=parent.getAdapter().getItemCount()==position+1;
-                    int paddingBottom=isLastItem?padding:0;//最后一条才有
-                    outRect.set(padding,padding,padding,paddingBottom);
-                }catch (Exception e){
-                    LogTool.ex(e);
-                }
-            }
-        });
-    }
+
     /***
      * 用于  多列 的 列表
      * @param recyclerView
@@ -163,8 +146,13 @@ public class RecycleViewTool {
                     super.getItemOffsets(outRect, view, parent, state);
                     try {
                         int position = parent.getChildAdapterPosition(view);
-                        boolean isLastItem=parent.getAdapter().getItemCount()==position+1;
-                        int paddingBottom=isLastItem?padding:0;//最后一条才有,  paddingTop 一直有， paddingBottom 只有最后一条才有
+
+                        boolean isLastLine=isLastLine(parent.getAdapter().getItemCount()-headCount,position-headCount,spanCount);
+
+                        int paddingBottom=isLastLine?padding:0;//最后一行才有,  paddingTop 一直有， paddingBottom 只有最后一条才有
+
+
+
                         boolean isHead=position<=headCount-1;//当前条是否是head
                         if(isHead){
                             outRect.set(padding,padding,padding,paddingBottom);
@@ -206,9 +194,50 @@ public class RecycleViewTool {
     }
 
 
+    /***
+     * 是否最后一行
+     * @param count  总数
+     * @param position  当前索引，0开始
+     * @param spanCount 几列
+     * @return
+     */
+    public static boolean isLastLine(int count,int position,int spanCount){
+        boolean isLastLine=false;
+        {
+            int line=0;
+            if(count%spanCount==0){
+                line=count/spanCount;
+            }else {
+                line=count/spanCount+1;
+            }
+            isLastLine=position>=(line-1)*spanCount;
+        }
+        return isLastLine;
+    }
 
 
 
+
+
+
+    public static void initRecycleViewLinearlayout(RecyclerView recyclerView,int paddingDp ){
+        removeAllDecoration(recyclerView);
+        final int padding= CommonTool.dip2px(paddingDp);
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                try {
+                    int position = parent.getChildAdapterPosition(view);
+                    boolean isLastItem=parent.getAdapter().getItemCount()==position+1;
+                    int paddingBottom=isLastItem?padding:0;//最后一条才有
+                    outRect.set(padding,padding,padding,paddingBottom);
+                }catch (Exception e){
+                    LogTool.ex(e);
+                }
+            }
+        });
+    }
     /***
      * 删除所有间隔线
      * @param recyclerView
