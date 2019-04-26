@@ -66,7 +66,7 @@ public class ParentRecycleViewWz extends RecyclerView {
     public void init() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         setLayoutManager(linearLayoutManager);
-        setNestedScrollingEnabled(false);
+       // setNestedScrollingEnabled(false);
 
         setItemAnimator(null);//不要动画
 
