@@ -339,6 +339,10 @@ public class HttpRequest {
 
     public void setCacheStr(String cacheStr) {
         try {
+            if(!canSaveCacheToLocal(cacheStr)){
+                LogTool.s("不能缓存接口");
+                return;
+            }
             String key = getCacheKey();
             if (!StringTool.isEmpty(key)) {
                 this.cacheStr = cacheStr;
@@ -374,6 +378,17 @@ public class HttpRequest {
     public String[] getCacheList(){
         return null;
     }
+
+    /***
+     * 是否可以保存缓存， 一般返回结果正常才保存
+     * @param cacheStr
+     * @return
+     */
+    public boolean canSaveCacheToLocal(String cacheStr){
+        return true;
+    }
+
+
 
     /***
      * 初始化是否使用缓存
