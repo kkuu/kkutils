@@ -14,12 +14,61 @@ import com.blankj.utilcode.util.BarUtils;
 import utils.wzutils.R;
 import utils.wzutils.common.LogTool;
 
+/***
+ * 只用 这个  public static void setStatusBarColor(Activity activity,int bgColor, boolean isTvBlack,boolean isLayoutBelowToStatusBar)
+ */
 public class StatusBarTool {
     public static int getDarkColorPrimary(Activity activity){
         TypedValue typedValue = new TypedValue();
         activity.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
         return typedValue.data;
     }
+
+
+    /***
+     * 设置状态栏颜色,和文字颜色
+     * @param  isLayoutBelowToStatusBar   contentView 是否在 状态栏的下面一层
+     */
+    public static void setStatusBarColor(Activity activity,int bgColor, boolean isTvBlack,boolean isLayoutBelowToStatusBar){
+        try {
+            LogTool.s("setStatusBarColor "+activity);
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            if(!isLayoutBelowToStatusBar)option=0;
+            {
+                activity.getWindow().setStatusBarColor(bgColor);
+                // 设置状态栏底色白色
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+                if(isTvBlack){  // 设置状态栏字体黑色
+                    activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR|option);
+                }else {
+                    activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE|option);
+                }
+            }
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /***
