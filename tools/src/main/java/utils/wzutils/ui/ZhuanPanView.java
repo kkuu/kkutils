@@ -31,7 +31,16 @@ public class ZhuanPanView extends RelativeLayout {
     }
     public ImageView imageViewBg=new ImageView(getContext());
     public ImageView imageViewCenter=new ImageView(getContext());
+    public View viewRotation;
+    public boolean isAnimating=false;
+
+    public void initImageViewBg(){
+        imageViewBg=new ImageView(getContext());
+    }
+
     public void init(){
+        initImageViewBg();
+
         imageViewBg.setBackgroundColor(Color.RED);
         addView(imageViewBg,LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
 
@@ -53,8 +62,7 @@ public class ZhuanPanView extends RelativeLayout {
         imageViewBg.setImageResource(resIdBg);
         imageViewCenter.setImageResource(resIdCenter);
     }
-    View viewRotation;
-    boolean isAnimating=false;
+
     public void animToAngle(final int angle, final Animation.AnimationListener animationListener){
         if(isAnimating==true){
             LogTool.s("动画中，待会再点");
