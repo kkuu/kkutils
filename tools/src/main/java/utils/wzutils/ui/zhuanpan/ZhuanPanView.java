@@ -1,4 +1,4 @@
-package utils.wzutils.ui;
+package utils.wzutils.ui.zhuanpan;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -63,11 +63,17 @@ public class ZhuanPanView extends RelativeLayout {
         imageViewCenter.setImageResource(resIdCenter);
     }
 
-    public void animToAngle(final int angle, final Animation.AnimationListener animationListener){
+    /***
+     * 转动指定角度，相对指针
+     * @param angleIn
+     * @param animationListener
+     */
+    public void animToAngle(final int angleIn, final Animation.AnimationListener animationListener){
         if(isAnimating==true){
             LogTool.s("动画中，待会再点");
             return;
         }
+        final int angle=-angleIn;
         RotateAnimation rotate  = new RotateAnimation((float) (viewRotation.getRotation()*180/Math.PI), 360*10+angle, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotate.setInterpolator(new AccelerateDecelerateInterpolator(){
             @Override
