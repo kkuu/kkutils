@@ -40,8 +40,9 @@ public class ZhuanPanViewWithText extends ZhuanPanView {
         super(context, attrs, defStyleAttr);
         initNew();
     }
-    Paint paint=new Paint();
-    HashMap<String ,Bitmap>bitmapHashMap;
+    public Paint paint=new Paint();
+    public HashMap<String ,Bitmap>bitmapHashMap;
+    public List<ZhuanPanData> zhuanPanDataList=new ArrayList<>();
 
     public void initNew(){
         paint.setAntiAlias(true);
@@ -71,7 +72,6 @@ public class ZhuanPanViewWithText extends ZhuanPanView {
             return zhuanPanDataList;
         }
     }
-    List<ZhuanPanData> zhuanPanDataList=new ArrayList<>();
     public void setData(List<ZhuanPanData> list){
         bitmapHashMap=new HashMap<>();
         if(CollectionsTool.isEmptyList(list))return;
