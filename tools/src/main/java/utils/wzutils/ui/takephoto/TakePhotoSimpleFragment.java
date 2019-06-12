@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
 import com.yanzhenjie.album.Action;
@@ -12,6 +13,7 @@ import com.yanzhenjie.album.AlbumConfig;
 import com.yanzhenjie.album.AlbumFile;
 import com.yanzhenjie.album.AlbumLoader;
 import com.yanzhenjie.album.api.widget.Widget;
+import com.yanzhenjie.durban.Durban;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.Locale;
 import utils.wzutils.AppTool;
 import utils.wzutils.ImgTool;
 import utils.wzutils.common.LogTool;
+import utils.wzutils.common.UiTool;
 
 
 /**
@@ -86,6 +89,52 @@ public class TakePhotoSimpleFragment extends WzTakePhotoFragment {
 
     }
 
+    /***
+     * 选取图片并裁剪
+     * @param fragment
+     *
+     *  Durban.parseResult(data);
+     */
+    public static void pickImg(final Fragment fragment){
+        int bg_qian_color= Color.parseColor("#eeeeee");
+        Widget widget = Widget.newDarkBuilder(AppTool.getApplication())
+                .title("Images") // Title.
+                .statusBarColor(bg_qian_color)
+                .toolBarColor(bg_qian_color)
+                .navigationBarColor(bg_qian_color)
+                .build();
+        Album.image(fragment.getActivity()) // Image selection.
+                .singleChoice()
+                .widget(widget)
+                .camera(true)
+                .columnCount(4)
+                .onResult(new Action<ArrayList<AlbumFile>>() {
+                    @Override
+                    public void onAction(@NonNull ArrayList<AlbumFile> result) {
+                        String path=result.get(0).getPath();
+                        Durban.with(fragment)
+                                // 图片路径list或者数组。
+                                .inputImagePaths(path)
+                                // 裁剪图片输出的最大宽高。
+                                .maxWidthHeight(512, 512)
+                                // 裁剪时的宽高比。
+                                .aspectRatio(1, 1)
+                                // 图片压缩格式：JPEG、PNG。
+                                .compressFormat(Durban.COMPRESS_JPEG)
+                                // 图片压缩质量，请参考：Bitmap#compress(Bitmap.CompressFormat, int, OutputStream)
+                                .compressQuality(90)
+                                .gesture(Durban.GESTURE_ALL)
+                                .requestCode(1)
+                                .start();
+                    }
+                })
+                .onCancel(new Action<String>() {
+                    @Override
+                    public void onAction(@NonNull String result) {
+                    }
+                })
+                .start();
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
