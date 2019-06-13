@@ -93,7 +93,7 @@ public class DialogTool {
             if (dialog != null) {
                 dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-                dialog.getWindow().setDimAmount(0.4f);
+                dialog.getWindow().setDimAmount(0.7f);
                 dialog.setContentView(contentView);
                 if (dpJianJu > -1) {
                     setDialogNoBg(dialog);
