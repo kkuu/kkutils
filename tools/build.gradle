@@ -74,4 +74,16 @@ dependencies {
     //底部导航栏
     api 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
     api 'q.rorbin:badgeview:1.1.0'
+
+
+
+
+//视频播放的 要用可以打开
+    //KKVideoPlayer
+//    implementation 'com.github.dueeeke.dkplayer:dkplayer-java:2.5.7'
+//    implementation 'com.github.dueeeke.dkplayer:dkplayer-armv7a:2.5.7'
+//    implementation 'com.github.dueeeke.dkplayer:dkplayer-x86:2.5.7'
+//    implementation 'com.github.dueeeke.dkplayer:dkplayer-ui:2.5.7'
+//视频播放的
+
 }
