@@ -114,6 +114,30 @@ public class MapListTool<T> implements Serializable {
         return list;
     }
 
+    /***
+     * 一般用于聊天反序的
+     * @param group
+     * @return
+     */
+    public synchronized List<T> getListRevers(Object group) {
+        if (allGroup.equals(group)) {
+            LinkedList<T> result = new LinkedList<T>();
+            Iterator<Map.Entry<Comparable, List<T>>> iterator = getMaps().entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<Comparable, List<T>> entry = iterator.next();
+                List<T> list = entry.getValue();
+                if (list != null) {
+                    result.addAll(0,list);
+                }
+            }
+            return result;
+        }
+
+        if (group == null) return new LinkedList<T>();
+        List<T> list = getMaps().get(group);
+        if (list == null) return new LinkedList<T>();
+        return list;
+    }
     /**
      * **根据数据获取所属组*
      */
