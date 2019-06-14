@@ -78,7 +78,14 @@ public class PageControl<T> implements Serializable {
     public List<T> getAllDatas() {
         return mapListTool.getList(MapListTool.allGroup);
     }
-
+    /***
+     * 获取当前所有数据 反序，用于聊天记录
+     *
+     * @return
+     */
+    public List<T> getAllDatasRevers() {
+        return mapListTool.getListRevers(MapListTool.allGroup);
+    }
     /**
      * 获取下一页应该的索引
      *
