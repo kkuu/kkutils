@@ -11,7 +11,7 @@ import utils.wzutils.common.MapListTool;
 public class PageControl<T> implements Serializable {
     public static int noMoreDataPage=-1;//没有更多数据的时候 的当前页
 
-    MapListTool<T> mapListTool = new MapListTool<T>();
+    public MapListTool<T> mapListTool = new MapListTool<T>();
 
 
 
