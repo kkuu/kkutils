@@ -16,7 +16,7 @@ import utils.kkutils.common.thread.ThreadTool;
 
 public class KK_DiZhi implements Comparable, Serializable {
     public static void main(String []args){
-        System.out.println("asdafdssdf");
+        System.out.println("asdafdssdf2");
 
         String path="D:\\国家.txt";
 
