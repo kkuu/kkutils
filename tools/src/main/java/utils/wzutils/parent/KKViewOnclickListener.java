@@ -8,7 +8,7 @@ import utils.wzutils.common.LogTool;
  * Created by kk on 2017/3/22.
  */
 
-public abstract class WzViewOnclickListener implements View.OnClickListener {
+public abstract class KKViewOnclickListener implements View.OnClickListener {
     static  long timePreClick=0;
     boolean allowQuickClick;
 
@@ -25,10 +25,10 @@ public abstract class WzViewOnclickListener implements View.OnClickListener {
             LogTool.ex(e);
         }
     }
-    public WzViewOnclickListener(boolean allowQuickClick){
+    public KKViewOnclickListener(boolean allowQuickClick){
         setAllowQuickClick(allowQuickClick);
     }
-    public WzViewOnclickListener(){
+    public KKViewOnclickListener(){
     }
     /***
      * 是否允许快速点击

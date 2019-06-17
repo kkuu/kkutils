@@ -24,7 +24,7 @@ import utils.wzutils.R;
 import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.StringTool;
-import utils.wzutils.parent.WzViewOnclickListener;
+import utils.wzutils.parent.KKViewOnclickListener;
 
 /**
  * Created by kk on 2017/1/9.
@@ -66,7 +66,7 @@ public class DialogTool {
                 dialog.setCanceledOnTouchOutside(true);
                 setDialogNoBg(dialog);
                 dialog.getWindow().setLayout(CommonTool.getWindowSize().x, ViewGroup.LayoutParams.MATCH_PARENT);//默认的宽宥边距 不要默认宽
-                contentView.setOnClickListener(new WzViewOnclickListener() {
+                contentView.setOnClickListener(new KKViewOnclickListener() {
                     @Override
                     public void onClickWz(View v) {
                         dialog.dismiss();

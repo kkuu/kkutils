@@ -13,7 +13,7 @@
         android:layout_height="match_parent" android:orientation="vertical">
         <TextView android:id="@+id/btn_choose_dizhi"  android:layout_width="match_parent" android:layout_height="50dp" android:text="选择收货地址" android:gravity="center" android:textColor="@color/heise" android:background="@color/huise"/>
 
-            <utils.wzutils.ui.pullrefresh.WzRefreshLayout
+            <utils.wzutils.ui.pullrefresh.KKRefreshLayout
                 android:id="@+id/wz_refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -27,13 +27,13 @@
                         <TextView android:contentDescription="滚动的"  app:layout_scrollFlags="scroll|exitUntilCollapsed" android:layout_width="match_parent" android:layout_height="100dp" android:text="滚动的" android:gravity="center" android:textColor="@color/heise" android:background="@color/huise"/>
                         <TextView android:contentDescription="不滚动的"   android:layout_width="match_parent" android:layout_height="50dp" android:text="不滚动的" android:gravity="center" android:textColor="@color/heise" android:background="@color/hongse"/>
                     </android.support.design.widget.AppBarLayout>
-                    <utils.wzutils.ui.WzSimpleRecycleView
+                    <utils.wzutils.ui.KKSimpleRecycleView
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" ></utils.wzutils.ui.WzSimpleRecycleView>
+                        android:layout_height="match_parent" ></utils.wzutils.ui.KKSimpleRecycleView>
                 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-            </utils.wzutils.ui.pullrefresh.WzRefreshLayout>
+            </utils.wzutils.ui.pullrefresh.KKRefreshLayout>
 
     </LinearLayout>
 

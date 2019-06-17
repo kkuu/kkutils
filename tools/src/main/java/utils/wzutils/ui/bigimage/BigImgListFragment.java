@@ -12,19 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.wzutils.R;
-import utils.wzutils.parent.WzNormalFragmentActivity;
-import utils.wzutils.parent.WzParentFragment;
+import utils.wzutils.parent.NormalFragmentActivity;
+import utils.wzutils.parent.ParentFragment;
 import utils.wzutils.ui.lunbo.LunBoTool;
 
 /**
  * abc on 2017/9/15.
  *
- * WzBigImgListFragment.init(R.layout.fragmentLayoutId,R.id.viewPagerResId,R.id.dotParentResId,R.layout.dotItemLayoutId,R.id.cb_dot);
+ * BigImgListFragment.init(R.layout.fragmentLayoutId,R.id.viewPagerResId,R.id.dotParentResId,R.layout.dotItemLayoutId,R.id.cb_dot);
  * 同轮播的初始化
  *
  */
 
-public class WzBigImgListFragment extends WzParentFragment {
+public class BigImgListFragment extends ParentFragment {
     List<String> stringArrayList = new ArrayList<>();
     int currentIndex;
 
@@ -36,15 +36,15 @@ public class WzBigImgListFragment extends WzParentFragment {
 
 
     public static void init(int fragmentLayoutId,int viewPagerResId,int dotParentResId,int dotItemLayoutId,int cb_dot){
-        WzBigImgListFragment.fragmentLayoutId = fragmentLayoutId;
-        WzBigImgListFragment.viewPagerResId =viewPagerResId;
-        WzBigImgListFragment.dotParentResId =dotParentResId;
-        WzBigImgListFragment.dotItemLayoutId=dotItemLayoutId;
-        WzBigImgListFragment.cb_dot=cb_dot;
+        BigImgListFragment.fragmentLayoutId = fragmentLayoutId;
+        BigImgListFragment.viewPagerResId =viewPagerResId;
+        BigImgListFragment.dotParentResId =dotParentResId;
+        BigImgListFragment.dotItemLayoutId=dotItemLayoutId;
+        BigImgListFragment.cb_dot=cb_dot;
     };
 
     static {
-        WzBigImgListFragment.init(R.layout.kk_lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.kk_lunbo_item,R.id.cb_dot);
+        BigImgListFragment.init(R.layout.kk_lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.kk_lunbo_item,R.id.cb_dot);
 
     }
 
@@ -94,6 +94,6 @@ public class WzBigImgListFragment extends WzParentFragment {
         bundle.putStringArrayList("stringArrayList", arrayList);
         bundle.putInt("currentIndex", currentIndex);
         setArguments(bundle);
-        new WzNormalFragmentActivity().go(this);
+        new NormalFragmentActivity().go(this);
     }
 }

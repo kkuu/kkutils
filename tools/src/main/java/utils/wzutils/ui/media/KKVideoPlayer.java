@@ -3,9 +3,9 @@
 //import utils.wzutils.ImgTool;
 //import utils.wzutils.common.CommonTool;
 //import utils.wzutils.common.UiTool;
-//import utils.wzutils.parent.WzParentActivity;
+//import utils.wzutils.parent.ParentActivity;
 //
-//public class KKVideoPlayer extends WzParentActivity {
+//public class KKVideoPlayer extends ParentActivity {
 //    IjkVideoView ijkVideoView;
 //    public void initMedia(String name,String url,String image){
 //        {

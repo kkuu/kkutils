@@ -9,7 +9,7 @@ import utils.wzutils.common.CommonTool;
  * 可以设置最大高度 的ScrollView
  * 一般用于dialog中
  */
-public class MaxHeightScrollView extends WzScrollView {
+public class MaxHeightScrollView extends KKScrollView {
     public MaxHeightScrollView(Context context) {
         super(context);
     }

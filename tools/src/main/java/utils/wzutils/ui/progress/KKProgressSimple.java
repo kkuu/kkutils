@@ -13,13 +13,13 @@ import utils.wzutils.common.CommonTool;
  * abc on 2017/7/21.
  */
 
-public class WzProgressSimple extends androidx.appcompat.widget.AppCompatImageView {
-    public WzProgressSimple(Context context) {
+public class KKProgressSimple extends androidx.appcompat.widget.AppCompatImageView {
+    public KKProgressSimple(Context context) {
         super(context);
         init();
     }
 
-    public WzProgressSimple(Context context, AttributeSet attrs) {
+    public KKProgressSimple(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }

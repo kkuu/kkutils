@@ -20,7 +20,7 @@ import utils.wzutils.common.LogTool;
  * Created by kk on 2017/3/23.
  */
 
-public class WzParentActivity extends AppCompatActivity implements Serializable {
+public class ParentActivity extends AppCompatActivity implements Serializable {
     ProgressDialog progressDialog;
 
     /***
@@ -60,8 +60,8 @@ public class WzParentActivity extends AppCompatActivity implements Serializable 
      */
     public static void showWaitingDialogStac(String msg) {
         try {
-            if (AppTool.currActivity instanceof WzParentActivity) {
-                ((WzParentActivity) AppTool.currActivity).showWaitingDialog("");
+            if (AppTool.currActivity instanceof ParentActivity) {
+                ((ParentActivity) AppTool.currActivity).showWaitingDialog("");
             }
         } catch (Exception e) {
             LogTool.ex(e);
@@ -73,8 +73,8 @@ public class WzParentActivity extends AppCompatActivity implements Serializable 
      */
     public static void hideWaitingDialogStac() {
         try {
-            if (AppTool.currActivity instanceof WzParentActivity) {
-                ((WzParentActivity) AppTool.currActivity).hideWaitingDialog();
+            if (AppTool.currActivity instanceof ParentActivity) {
+                ((ParentActivity) AppTool.currActivity).hideWaitingDialog();
             }
         } catch (Exception e) {
             LogTool.ex(e);
@@ -100,7 +100,7 @@ public class WzParentActivity extends AppCompatActivity implements Serializable 
                 @Override
                 public void run() {
                     try {
-                        Activity activity=WzParentActivity.this;
+                        Activity activity= ParentActivity.this;
                         if(activity.isFinishing())return;
                         if (progressDialog != null && progressDialog.isShowing()) {
                             progressDialog.setMessage(msgFnal);

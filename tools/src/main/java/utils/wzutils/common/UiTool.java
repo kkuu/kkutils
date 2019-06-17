@@ -34,8 +34,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import utils.wzutils.AppTool;
-import utils.wzutils.parent.WzViewOnclickListener;
-import utils.wzutils.ui.WzToast;
+import utils.wzutils.parent.KKViewOnclickListener;
+import utils.wzutils.ui.KKToast;
 
 /**
  * Created by kk on 2016/5/10.
@@ -126,8 +126,8 @@ public class UiTool {
      */
     public static void showToast(final Object toastText) {
         try {
-            WzToast wzToast = new WzToast();
-            wzToast.showWzToast(toastText);
+            KKToast KKToast = new KKToast();
+            KKToast.showWzToast(toastText);
         } catch (Exception e) {
             LogTool.ex(e);
         }
@@ -135,8 +135,8 @@ public class UiTool {
 
     public static void showToastLong(final Object toastText) {
         try {
-            WzToast wzToast = new WzToast();
-            wzToast.showWzToastLong(toastText);
+            KKToast KKToast = new KKToast();
+            KKToast.showWzToastLong(toastText);
         } catch (Exception e) {
             LogTool.ex(e);
         }
@@ -352,7 +352,7 @@ public class UiTool {
      * @param begin
      * @param end
      */
-    public static void setTextSpanClick(TextView textView, final WzViewOnclickListener wzViewOnclickListener, int begin, int end){
+    public static void setTextSpanClick(TextView textView, final KKViewOnclickListener wzViewOnclickListener, int begin, int end){
         CharSequence text=textView.getText();
         ClickableSpan clickableSpan=new ClickableSpan(){
             @Override
@@ -493,7 +493,7 @@ public class UiTool {
      */
     public static void bindFuZhi(View btnFuZhi, final String text){
         if(btnFuZhi==null||StringTool.isEmpty(text))return;
-        btnFuZhi.setOnClickListener(new WzViewOnclickListener() {
+        btnFuZhi.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
                 ClipboardManager cm = (ClipboardManager) AppTool.getApplication().getSystemService(Context.CLIPBOARD_SERVICE);

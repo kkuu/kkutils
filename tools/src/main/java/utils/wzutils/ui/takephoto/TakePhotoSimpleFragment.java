@@ -29,11 +29,11 @@ import utils.wzutils.ImgTool;
  *     compile 'com.yanzhenjie:album:1.0.7'
  *
      new TakePhotoSimpleFragment().addToParent(supportFragmentManager, R.id.vg_dongtai_fabu_tupian, R.layout.dongtai_fabu_tupian_item, maxSize,
- new WzTakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_send_picture_add, R.drawable.kk_send_picture_add));
+ new TakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_send_picture_add, R.drawable.kk_send_picture_add));
  *
  */
 
-public class TakePhotoSimpleFragment extends WzTakePhotoFragment {
+public class TakePhotoSimpleFragment extends TakePhotoFragment {
     @Override
     public void showChooseDialog() {
 //

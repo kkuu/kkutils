@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 /**
  * Created by ishare on 2016/6/13.
  */
-public class WzScrollView extends NestedScrollView {
+public class KKScrollView extends NestedScrollView {
     float downY;
     float downX;
     double yDistance;
@@ -16,15 +16,15 @@ public class WzScrollView extends NestedScrollView {
     OnScrollChangeListener onScrollChangeListener;
 
 
-    public WzScrollView(Context context) {
+    public KKScrollView(Context context) {
         super(context);
     }
 
-    public WzScrollView(Context context, AttributeSet attrs) {
+    public KKScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public WzScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KKScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

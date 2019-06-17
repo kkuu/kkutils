@@ -10,23 +10,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 
-public class WzRatingBar extends LinearLayout {
+public class KKRatingBar extends LinearLayout {
     int max = 0;
     int rating = 0;
     int minRating=1;
     boolean canControl=true;
     int resStarDrawableIdEmpty = android.R.drawable.star_off;
     int resStarDrawableId = android.R.drawable.star_on;
-    public WzRatingBar(Context context) {
+    public KKRatingBar(Context context) {
         super(context);
         init();
     }
 
-    public WzRatingBar(Context context, @Nullable AttributeSet attrs) {
+    public KKRatingBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
-    public WzRatingBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public KKRatingBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -81,7 +81,7 @@ public class WzRatingBar extends LinearLayout {
     }
 
     public  interface OnWzRatingBarChangeListener{
-        public void onRatingChanged(WzRatingBar ratingBar, float rating, boolean fromUser) ;
+        public void onRatingChanged(KKRatingBar ratingBar, float rating, boolean fromUser) ;
     }
 
     public void setOnWzRatingBarChangeListener(OnWzRatingBarChangeListener onWzRatingBarChangeListener) {

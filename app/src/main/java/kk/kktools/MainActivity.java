@@ -1,6 +1,5 @@
 package kk.kktools;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,13 +9,13 @@ import java.util.ArrayList;
 import utils.wzutils.AppTool;
 import utils.wzutils.common.TestData;
 import utils.wzutils.common.UiTool;
-import utils.wzutils.parent.WzParentActivity;
-import utils.wzutils.parent.WzParentFragment;
-import utils.wzutils.parent.WzViewOnclickListener;
-import utils.wzutils.ui.WzSimpleRecycleView;
-import utils.wzutils.ui.bigimage.WzBigImgListFragment;
+import utils.wzutils.parent.ParentActivity;
+import utils.wzutils.parent.ParentFragment;
+import utils.wzutils.parent.KKViewOnclickListener;
+import utils.wzutils.ui.KKSimpleRecycleView;
+import utils.wzutils.ui.bigimage.BigImgListFragment;
 
-public class MainActivity extends WzParentActivity {
+public class MainActivity extends ParentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +26,13 @@ public class MainActivity extends WzParentActivity {
 
 
 
-        addItem("测试大图", null, new WzViewOnclickListener() {
+        addItem("测试大图", null, new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new WzBigImgListFragment().go(0, TestData.getTestImgUrlList(2));
+                new BigImgListFragment().go(0, TestData.getTestImgUrlList(2));
             }
         });
-        addItem("测试CoordinatorLayout,和选择收货地址", null, new WzViewOnclickListener() {
+        addItem("测试CoordinatorLayout,和选择收货地址", null, new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
                 new TestCoordinatorLayoutFragment().go();
@@ -45,9 +44,9 @@ public class MainActivity extends WzParentActivity {
 
     public static class TestItem{
         public String title;
-        public WzParentFragment fragment;
-        public WzViewOnclickListener onclickListener;
-        public TestItem(String title, WzParentFragment fragment, WzViewOnclickListener onclickListener) {
+        public ParentFragment fragment;
+        public KKViewOnclickListener onclickListener;
+        public TestItem(String title, ParentFragment fragment, KKViewOnclickListener onclickListener) {
             this.title = title;
             this.fragment = fragment;
             this.onclickListener = onclickListener;
@@ -57,12 +56,12 @@ public class MainActivity extends WzParentActivity {
 
     }
     public ArrayList<TestItem> testItems=new ArrayList<>();
-    public void addItem(final String title, final WzParentFragment fragment,WzViewOnclickListener onclickListener){
+    public void addItem(final String title, final ParentFragment fragment, KKViewOnclickListener onclickListener){
         testItems.add(new TestItem(title,fragment,onclickListener));
     }
     public void refresh(){
-        WzSimpleRecycleView recycleView=findViewById(R.id.recycleView);
-        recycleView.setData(testItems, R.layout.activity_main_item, new WzSimpleRecycleView.WzRecycleAdapter() {
+        KKSimpleRecycleView recycleView=findViewById(R.id.recycleView);
+        recycleView.setData(testItems, R.layout.activity_main_item, new KKSimpleRecycleView.WzRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);
@@ -72,7 +71,7 @@ public class MainActivity extends WzParentActivity {
                 if(testItem.onclickListener!=null){
                     itemView.setOnClickListener(testItem.onclickListener);
                 }else {
-                    itemView.setOnClickListener(new WzViewOnclickListener() {
+                    itemView.setOnClickListener(new KKViewOnclickListener() {
                         @Override
                         public void onClickWz(View v) {
                             testItem.fragment.go();

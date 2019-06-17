@@ -10,7 +10,7 @@
         android:supportsRtl="true" >
 
 
-        <activity  android:name="utils.wzutils.parent.WzNormalFragmentActivity"  android:screenOrientation="portrait" />
+        <activity  android:name="utils.wzutils.parent.NormalFragmentActivity"  android:screenOrientation="portrait" />
 
 
     </application>

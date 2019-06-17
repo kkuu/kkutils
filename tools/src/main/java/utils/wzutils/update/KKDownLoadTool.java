@@ -27,7 +27,7 @@ import utils.wzutils.encypt.Md5Tool;
 /**
  * Created by kk on 2016/5/18.
  */
-public class WzDownLoadTool {
+public class KKDownLoadTool {
     static HashMap<Long ,Callback.Cancelable> downLoadMap=new HashMap<>();
     static volatile  long downLoadId=0;
     public static synchronized long downLoad(final String url,String localPath ,final DownLoadProgressListener downLoadProgressListener) {

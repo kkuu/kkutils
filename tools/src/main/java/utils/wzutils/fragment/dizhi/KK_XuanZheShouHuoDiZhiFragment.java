@@ -13,17 +13,17 @@ import utils.wzutils.common.CollectionsTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.StringTool;
 import utils.wzutils.common.UiTool;
-import utils.wzutils.parent.WzNormalFragmentActivity;
-import utils.wzutils.parent.WzParentFragment;
-import utils.wzutils.parent.WzViewOnclickListener;
-import utils.wzutils.ui.WzSimpleRecycleView;
+import utils.wzutils.parent.NormalFragmentActivity;
+import utils.wzutils.parent.ParentFragment;
+import utils.wzutils.parent.KKViewOnclickListener;
+import utils.wzutils.ui.KKSimpleRecycleView;
 
 /**
  * Created by kk on 2017/3/23.
  */
 
-public class KK_XuanZheShouHuoDiZhiFragment extends WzParentFragment {
-    public WzSimpleRecycleView recycleView;
+public class KK_XuanZheShouHuoDiZhiFragment extends ParentFragment {
+    public KKSimpleRecycleView recycleView;
     @Override
     public int initContentViewId() {
         return R.layout.kk_normal_list;
@@ -32,8 +32,8 @@ public class KK_XuanZheShouHuoDiZhiFragment extends WzParentFragment {
     public void initData() {
         maxDep= (int) getArgument("maxDep",maxDep);
         currKKDiZhi = KK_DiZhi.loadFromLocal().list.get(0);
-        if (getActivity() instanceof WzNormalFragmentActivity) {
-            ((WzNormalFragmentActivity) getActivity()).setOnBackPressedListener(new WzNormalFragmentActivity.OnBackPressedListener() {
+        if (getActivity() instanceof NormalFragmentActivity) {
+            ((NormalFragmentActivity) getActivity()).setOnBackPressedListener(new NormalFragmentActivity.OnBackPressedListener() {
                 @Override
                 public boolean onBackPressed() {
                     if(currKKDiZhi !=null){
@@ -59,7 +59,7 @@ public class KK_XuanZheShouHuoDiZhiFragment extends WzParentFragment {
     public void loadData(final KK_DiZhi KKDiZhi){
         currKKDiZhi = KKDiZhi;
         recycleView.scrollToPosition(0);
-        recycleView.setData(KKDiZhi.list, R.layout.kk_dizhi_item, new WzSimpleRecycleView.WzRecycleAdapter() {
+        recycleView.setData(KKDiZhi.list, R.layout.kk_dizhi_item, new KKSimpleRecycleView.WzRecycleAdapter() {
             @Override
             public void initData(int positon, int type, View itemView) {
                 super.initData(positon, type, itemView);
@@ -74,7 +74,7 @@ public class KK_XuanZheShouHuoDiZhiFragment extends WzParentFragment {
                 }
 
 
-                itemView.setOnClickListener(new WzViewOnclickListener() {
+                itemView.setOnClickListener(new KKViewOnclickListener() {
                     @Override
                     public void onClickWz(View v) {
                         if(KKDiZhiItem.getDep()==2){
@@ -138,10 +138,10 @@ public class KK_XuanZheShouHuoDiZhiFragment extends WzParentFragment {
     }
 
     @Override
-    public void goForResult(WzParentFragment parentFragment, int requestCode) {
+    public void goForResult(ParentFragment parentFragment, int requestCode) {
         super.goForResult(parentFragment, requestCode);
     }
-    public void goForResult(WzParentFragment parentFragment, int requestCode,int maxDep) {
+    public void goForResult(ParentFragment parentFragment, int requestCode, int maxDep) {
         Bundle bundle=new Bundle();
         bundle.putInt("maxDep",maxDep);
         setArguments(bundle);

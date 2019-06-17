@@ -10,9 +10,9 @@ import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebView;
 
 import utils.wzutils.common.StringTool;
-import utils.wzutils.parent.WzParentFragment;
+import utils.wzutils.parent.ParentFragment;
 
-public class X5WebViewFragment extends WzParentFragment {
+public class X5WebViewFragment extends ParentFragment {
     @Override
     public int initContentViewId() {
         return 0;

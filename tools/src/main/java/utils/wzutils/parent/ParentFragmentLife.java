@@ -3,7 +3,7 @@ package utils.wzutils.parent;
 /**
  * Created by ishare on 2016/7/7.
  */
-public class WzParentFragmentLife extends WzParentFragment {
+public class ParentFragmentLife extends ParentFragment {
 
     @Override
     public int initContentViewId() {

@@ -12,21 +12,21 @@ import android.widget.RelativeLayout;
  * 自动换行的
  */
 
-public class WzAutoLayout extends RelativeLayout {
-    public WzAutoLayout(Context context) {
+public class KKAutoLayout extends RelativeLayout {
+    public KKAutoLayout(Context context) {
         super(context);
     }
 
-    public WzAutoLayout(Context context, AttributeSet attrs) {
+    public KKAutoLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public WzAutoLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KKAutoLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public WzAutoLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public KKAutoLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

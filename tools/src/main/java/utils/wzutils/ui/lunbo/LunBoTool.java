@@ -22,8 +22,8 @@ import utils.wzutils.common.LayoutInflaterTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.TestData;
 import utils.wzutils.common.ViewTool;
-import utils.wzutils.parent.WzViewOnclickListener;
-import utils.wzutils.ui.WzImageView;
+import utils.wzutils.parent.KKViewOnclickListener;
+import utils.wzutils.ui.KKImageView;
 import utils.wzutils.ui.bigimage.PinchImageView;
 
 /***
@@ -147,7 +147,7 @@ public class LunBoTool {
                         positionIn = CommonTool.loopPosition(datasList.size(), beginPosition, positionIn);
                     }
                     final LunBoData lunBoData = datasList.get(positionIn);
-                    ImageView imageView = new WzImageView(container.getContext());//不能用 curractivity
+                    ImageView imageView = new KKImageView(container.getContext());//不能用 curractivity
                     if (imageCanScale) {
                         imageView = new PinchImageView(container.getContext());
                     }
@@ -155,7 +155,7 @@ public class LunBoTool {
                     container.addView(imageView);
                     ImgTool.loadImage(datasList.get(positionIn).imageUrl, imageView);
                     if(lunBoData.lunBoClickListener!=null){
-                        imageView.setOnClickListener(new WzViewOnclickListener() {
+                        imageView.setOnClickListener(new KKViewOnclickListener() {
                             @Override
                             public void onClickWz(View v) {
                                 if (lunBoData.lunBoClickListener != null){
@@ -317,7 +317,7 @@ public class LunBoTool {
         }
     }
 
-    public static abstract class LunBoClickListener extends WzViewOnclickListener {
+    public static abstract class LunBoClickListener extends KKViewOnclickListener {
 
         public abstract void onClickLunBo(View v, LunBoData lunBoData);
 

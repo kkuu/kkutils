@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.webkit.GeolocationPermissions;
-import android.webkit.JsResult;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -17,7 +16,7 @@ import android.webkit.WebViewClient;
 import utils.wzutils.AppTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.StringTool;
-import utils.wzutils.parent.WzParentActivity;
+import utils.wzutils.parent.ParentActivity;
 
 /**
  * Created by coder on 16/1/18.
@@ -93,13 +92,13 @@ public class WebViewTool {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                WzParentActivity.showWaitingDialogStac("");
+                ParentActivity.showWaitingDialogStac("");
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                WzParentActivity.hideWaitingDialogStac();
+                ParentActivity.hideWaitingDialogStac();
             }
         });
     }

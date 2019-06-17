@@ -23,9 +23,9 @@ import utils.wzutils.AppTool;
 import utils.wzutils.ImgTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.UpLoadFilesTool;
-import utils.wzutils.parent.WzParentFragmentLife;
-import utils.wzutils.parent.WzViewOnclickListener;
-import utils.wzutils.ui.WzSimpleRecycleView;
+import utils.wzutils.parent.ParentFragmentLife;
+import utils.wzutils.parent.KKViewOnclickListener;
+import utils.wzutils.ui.KKSimpleRecycleView;
 import utils.wzutils.ui.dialog.DialogTool;
 
 /**
@@ -34,13 +34,13 @@ import utils.wzutils.ui.dialog.DialogTool;
  * 2.0 用于拍照用的
  *
      new TakePhotoSimpleFragment().addToParent(getChildFragmentManager(), R.id.vg_dongtai_fabu_tupian, R.layout.dongtai_fabu_tupian_item, 9,
- new WzTakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_send_picture_add, R.drawable.kk_send_picture_add));
+ new TakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_send_picture_add, R.drawable.kk_send_picture_add));
 
  */
-public class WzTakePhotoFragment extends WzParentFragmentLife implements Serializable {
+public class TakePhotoFragment extends ParentFragmentLife implements Serializable {
 
     public static final String tag = "TakePhotoFragmentTag";
-    public WzSimpleRecycleView recycleView;
+    public KKSimpleRecycleView recycleView;
     public int add_photo_id;
     public int itemId;
     public int itemImageViewId;
@@ -48,16 +48,16 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
     public int maxSize;
     public ArrayList<String> datas = new ArrayList<>();
     public String addPhoto = "addphoto";
-    protected WzTakePhotoTool takePhotoTool;
+    protected KKTakePhotoTool takePhotoTool;
     OnAddPhotoInitDataListener onAddPhotoInitDataListener;
 
-    public static WzTakePhotoFragment getCurrTakePhotoFragment(FragmentManager fragmentManager){
+    public static TakePhotoFragment getCurrTakePhotoFragment(FragmentManager fragmentManager){
         try {
-            return ((WzTakePhotoFragment) fragmentManager.findFragmentByTag(tag));
+            return ((TakePhotoFragment) fragmentManager.findFragmentByTag(tag));
         } catch (Exception e) {
             LogTool.ex(e);
         }
-        return new WzTakePhotoFragment();
+        return new TakePhotoFragment();
     }
     public static ArrayList<String> getSelectPhotos(FragmentManager fragmentManager) {
         try {
@@ -116,7 +116,7 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
     }
 
     public View initContentView() {
-        recycleView = new WzSimpleRecycleView(getContext());
+        recycleView = new KKSimpleRecycleView(getContext());
       //  recycleView.setBackgroundColor(Color.WHITE);
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         recycleView.setLayoutParams(lp);
@@ -170,34 +170,34 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
             }
 
 
-            takePhotoTool = new WzTakePhotoTool(this);
+            takePhotoTool = new KKTakePhotoTool(this);
             int col = 3;
             if (maxSize < col) {
                 col = maxSize;
             }
             recycleView.setLayoutManager(new StaggeredGridLayoutManager(col, StaggeredGridLayoutManager.VERTICAL));
             recycleView.setDividerDp(10,10);
-            recycleView.setData(datas, itemId, new WzSimpleRecycleView.WzRecycleAdapter() {
+            recycleView.setData(datas, itemId, new KKSimpleRecycleView.WzRecycleAdapter() {
                 @Override
                 public void initData(final int positon, int type, final View itemView) {
                     if (onAddPhotoInitDataListener != null) {
-                        onAddPhotoInitDataListener.onInitData(WzTakePhotoFragment.this, datas, positon, type, itemView);
+                        onAddPhotoInitDataListener.onInitData(TakePhotoFragment.this, datas, positon, type, itemView);
                         return;
                     }
                     final String path = datas.get(positon);
                     if (addPhoto.equals(path)) {//点击了添加图片的按钮
-                        itemView.setOnClickListener(new WzViewOnclickListener() {
+                        itemView.setOnClickListener(new KKViewOnclickListener() {
                             @Override
                             public void onClickWz(View v) {
                                 showChooseDialog();
                             }
                         });
                     } else {//点击了已经选择的图片
-                        itemView.setOnClickListener(new WzViewOnclickListener() {
+                        itemView.setOnClickListener(new KKViewOnclickListener() {
                             @Override
                             public void onClickWz(View v) {
                                 try {
-                                    showDeleteDialog(datas,path,WzTakePhotoFragment.this);
+                                    showDeleteDialog(datas,path, TakePhotoFragment.this);
                                 } catch (Exception e) {
                                     LogTool.ex(e);
                                 }
@@ -250,8 +250,8 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
      *
     public static void upLoadImg(FragmentManager fragmentManager,final CommitToServer commitToServer){
     ParentActivity.showWaitingDialogStac("");
-    if(WzTakePhotoFragment.getSelectPhotos(fragmentManager).size()>0){//有文件需要上传
-    WzTakePhotoFragment.getCurrTakePhotoFragment(fragmentManager).sendToServer(new UpLoadFilesTool.UpLoadImp() {
+    if(TakePhotoFragment.getSelectPhotos(fragmentManager).size()>0){//有文件需要上传
+    TakePhotoFragment.getCurrTakePhotoFragment(fragmentManager).sendToServer(new UpLoadFilesTool.UpLoadImp() {
     @Override
     public void upLoadImpl(final UpLoadFilesTool.UpLoadData upLoadData) {
     Data_upload_file.load(upLoadData.file, Data_upload_file.UpLoadType.questions_images, new HttpUiCallBack<Data_upload_file>() {
@@ -292,7 +292,7 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
         UpLoadFilesTool.upLoadImages(upLoadDataList, upLoadImp, upLoadFilesListener);
     }
 
-    public static void showDeleteDialog(final List<String> datas, final String path, final WzTakePhotoFragment currFragment){
+    public static void showDeleteDialog(final List<String> datas, final String path, final TakePhotoFragment currFragment){
         try {
             DialogTool.initNormalQueDingDialog("", "是否删除这张图片？", "删除", new DialogInterface.OnClickListener() {
                 @Override
@@ -308,7 +308,7 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
     }
 
     public static interface OnAddPhotoInitDataListener extends Serializable {
-        void onInitData(WzTakePhotoFragment currFragment, List<String> datas, final int positon, int type, final View itemView);
+        void onInitData(TakePhotoFragment currFragment, List<String> datas, final int positon, int type, final View itemView);
     }
 
     /**
@@ -364,7 +364,7 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
         }
 
         @Override
-        public void onInitData(final WzTakePhotoFragment currFragment, final List<String> datas, int positon, int type, View itemView) {
+        public void onInitData(final TakePhotoFragment currFragment, final List<String> datas, int positon, int type, View itemView) {
             final String path = datas.get(positon);
             ImageView imgv_add_photo = (ImageView) itemView.findViewById(res_imgv_add_photo);
             ImageView imgv_delete_photo = (ImageView) itemView.findViewById(res_imgv_delete_photo);
@@ -386,7 +386,7 @@ public class WzTakePhotoFragment extends WzParentFragmentLife implements Seriali
                     currFragment.showChooseDialog();
                 }
             });
-            imgv_delete_photo.setOnClickListener(new WzViewOnclickListener() {
+            imgv_delete_photo.setOnClickListener(new KKViewOnclickListener() {
                 @Override
                 public void onClickWz(View v) {
                     try {

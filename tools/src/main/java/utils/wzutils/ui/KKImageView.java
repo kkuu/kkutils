@@ -7,19 +7,19 @@ import android.util.AttributeSet;
 /**
  * Created by ishare on 2016/6/1.
  */
-public class WzImageView extends androidx.appcompat.widget.AppCompatImageView {
+public class KKImageView extends androidx.appcompat.widget.AppCompatImageView {
 
-    public WzImageView(Context context) {
+    public KKImageView(Context context) {
         super(context);
         init();
     }
 
-    public WzImageView(Context context, AttributeSet attrs) {
+    public KKImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public WzImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KKImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

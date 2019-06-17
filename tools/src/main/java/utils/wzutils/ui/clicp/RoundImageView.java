@@ -3,11 +3,10 @@ package utils.wzutils.ui.clicp;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
-import utils.wzutils.ui.WzImageView;
+import utils.wzutils.ui.KKImageView;
 
-public class RoundImageView extends WzImageView {
+public class RoundImageView extends KKImageView {
     public RoundViewTool roundViewTool;
     public RoundImageView(Context context) {
         super(context);

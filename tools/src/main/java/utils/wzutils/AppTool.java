@@ -2,7 +2,6 @@ package utils.wzutils;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,9 +16,6 @@ import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.LayoutInflaterTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.db.MapDB;
-import utils.wzutils.ui.WzSimpleRecycleView;
-import utils.wzutils.ui.bigimage.WzBigImgListFragment;
-import utils.wzutils.ui.pullrefresh.WzRefreshImp;
 import utils.wzutils.ui.takephoto.TakePhotoSimpleFragment;
 import utils.wzutils.ui.webview.X5WebView;
 

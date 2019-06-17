@@ -8,12 +8,12 @@ import utils.wzutils.common.LogTool;
 import utils.wzutils.common.TestData;
 import utils.wzutils.common.UiTool;
 import utils.wzutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
-import utils.wzutils.parent.WzParentFragment;
-import utils.wzutils.parent.WzViewOnclickListener;
-import utils.wzutils.ui.WzSimpleRecycleView;
+import utils.wzutils.parent.ParentFragment;
+import utils.wzutils.parent.KKViewOnclickListener;
+import utils.wzutils.ui.KKSimpleRecycleView;
 
-public class TestCoordinatorLayoutFragment extends WzParentFragment {
-    WzSimpleRecycleView recycler_view;
+public class TestCoordinatorLayoutFragment extends ParentFragment {
+    KKSimpleRecycleView recycler_view;
     TextView btn_choose_dizhi;
     @Override
     public int initContentViewId() {
@@ -23,13 +23,13 @@ public class TestCoordinatorLayoutFragment extends WzParentFragment {
     @Override
     public void initData() {
         recycler_view.setNestedScrollingEnabled(true);
-        recycler_view.setData(TestData.getTestStrList(30), R.layout.activity_main_item, new WzSimpleRecycleView.WzRecycleAdapter() {
+        recycler_view.setData(TestData.getTestStrList(30), R.layout.activity_main_item, new KKSimpleRecycleView.WzRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);
             }
         });
-        btn_choose_dizhi.setOnClickListener(new WzViewOnclickListener() {
+        btn_choose_dizhi.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
                 new KK_XuanZheShouHuoDiZhiFragment().goForResult(TestCoordinatorLayoutFragment.this,1);

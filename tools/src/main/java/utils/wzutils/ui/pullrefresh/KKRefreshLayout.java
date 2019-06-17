@@ -25,18 +25,18 @@ import utils.wzutils.common.UiTool;
  *    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
  compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'//没有使用特殊Header，可以不加这行
  */
-public class WzRefreshLayout extends SmartRefreshLayout {
-    public WzRefreshLayout(Context context) {
+public class KKRefreshLayout extends SmartRefreshLayout {
+    public KKRefreshLayout(Context context) {
         super(context);
         init();
     }
 
-    public WzRefreshLayout(Context context, AttributeSet attrs) {
+    public KKRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public WzRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KKRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

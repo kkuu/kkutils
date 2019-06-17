@@ -14,16 +14,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import utils.wzutils.AppTool;
 import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.UiTool;
-import utils.wzutils.parent.WzViewOnclickListener;
+import utils.wzutils.parent.KKViewOnclickListener;
 import utils.wzutils.ui.dialog.DialogTool;
 
 /**
  *
  */
-public class WzDatePickerDialog extends RelativeLayout {
+public class KKDatePickerDialog extends RelativeLayout {
     public DatePickerView dp_nian;
     public DatePickerView dp_yue;
     public DatePickerView dp_ri;
@@ -39,17 +38,17 @@ public class WzDatePickerDialog extends RelativeLayout {
         DialogTool.initBottomDialog(this).show();
     }
 
-    public WzDatePickerDialog(Context context) {
+    public KKDatePickerDialog(Context context) {
         super(context);
         init();
     }
 
-    public WzDatePickerDialog(Context context, AttributeSet attrs) {
+    public KKDatePickerDialog(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public WzDatePickerDialog(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KKDatePickerDialog(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -304,7 +303,7 @@ public class WzDatePickerDialog extends RelativeLayout {
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         addBtnControlItem(linearLayout,"取消",null);
         addLineV(linearLayout);
-        addBtnControlItem(linearLayout, "确定", new WzViewOnclickListener() {
+        addBtnControlItem(linearLayout, "确定", new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
                 int nian=Integer.valueOf(dp_nian.getCurrSelected());
@@ -327,7 +326,7 @@ public class WzDatePickerDialog extends RelativeLayout {
         viewGroup.addView(linearLayout);
     }
 
-    public void addBtnControlItem(ViewGroup viewGroup, String text, WzViewOnclickListener wzViewOnclickListener){
+    public void addBtnControlItem(ViewGroup viewGroup, String text, KKViewOnclickListener wzViewOnclickListener){
         TextView textView=new TextView(getContext());
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(0,-1,1);
         textView.setLayoutParams(lp);

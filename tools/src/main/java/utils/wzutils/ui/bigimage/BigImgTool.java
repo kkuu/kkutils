@@ -5,7 +5,7 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import utils.wzutils.parent.WzViewOnclickListener;
+import utils.wzutils.parent.KKViewOnclickListener;
 
 /**
  * abc on 2017/11/22.
@@ -23,7 +23,7 @@ public class BigImgTool {
 
 
     public static void bindShowBigImgSingle(final ImageView imageView) {
-        imageView.setOnClickListener(new WzViewOnclickListener() {
+        imageView.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
                 showBigImgSingle(imageView);
@@ -31,18 +31,18 @@ public class BigImgTool {
         });
     }
     public static void bindShowBigImgs(View itemView, final int positon, final String... images) {
-        itemView.setOnClickListener(new WzViewOnclickListener() {
+        itemView.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new WzBigImgListFragment().go(positon,  images);
+                new BigImgListFragment().go(positon,  images);
             }
         });
     }
     public static void bindShowBigImgs(View itemView, final int positon, final List<String> images) {
-        itemView.setOnClickListener(new WzViewOnclickListener() {
+        itemView.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new WzBigImgListFragment().go(positon,  images);
+                new BigImgListFragment().go(positon,  images);
             }
         });
     }

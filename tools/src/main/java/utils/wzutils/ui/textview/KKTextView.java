@@ -12,11 +12,11 @@ import android.util.AttributeSet;
  * compile 'me.biubiubiu.justifytext:library:1.1'
  * 解决自动换行问题
  */
-public class WzTextView extends AppCompatTextView {
+public class KKTextView extends AppCompatTextView {
     private int mLineY;
     private int mViewWidth;
 
-    public WzTextView(Context context, AttributeSet attrs) {
+    public KKTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

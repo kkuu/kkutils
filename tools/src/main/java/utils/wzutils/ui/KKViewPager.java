@@ -8,15 +8,15 @@ import android.view.MotionEvent;
 /**
  * Created by ishare on 2016/9/18.
  */
-public class WzViewPager extends ViewPager {
+public class KKViewPager extends ViewPager {
     private boolean canScroll = true;
 
-    public WzViewPager(Context context) {
+    public KKViewPager(Context context) {
         super(context);
     }
 
 
-    public WzViewPager(Context context, AttributeSet attrs) {
+    public KKViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

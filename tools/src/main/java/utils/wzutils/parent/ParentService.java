@@ -15,7 +15,7 @@ import utils.wzutils.common.LogTool;
  * abc on 2018/2/2.
  */
 
-public class WzParentService extends Service {
+public class ParentService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {

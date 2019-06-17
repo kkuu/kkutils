@@ -16,8 +16,8 @@ import java.util.List;
 
 import utils.wzutils.common.LayoutInflaterTool;
 import utils.wzutils.common.LogTool;
-import utils.wzutils.parent.WzParentFragment;
-import utils.wzutils.parent.WzViewOnclickListener;
+import utils.wzutils.parent.ParentFragment;
+import utils.wzutils.parent.KKViewOnclickListener;
 
 /**
  * abc on 2017/5/27.
@@ -103,7 +103,7 @@ public class TabTitleTool {
                     }
                 }
             });
-            item.setOnClickListener(new WzViewOnclickListener() {
+            item.setOnClickListener(new KKViewOnclickListener() {
                 @Override
                 public void onClickWz(View v) {
                     try {
@@ -168,7 +168,7 @@ public class TabTitleTool {
         }
 
     }
-    WzParentFragment oldFragment;
+    ParentFragment oldFragment;
     public void click(int position) {
         try {
             commonButtonTool.getAllButtons().get(position).performClick();
@@ -193,7 +193,7 @@ public class TabTitleTool {
     public static class TabData {
         public String tabText;//标题
         public Serializable type;//类型
-        public WzParentFragment fragment;//内容fargment
+        public ParentFragment fragment;//内容fargment
         public int layoutItemId;//tab 标题的 资源文件
         public int commonBtnId;//按钮
         public ViewGroup.LayoutParams tablayoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
@@ -204,7 +204,7 @@ public class TabTitleTool {
         public TabData(
                 String tabText,
                 Serializable type,
-                WzParentFragment fragment,
+                ParentFragment fragment,
                 int layoutItemId,
                 int commonBtnId,
                 ViewGroup.LayoutParams tablayoutParams
@@ -222,7 +222,7 @@ public class TabTitleTool {
         public TabData(
                 String tabText,
                 Serializable type,
-                WzParentFragment fragment,
+                ParentFragment fragment,
                 int layoutItemId,
                 int commonBtnId
 

@@ -16,7 +16,7 @@ import android.view.View;
  * abc on 2017/4/6.
  */
 
-public class WzProgressCircle extends View {
+public class KKProgressCircle extends View {
     int maxProgess = 100;
     int currProgess = 67;
     int colorBg = Color.parseColor("#ffffff");
@@ -31,16 +31,16 @@ public class WzProgressCircle extends View {
     int neiYuanWidth = 20;
     int waiyuanWidth = 40;
 
-    public WzProgressCircle(Context context) {
+    public KKProgressCircle(Context context) {
         super(context);
         init();
     }
 
-    public WzProgressCircle(Context context, @Nullable AttributeSet attrs) {
+    public KKProgressCircle(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
-    public WzProgressCircle(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public KKProgressCircle(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

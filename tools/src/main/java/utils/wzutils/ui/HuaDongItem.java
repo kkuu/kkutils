@@ -9,7 +9,6 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.HorizontalScrollView;
 
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.wzutils.common.LogTool;
-import utils.wzutils.parent.WzViewOnclickListener;
+import utils.wzutils.parent.KKViewOnclickListener;
 
 /**
  * Created by ishare on 2016/9/18.
@@ -173,7 +172,7 @@ public class HuaDongItem extends HorizontalScrollView {
         //super.fling(9999);
     }
 
-    public void setLeftClickListener(WzViewOnclickListener wzViewOnclickListener) {
+    public void setLeftClickListener(KKViewOnclickListener wzViewOnclickListener) {
         if(getLeftView()!=null)leftView.setOnClickListener(wzViewOnclickListener);
     }
 

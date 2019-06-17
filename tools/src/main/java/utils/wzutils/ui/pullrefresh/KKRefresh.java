@@ -269,7 +269,7 @@ footer.setAlpha(progress);
  // <!--&gt;</ListView>-->
  </com.example.wz.test.WzRefresh>
  */
-public class WzRefresh extends RelativeLayout {
+public class KKRefresh extends RelativeLayout {
     public TouchState touchState = TouchState.ready;
     public Interpolator backToRefreshInterpolator = new DecelerateInterpolator(3);
     public Interpolator backToStartInterpolator = new DecelerateInterpolator(1);
@@ -296,15 +296,15 @@ public class WzRefresh extends RelativeLayout {
     int backToRefreshDuration = 400;//回弹动画执行时间
     int backToStartDuration = 250;//回到初值回弹动画执行时间
 
-    public WzRefresh(Context context) {
+    public KKRefresh(Context context) {
         super(context);
     }
 
-    public WzRefresh(Context context, AttributeSet attrs) {
+    public KKRefresh(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public WzRefresh(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KKRefresh(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

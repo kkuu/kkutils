@@ -8,8 +8,8 @@ import java.util.HashMap;
 import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.common.StringTool;
-import utils.wzutils.parent.WzParentActivity;
-import utils.wzutils.parent.WzViewOnclickListener;
+import utils.wzutils.parent.ParentActivity;
+import utils.wzutils.parent.KKViewOnclickListener;
 
 /**
  * abc on 2017/6/6.
@@ -105,7 +105,7 @@ public class DaoJiShiSimple extends DaoJiShiControl {
             endStr = "获取验证码";
         }
         currDaoJiShi.setView(clickBtn, tvShow, endStr);
-        clickBtn.setOnClickListener(new WzViewOnclickListener() {
+        clickBtn.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
                 if (tvPhone != null) {
@@ -125,7 +125,7 @@ public class DaoJiShiSimple extends DaoJiShiControl {
         OnHuoQuYanZhengMaSuccess onHuoQuYanZhengMaSuccess = new OnHuoQuYanZhengMaSuccess() {
             @Override
             public void onHuoQuYanZhengMaSuccess(boolean isDataOk, String msg, long time) {
-                WzParentActivity.hideWaitingDialogStac();
+                ParentActivity.hideWaitingDialogStac();
                 if (StringTool.notEmpty(msg)) {
                     CommonTool.showToast(msg);
                 }
@@ -139,7 +139,7 @@ public class DaoJiShiSimple extends DaoJiShiControl {
         };
         if (onHuoQuYanZhengMa != null) {
             boolean sendOk = onHuoQuYanZhengMa.onHuoQuYanZhengMa(onHuoQuYanZhengMaSuccess);
-            if (sendOk) WzParentActivity.showWaitingDialogStac("");
+            if (sendOk) ParentActivity.showWaitingDialogStac("");
         } else {
             LogTool.s("onHuoQuYanZhengMa---------------不能为空");
         }

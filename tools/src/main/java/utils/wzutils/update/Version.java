@@ -101,7 +101,7 @@ public class Version {
         progressDialog.setTitle(context.getString(R.string.zhengzai_nuli_xiazai));
         String path= FileTool.getCacheDir("apk")+"tem.apk";
 
-        final long id = WzDownLoadTool.downLoad( newVersion.updateUrl,path, new WzDownLoadTool.DownLoadProgressListener() {
+        final long id = KKDownLoadTool.downLoad( newVersion.updateUrl,path, new KKDownLoadTool.DownLoadProgressListener() {
             @Override
             public void onProgress(long id, String url, final String localPath, long allSize, long currDownLoadSize, boolean isComplete) {
                 if (isComplete && allSize == currDownLoadSize&&localPath!=null) {//完成过后就是安装
@@ -123,7 +123,7 @@ public class Version {
             progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, context.getString(R.string.quxiao), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    WzDownLoadTool.removeDownLoad(id);
+                    KKDownLoadTool.removeDownLoad(id);
                     progressDialog.dismiss();
                 }
             });

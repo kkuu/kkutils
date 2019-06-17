@@ -2,7 +2,7 @@ package utils.wzutils.parent;
 
 import android.content.Context;
 import android.graphics.Rect;
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.core.view.MotionEventCompat;
 import androidx.core.view.ViewConfigurationCompat;
@@ -18,12 +18,12 @@ import utils.wzutils.ImgTool;
 import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.LogTool;
 import utils.wzutils.ui.pullrefresh.PageControl;
-import utils.wzutils.ui.pullrefresh.WzRefreshImp;
+import utils.wzutils.ui.pullrefresh.KKRefreshImp;
 
 /**
  * Created by ishare on 2016/6/7.
  */
-public class ParentRecycleViewWz extends RecyclerView {
+public class ParentRecycleView extends RecyclerView {
     /******************
      *解决  recyclerview横竖嵌套 的问题，  横向滑动不流畅
      * http://www.open-open.com/lib/view/open1474352526193.html
@@ -43,18 +43,18 @@ public class ParentRecycleViewWz extends RecyclerView {
     private int mInitialTouchX, mInitialTouchY;
     private int mTouchSlop;
 
-    public ParentRecycleViewWz(Context context) {
+    public ParentRecycleView(Context context) {
         super(context);
         init();
     }
 
 
-    public ParentRecycleViewWz(Context context, @Nullable AttributeSet attrs) {
+    public ParentRecycleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ParentRecycleViewWz(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public ParentRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         final ViewConfiguration vc = ViewConfiguration.get(getContext());
         mTouchSlop = vc.getScaledTouchSlop();
@@ -100,8 +100,8 @@ public class ParentRecycleViewWz extends RecyclerView {
                     int lastVisibleItemPosition =((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
                     int visibleItemCount = getChildCount();
                     if(visibleItemCount>1&&lastVisibleItemPosition==totalItemCount-1){
-                        if(getParent() instanceof WzRefreshImp){
-                            ((WzRefreshImp) getParent()).refreshByPullUp();
+                        if(getParent() instanceof KKRefreshImp){
+                            ((KKRefreshImp) getParent()).refreshByPullUp();
                         }
                     }
                 }
@@ -171,7 +171,7 @@ public class ParentRecycleViewWz extends RecyclerView {
                 try {
                     if(event.getAction()==MotionEvent.ACTION_UP){
                         if(onClickListener!=null){
-                            onClickListener.onClick(ParentRecycleViewWz.this);
+                            onClickListener.onClick(ParentRecycleView.this);
                         }
                     }
                 }catch (Exception e){

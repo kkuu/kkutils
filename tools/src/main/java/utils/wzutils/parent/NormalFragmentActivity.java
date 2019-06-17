@@ -28,7 +28,7 @@ import utils.wzutils.common.ViewTool;
   </RelativeLayout>
 
  */
-public  class WzNormalFragmentActivity extends WzParentActivity {
+public  class NormalFragmentActivity extends ParentActivity {
 
     Fragment currentFragment = null;
     /***
@@ -39,10 +39,10 @@ public  class WzNormalFragmentActivity extends WzParentActivity {
     /***
      * 跳转到一个Fragment
      */
-    private void go(WzParentFragment fragment, boolean inCurrActivity) {
+    private void go(ParentFragment fragment, boolean inCurrActivity) {
         if (inCurrActivity) {//就在当前页面 ， 不跳转
-            if (AppTool.currActivity instanceof WzNormalFragmentActivity) {
-                ((WzNormalFragmentActivity) AppTool.currActivity).setFragment(fragment);
+            if (AppTool.currActivity instanceof NormalFragmentActivity) {
+                ((NormalFragmentActivity) AppTool.currActivity).setFragment(fragment);
             }
         } else {
             go(fragment);
@@ -53,14 +53,14 @@ public  class WzNormalFragmentActivity extends WzParentActivity {
     /***
      * 跳转到一个Fragment
      */
-    public void go(WzParentFragment fragment) {
+    public void go(ParentFragment fragment) {
         go(fragment, null);
     }
 
     /***
      * 跳转到一个Fragment
      */
-    public void go(WzParentFragment fragment, Intent intent) {
+    public void go(ParentFragment fragment, Intent intent) {
         if (intent == null) {
             intent = new Intent();
         }
@@ -74,7 +74,7 @@ public  class WzNormalFragmentActivity extends WzParentActivity {
      * @param fragment     要去向的fragment
      * @param fromFragment 由哪个 fragment 启动的
      */
-    public void goForResult(WzParentFragment fragment, WzParentFragment fromFragment, int requestCode) {
+    public void goForResult(ParentFragment fragment, ParentFragment fromFragment, int requestCode) {
         Intent intent = new Intent();
         intent.setClass(AppTool.currActivity, getClass());
         intent.putExtra("fragment", fragment);
@@ -121,8 +121,8 @@ public  class WzNormalFragmentActivity extends WzParentActivity {
 
     @Override
     public void onBackPressed() {
-        if(currentFragment!=null&&currentFragment instanceof WzParentFragment){
-            if(((WzParentFragment) currentFragment).onBackPressed()){
+        if(currentFragment!=null&&currentFragment instanceof ParentFragment){
+            if(((ParentFragment) currentFragment).onBackPressed()){
                 return;
             }
         }

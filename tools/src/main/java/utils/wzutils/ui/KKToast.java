@@ -29,14 +29,14 @@ import static android.content.Context.WINDOW_SERVICE;
  * Created by ishare on 2016/10/17.
  * targetSdkVersion 22
  */
-public class WzToast {
+public class KKToast {
 
     final static int keyShow = ViewTool.initKey();
     volatile static Toast toast;
     static TextView tvToast;
     static WindowManager windowManager;
 
-    public WzToast() {
+    public KKToast() {
     }
 
     public void showWzToast(final Object toastStr) {

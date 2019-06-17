@@ -27,7 +27,7 @@ import utils.wzutils.db.MapDB;
  * @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
  * super.onActivityResult(requestCode, resultCode, data);
  * Uri uri=takePhotoTool.readCurrChoosePhotoUri(data);
- * if(requestCode!=WzTakePhotoTool.requestCodeCrop){//如果需要裁剪才这样写
+ * if(requestCode!=KKTakePhotoTool.requestCodeCrop){//如果需要裁剪才这样写
  * takePhotoTool.goCrop(uri,480,480);
  * }else {
  * datas.add(uri.toString());
@@ -35,7 +35,7 @@ import utils.wzutils.db.MapDB;
  * }
  * }
  */
-public class WzTakePhotoTool {
+public class KKTakePhotoTool {
     public static final int requestCodeCamera = 1;//去拍照
     public static final int requestCodeFile = 2;//去选择文件
     public static final int requestCodeCrop = 3;//去裁剪
@@ -45,13 +45,13 @@ public class WzTakePhotoTool {
     Fragment fragment;
     Context context;
 
-    public WzTakePhotoTool(Activity activity) {
+    public KKTakePhotoTool(Activity activity) {
         this.activity = activity;
         context = activity;
         cacheDir = initTakePhotoCacheDir(activity);
     }
 
-    public WzTakePhotoTool(Fragment fragment) {
+    public KKTakePhotoTool(Fragment fragment) {
         this.fragment = fragment;
         context = fragment.getContext();
         cacheDir = initTakePhotoCacheDir(fragment.getContext());

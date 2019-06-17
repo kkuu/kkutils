@@ -15,14 +15,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import utils.wzutils.ui.WzImageView;
+import utils.wzutils.ui.KKImageView;
 
 /**
  * 手势图片控件 查看大图的
  *
  * @author clifford
  */
-public class PinchImageView extends WzImageView {
+public class PinchImageView extends KKImageView {
 
     ////////////////////////////////配置参数////////////////////////////////
 

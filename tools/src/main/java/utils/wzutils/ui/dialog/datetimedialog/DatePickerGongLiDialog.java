@@ -1,29 +1,11 @@
 package utils.wzutils.ui.dialog.datetimedialog;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import utils.wzutils.AppTool;
-import utils.wzutils.common.CommonTool;
-import utils.wzutils.common.NongLiTool;
-import utils.wzutils.common.UiTool;
-import utils.wzutils.parent.WzViewOnclickListener;
-import utils.wzutils.ui.dialog.DialogTool;
 
 /**
  */
-public class DatePickerGongLiDialog extends WzDatePickerDialog {
+public class DatePickerGongLiDialog extends KKDatePickerDialog {
     public DatePickerGongLiDialog(Context context) {
         super(context);
     }
