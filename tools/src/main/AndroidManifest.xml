@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="utils.wzutils" >
+    package="utils.kkutils" >
 
     <application
         android:usesCleartextTraffic="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true" >
 
 
-        <activity  android:name="utils.wzutils.parent.NormalFragmentActivity"  android:screenOrientation="portrait" />
+        <activity  android:name="utils.kkutils.parent.NormalFragmentActivity"  android:screenOrientation="portrait" />
 
 
     </application>

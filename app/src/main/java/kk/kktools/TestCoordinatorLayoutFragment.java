@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import utils.wzutils.common.LogTool;
-import utils.wzutils.common.TestData;
-import utils.wzutils.common.UiTool;
-import utils.wzutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
-import utils.wzutils.parent.ParentFragment;
-import utils.wzutils.parent.KKViewOnclickListener;
-import utils.wzutils.ui.KKSimpleRecycleView;
+import utils.kkutils.common.LogTool;
+import utils.kkutils.common.TestData;
+import utils.kkutils.common.UiTool;
+import utils.kkutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
+import utils.kkutils.parent.ParentFragment;
+import utils.kkutils.parent.KKViewOnclickListener;
+import utils.kkutils.ui.KKSimpleRecycleView;
 
 public class TestCoordinatorLayoutFragment extends ParentFragment {
     KKSimpleRecycleView recycler_view;

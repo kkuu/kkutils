@@ -9,7 +9,7 @@
     >
 
 
-    <utils.wzutils.ui.KKViewPager
+    <utils.kkutils.ui.KKViewPager
         android:id="@+id/viewPagerResId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

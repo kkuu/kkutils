@@ -6,8 +6,8 @@
     android:layout_height="match_parent" android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <utils.wzutils.ui.KKSimpleRecycleView
+    <utils.kkutils.ui.KKSimpleRecycleView
         android:id="@+id/recycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></utils.wzutils.ui.KKSimpleRecycleView>
+        android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleView>
 </LinearLayout>

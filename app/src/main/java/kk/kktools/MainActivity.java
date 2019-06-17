@@ -6,14 +6,14 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-import utils.wzutils.AppTool;
-import utils.wzutils.common.TestData;
-import utils.wzutils.common.UiTool;
-import utils.wzutils.parent.ParentActivity;
-import utils.wzutils.parent.ParentFragment;
-import utils.wzutils.parent.KKViewOnclickListener;
-import utils.wzutils.ui.KKSimpleRecycleView;
-import utils.wzutils.ui.bigimage.BigImgListFragment;
+import utils.kkutils.AppTool;
+import utils.kkutils.common.TestData;
+import utils.kkutils.common.UiTool;
+import utils.kkutils.parent.ParentActivity;
+import utils.kkutils.parent.ParentFragment;
+import utils.kkutils.parent.KKViewOnclickListener;
+import utils.kkutils.ui.KKSimpleRecycleView;
+import utils.kkutils.ui.bigimage.BigImgListFragment;
 
 public class MainActivity extends ParentActivity {
 
