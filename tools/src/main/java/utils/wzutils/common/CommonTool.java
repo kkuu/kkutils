@@ -12,6 +12,7 @@ import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -22,6 +23,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import utils.wzutils.AppTool;
 
@@ -228,14 +230,55 @@ public class CommonTool {
      * @return
      */
     public static String getDeviceId() {
+        String serial="";
         try {
             Context context = AppTool.getApplication();
             TelephonyManager tm = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
-            return tm.getDeviceId();
+            serial= tm.getDeviceId();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        try {
+            if(StringTool.isEmpty(serial)){
+
+                String m_szDevIDShort = "35" +
+                        Build.BOARD.length() % 10 + Build.BRAND.length() % 10 +
+
+                        Build.CPU_ABI.length() % 10 + Build.DEVICE.length() % 10 +
+
+                        Build.DISPLAY.length() % 10 + Build.HOST.length() % 10 +
+
+                        Build.ID.length() % 10 + Build.MANUFACTURER.length() % 10 +
+
+                        Build.MODEL.length() % 10 + Build.PRODUCT.length() % 10 +
+
+                        Build.TAGS.length() % 10 + Build.TYPE.length() % 10 +
+
+                        Build.USER.length() % 10; //13 位
+
+                try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        serial = android.os.Build.getSerial();
+                    } else {
+                        serial = Build.SERIAL;
+                    }
+                    //API>=9 使用serial号
+                    return new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
+                } catch (Exception exception) {
+                    //serial需要一个初始化
+                    serial = "serial"; // 随便一个初始化
+                }
+                //使用硬件信息拼凑出来的15位号码
+                serial= new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
+            }
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
+
+
+
+        return serial;
     }
 
     /**
