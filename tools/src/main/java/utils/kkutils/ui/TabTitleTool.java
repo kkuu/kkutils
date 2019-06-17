@@ -16,7 +16,7 @@ import java.util.List;
 
 import utils.kkutils.common.LayoutInflaterTool;
 import utils.kkutils.common.LogTool;
-import utils.kkutils.parent.ParentFragment;
+import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 
 /**
@@ -168,7 +168,7 @@ public class TabTitleTool {
         }
 
     }
-    ParentFragment oldFragment;
+    KKParentFragment oldFragment;
     public void click(int position) {
         try {
             commonButtonTool.getAllButtons().get(position).performClick();
@@ -193,7 +193,7 @@ public class TabTitleTool {
     public static class TabData {
         public String tabText;//标题
         public Serializable type;//类型
-        public ParentFragment fragment;//内容fargment
+        public KKParentFragment fragment;//内容fargment
         public int layoutItemId;//tab 标题的 资源文件
         public int commonBtnId;//按钮
         public ViewGroup.LayoutParams tablayoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
@@ -204,7 +204,7 @@ public class TabTitleTool {
         public TabData(
                 String tabText,
                 Serializable type,
-                ParentFragment fragment,
+                KKParentFragment fragment,
                 int layoutItemId,
                 int commonBtnId,
                 ViewGroup.LayoutParams tablayoutParams
@@ -222,7 +222,7 @@ public class TabTitleTool {
         public TabData(
                 String tabText,
                 Serializable type,
-                ParentFragment fragment,
+                KKParentFragment fragment,
                 int layoutItemId,
                 int commonBtnId
 

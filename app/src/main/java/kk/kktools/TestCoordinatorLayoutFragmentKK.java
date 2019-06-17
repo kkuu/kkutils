@@ -7,13 +7,13 @@ import android.widget.TextView;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
-import utils.kkutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
-import utils.kkutils.parent.ParentFragment;
+import utils.kkutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragmentKK;
+import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
-import utils.kkutils.ui.KKSimpleRecycleView;
+import utils.kkutils.ui.KKSimpleRecycleViewKK;
 
-public class TestCoordinatorLayoutFragment extends ParentFragment {
-    KKSimpleRecycleView recycler_view;
+public class TestCoordinatorLayoutFragmentKK extends KKParentFragment {
+    KKSimpleRecycleViewKK recycler_view;
     TextView btn_choose_dizhi;
     @Override
     public int initContentViewId() {
@@ -23,7 +23,7 @@ public class TestCoordinatorLayoutFragment extends ParentFragment {
     @Override
     public void initData() {
         recycler_view.setNestedScrollingEnabled(true);
-        recycler_view.setData(TestData.getTestStrList(30), R.layout.activity_main_item, new KKSimpleRecycleView.WzRecycleAdapter() {
+        recycler_view.setData(TestData.getTestStrList(30), R.layout.activity_main_item, new KKSimpleRecycleViewKK.WzRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);
@@ -32,7 +32,7 @@ public class TestCoordinatorLayoutFragment extends ParentFragment {
         btn_choose_dizhi.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new KK_XuanZheShouHuoDiZhiFragment().goForResult(TestCoordinatorLayoutFragment.this,1);
+                new KK_XuanZheShouHuoDiZhiFragmentKK().goForResult(TestCoordinatorLayoutFragmentKK.this,1);
             }
         });
     }
@@ -41,7 +41,7 @@ public class TestCoordinatorLayoutFragment extends ParentFragment {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if(data!=null&&data.getExtras()!=null){
-                KK_XuanZheShouHuoDiZhiFragment.DiZhiChoose diZhiChoose = KK_XuanZheShouHuoDiZhiFragment.getDiZhiByIntent(data);
+                KK_XuanZheShouHuoDiZhiFragmentKK.DiZhiChoose diZhiChoose = KK_XuanZheShouHuoDiZhiFragmentKK.getDiZhiByIntent(data);
                 UiTool.setTextView(btn_choose_dizhi, diZhiChoose.address_province+" "+diZhiChoose.address_city+" "+diZhiChoose.address_area);
             }
         }catch (Exception e){

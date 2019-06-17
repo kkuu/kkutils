@@ -3,7 +3,7 @@ package utils.kkutils.parent;
 /**
  * Created by ishare on 2016/7/7.
  */
-public class ParentFragmentLife extends ParentFragment {
+public class KKParentFragmentLife extends KKParentFragment {
 
     @Override
     public int initContentViewId() {

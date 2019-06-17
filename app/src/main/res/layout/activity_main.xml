@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivityKK">
 
-    <utils.kkutils.ui.KKSimpleRecycleView
+    <utils.kkutils.ui.KKSimpleRecycleViewKK
         android:id="@+id/recycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleView>
+        android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleViewKK>
 </LinearLayout>

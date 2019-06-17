@@ -8,7 +8,7 @@ import java.util.HashMap;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.StringTool;
-import utils.kkutils.parent.ParentActivity;
+import utils.kkutils.parent.KKParentActivity;
 import utils.kkutils.parent.KKViewOnclickListener;
 
 /**
@@ -125,7 +125,7 @@ public class DaoJiShiSimple extends DaoJiShiControl {
         OnHuoQuYanZhengMaSuccess onHuoQuYanZhengMaSuccess = new OnHuoQuYanZhengMaSuccess() {
             @Override
             public void onHuoQuYanZhengMaSuccess(boolean isDataOk, String msg, long time) {
-                ParentActivity.hideWaitingDialogStac();
+                KKParentActivity.hideWaitingDialogStac();
                 if (StringTool.notEmpty(msg)) {
                     CommonTool.showToast(msg);
                 }
@@ -139,7 +139,7 @@ public class DaoJiShiSimple extends DaoJiShiControl {
         };
         if (onHuoQuYanZhengMa != null) {
             boolean sendOk = onHuoQuYanZhengMa.onHuoQuYanZhengMa(onHuoQuYanZhengMaSuccess);
-            if (sendOk) ParentActivity.showWaitingDialogStac("");
+            if (sendOk) KKParentActivity.showWaitingDialogStac("");
         } else {
             LogTool.s("onHuoQuYanZhengMa---------------不能为空");
         }

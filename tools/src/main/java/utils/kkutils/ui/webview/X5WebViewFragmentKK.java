@@ -10,9 +10,9 @@ import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebView;
 
 import utils.kkutils.common.StringTool;
-import utils.kkutils.parent.ParentFragment;
+import utils.kkutils.parent.KKParentFragment;
 
-public class X5WebViewFragment extends ParentFragment {
+public class X5WebViewFragmentKK extends KKParentFragment {
     @Override
     public int initContentViewId() {
         return 0;
@@ -28,7 +28,7 @@ public class X5WebViewFragment extends ParentFragment {
 
     }
     public static void init(FragmentActivity activity, WebView webView){
-        new X5WebViewFragment().initWebView(activity.getSupportFragmentManager(),webView);
+        new X5WebViewFragmentKK().initWebView(activity.getSupportFragmentManager(),webView);
     }
 
     public  void initWebView(FragmentManager fragmentManager, WebView webView){

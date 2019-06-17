@@ -23,7 +23,7 @@ import utils.kkutils.ui.pullrefresh.KKRefreshImp;
 /**
  * Created by ishare on 2016/6/7.
  */
-public class ParentRecycleView extends RecyclerView {
+public class KKParentRecycleView extends RecyclerView {
     /******************
      *解决  recyclerview横竖嵌套 的问题，  横向滑动不流畅
      * http://www.open-open.com/lib/view/open1474352526193.html
@@ -43,18 +43,18 @@ public class ParentRecycleView extends RecyclerView {
     private int mInitialTouchX, mInitialTouchY;
     private int mTouchSlop;
 
-    public ParentRecycleView(Context context) {
+    public KKParentRecycleView(Context context) {
         super(context);
         init();
     }
 
 
-    public ParentRecycleView(Context context, @Nullable AttributeSet attrs) {
+    public KKParentRecycleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ParentRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public KKParentRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         final ViewConfiguration vc = ViewConfiguration.get(getContext());
         mTouchSlop = vc.getScaledTouchSlop();
@@ -171,7 +171,7 @@ public class ParentRecycleView extends RecyclerView {
                 try {
                     if(event.getAction()==MotionEvent.ACTION_UP){
                         if(onClickListener!=null){
-                            onClickListener.onClick(ParentRecycleView.this);
+                            onClickListener.onClick(KKParentRecycleView.this);
                         }
                     }
                 }catch (Exception e){

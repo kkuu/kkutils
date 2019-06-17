@@ -57,7 +57,7 @@ public class WebViewBigImg extends WebView {
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
                 try {
                     String src = message.replace(tuWenPreStr, "");
-                    // ParentFragment.showBigImage(tuwenSrcList.indexOf(src),tuwenSrcList);
+                    // KKParentFragment.showBigImage(tuwenSrcList.indexOf(src),tuwenSrcList);
                     ImageView imageView = new ImageView(AppTool.currActivity);
                     ImgTool.setUrlTag(src, imageView);
                     PicViewActivity.go(imageView);

@@ -18,7 +18,7 @@ import utils.kkutils.common.ViewTool;
 /**
  * Created by ishare on 2016/7/7.
  */
-public abstract class ParentFragment extends Fragment implements Serializable {
+public abstract class KKParentFragment extends Fragment implements Serializable {
     public static Fragment currentFragment;
     public View parent;
     public View vg_page_content;
@@ -197,15 +197,15 @@ public abstract class ParentFragment extends Fragment implements Serializable {
     public void go(Bundle bundle) {
         try {
             if(bundle!=null)setArguments(bundle);
-            new NormalFragmentActivity().go(this);
+            new KKNormalFragmentActivityKK().go(this);
             currentFragment=this;
         } catch (Exception e) {
             LogTool.ex(e);
         }
     }
-    public void goForResult(ParentFragment parentFragment, int requestCode) {
+    public void goForResult(KKParentFragment KKParentFragment, int requestCode) {
         try {
-            new NormalFragmentActivity().goForResult(this,parentFragment,requestCode);
+            new KKNormalFragmentActivityKK().goForResult(this, KKParentFragment,requestCode);
             currentFragment=this;
         } catch (Exception e) {
             LogTool.ex(e);

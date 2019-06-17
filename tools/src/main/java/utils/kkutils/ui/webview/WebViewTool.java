@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 import utils.kkutils.AppTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.StringTool;
-import utils.kkutils.parent.ParentActivity;
+import utils.kkutils.parent.KKParentActivity;
 
 /**
  * Created by coder on 16/1/18.
@@ -92,13 +92,13 @@ public class WebViewTool {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                ParentActivity.showWaitingDialogStac("");
+                KKParentActivity.showWaitingDialogStac("");
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                ParentActivity.hideWaitingDialogStac();
+                KKParentActivity.hideWaitingDialogStac();
             }
         });
     }

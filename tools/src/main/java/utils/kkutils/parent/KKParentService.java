@@ -15,7 +15,7 @@ import utils.kkutils.common.LogTool;
  * abc on 2018/2/2.
  */
 
-public class ParentService extends Service {
+public class KKParentService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {

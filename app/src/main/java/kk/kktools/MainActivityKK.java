@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import utils.kkutils.AppTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
-import utils.kkutils.parent.ParentActivity;
-import utils.kkutils.parent.ParentFragment;
+import utils.kkutils.parent.KKParentActivity;
+import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
-import utils.kkutils.ui.KKSimpleRecycleView;
-import utils.kkutils.ui.bigimage.BigImgListFragment;
+import utils.kkutils.ui.KKSimpleRecycleViewKK;
+import utils.kkutils.ui.bigimage.BigImgListFragmentKK;
 
-public class MainActivity extends ParentActivity {
+public class MainActivityKK extends KKParentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +29,13 @@ public class MainActivity extends ParentActivity {
         addItem("测试大图", null, new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new BigImgListFragment().go(0, TestData.getTestImgUrlList(2));
+                new BigImgListFragmentKK().go(0, TestData.getTestImgUrlList(2));
             }
         });
         addItem("测试CoordinatorLayout,和选择收货地址", null, new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new TestCoordinatorLayoutFragment().go();
+                new TestCoordinatorLayoutFragmentKK().go();
             }
         });
 
@@ -44,9 +44,9 @@ public class MainActivity extends ParentActivity {
 
     public static class TestItem{
         public String title;
-        public ParentFragment fragment;
+        public KKParentFragment fragment;
         public KKViewOnclickListener onclickListener;
-        public TestItem(String title, ParentFragment fragment, KKViewOnclickListener onclickListener) {
+        public TestItem(String title, KKParentFragment fragment, KKViewOnclickListener onclickListener) {
             this.title = title;
             this.fragment = fragment;
             this.onclickListener = onclickListener;
@@ -56,12 +56,12 @@ public class MainActivity extends ParentActivity {
 
     }
     public ArrayList<TestItem> testItems=new ArrayList<>();
-    public void addItem(final String title, final ParentFragment fragment, KKViewOnclickListener onclickListener){
+    public void addItem(final String title, final KKParentFragment fragment, KKViewOnclickListener onclickListener){
         testItems.add(new TestItem(title,fragment,onclickListener));
     }
     public void refresh(){
-        KKSimpleRecycleView recycleView=findViewById(R.id.recycleView);
-        recycleView.setData(testItems, R.layout.activity_main_item, new KKSimpleRecycleView.WzRecycleAdapter() {
+        KKSimpleRecycleViewKK recycleView=findViewById(R.id.recycleView);
+        recycleView.setData(testItems, R.layout.activity_main_item, new KKSimpleRecycleViewKK.WzRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);

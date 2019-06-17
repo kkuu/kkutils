@@ -28,7 +28,7 @@ import utils.kkutils.common.ViewTool;
   </RelativeLayout>
 
  */
-public  class NormalFragmentActivity extends ParentActivity {
+public  class KKNormalFragmentActivityKK extends KKParentActivity {
 
     Fragment currentFragment = null;
     /***
@@ -39,10 +39,10 @@ public  class NormalFragmentActivity extends ParentActivity {
     /***
      * 跳转到一个Fragment
      */
-    private void go(ParentFragment fragment, boolean inCurrActivity) {
+    private void go(KKParentFragment fragment, boolean inCurrActivity) {
         if (inCurrActivity) {//就在当前页面 ， 不跳转
-            if (AppTool.currActivity instanceof NormalFragmentActivity) {
-                ((NormalFragmentActivity) AppTool.currActivity).setFragment(fragment);
+            if (AppTool.currActivity instanceof KKNormalFragmentActivityKK) {
+                ((KKNormalFragmentActivityKK) AppTool.currActivity).setFragment(fragment);
             }
         } else {
             go(fragment);
@@ -53,14 +53,14 @@ public  class NormalFragmentActivity extends ParentActivity {
     /***
      * 跳转到一个Fragment
      */
-    public void go(ParentFragment fragment) {
+    public void go(KKParentFragment fragment) {
         go(fragment, null);
     }
 
     /***
      * 跳转到一个Fragment
      */
-    public void go(ParentFragment fragment, Intent intent) {
+    public void go(KKParentFragment fragment, Intent intent) {
         if (intent == null) {
             intent = new Intent();
         }
@@ -74,7 +74,7 @@ public  class NormalFragmentActivity extends ParentActivity {
      * @param fragment     要去向的fragment
      * @param fromFragment 由哪个 fragment 启动的
      */
-    public void goForResult(ParentFragment fragment, ParentFragment fromFragment, int requestCode) {
+    public void goForResult(KKParentFragment fragment, KKParentFragment fromFragment, int requestCode) {
         Intent intent = new Intent();
         intent.setClass(AppTool.currActivity, getClass());
         intent.putExtra("fragment", fragment);
@@ -121,8 +121,8 @@ public  class NormalFragmentActivity extends ParentActivity {
 
     @Override
     public void onBackPressed() {
-        if(currentFragment!=null&&currentFragment instanceof ParentFragment){
-            if(((ParentFragment) currentFragment).onBackPressed()){
+        if(currentFragment!=null&&currentFragment instanceof KKParentFragment){
+            if(((KKParentFragment) currentFragment).onBackPressed()){
                 return;
             }
         }

@@ -28,12 +28,12 @@ import utils.kkutils.ImgTool;
  *
  *     compile 'com.yanzhenjie:album:1.0.7'
  *
-     new TakePhotoSimpleFragment().addToParent(supportFragmentManager, R.id.vg_dongtai_fabu_tupian, R.layout.dongtai_fabu_tupian_item, maxSize,
- new TakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_send_picture_add, R.drawable.kk_send_picture_add));
+     new TakePhotoSimpleFragmentKK().addToParent(supportFragmentManager, R.id.vg_dongtai_fabu_tupian, R.layout.dongtai_fabu_tupian_item, maxSize,
+ new TakePhotoFragmentKK.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_send_picture_add, R.drawable.kk_send_picture_add));
  *
  */
 
-public class TakePhotoSimpleFragment extends TakePhotoFragment {
+public class TakePhotoSimpleFragmentKK extends TakePhotoFragmentKK {
     @Override
     public void showChooseDialog() {
 //

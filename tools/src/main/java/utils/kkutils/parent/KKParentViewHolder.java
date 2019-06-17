@@ -10,8 +10,8 @@ import utils.kkutils.common.ViewTool;
 /**
  * Created by coder on 15/12/30.
  */
-public abstract class ParentViewHolder extends RecyclerView.ViewHolder implements Serializable {
-    public ParentViewHolder(View itemView, View.OnClickListener onClickListener) {
+public abstract class KKParentViewHolder extends RecyclerView.ViewHolder implements Serializable {
+    public KKParentViewHolder(View itemView, View.OnClickListener onClickListener) {
         super(itemView);
         ViewTool.initViews(itemView, this, onClickListener);
     }

@@ -23,9 +23,9 @@ import utils.kkutils.AppTool;
 import utils.kkutils.ImgTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UpLoadFilesTool;
-import utils.kkutils.parent.ParentFragmentLife;
+import utils.kkutils.parent.KKParentFragmentLife;
 import utils.kkutils.parent.KKViewOnclickListener;
-import utils.kkutils.ui.KKSimpleRecycleView;
+import utils.kkutils.ui.KKSimpleRecycleViewKK;
 import utils.kkutils.ui.dialog.DialogTool;
 
 /**
@@ -33,14 +33,14 @@ import utils.kkutils.ui.dialog.DialogTool;
  * <p>
  * 2.0 用于拍照用的
  *
-     new TakePhotoSimpleFragment().addToParent(getChildFragmentManager(), R.id.vg_dongtai_fabu_tupian, R.layout.dongtai_fabu_tupian_item, 9,
- new TakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_send_picture_add, R.drawable.kk_send_picture_add));
+     new TakePhotoSimpleFragmentKK().addToParent(getChildFragmentManager(), R.id.vg_dongtai_fabu_tupian, R.layout.dongtai_fabu_tupian_item, 9,
+ new TakePhotoFragmentKK.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_send_picture_add, R.drawable.kk_send_picture_add));
 
  */
-public class TakePhotoFragment extends ParentFragmentLife implements Serializable {
+public class TakePhotoFragmentKK extends KKParentFragmentLife implements Serializable {
 
     public static final String tag = "TakePhotoFragmentTag";
-    public KKSimpleRecycleView recycleView;
+    public KKSimpleRecycleViewKK recycleView;
     public int add_photo_id;
     public int itemId;
     public int itemImageViewId;
@@ -51,13 +51,13 @@ public class TakePhotoFragment extends ParentFragmentLife implements Serializabl
     protected KKTakePhotoTool takePhotoTool;
     OnAddPhotoInitDataListener onAddPhotoInitDataListener;
 
-    public static TakePhotoFragment getCurrTakePhotoFragment(FragmentManager fragmentManager){
+    public static TakePhotoFragmentKK getCurrTakePhotoFragment(FragmentManager fragmentManager){
         try {
-            return ((TakePhotoFragment) fragmentManager.findFragmentByTag(tag));
+            return ((TakePhotoFragmentKK) fragmentManager.findFragmentByTag(tag));
         } catch (Exception e) {
             LogTool.ex(e);
         }
-        return new TakePhotoFragment();
+        return new TakePhotoFragmentKK();
     }
     public static ArrayList<String> getSelectPhotos(FragmentManager fragmentManager) {
         try {
@@ -116,7 +116,7 @@ public class TakePhotoFragment extends ParentFragmentLife implements Serializabl
     }
 
     public View initContentView() {
-        recycleView = new KKSimpleRecycleView(getContext());
+        recycleView = new KKSimpleRecycleViewKK(getContext());
       //  recycleView.setBackgroundColor(Color.WHITE);
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         recycleView.setLayoutParams(lp);
@@ -177,11 +177,11 @@ public class TakePhotoFragment extends ParentFragmentLife implements Serializabl
             }
             recycleView.setLayoutManager(new StaggeredGridLayoutManager(col, StaggeredGridLayoutManager.VERTICAL));
             recycleView.setDividerDp(10,10);
-            recycleView.setData(datas, itemId, new KKSimpleRecycleView.WzRecycleAdapter() {
+            recycleView.setData(datas, itemId, new KKSimpleRecycleViewKK.WzRecycleAdapter() {
                 @Override
                 public void initData(final int positon, int type, final View itemView) {
                     if (onAddPhotoInitDataListener != null) {
-                        onAddPhotoInitDataListener.onInitData(TakePhotoFragment.this, datas, positon, type, itemView);
+                        onAddPhotoInitDataListener.onInitData(TakePhotoFragmentKK.this, datas, positon, type, itemView);
                         return;
                     }
                     final String path = datas.get(positon);
@@ -197,7 +197,7 @@ public class TakePhotoFragment extends ParentFragmentLife implements Serializabl
                             @Override
                             public void onClickWz(View v) {
                                 try {
-                                    showDeleteDialog(datas,path, TakePhotoFragment.this);
+                                    showDeleteDialog(datas,path, TakePhotoFragmentKK.this);
                                 } catch (Exception e) {
                                     LogTool.ex(e);
                                 }
@@ -249,9 +249,9 @@ public class TakePhotoFragment extends ParentFragmentLife implements Serializabl
      * 例子
      *
     public static void upLoadImg(FragmentManager fragmentManager,final CommitToServer commitToServer){
-    ParentActivity.showWaitingDialogStac("");
-    if(TakePhotoFragment.getSelectPhotos(fragmentManager).size()>0){//有文件需要上传
-    TakePhotoFragment.getCurrTakePhotoFragment(fragmentManager).sendToServer(new UpLoadFilesTool.UpLoadImp() {
+    KKParentActivity.showWaitingDialogStac("");
+    if(TakePhotoFragmentKK.getSelectPhotos(fragmentManager).size()>0){//有文件需要上传
+    TakePhotoFragmentKK.getCurrTakePhotoFragment(fragmentManager).sendToServer(new UpLoadFilesTool.UpLoadImp() {
     @Override
     public void upLoadImpl(final UpLoadFilesTool.UpLoadData upLoadData) {
     Data_upload_file.load(upLoadData.file, Data_upload_file.UpLoadType.questions_images, new HttpUiCallBack<Data_upload_file>() {
@@ -292,7 +292,7 @@ public class TakePhotoFragment extends ParentFragmentLife implements Serializabl
         UpLoadFilesTool.upLoadImages(upLoadDataList, upLoadImp, upLoadFilesListener);
     }
 
-    public static void showDeleteDialog(final List<String> datas, final String path, final TakePhotoFragment currFragment){
+    public static void showDeleteDialog(final List<String> datas, final String path, final TakePhotoFragmentKK currFragment){
         try {
             DialogTool.initNormalQueDingDialog("", "是否删除这张图片？", "删除", new DialogInterface.OnClickListener() {
                 @Override
@@ -308,7 +308,7 @@ public class TakePhotoFragment extends ParentFragmentLife implements Serializabl
     }
 
     public static interface OnAddPhotoInitDataListener extends Serializable {
-        void onInitData(TakePhotoFragment currFragment, List<String> datas, final int positon, int type, final View itemView);
+        void onInitData(TakePhotoFragmentKK currFragment, List<String> datas, final int positon, int type, final View itemView);
     }
 
     /**
@@ -364,7 +364,7 @@ public class TakePhotoFragment extends ParentFragmentLife implements Serializabl
         }
 
         @Override
-        public void onInitData(final TakePhotoFragment currFragment, final List<String> datas, int positon, int type, View itemView) {
+        public void onInitData(final TakePhotoFragmentKK currFragment, final List<String> datas, int positon, int type, View itemView) {
             final String path = datas.get(positon);
             ImageView imgv_add_photo = (ImageView) itemView.findViewById(res_imgv_add_photo);
             ImageView imgv_delete_photo = (ImageView) itemView.findViewById(res_imgv_delete_photo);

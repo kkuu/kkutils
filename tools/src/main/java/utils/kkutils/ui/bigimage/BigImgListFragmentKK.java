@@ -12,19 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.kkutils.R;
-import utils.kkutils.parent.NormalFragmentActivity;
-import utils.kkutils.parent.ParentFragment;
+import utils.kkutils.parent.KKNormalFragmentActivityKK;
+import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.ui.lunbo.LunBoTool;
 
 /**
  * abc on 2017/9/15.
  *
- * BigImgListFragment.init(R.layout.fragmentLayoutId,R.id.viewPagerResId,R.id.dotParentResId,R.layout.dotItemLayoutId,R.id.cb_dot);
+ * BigImgListFragmentKK.init(R.layout.fragmentLayoutId,R.id.viewPagerResId,R.id.dotParentResId,R.layout.dotItemLayoutId,R.id.cb_dot);
  * 同轮播的初始化
  *
  */
 
-public class BigImgListFragment extends ParentFragment {
+public class BigImgListFragmentKK extends KKParentFragment {
     List<String> stringArrayList = new ArrayList<>();
     int currentIndex;
 
@@ -36,15 +36,15 @@ public class BigImgListFragment extends ParentFragment {
 
 
     public static void init(int fragmentLayoutId,int viewPagerResId,int dotParentResId,int dotItemLayoutId,int cb_dot){
-        BigImgListFragment.fragmentLayoutId = fragmentLayoutId;
-        BigImgListFragment.viewPagerResId =viewPagerResId;
-        BigImgListFragment.dotParentResId =dotParentResId;
-        BigImgListFragment.dotItemLayoutId=dotItemLayoutId;
-        BigImgListFragment.cb_dot=cb_dot;
+        BigImgListFragmentKK.fragmentLayoutId = fragmentLayoutId;
+        BigImgListFragmentKK.viewPagerResId =viewPagerResId;
+        BigImgListFragmentKK.dotParentResId =dotParentResId;
+        BigImgListFragmentKK.dotItemLayoutId=dotItemLayoutId;
+        BigImgListFragmentKK.cb_dot=cb_dot;
     };
 
     static {
-        BigImgListFragment.init(R.layout.kk_lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.kk_lunbo_item,R.id.cb_dot);
+        BigImgListFragmentKK.init(R.layout.kk_lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.kk_lunbo_item,R.id.cb_dot);
 
     }
 
@@ -94,6 +94,6 @@ public class BigImgListFragment extends ParentFragment {
         bundle.putStringArrayList("stringArrayList", arrayList);
         bundle.putInt("currentIndex", currentIndex);
         setArguments(bundle);
-        new NormalFragmentActivity().go(this);
+        new KKNormalFragmentActivityKK().go(this);
     }
 }
