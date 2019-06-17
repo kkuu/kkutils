@@ -3,7 +3,7 @@ package utils.wzutils.ui;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v4.graphics.ColorUtils;
+import androidx.core.graphics.ColorUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;

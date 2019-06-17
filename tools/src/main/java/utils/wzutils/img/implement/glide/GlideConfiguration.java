@@ -1,8 +1,8 @@
 package utils.wzutils.img.implement.glide;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;

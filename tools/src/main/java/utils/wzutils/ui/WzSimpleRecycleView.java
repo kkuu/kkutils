@@ -1,7 +1,7 @@
 package utils.wzutils.ui;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +13,6 @@ import java.util.List;
 
 import utils.wzutils.common.LayoutInflaterTool;
 import utils.wzutils.common.LogTool;
-import utils.wzutils.common.UiTool;
 import utils.wzutils.common.ViewTool;
 import utils.wzutils.parent.ParentRecycleViewWz;
 

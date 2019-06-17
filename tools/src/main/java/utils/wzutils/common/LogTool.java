@@ -1,6 +1,5 @@
 package utils.wzutils.common;
 
-import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import java.io.File;

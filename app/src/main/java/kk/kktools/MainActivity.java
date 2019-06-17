@@ -1,32 +1,19 @@
 package kk.kktools;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 
 import java.util.ArrayList;
 
 import utils.wzutils.AppTool;
-import utils.wzutils.HttpTool;
-import utils.wzutils.ImgTool;
-import utils.wzutils.common.CommonTool;
-import utils.wzutils.common.LanguageTool;
-import utils.wzutils.common.LogTool;
-import utils.wzutils.common.PwdTool;
 import utils.wzutils.common.TestData;
 import utils.wzutils.common.UiTool;
-import utils.wzutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
-import utils.wzutils.http.HttpRequest;
-import utils.wzutils.http.HttpUiCallBack;
-import utils.wzutils.parent.WzNormalFragmentActivity;
 import utils.wzutils.parent.WzParentActivity;
 import utils.wzutils.parent.WzParentFragment;
 import utils.wzutils.parent.WzViewOnclickListener;
 import utils.wzutils.ui.WzSimpleRecycleView;
-import utils.wzutils.ui.bigimage.BigImgTool;
 import utils.wzutils.ui.bigimage.WzBigImgListFragment;
 
 public class MainActivity extends WzParentActivity {

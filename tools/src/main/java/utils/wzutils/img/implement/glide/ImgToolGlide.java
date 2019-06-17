@@ -2,31 +2,21 @@ package utils.wzutils.img.implement.glide;
 
 import android.app.Application;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.DrawableImageViewTarget;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.target.ViewTarget;
-import com.bumptech.glide.request.transition.Transition;
 
 import java.io.File;
 import java.util.HashMap;
@@ -35,7 +25,6 @@ import utils.wzutils.AppTool;
 import utils.wzutils.ImgTool;
 import utils.wzutils.common.FileTool;
 import utils.wzutils.common.LogTool;
-import utils.wzutils.common.SafeTool;
 import utils.wzutils.common.thread.ThreadTool;
 import utils.wzutils.img.InterfaceImgTool;
 

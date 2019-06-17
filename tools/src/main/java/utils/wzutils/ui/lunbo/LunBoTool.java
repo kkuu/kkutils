@@ -4,8 +4,8 @@ package utils.wzutils.ui.lunbo;
  * Created by kk on 2017/3/23.
  */
 
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.wzutils.AppTool;
 import utils.wzutils.ImgTool;
 import utils.wzutils.JsonTool;
 import utils.wzutils.common.CommonTool;

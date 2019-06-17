@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 
@@ -14,7 +13,7 @@ import utils.wzutils.common.CommonTool;
  * abc on 2017/7/21.
  */
 
-public class WzProgressSimple extends android.support.v7.widget.AppCompatImageView {
+public class WzProgressSimple extends androidx.appcompat.widget.AppCompatImageView {
     public WzProgressSimple(Context context) {
         super(context);
         init();

@@ -8,7 +8,7 @@ import android.util.AttributeSet;
  * abc on 2017/11/16.
  */
 
-public class BoldTextView extends android.support.v7.widget.AppCompatTextView {
+public class BoldTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     public BoldTextView(Context context) {
         super(context);

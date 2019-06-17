@@ -6,8 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.bumptech.glide.Glide;
@@ -100,7 +100,7 @@ public class ZhuanPanViewWithText extends ZhuanPanView {
 
 
 
-        imageViewBg=new android.support.v7.widget.AppCompatImageView(getContext()){
+        imageViewBg=new androidx.appcompat.widget.AppCompatImageView(getContext()){
             @Override
             protected void onDraw(Canvas canvas) {
                 super.onDraw(canvas);

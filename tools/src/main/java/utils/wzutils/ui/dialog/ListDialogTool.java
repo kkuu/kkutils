@@ -2,8 +2,8 @@ package utils.wzutils.ui.dialog;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.support.v7.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
 import android.view.ViewGroup;
 
 import utils.wzutils.AppTool;

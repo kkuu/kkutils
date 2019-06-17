@@ -2,10 +2,10 @@ package utils.wzutils.ui.tablayout;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 
 import com.flyco.tablayout.SlidingTabLayout;

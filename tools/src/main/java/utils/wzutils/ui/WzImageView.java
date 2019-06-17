@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 /**
  * Created by ishare on 2016/6/1.
  */
-public class WzImageView extends android.support.v7.widget.AppCompatImageView {
+public class WzImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     public WzImageView(Context context) {
         super(context);

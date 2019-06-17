@@ -1,12 +1,9 @@
 package utils.wzutils.ui;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
-import android.support.v4.widget.NestedScrollView;
+
+import androidx.core.widget.NestedScrollView;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.widget.ScrollView;
 
 /**
  * Created by ishare on 2016/6/13.

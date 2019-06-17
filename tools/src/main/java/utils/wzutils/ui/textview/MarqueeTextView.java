@@ -9,7 +9,7 @@ import android.util.AttributeSet;
  * abc on 2017/11/16.
  */
 
-public class MarqueeTextView extends android.support.v7.widget.AppCompatTextView {
+public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     public MarqueeTextView(Context context) {
         super(context);

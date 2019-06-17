@@ -2,9 +2,10 @@ package utils.wzutils.parent;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.View;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.widget.FrameLayout;
 
 import utils.wzutils.AppTool;
@@ -104,7 +105,7 @@ public  class WzNormalFragmentActivity extends WzParentActivity {
     }
 
     void setFragment(Fragment fragment) {
-        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (currentFragment != null) {
             transaction.hide(currentFragment);
         }

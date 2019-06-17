@@ -17,7 +17,7 @@
                 android:id="@+id/wz_refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <android.support.design.widget.CoordinatorLayout
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <android.support.design.widget.AppBarLayout
@@ -32,7 +32,7 @@
                         android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" ></utils.wzutils.ui.WzSimpleRecycleView>
-                </android.support.design.widget.CoordinatorLayout>
+                </androidx.coordinatorlayout.widget.CoordinatorLayout>
             </utils.wzutils.ui.pullrefresh.WzRefreshLayout>
 
     </LinearLayout>

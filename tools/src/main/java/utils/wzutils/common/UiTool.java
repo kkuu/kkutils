@@ -11,7 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.Spannable;
@@ -23,25 +23,19 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import utils.wzutils.AppTool;
 import utils.wzutils.parent.WzViewOnclickListener;
 import utils.wzutils.ui.WzToast;
-import utils.wzutils.ui.bigimage.PicViewActivity;
-import utils.wzutils.ui.bigimage.WzBigImgListFragment;
 
 /**
  * Created by kk on 2016/5/10.

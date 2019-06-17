@@ -1,16 +1,14 @@
 package utils.wzutils.ui.takephoto;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +21,7 @@ import java.util.List;
 
 import utils.wzutils.AppTool;
 import utils.wzutils.ImgTool;
-import utils.wzutils.common.CommonTool;
 import utils.wzutils.common.LogTool;
-import utils.wzutils.common.StringTool;
 import utils.wzutils.common.UpLoadFilesTool;
 import utils.wzutils.parent.WzParentFragmentLife;
 import utils.wzutils.parent.WzViewOnclickListener;

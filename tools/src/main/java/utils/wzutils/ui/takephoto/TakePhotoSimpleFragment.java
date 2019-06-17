@@ -1,10 +1,9 @@
 package utils.wzutils.ui.takephoto;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import android.widget.ImageView;
 
 import com.yanzhenjie.album.Action;
@@ -17,13 +16,10 @@ import com.yanzhenjie.durban.Durban;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import utils.wzutils.AppTool;
 import utils.wzutils.ImgTool;
-import utils.wzutils.common.LogTool;
-import utils.wzutils.common.UiTool;
 
 
 /**
