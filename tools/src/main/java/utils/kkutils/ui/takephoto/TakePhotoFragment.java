@@ -177,7 +177,7 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
             }
             recycleView.setLayoutManager(new StaggeredGridLayoutManager(col, StaggeredGridLayoutManager.VERTICAL));
             recycleView.setDividerDp(10,10);
-            recycleView.setData(datas, itemId, new KKSimpleRecycleView.WzRecycleAdapter() {
+            recycleView.setData(datas, itemId, new KKSimpleRecycleView.KKRecycleAdapter() {
                 @Override
                 public void initData(final int positon, int type, final View itemView) {
                     if (onAddPhotoInitDataListener != null) {

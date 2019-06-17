@@ -61,7 +61,7 @@ public class MainActivityKK extends KKParentActivity {
     }
     public void refresh(){
         KKSimpleRecycleView recycleView=findViewById(R.id.recycleView);
-        recycleView.setData(testItems, R.layout.activity_main_item, new KKSimpleRecycleView.WzRecycleAdapter() {
+        recycleView.setData(testItems, R.layout.activity_main_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);

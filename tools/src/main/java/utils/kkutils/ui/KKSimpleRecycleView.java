@@ -31,7 +31,7 @@ public class KKSimpleRecycleView<E> extends KKParentRecycleView {
     List<E> datas = new ArrayList<E>();
     int[] types = new int[0];
     int[] viewsResId = new int[0];
-    WzRecycleAdapter wzRecycleAdapter;
+    KKRecycleAdapter kkRecycleAdapter;
     Class<WzViewHolder> holderClass;
     /***
      * 设置 缓存的 layout 的个数， 和recyle cache 不一样， LayoutInflaterTool 这个用的
@@ -67,21 +67,21 @@ public class KKSimpleRecycleView<E> extends KKParentRecycleView {
         setEmptyResId(defaultEmptyResId);
     }
 
-    public void setData(List<E> datas, int[] types, int[] viewsResId, WzRecycleAdapter wzRecycleAdapter) {
-        setDataImp(datas, null, types, viewsResId, wzRecycleAdapter);
+    public void setData(List<E> datas, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
+        setDataImp(datas, null, types, viewsResId, KKRecycleAdapter);
     }
 
-    public void setData(List<E> datas, int resId, WzRecycleAdapter wzRecycleAdapter) {
-        setData(datas, null, resId, wzRecycleAdapter);
+    public void setData(List<E> datas, int resId, KKRecycleAdapter KKRecycleAdapter) {
+        setData(datas, null, resId, KKRecycleAdapter);
     }
 
-    public void setData(List<E> datas, Class<WzViewHolder> holderClass, int resId, WzRecycleAdapter wzRecycleAdapter) {
+    public void setData(List<E> datas, Class<WzViewHolder> holderClass, int resId, KKRecycleAdapter KKRecycleAdapter) {
         types = new int[]{0};
         viewsResId = new int[]{resId};
-        setDataImp(datas, holderClass, types, viewsResId, wzRecycleAdapter);
+        setDataImp(datas, holderClass, types, viewsResId, KKRecycleAdapter);
     }
 
-    protected void setDataImp(List<E> datas, Class<WzViewHolder> holderClass, int[] types, int[] viewsResId, WzRecycleAdapter wzRecycleAdapter) {
+    protected void setDataImp(List<E> datas, Class<WzViewHolder> holderClass, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
         if(getAdapter()==null)setAdapter(adapter);//放在这里设置的目的是  因为有了默认空界面后， 设置了这个就会显示空数据， 所以放在这里
 
 
@@ -94,7 +94,7 @@ public class KKSimpleRecycleView<E> extends KKParentRecycleView {
             this.viewsResId = viewsResId;
         }
         this.holderClass = holderClass;
-        if (wzRecycleAdapter != null) this.wzRecycleAdapter = wzRecycleAdapter;
+        if (KKRecycleAdapter != null) this.kkRecycleAdapter = KKRecycleAdapter;
         adapter.notifyDataSetChanged();
 
     }
@@ -182,7 +182,7 @@ public class KKSimpleRecycleView<E> extends KKParentRecycleView {
             if (emptyView != null && wzRecycleView.datas.size() == 0) {//如果当前要显示空的控件并且当前数据就是空的， 那么就返回 空控件
                 return emptyType;
             }
-            return wzRecycleView.wzRecycleAdapter.getItemViewType(position);
+            return wzRecycleView.kkRecycleAdapter.getItemViewType(position);
         }
 
         @Override
@@ -206,11 +206,11 @@ public class KKSimpleRecycleView<E> extends KKParentRecycleView {
         public void initData(int position) {
             try {
                 int type=getItemViewType();
-                if(wzRecycleView.wzRecycleAdapter.isEmptyType(type)){
-                    wzRecycleView.wzRecycleAdapter.initEmptyData(position,type,itemView);
+                if(wzRecycleView.kkRecycleAdapter.isEmptyType(type)){
+                    wzRecycleView.kkRecycleAdapter.initEmptyData(position,type,itemView);
                 }else {
-                    wzRecycleView.wzRecycleAdapter.initData(position, type, itemView);
-                    wzRecycleView.wzRecycleAdapter.initData(position, type, itemView, this);
+                    wzRecycleView.kkRecycleAdapter.initData(position, type, itemView);
+                    wzRecycleView.kkRecycleAdapter.initData(position, type, itemView, this);
                 }
             } catch (Exception e) {
                 LogTool.ex(e);
@@ -218,7 +218,7 @@ public class KKSimpleRecycleView<E> extends KKParentRecycleView {
         }
     }
 
-    public static abstract class WzRecycleAdapter {
+    public static abstract class KKRecycleAdapter {
         public int getItemViewType(int position) {
             return 0;
         }

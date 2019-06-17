@@ -59,7 +59,7 @@ public class KK_XuanZheShouHuoDiZhiFragment extends KKParentFragment {
     public void loadData(final KK_DiZhi KKDiZhi){
         currKKDiZhi = KKDiZhi;
         recycleView.scrollToPosition(0);
-        recycleView.setData(KKDiZhi.list, R.layout.kk_dizhi_item, new KKSimpleRecycleView.WzRecycleAdapter() {
+        recycleView.setData(KKDiZhi.list, R.layout.kk_dizhi_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int positon, int type, View itemView) {
                 super.initData(positon, type, itemView);
