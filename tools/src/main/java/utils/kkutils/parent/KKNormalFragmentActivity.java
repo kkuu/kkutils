@@ -28,7 +28,7 @@ import utils.kkutils.common.ViewTool;
   </RelativeLayout>
 
  */
-public  class KKNormalFragmentActivityKK extends KKParentActivity {
+public  class KKNormalFragmentActivity extends KKParentActivity {
 
     Fragment currentFragment = null;
     /***
@@ -41,8 +41,8 @@ public  class KKNormalFragmentActivityKK extends KKParentActivity {
      */
     private void go(KKParentFragment fragment, boolean inCurrActivity) {
         if (inCurrActivity) {//就在当前页面 ， 不跳转
-            if (AppTool.currActivity instanceof KKNormalFragmentActivityKK) {
-                ((KKNormalFragmentActivityKK) AppTool.currActivity).setFragment(fragment);
+            if (AppTool.currActivity instanceof KKNormalFragmentActivity) {
+                ((KKNormalFragmentActivity) AppTool.currActivity).setFragment(fragment);
             }
         } else {
             go(fragment);

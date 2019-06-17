@@ -16,7 +16,7 @@ import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LayoutInflaterTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.db.MapDB;
-import utils.kkutils.ui.takephoto.TakePhotoSimpleFragmentKK;
+import utils.kkutils.ui.takephoto.TakePhotoSimpleFragment;
 import utils.kkutils.ui.webview.X5WebView;
 
 
@@ -49,7 +49,7 @@ public class AppTool {
             ImgTool.init(application, 0, 0);
             HttpTool.init(application);
             MapDB.init(isDebugIn);
-            TakePhotoSimpleFragmentKK.init();
+            TakePhotoSimpleFragment.init();
             Utils.init(application);
             X5WebView.init(application);
             LayoutInflaterTool.clearAll();

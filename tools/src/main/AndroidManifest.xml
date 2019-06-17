@@ -10,7 +10,7 @@
         android:supportsRtl="true" >
 
 
-        <activity  android:name="utils.kkutils.parent.KKNormalFragmentActivityKK"  android:screenOrientation="portrait" />
+        <activity  android:name="utils.kkutils.parent.KKNormalFragmentActivity"  android:screenOrientation="portrait" />
 
 
     </application>

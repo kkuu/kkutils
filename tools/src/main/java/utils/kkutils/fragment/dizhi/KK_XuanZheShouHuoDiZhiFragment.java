@@ -13,7 +13,7 @@ import utils.kkutils.common.CollectionsTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.StringTool;
 import utils.kkutils.common.UiTool;
-import utils.kkutils.parent.KKNormalFragmentActivityKK;
+import utils.kkutils.parent.KKNormalFragmentActivity;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
@@ -22,7 +22,7 @@ import utils.kkutils.ui.KKSimpleRecycleView;
  * Created by kk on 2017/3/23.
  */
 
-public class KK_XuanZheShouHuoDiZhiFragmentKK extends KKParentFragment {
+public class KK_XuanZheShouHuoDiZhiFragment extends KKParentFragment {
     public KKSimpleRecycleView recycleView;
     @Override
     public int initContentViewId() {
@@ -32,8 +32,8 @@ public class KK_XuanZheShouHuoDiZhiFragmentKK extends KKParentFragment {
     public void initData() {
         maxDep= (int) getArgument("maxDep",maxDep);
         currKKDiZhi = KK_DiZhi.loadFromLocal().list.get(0);
-        if (getActivity() instanceof KKNormalFragmentActivityKK) {
-            ((KKNormalFragmentActivityKK) getActivity()).setOnBackPressedListener(new KKNormalFragmentActivityKK.OnBackPressedListener() {
+        if (getActivity() instanceof KKNormalFragmentActivity) {
+            ((KKNormalFragmentActivity) getActivity()).setOnBackPressedListener(new KKNormalFragmentActivity.OnBackPressedListener() {
                 @Override
                 public boolean onBackPressed() {
                     if(currKKDiZhi !=null){

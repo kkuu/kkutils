@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.kkutils.R;
-import utils.kkutils.parent.KKNormalFragmentActivityKK;
+import utils.kkutils.parent.KKNormalFragmentActivity;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.ui.lunbo.LunBoTool;
 
@@ -94,6 +94,6 @@ public class KKBigImgListFragment extends KKParentFragment {
         bundle.putStringArrayList("stringArrayList", arrayList);
         bundle.putInt("currentIndex", currentIndex);
         setArguments(bundle);
-        new KKNormalFragmentActivityKK().go(this);
+        new KKNormalFragmentActivity().go(this);
     }
 }

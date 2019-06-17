@@ -197,7 +197,7 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
     public void go(Bundle bundle) {
         try {
             if(bundle!=null)setArguments(bundle);
-            new KKNormalFragmentActivityKK().go(this);
+            new KKNormalFragmentActivity().go(this);
             currentFragment=this;
         } catch (Exception e) {
             LogTool.ex(e);
@@ -205,7 +205,7 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
     }
     public void goForResult(KKParentFragment KKParentFragment, int requestCode) {
         try {
-            new KKNormalFragmentActivityKK().goForResult(this, KKParentFragment,requestCode);
+            new KKNormalFragmentActivity().goForResult(this, KKParentFragment,requestCode);
             currentFragment=this;
         } catch (Exception e) {
             LogTool.ex(e);
