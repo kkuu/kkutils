@@ -13,7 +13,7 @@ import utils.kkutils.parent.KKParentActivity;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
-import utils.kkutils.ui.bigimage.BigImgListFragmentKK;
+import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 
 public class MainActivityKK extends KKParentActivity {
 
@@ -29,7 +29,7 @@ public class MainActivityKK extends KKParentActivity {
         addItem("测试大图", null, new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new BigImgListFragmentKK().go(0, TestData.getTestImgUrlList(2));
+                new KKBigImgListFragment().go(0, TestData.getTestImgUrlList(2));
             }
         });
         addItem("测试CoordinatorLayout,和选择收货地址", null, new KKViewOnclickListener() {

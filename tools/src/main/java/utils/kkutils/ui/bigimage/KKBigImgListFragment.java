@@ -19,12 +19,12 @@ import utils.kkutils.ui.lunbo.LunBoTool;
 /**
  * abc on 2017/9/15.
  *
- * BigImgListFragmentKK.init(R.layout.fragmentLayoutId,R.id.viewPagerResId,R.id.dotParentResId,R.layout.dotItemLayoutId,R.id.cb_dot);
+ * KKBigImgListFragment.init(R.layout.fragmentLayoutId,R.id.viewPagerResId,R.id.dotParentResId,R.layout.dotItemLayoutId,R.id.cb_dot);
  * 同轮播的初始化
  *
  */
 
-public class BigImgListFragmentKK extends KKParentFragment {
+public class KKBigImgListFragment extends KKParentFragment {
     List<String> stringArrayList = new ArrayList<>();
     int currentIndex;
 
@@ -36,15 +36,15 @@ public class BigImgListFragmentKK extends KKParentFragment {
 
 
     public static void init(int fragmentLayoutId,int viewPagerResId,int dotParentResId,int dotItemLayoutId,int cb_dot){
-        BigImgListFragmentKK.fragmentLayoutId = fragmentLayoutId;
-        BigImgListFragmentKK.viewPagerResId =viewPagerResId;
-        BigImgListFragmentKK.dotParentResId =dotParentResId;
-        BigImgListFragmentKK.dotItemLayoutId=dotItemLayoutId;
-        BigImgListFragmentKK.cb_dot=cb_dot;
+        KKBigImgListFragment.fragmentLayoutId = fragmentLayoutId;
+        KKBigImgListFragment.viewPagerResId =viewPagerResId;
+        KKBigImgListFragment.dotParentResId =dotParentResId;
+        KKBigImgListFragment.dotItemLayoutId=dotItemLayoutId;
+        KKBigImgListFragment.cb_dot=cb_dot;
     };
 
     static {
-        BigImgListFragmentKK.init(R.layout.kk_lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.kk_lunbo_item,R.id.cb_dot);
+        KKBigImgListFragment.init(R.layout.kk_lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.kk_lunbo_item,R.id.cb_dot);
 
     }
 

@@ -34,7 +34,7 @@ public class BigImgTool {
         itemView.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new BigImgListFragmentKK().go(positon,  images);
+                new KKBigImgListFragment().go(positon,  images);
             }
         });
     }
@@ -42,7 +42,7 @@ public class BigImgTool {
         itemView.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickWz(View v) {
-                new BigImgListFragmentKK().go(positon,  images);
+                new KKBigImgListFragment().go(positon,  images);
             }
         });
     }
