@@ -68,7 +68,7 @@ public class DialogTool {
                 dialog.getWindow().setLayout(CommonTool.getWindowSize().x, ViewGroup.LayoutParams.MATCH_PARENT);//默认的宽宥边距 不要默认宽
                 contentView.setOnClickListener(new KKViewOnclickListener() {
                     @Override
-                    public void onClickWz(View v) {
+                    public void onClickKK(View v) {
                         dialog.dismiss();
                     }
                 });

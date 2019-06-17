@@ -76,7 +76,7 @@ public class KK_XuanZheShouHuoDiZhiFragment extends KKParentFragment {
 
                 itemView.setOnClickListener(new KKViewOnclickListener() {
                     @Override
-                    public void onClickWz(View v) {
+                    public void onClickKK(View v) {
                         if(KKDiZhiItem.getDep()==2){
                             diZhiChoose.address_country= KKDiZhiItem.name;
                         }else if(KKDiZhiItem.getDep()==3){

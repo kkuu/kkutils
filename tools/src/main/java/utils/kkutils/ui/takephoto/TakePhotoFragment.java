@@ -188,14 +188,14 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
                     if (addPhoto.equals(path)) {//点击了添加图片的按钮
                         itemView.setOnClickListener(new KKViewOnclickListener() {
                             @Override
-                            public void onClickWz(View v) {
+                            public void onClickKK(View v) {
                                 showChooseDialog();
                             }
                         });
                     } else {//点击了已经选择的图片
                         itemView.setOnClickListener(new KKViewOnclickListener() {
                             @Override
-                            public void onClickWz(View v) {
+                            public void onClickKK(View v) {
                                 try {
                                     showDeleteDialog(datas,path, TakePhotoFragment.this);
                                 } catch (Exception e) {
@@ -388,7 +388,7 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
             });
             imgv_delete_photo.setOnClickListener(new KKViewOnclickListener() {
                 @Override
-                public void onClickWz(View v) {
+                public void onClickKK(View v) {
                     try {
                         showDeleteDialog(datas,path,currFragment);
                     } catch (Exception e) {

@@ -28,13 +28,13 @@ public class MainActivityKK extends KKParentActivity {
 
         addItem("测试大图", null, new KKViewOnclickListener() {
             @Override
-            public void onClickWz(View v) {
+            public void onClickKK(View v) {
                 new KKBigImgListFragment().go(0, TestData.getTestImgUrlList(2));
             }
         });
         addItem("测试CoordinatorLayout,和选择收货地址", null, new KKViewOnclickListener() {
             @Override
-            public void onClickWz(View v) {
+            public void onClickKK(View v) {
                 new TestCoordinatorLayoutFragmentKK().go();
             }
         });
@@ -73,7 +73,7 @@ public class MainActivityKK extends KKParentActivity {
                 }else {
                     itemView.setOnClickListener(new KKViewOnclickListener() {
                         @Override
-                        public void onClickWz(View v) {
+                        public void onClickKK(View v) {
                             testItem.fragment.go();
                         }
                     });

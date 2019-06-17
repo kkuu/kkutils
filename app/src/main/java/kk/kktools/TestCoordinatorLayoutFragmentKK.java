@@ -31,7 +31,7 @@ public class TestCoordinatorLayoutFragmentKK extends KKParentFragment {
         });
         btn_choose_dizhi.setOnClickListener(new KKViewOnclickListener() {
             @Override
-            public void onClickWz(View v) {
+            public void onClickKK(View v) {
                 new KK_XuanZheShouHuoDiZhiFragment().goForResult(TestCoordinatorLayoutFragmentKK.this,1);
             }
         });

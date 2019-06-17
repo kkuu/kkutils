@@ -105,7 +105,7 @@ public class TabTitleTool {
             });
             item.setOnClickListener(new KKViewOnclickListener() {
                 @Override
-                public void onClickWz(View v) {
+                public void onClickKK(View v) {
                     try {
                         CompoundButton cb_btn = (CompoundButton) v.findViewById(tabData.commonBtnId);
                         cb_btn.performClick();

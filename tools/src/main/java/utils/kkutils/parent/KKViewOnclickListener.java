@@ -20,7 +20,7 @@ public abstract class KKViewOnclickListener implements View.OnClickListener {
                 if(time-timePreClick<300)return;//300毫秒内只能点击一次
                 timePreClick=time;
             }
-            onClickWz(v);
+            onClickKK(v);
         } catch (Exception e) {
             LogTool.ex(e);
         }
@@ -37,5 +37,5 @@ public abstract class KKViewOnclickListener implements View.OnClickListener {
     public void setAllowQuickClick(boolean allowQuickClick){
         this.allowQuickClick=allowQuickClick;
     }
-    public abstract void onClickWz(View v);
+    public abstract void onClickKK(View v);
 }

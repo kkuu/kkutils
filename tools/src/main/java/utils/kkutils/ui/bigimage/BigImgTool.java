@@ -25,7 +25,7 @@ public class BigImgTool {
     public static void bindShowBigImgSingle(final ImageView imageView) {
         imageView.setOnClickListener(new KKViewOnclickListener() {
             @Override
-            public void onClickWz(View v) {
+            public void onClickKK(View v) {
                 showBigImgSingle(imageView);
             }
         });
@@ -33,7 +33,7 @@ public class BigImgTool {
     public static void bindShowBigImgs(View itemView, final int positon, final String... images) {
         itemView.setOnClickListener(new KKViewOnclickListener() {
             @Override
-            public void onClickWz(View v) {
+            public void onClickKK(View v) {
                 new KKBigImgListFragment().go(positon,  images);
             }
         });
@@ -41,7 +41,7 @@ public class BigImgTool {
     public static void bindShowBigImgs(View itemView, final int positon, final List<String> images) {
         itemView.setOnClickListener(new KKViewOnclickListener() {
             @Override
-            public void onClickWz(View v) {
+            public void onClickKK(View v) {
                 new KKBigImgListFragment().go(positon,  images);
             }
         });

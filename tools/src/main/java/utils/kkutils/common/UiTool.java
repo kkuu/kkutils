@@ -358,7 +358,7 @@ public class UiTool {
             @Override
             public void onClick(View widget) {
                 try {
-                    wzViewOnclickListener.onClickWz(widget);
+                    wzViewOnclickListener.onClickKK(widget);
                 }catch (Exception e){
                     LogTool.ex(e);
                 }
@@ -495,7 +495,7 @@ public class UiTool {
         if(btnFuZhi==null||StringTool.isEmpty(text))return;
         btnFuZhi.setOnClickListener(new KKViewOnclickListener() {
             @Override
-            public void onClickWz(View v) {
+            public void onClickKK(View v) {
                 ClipboardManager cm = (ClipboardManager) AppTool.getApplication().getSystemService(Context.CLIPBOARD_SERVICE);
                 // 将文本内容放到系统剪贴板里。
                 cm.setText(text);

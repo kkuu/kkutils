@@ -157,7 +157,7 @@ public class LunBoTool {
                     if(lunBoData.lunBoClickListener!=null){
                         imageView.setOnClickListener(new KKViewOnclickListener() {
                             @Override
-                            public void onClickWz(View v) {
+                            public void onClickKK(View v) {
                                 if (lunBoData.lunBoClickListener != null){
                                     lunBoData.lunBoClickListener.onClickLunBo(v, lunBoData);
                                 }
@@ -322,7 +322,7 @@ public class LunBoTool {
         public abstract void onClickLunBo(View v, LunBoData lunBoData);
 
         @Override
-        public void onClickWz(View v) {
+        public void onClickKK(View v) {
 
         }
     }

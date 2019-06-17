@@ -107,7 +107,7 @@ public class DaoJiShiSimple extends DaoJiShiControl {
         currDaoJiShi.setView(clickBtn, tvShow, endStr);
         clickBtn.setOnClickListener(new KKViewOnclickListener() {
             @Override
-            public void onClickWz(View v) {
+            public void onClickKK(View v) {
                 if (tvPhone != null) {
                     String phone = tvPhone.getText().toString().trim();
                     String msg = checkPhone(phone);

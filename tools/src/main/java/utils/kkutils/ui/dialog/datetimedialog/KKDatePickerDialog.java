@@ -305,7 +305,7 @@ public class KKDatePickerDialog extends RelativeLayout {
         addLineV(linearLayout);
         addBtnControlItem(linearLayout, "确定", new KKViewOnclickListener() {
             @Override
-            public void onClickWz(View v) {
+            public void onClickKK(View v) {
                 int nian=Integer.valueOf(dp_nian.getCurrSelected());
                 int yue=Integer.valueOf(dp_yue.getCurrSelected());
                 int ri=Integer.valueOf(dp_ri.getCurrSelected());
