@@ -10,10 +10,10 @@ import utils.kkutils.common.UiTool;
 import utils.kkutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragmentKK;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
-import utils.kkutils.ui.KKSimpleRecycleViewKK;
+import utils.kkutils.ui.KKSimpleRecycleView;
 
 public class TestCoordinatorLayoutFragmentKK extends KKParentFragment {
-    KKSimpleRecycleViewKK recycler_view;
+    KKSimpleRecycleView recycler_view;
     TextView btn_choose_dizhi;
     @Override
     public int initContentViewId() {
@@ -23,7 +23,7 @@ public class TestCoordinatorLayoutFragmentKK extends KKParentFragment {
     @Override
     public void initData() {
         recycler_view.setNestedScrollingEnabled(true);
-        recycler_view.setData(TestData.getTestStrList(30), R.layout.activity_main_item, new KKSimpleRecycleViewKK.WzRecycleAdapter() {
+        recycler_view.setData(TestData.getTestStrList(30), R.layout.activity_main_item, new KKSimpleRecycleView.WzRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);

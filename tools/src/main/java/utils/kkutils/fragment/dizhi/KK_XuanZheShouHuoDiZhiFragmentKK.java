@@ -16,14 +16,14 @@ import utils.kkutils.common.UiTool;
 import utils.kkutils.parent.KKNormalFragmentActivityKK;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
-import utils.kkutils.ui.KKSimpleRecycleViewKK;
+import utils.kkutils.ui.KKSimpleRecycleView;
 
 /**
  * Created by kk on 2017/3/23.
  */
 
 public class KK_XuanZheShouHuoDiZhiFragmentKK extends KKParentFragment {
-    public KKSimpleRecycleViewKK recycleView;
+    public KKSimpleRecycleView recycleView;
     @Override
     public int initContentViewId() {
         return R.layout.kk_normal_list;
@@ -59,7 +59,7 @@ public class KK_XuanZheShouHuoDiZhiFragmentKK extends KKParentFragment {
     public void loadData(final KK_DiZhi KKDiZhi){
         currKKDiZhi = KKDiZhi;
         recycleView.scrollToPosition(0);
-        recycleView.setData(KKDiZhi.list, R.layout.kk_dizhi_item, new KKSimpleRecycleViewKK.WzRecycleAdapter() {
+        recycleView.setData(KKDiZhi.list, R.layout.kk_dizhi_item, new KKSimpleRecycleView.WzRecycleAdapter() {
             @Override
             public void initData(int positon, int type, View itemView) {
                 super.initData(positon, type, itemView);

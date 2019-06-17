@@ -12,7 +12,7 @@ import utils.kkutils.common.UiTool;
 import utils.kkutils.parent.KKParentActivity;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
-import utils.kkutils.ui.KKSimpleRecycleViewKK;
+import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.BigImgListFragmentKK;
 
 public class MainActivityKK extends KKParentActivity {
@@ -60,8 +60,8 @@ public class MainActivityKK extends KKParentActivity {
         testItems.add(new TestItem(title,fragment,onclickListener));
     }
     public void refresh(){
-        KKSimpleRecycleViewKK recycleView=findViewById(R.id.recycleView);
-        recycleView.setData(testItems, R.layout.activity_main_item, new KKSimpleRecycleViewKK.WzRecycleAdapter() {
+        KKSimpleRecycleView recycleView=findViewById(R.id.recycleView);
+        recycleView.setData(testItems, R.layout.activity_main_item, new KKSimpleRecycleView.WzRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);

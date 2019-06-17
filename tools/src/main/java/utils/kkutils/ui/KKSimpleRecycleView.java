@@ -22,7 +22,7 @@ import utils.kkutils.parent.KKParentRecycleView;
  * <p>
  * recycle  如果加了 item type  好像效率不理想
  */
-public class KKSimpleRecycleViewKK<E> extends KKParentRecycleView {
+public class KKSimpleRecycleView<E> extends KKParentRecycleView {
     /***
      * 默认的空界面
      */
@@ -38,15 +38,15 @@ public class KKSimpleRecycleViewKK<E> extends KKParentRecycleView {
      */
     int layoutCacheCount = 20;
 
-    public KKSimpleRecycleViewKK(Context context) {
+    public KKSimpleRecycleView(Context context) {
         super(context);
     }
 
-    public KKSimpleRecycleViewKK(Context context, @Nullable AttributeSet attrs) {
+    public KKSimpleRecycleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public KKSimpleRecycleViewKK(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public KKSimpleRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
@@ -123,9 +123,9 @@ public class KKSimpleRecycleViewKK<E> extends KKParentRecycleView {
     public static class AdapterRecycle extends Adapter {
         public static final int emptyType = -999;
         public View emptyView;
-        KKSimpleRecycleViewKK wzRecycleView;
+        KKSimpleRecycleView wzRecycleView;
 
-        public AdapterRecycle(KKSimpleRecycleViewKK wzRecycleView) {
+        public AdapterRecycle(KKSimpleRecycleView wzRecycleView) {
             this.wzRecycleView = wzRecycleView;
             setHasStableIds(true);//getItemId  配合这个 ，保证 同一个position  使用同一个 view ， 这样就可以防止刷新的时候闪烁。。 goole 是坑，不知道默认返回position
         }
@@ -153,7 +153,7 @@ public class KKSimpleRecycleViewKK<E> extends KKParentRecycleView {
             WzViewHolder holder = null;
             if (wzRecycleView.holderClass != null) {
                 try {
-                    holder = (WzViewHolder) wzRecycleView.holderClass.getConstructor(KKSimpleRecycleViewKK.class, View.class).newInstance(wzRecycleView, itemView);
+                    holder = (WzViewHolder) wzRecycleView.holderClass.getConstructor(KKSimpleRecycleView.class, View.class).newInstance(wzRecycleView, itemView);
                 } catch (Exception e) {
                     LogTool.ex(e);
                 }
@@ -194,9 +194,9 @@ public class KKSimpleRecycleViewKK<E> extends KKParentRecycleView {
 
     public static class WzViewHolder extends ViewHolder implements Serializable {
         public static final int keyHolderTag = 1;
-        KKSimpleRecycleViewKK wzRecycleView;
+        KKSimpleRecycleView wzRecycleView;
 
-        public WzViewHolder(KKSimpleRecycleViewKK wzRecycleView, View itemView) {
+        public WzViewHolder(KKSimpleRecycleView wzRecycleView, View itemView) {
             super(itemView);
             this.wzRecycleView = wzRecycleView;
             ViewTool.setTag(itemView, this, keyHolderTag);

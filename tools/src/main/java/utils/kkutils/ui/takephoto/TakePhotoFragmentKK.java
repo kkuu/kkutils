@@ -25,7 +25,7 @@ import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UpLoadFilesTool;
 import utils.kkutils.parent.KKParentFragmentLife;
 import utils.kkutils.parent.KKViewOnclickListener;
-import utils.kkutils.ui.KKSimpleRecycleViewKK;
+import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.dialog.DialogTool;
 
 /**
@@ -40,7 +40,7 @@ import utils.kkutils.ui.dialog.DialogTool;
 public class TakePhotoFragmentKK extends KKParentFragmentLife implements Serializable {
 
     public static final String tag = "TakePhotoFragmentTag";
-    public KKSimpleRecycleViewKK recycleView;
+    public KKSimpleRecycleView recycleView;
     public int add_photo_id;
     public int itemId;
     public int itemImageViewId;
@@ -116,7 +116,7 @@ public class TakePhotoFragmentKK extends KKParentFragmentLife implements Seriali
     }
 
     public View initContentView() {
-        recycleView = new KKSimpleRecycleViewKK(getContext());
+        recycleView = new KKSimpleRecycleView(getContext());
       //  recycleView.setBackgroundColor(Color.WHITE);
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         recycleView.setLayoutParams(lp);
@@ -177,7 +177,7 @@ public class TakePhotoFragmentKK extends KKParentFragmentLife implements Seriali
             }
             recycleView.setLayoutManager(new StaggeredGridLayoutManager(col, StaggeredGridLayoutManager.VERTICAL));
             recycleView.setDividerDp(10,10);
-            recycleView.setData(datas, itemId, new KKSimpleRecycleViewKK.WzRecycleAdapter() {
+            recycleView.setData(datas, itemId, new KKSimpleRecycleView.WzRecycleAdapter() {
                 @Override
                 public void initData(final int positon, int type, final View itemView) {
                     if (onAddPhotoInitDataListener != null) {
