@@ -50,7 +50,7 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
         }
         LogTool.printClassLine("onDestroy", this);
     }
-    public Activity getActivityWz(){
+    public Activity getActivityKK(){
         if(getActivity()!=null)return getActivity();
         if(AppTool.currActivity!=null)return AppTool.currActivity;
         return null;
