@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.SaoMaTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
@@ -33,6 +34,13 @@ public class TestRecycleView extends KKParentFragment {
 
                 Object o = recycler_view.datas.get(position);
                 UiTool.setTextView(itemView,R.id.tv_main_title,"测试"+position+"  "+o );
+
+                itemView.setOnClickListener(new KKViewOnclickListener() {
+                    @Override
+                    public void onClickKK(View v) {
+                        SaoMaTool.startSaoMa(TestRecycleView.this);
+                    }
+                });
             }
         });
 

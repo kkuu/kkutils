@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="utils.kkutils" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="utils.kkutils">
 
     <application
         android:usesCleartextTraffic="true"
@@ -12,7 +13,7 @@
 
         <activity  android:name="utils.kkutils.parent.KKNormalFragmentActivity"  android:screenOrientation="portrait" />
 
-
+        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"   android:screenOrientation="portrait" tools:replace="android:screenOrientation"></activity>
     </application>
 
 
