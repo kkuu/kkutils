@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.kkutils.common.CollectionsTool;
 import utils.kkutils.common.LayoutInflaterTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.ViewTool;
@@ -22,21 +23,21 @@ import utils.kkutils.parent.KKParentRecycleView;
  * <p>
  * recycle  如果加了 item type  好像效率不理想
  */
-public class KKSimpleRecycleView<E> extends KKParentRecycleView {
+public class KKSimpleRecycleView extends KKParentRecycleView {
     /***
      * 默认的空界面
      */
     public static int defaultEmptyResId;
-    AdapterRecycle adapter;
-    List<E> datas = new ArrayList<E>();
-    int[] types = new int[0];
-    int[] viewsResId = new int[0];
-    KKRecycleAdapter kkRecycleAdapter;
-    Class<WzViewHolder> holderClass;
+    public AdapterRecycle adapter;
+    public List datas = new ArrayList();
+    public int[] types = new int[0];
+    public int[] viewsResId = new int[0];
+    public KKRecycleAdapter kkRecycleAdapter;
+    public Class<WzViewHolder> holderClass;
     /***
      * 设置 缓存的 layout 的个数， 和recyle cache 不一样， LayoutInflaterTool 这个用的
      */
-    int layoutCacheCount = 20;
+    public int layoutCacheCount = 20;
 
     public KKSimpleRecycleView(Context context) {
         super(context);
@@ -67,21 +68,21 @@ public class KKSimpleRecycleView<E> extends KKParentRecycleView {
         setEmptyResId(defaultEmptyResId);
     }
 
-    public void setData(List<E> datas, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
+    public void setData(List datas, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
         setDataImp(datas, null, types, viewsResId, KKRecycleAdapter);
     }
 
-    public void setData(List<E> datas, int resId, KKRecycleAdapter KKRecycleAdapter) {
+    public void setData(List datas, int resId, KKRecycleAdapter KKRecycleAdapter) {
         setData(datas, null, resId, KKRecycleAdapter);
     }
 
-    public void setData(List<E> datas, Class<WzViewHolder> holderClass, int resId, KKRecycleAdapter KKRecycleAdapter) {
+    public void setData(List datas, Class<WzViewHolder> holderClass, int resId, KKRecycleAdapter KKRecycleAdapter) {
         types = new int[]{0};
         viewsResId = new int[]{resId};
         setDataImp(datas, holderClass, types, viewsResId, KKRecycleAdapter);
     }
 
-    protected void setDataImp(List<E> datas, Class<WzViewHolder> holderClass, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
+    protected void setDataImp(List datas, Class<WzViewHolder> holderClass, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
         if(getAdapter()==null)setAdapter(adapter);//放在这里设置的目的是  因为有了默认空界面后， 设置了这个就会显示空数据， 所以放在这里
 
 
@@ -98,6 +99,28 @@ public class KKSimpleRecycleView<E> extends KKParentRecycleView {
         adapter.notifyDataSetChanged();
 
     }
+
+    public void addData(int position,Object data){
+        this.datas.add(position,data);
+        adapter.notifyItemInserted(position);
+        adapter.notifyItemRangeChanged(position, adapter.getItemCount());
+    }
+    public void addDataList(int position,List dataList){
+        if(CollectionsTool.NotEmptyList(dataList)){
+            this.datas.addAll(position,dataList);
+            adapter.notifyItemRangeInserted(position,dataList.size());
+            adapter.notifyItemRangeChanged(0,position);//刷新前面的
+            adapter.notifyItemRangeChanged(position+dataList.size(),datas.size()-dataList.size());//刷新后面的
+        }
+    }
+
+
+
+
+
+
+
+
 
     public void setEmptyResId(int emptyResId) {
         try {

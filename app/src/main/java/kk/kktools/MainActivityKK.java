@@ -38,7 +38,7 @@ public class MainActivityKK extends KKParentActivity {
                 new TestCoordinatorLayoutFragmentKK().go();
             }
         });
-
+        addItem("测试recycleView", new TestRecycleView(), null);
         refresh();
     }
 
