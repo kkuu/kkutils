@@ -50,7 +50,8 @@ public class X5WebView extends WebView {
 			@Override
 			public void onPageFinished(WebView webView, String s) {
 				super.onPageFinished(webView, s);
-				UiTool.setWH(webView, CommonTool.getWindowSize().x, ViewGroup.LayoutParams.WRAP_CONTENT);
+				int w=getLayoutParams()==null? CommonTool.getWindowSize().x:getLayoutParams().width;
+				UiTool.setWH(webView,w, ViewGroup.LayoutParams.WRAP_CONTENT);
 			}
 
 		});
@@ -75,7 +76,7 @@ public class X5WebView extends WebView {
             post(new Runnable() {
                 @Override
                 public void run() {
-                    if(getLayoutParams()!=null&&getLayoutParams().width== ViewGroup.LayoutParams.WRAP_CONTENT){
+                    if(getLayoutParams()!=null&&getLayoutParams().height== ViewGroup.LayoutParams.WRAP_CONTENT){
                         setWrapContent();
                     }
                 }
