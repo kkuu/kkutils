@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tencent.smtt.sdk.QbSdk;
@@ -15,7 +16,9 @@ import com.tencent.smtt.sdk.WebViewClient;
 
 import java.util.Map;
 
+import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.UiTool;
 
 /***
  * webview  通用bug
@@ -27,7 +30,8 @@ import utils.kkutils.common.LogTool;
  */
 public class X5WebView extends WebView {
 	TextView title;
-	private WebViewClient client = new WebViewClient() {
+	private WebViewClient client = new KKX5WebViewClientDefault();
+	public static class KKX5WebViewClientDefault extends WebViewClient{
 		/**
 		 * 防止加载网页时调起系统浏览器
 		 */
@@ -35,8 +39,22 @@ public class X5WebView extends WebView {
 			view.loadUrl(url);
 			return true;
 		}
-	};
+	}
 
+	/**
+	 * 设置自适应高 避免加载闪烁
+	 */
+	public void setWrapContent(){
+		UiTool.setWH(this, CommonTool.getWindowSize().x,1);
+		this.setWebViewClient(new KKX5WebViewClientDefault(){
+			@Override
+			public void onPageFinished(WebView webView, String s) {
+				super.onPageFinished(webView, s);
+				UiTool.setWH(webView, CommonTool.getWindowSize().x, ViewGroup.LayoutParams.WRAP_CONTENT);
+			}
+
+		});
+	}
 	@SuppressLint("SetJavaScriptEnabled")
 	public X5WebView(Context arg0, AttributeSet arg1) {
 		super(arg0, arg1);
@@ -45,6 +63,19 @@ public class X5WebView extends WebView {
 		// WebStorage webStorage = WebStorage.getInstance();
 		initWebViewSettings();
 		this.getView().setClickable(true);
+
+		{//自适应高检测
+			post(new Runnable() {
+				@Override
+				public void run() {
+					if(getLayoutParams()!=null&&getLayoutParams().width== ViewGroup.LayoutParams.WRAP_CONTENT){
+						setWrapContent();
+					}
+				}
+			});
+
+		}
+
 	}
 
 	private void initWebViewSettings() {
