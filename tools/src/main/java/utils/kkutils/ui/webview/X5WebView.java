@@ -58,25 +58,35 @@ public class X5WebView extends WebView {
 	@SuppressLint("SetJavaScriptEnabled")
 	public X5WebView(Context arg0, AttributeSet arg1) {
 		super(arg0, arg1);
-		this.setWebViewClient(client);
-		// this.setWebChromeClient(chromeClient);
-		// WebStorage webStorage = WebStorage.getInstance();
-		initWebViewSettings();
-		this.getView().setClickable(true);
-
-		{//自适应高检测
-			post(new Runnable() {
-				@Override
-				public void run() {
-					if(getLayoutParams()!=null&&getLayoutParams().width== ViewGroup.LayoutParams.WRAP_CONTENT){
-						setWrapContent();
-					}
-				}
-			});
-
-		}
+		init();
 
 	}
+
+    public X5WebView(Context arg0) {
+        super(arg0);
+        init();
+    }
+    public void init(){
+        setBackgroundColor(85621);
+        this.setWebViewClient(client);
+        initWebViewSettings();
+        this.getView().setClickable(true);
+        {//自适应高检测
+            post(new Runnable() {
+                @Override
+                public void run() {
+                    if(getLayoutParams()!=null&&getLayoutParams().width== ViewGroup.LayoutParams.WRAP_CONTENT){
+                        setWrapContent();
+                    }
+                }
+            });
+        }
+    }
+
+
+
+
+
 
 	private void initWebViewSettings() {
 		WebSettings webSetting = this.getSettings();
@@ -145,10 +155,6 @@ public class X5WebView extends WebView {
 //		return ret;
 //	}
 
-	public X5WebView(Context arg0) {
-		super(arg0);
-		setBackgroundColor(85621);
-	}
 
 
 	public static void init(Application application){
