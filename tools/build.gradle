@@ -31,37 +31,28 @@ repositories{
 }
 
 dependencies {
-    api fileTree(include: ['*.jar','*.aar'], dir: 'libs')
-
+    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
     api 'androidx.appcompat:appcompat:1.0.0'
     api 'androidx.recyclerview:recyclerview:1.0.0'
-
-   // implementation (name: 'alipaySdk-15.5.9-20181123210601', ext: 'aar') 不能使用这种方式   要用：   implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
-//    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
-//    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
+    // implementation (name: 'alipaySdk-15.5.9-20181123210601', ext: 'aar') 不能使用这种方式   要用：   implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
+    //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
-
     api 'org.xutils:xutils:3.5.0'
     api 'com.google.code.gson:gson:2.8.2'
-
     //图片加载
     api 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     annotationProcessor 'androidx.annotation:annotation:1.0.0'
     //图片加载
-
-
-
     //图片拾取
     api 'com.yanzhenjie:album:2.1.3'
     api 'com.yanzhenjie:durban:1.0.1'
     api 'com.yanzhenjie:sofia:1.0.4'
     //身份证拾取
     api 'com.github.lvzhihao100:ORCamera:1.1'
-
-
     api 'com.google.zxing:core:3.2.1'
     api 'com.journeyapps:zxing-android-embedded:3.6.0'
     //implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.9'//图片拾取
@@ -75,21 +66,19 @@ dependencies {
     //seekbar
     //很多的工具类
     api 'com.blankj:utilcode:1.23.5'
-    api files('libs/tbs_sdk_thirdapp_v3.6.0.1310_43612_sharewithdownload_withoutGame_obfs_20180706_163319.jar')
 
     //底部导航栏
     api 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
     api 'q.rorbin:badgeview:1.1.0'
-
-
-
-
-//视频播放的 要用可以打开
+    //视频播放的 要用可以打开
     //KKVideoPlayer
-//    implementation 'com.github.dueeeke.dkplayer:dkplayer-java:2.5.7'
-//    implementation 'com.github.dueeeke.dkplayer:dkplayer-armv7a:2.5.7'
-//    implementation 'com.github.dueeeke.dkplayer:dkplayer-x86:2.5.7'
-//    implementation 'com.github.dueeeke.dkplayer:dkplayer-ui:2.5.7'
-//视频播放的
+    //    implementation 'com.github.dueeeke.dkplayer:dkplayer-java:2.5.7'
+    //    implementation 'com.github.dueeeke.dkplayer:dkplayer-armv7a:2.5.7'
+    //    implementation 'com.github.dueeeke.dkplayer:dkplayer-x86:2.5.7'
+    //    implementation 'com.github.dueeeke.dkplayer:dkplayer-ui:2.5.7'
+    //视频播放的
 
+
+    //x5webview
+    api files('libs/tbs_sdk_thirdapp_v4.3.0.1072_43646_sharewithdownloadwithfile_withoutGame_obfs_20190429_175122.jar')
 }
