@@ -231,9 +231,11 @@ public class CommonTool {
     public static String getDeviceId() {
         String serial="";
         try {
-            Context context = AppTool.getApplication();
-            TelephonyManager tm = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
-            serial= tm.getDeviceId();
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                Context context = AppTool.getApplication();
+                TelephonyManager tm = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
+                serial= tm.getDeviceId();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

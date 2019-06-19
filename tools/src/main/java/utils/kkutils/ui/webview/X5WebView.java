@@ -42,7 +42,7 @@ public class X5WebView extends WebView {
 	}
 
 	/**
-	 * 设置自适应高 避免加载闪烁
+	 * 设置自适应高 避免加载闪烁 需要手动调用
 	 */
 	public void setWrapContent(){
 		UiTool.setWH(this, CommonTool.getWindowSize().x,1);
@@ -72,16 +72,6 @@ public class X5WebView extends WebView {
         this.setWebViewClient(client);
         initWebViewSettings();
         this.getView().setClickable(true);
-        {//自适应高检测
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    if(getLayoutParams()!=null&&getLayoutParams().height== ViewGroup.LayoutParams.WRAP_CONTENT){
-                        setWrapContent();
-                    }
-                }
-            });
-        }
     }
 
 
