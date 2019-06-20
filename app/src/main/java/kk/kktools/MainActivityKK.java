@@ -2,6 +2,7 @@ package kk.kktools;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
+import utils.kkutils.ui.webview.X5WebView;
 
 public class MainActivityKK extends KKParentActivity {
 
@@ -22,9 +24,6 @@ public class MainActivityKK extends KKParentActivity {
         AppTool.init(getApplication(),true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
 
         addItem("测试大图", null, new KKViewOnclickListener() {
             @Override
@@ -39,9 +38,26 @@ public class MainActivityKK extends KKParentActivity {
             }
         });
         addItem("测试recycleView", new TestRecycleView(), null);
+        addItem("测试视频播放", new TestRecycleView(), new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+               // KKVideoPlayer.go();
+            }
+        });
         refresh();
+
+        testWeb();
     }
 
+    public void testWeb(){
+        //x5web 不支持x86
+        X5WebView x5WebView=new X5WebView(this);
+        ViewGroup parent= (ViewGroup) getWindow().getDecorView();
+        parent.addView(x5WebView);
+        UiTool.setWH(x5WebView,-1,-1);
+        // x5WebView.loadUrl("https://blz-videos.nosdn.127.net/1/HearthStone/f6cd63b590d416821d3e27e0.mp4");
+        x5WebView.loadUrl("https://v.zmengzhu.com/play/10027924?inviter=4789850");
+    }
     public static class TestItem{
         public String title;
         public KKParentFragment fragment;

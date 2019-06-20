@@ -12,7 +12,7 @@
 
 
         <activity  android:name="utils.kkutils.parent.KKNormalFragmentActivity"  android:screenOrientation="portrait" />
-
+        <activity android:name="utils.kkutils.ui.media.KKVideoPlayer" android:screenOrientation="portrait" android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"   android:screenOrientation="portrait" tools:replace="android:screenOrientation"></activity>
     </application>
 
