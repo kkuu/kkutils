@@ -33,7 +33,22 @@ public class Version {
     public String updateDesc = "";//版本描述
     public String updateTime = "";//更新时间
     public String isForce = "";//是否强制更新 0-否 1-是
+    public String isHtml="";//是否html 更新  0-否 1-是
 
+    public Version() {
+
+    }
+
+    public Version(Version versionNew) {
+        this.versionCode = versionNew.versionCode;
+        this.versionName = versionNew.versionName;
+        this.versionSize = versionNew.versionSize;
+        this.updateUrl = versionNew.updateUrl;
+        this.updateDesc = versionNew.updateDesc;
+        this.updateTime = versionNew.updateTime;
+        this.isForce = versionNew.isForce;
+        this.isHtml = versionNew.isHtml;
+    }
 
     /***
      * 检测更新
@@ -82,7 +97,16 @@ public class Version {
             dialogShowMsg.setButton(ProgressDialog.BUTTON_POSITIVE, context.getString(R.string.liji_gengxin), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                   newVersion. showDownLoadProgressDialog(context, newVersion, isForce);
+                   if("1".equals(newVersion.isHtml)){//html 更新
+                       Intent intent = new Intent();
+                       intent.setData(Uri.parse(newVersion.updateUrl));//Url 就是你要打开的网址
+                       intent.setAction(Intent.ACTION_VIEW);
+                       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                       AppTool.getApplication().startActivity(intent);
+                   }else {
+                       newVersion. showDownLoadProgressDialog(context, newVersion, isForce);
+                   }
+
                 }
             });
 
