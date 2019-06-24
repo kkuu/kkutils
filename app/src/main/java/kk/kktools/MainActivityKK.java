@@ -46,7 +46,7 @@ public class MainActivityKK extends KKParentActivity {
         });
         refresh();
 
-        testWeb();
+       // testWeb();
     }
 
     public void testWeb(){

@@ -16,8 +16,14 @@
 
 
     </utils.kkutils.ui.KKAutoLayout>
-    <utils.kkutils.ui.KKSimpleRecycleView
-        android:id="@+id/recycler_view"
+    <utils.kkutils.ui.pullrefresh.KKRefreshLayout
+        android:id="@+id/kk_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleView>
+        android:layout_height="match_parent">
+        <utils.kkutils.ui.KKSimpleRecycleView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleView>
+    </utils.kkutils.ui.pullrefresh.KKRefreshLayout>
+
 </LinearLayout>

@@ -52,15 +52,15 @@ public class KKRefreshLayout extends SmartRefreshLayout {
     }
 
     public void initHeaderAndFooter(){
-        ClassicsFooter.REFRESH_FOOTER_PULLUP = getResources().getString(R.string.REFRESH_FOOTER_PULLUP);
+        ClassicsFooter.REFRESH_FOOTER_PULLING = getResources().getString(R.string.REFRESH_FOOTER_PULLUP);
         ClassicsFooter.REFRESH_FOOTER_RELEASE = getResources().getString(R.string.REFRESH_FOOTER_RELEASE);
         ClassicsFooter.REFRESH_FOOTER_LOADING = getResources().getString(R.string.REFRESH_FOOTER_LOADING);
         ClassicsFooter.REFRESH_FOOTER_REFRESHING = getResources().getString(R.string.REFRESH_FOOTER_REFRESHING);
         ClassicsFooter.REFRESH_FOOTER_FINISH = getResources().getString(R.string.REFRESH_FOOTER_FINISH);
         ClassicsFooter.REFRESH_FOOTER_FAILED = getResources().getString(R.string.REFRESH_FOOTER_FAILED);
-        ClassicsFooter.REFRESH_FOOTER_ALLLOADED = getResources().getString(R.string.REFRESH_FOOTER_ALLLOADED);
+        ClassicsFooter.REFRESH_FOOTER_NOTHING = getResources().getString(R.string.REFRESH_FOOTER_ALLLOADED);
 
-        ClassicsHeader.REFRESH_HEADER_PULLDOWN = getResources().getString(R.string.REFRESH_HEADER_PULLDOWN);
+        ClassicsHeader.REFRESH_HEADER_PULLING = getResources().getString(R.string.REFRESH_HEADER_PULLDOWN);
         ClassicsHeader.REFRESH_HEADER_REFRESHING = getResources().getString(R.string.REFRESH_HEADER_REFRESHING);
         ClassicsHeader.REFRESH_HEADER_LOADING = getResources().getString(R.string.REFRESH_HEADER_LOADING);
         ClassicsHeader.REFRESH_HEADER_RELEASE = getResources().getString(R.string.REFRESH_HEADER_RELEASE);
@@ -80,10 +80,12 @@ public class KKRefreshLayout extends SmartRefreshLayout {
         return super.dispatchTouchEvent(event);
     }
 
+
     @Override
-    public SmartRefreshLayout finishRefresh(int delayed, boolean success) {
-        return super.finishRefresh(0, success);
+    public RefreshLayout finishRefresh(int delayed, boolean success, Boolean noMoreData) {
+        return super.finishRefresh(0, success, noMoreData);
     }
+
 
 
     /***

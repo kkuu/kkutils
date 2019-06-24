@@ -15,10 +15,13 @@ import utils.kkutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
+import utils.kkutils.ui.pullrefresh.KKRefreshLayout;
 
 public class TestRecycleView extends KKParentFragment {
     KKSimpleRecycleView recycler_view;
     View btn_add_top;
+
+    KKRefreshLayout kk_refresh;
     @Override
     public int initContentViewId() {
         return R.layout.test_recyclevew;
@@ -27,7 +30,20 @@ public class TestRecycleView extends KKParentFragment {
     @Override
     public void initData() {
         recycler_view.setNestedScrollingEnabled(true);
-        recycler_view.setData(TestData.getTestStrList(5), R.layout.activity_main_item, new KKSimpleRecycleView.KKRecycleAdapter() {
+
+        kk_refresh.bindLoadDataAndRefresh(null, new KKRefreshLayout.LoadListDataInterface() {
+            @Override
+            public void loadData(int page) {
+                kk_refresh.stopRefresh(null);
+
+                initRecycleView(TestData.getTestStrList(10*page));
+            }
+        });
+
+
+    }
+    public void initRecycleView(List<String> list){
+        recycler_view.setData(list, R.layout.activity_main_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);
@@ -43,8 +59,8 @@ public class TestRecycleView extends KKParentFragment {
                 });
             }
         });
-
     }
+
 
     @Override
     public void initListener() {
