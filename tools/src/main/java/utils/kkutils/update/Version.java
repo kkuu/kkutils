@@ -165,7 +165,7 @@ public class Version {
      * @param context
      * @param path
      */
-    private  void installApk(final Context context, final String path) {
+    protected   void installApk(final Context context, final String path) {
 
 
         if(true)autoInstallApk(context,new File(path));
@@ -178,7 +178,7 @@ public class Version {
 
     }
 
-    private  void autoInstallApk(Context context,File file) {
+    protected  void autoInstallApk(Context context,File file) {
         LogTool.s("installApk ing " + file.getAbsolutePath() + "  " + file.length());
 
         Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
