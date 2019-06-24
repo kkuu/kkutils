@@ -14,6 +14,21 @@
         <activity  android:name="utils.kkutils.parent.KKNormalFragmentActivity"  android:screenOrientation="portrait" />
         <activity android:name="utils.kkutils.ui.media.KKVideoPlayer" android:screenOrientation="portrait" android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"   android:screenOrientation="portrait" tools:replace="android:screenOrientation"></activity>
+
+
+
+        <!--用于更新的-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+
     </application>
 
 
@@ -25,5 +40,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.GET_TASKS"  />
 
+
+    <!--安装更新权限-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 
 </manifest>
