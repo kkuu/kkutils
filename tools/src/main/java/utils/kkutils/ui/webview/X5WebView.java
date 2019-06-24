@@ -44,17 +44,19 @@ public class X5WebView extends WebView {
 	/**
 	 * 设置自适应高 避免加载闪烁 需要手动调用
 	 */
+	@Deprecated
 	public void setWrapContent(){
-		UiTool.setWH(this, CommonTool.getWindowSize().x,1);
-		this.setWebViewClient(new KKX5WebViewClientDefault(){
-			@Override
-			public void onPageFinished(WebView webView, String s) {
-				super.onPageFinished(webView, s);
-				int w=getLayoutParams()==null? CommonTool.getWindowSize().x:getLayoutParams().width;
-				UiTool.setWH(webView,w, ViewGroup.LayoutParams.WRAP_CONTENT);
-			}
-
-		});
+//		UiTool.setWH(this, CommonTool.getWindowSize().x,10000);
+//		this.setWebViewClient(new KKX5WebViewClientDefault(){
+//			@Override
+//			public void onPageFinished(WebView webView, String s) {
+//				super.onPageFinished(webView, s);
+//				LogTool.s("onPageFinished"+"  "+s);
+//				int w=getLayoutParams()==null? CommonTool.getWindowSize().x:getLayoutParams().width;
+//				UiTool.setWH(webView,w, ViewGroup.LayoutParams.WRAP_CONTENT);
+//			}
+//
+//		});
 	}
 	@SuppressLint("SetJavaScriptEnabled")
 	public X5WebView(Context arg0, AttributeSet arg1) {
