@@ -203,7 +203,7 @@ public class Version {
     }
 
     protected  void autoInstallApk(Context context,File file) {
-        LogTool.s("installApk ing " + file.getAbsolutePath() + "  " + file.length());
+        LogTool.s("installApk ing " +AppTool.getApplication().getPackageName() +"     @@@  " +file.getAbsolutePath() + "  " + file.length());
 
         Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -213,7 +213,7 @@ public class Version {
             // 声明需要的临时的权限
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             // 第二个参数，即第一步中配置的authorities
-            Uri contentUri = FileProvider.getUriForFile(AppTool.getApplication(), BuildConfig.APPLICATION_ID + ".fileprovider", file);//注意这里，我故意写了com.http.www.smarthttpdemo.BuildConfig，因为这里出错了我郁闷了好久，因为这里容易导错包，如果你是多module开发，一定要使用主Module（即：app）的那个BuildConfig（这里说明一下，我上面的清单文件是主Module的，所以这里也要导包导入主module的，我觉得写到被依赖module也是可以的，但要保持一致，这个我没试过）
+            Uri contentUri = FileProvider.getUriForFile(AppTool.getApplication(), AppTool.getApplication().getPackageName() + ".fileprovider", file);//注意这里，我故意写了com.http.www.smarthttpdemo.BuildConfig，因为这里出错了我郁闷了好久，因为这里容易导错包，如果你是多module开发，一定要使用主Module（即：app）的那个BuildConfig（这里说明一下，我上面的清单文件是主Module的，所以这里也要导包导入主module的，我觉得写到被依赖module也是可以的，但要保持一致，这个我没试过）
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
         }
         context.startActivity(intent);
