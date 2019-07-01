@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.util.Log;
 
 import com.blankj.utilcode.util.Utils;
@@ -44,6 +45,8 @@ public class AppTool {
         if(application.getPackageName().equals(CommonTool.getProcessName(application))){//避免启动多少次
             isDebug=isDebugIn;
             app = application;
+
+            initFileUriException();
             initUiHander();
             initRecycleLife();
             ImgTool.init(application, 0, 0);
@@ -54,6 +57,14 @@ public class AppTool {
             X5WebView.init(application);
             LayoutInflaterTool.clearAll();
 
+        }
+    }
+    public static void initFileUriException(){
+        {
+            //应用程序将file://Uri 暴露给另一个应用程序时引发的异常
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+            builder.detectFileUriExposure();
         }
     }
 
