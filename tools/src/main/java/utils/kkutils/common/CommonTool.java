@@ -223,12 +223,14 @@ public class CommonTool {
         return isNetOpen;
     }
 
+    static  String deviceId="";
     /***
      * 获取设备号
      *
      * @return
      */
     public static String getDeviceId() {
+        if(StringTool.notEmpty(deviceId))return deviceId;
         String serial="";
         try {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
@@ -279,6 +281,7 @@ public class CommonTool {
 
 
 
+        deviceId=serial;
         return serial;
     }
 
