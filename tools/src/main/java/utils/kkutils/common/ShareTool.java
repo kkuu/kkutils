@@ -37,7 +37,7 @@ public class ShareTool {
         try {
             File file = FileTool.initCacheFile("" , imgName);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
-            shareImageUri(activity,title, Uri.fromFile(file));
+            shareImageUri(activity,title,UriTool.getUriWithFileProvider(file));
         }catch (Exception e){
             LogTool.ex(e);
         }
@@ -63,7 +63,7 @@ public class ShareTool {
     public static void shareFile(Activity activity,String title, File file) {
         if (null != file && file.exists()) {
             Intent share = new Intent(Intent.ACTION_SEND);
-            share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+            share.putExtra(Intent.EXTRA_STREAM,UriTool.getUriWithFileProvider(file) );
             share.setType(getMimeType(file.getAbsolutePath()));//此处可发送多种文件
             share.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

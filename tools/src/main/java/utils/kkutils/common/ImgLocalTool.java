@@ -175,7 +175,7 @@ public class ImgLocalTool {
             MediaStore.Images.Media.insertImage(AppTool.getApplication().getContentResolver(),
                     bmp, fileName, null);
             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            Uri uri = Uri.fromFile(file);
+            Uri uri =UriTool.getUriWithFileProvider(file);// Uri.fromFile(file);
             intent.setData(uri);
             AppTool.getApplication().sendBroadcast(intent);
 

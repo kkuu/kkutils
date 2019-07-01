@@ -11,6 +11,9 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import androidx.core.content.FileProvider;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +24,15 @@ import utils.kkutils.AppTool;
  */
 public class UriTool {
 
+    /***
+     * android 7.0 后暴露给其他app 的路径 要用这种uri
+     * @param file
+     * @return
+     */
+    public static Uri getUriWithFileProvider(File file){
+        Uri uriForFile = FileProvider.getUriForFile(AppTool.getApplication(), AppTool.getApplication().getPackageName() + ".fileprovider", file);
+        return uriForFile;
+    }
     /***
      * Fresco  专用的
      *
