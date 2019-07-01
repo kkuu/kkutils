@@ -46,7 +46,6 @@ public class AppTool {
             isDebug=isDebugIn;
             app = application;
 
-            initFileUriException();
             initUiHander();
             initRecycleLife();
             ImgTool.init(application, 0, 0);
@@ -59,14 +58,14 @@ public class AppTool {
 
         }
     }
-    public static void initFileUriException(){
-        {
-            //应用程序将file://Uri 暴露给另一个应用程序时引发的异常
-            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-            StrictMode.setVmPolicy(builder.build());
-            builder.detectFileUriExposure();
-        }
-    }
+//    public static void initFileUriException(){
+//        {
+//            //应用程序将file://Uri 暴露给另一个应用程序时引发的异常
+//            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//            StrictMode.setVmPolicy(builder.build());
+//            builder.detectFileUriExposure();
+//        }
+//    }
 
     /**
      * 初始化uihandler
