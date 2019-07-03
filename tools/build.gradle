@@ -35,6 +35,9 @@ dependencies {
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
     api 'androidx.appcompat:appcompat:1.0.0'
+    api 'com.google.android.material:material:1.0.0'
+
+
     api 'androidx.recyclerview:recyclerview:1.0.0'
     // implementation (name: 'alipaySdk-15.5.9-20181123210601', ext: 'aar') 不能使用这种方式   要用：   implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
     //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
@@ -89,7 +92,7 @@ dependencies {
     api 'com.blankj:utilcode:1.23.5'
 
     //底部导航栏
-    api 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
+    api 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
     api 'q.rorbin:badgeview:1.1.0'
 
     //视频播放的 要用可以打开
