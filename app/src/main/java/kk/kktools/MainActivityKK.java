@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import utils.kkutils.AppTool;
+import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.parent.KKParentActivity;
