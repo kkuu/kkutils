@@ -34,6 +34,7 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
     public int[] viewsResId = new int[0];
     public KKRecycleAdapter kkRecycleAdapter;
     public Class<WzViewHolder> holderClass;
+    public boolean isOnCreateViewUseRootView;//在创建的时候 使用rootView
     /***
      * 设置 缓存的 layout 的个数， 和recyle cache 不一样， LayoutInflaterTool 这个用的
      */
@@ -166,11 +167,16 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
                         resId = wzRecycleView.viewsResId[i];
                     }
                 }
-                if (wzRecycleView.getLayoutCacheCount() > 0) {
-                    itemView = LayoutInflaterTool.getInflater(wzRecycleView.getLayoutCacheCount(), resId).inflate();
-                } else {
-                    itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, null);
+                if(wzRecycleView.isOnCreateViewUseRootView){
+                    itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, parent,false);
+                }else {
+                    if (wzRecycleView.getLayoutCacheCount() > 0) {
+                        itemView = LayoutInflaterTool.getInflater(wzRecycleView.getLayoutCacheCount(), resId).inflate();
+                    } else {
+                        itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, null);
+                    }
                 }
+
             }
 
             WzViewHolder holder = null;

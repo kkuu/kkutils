@@ -24,5 +24,25 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    annotationProcessor 'androidx.annotation:annotation:1.0.0'
     api project(':tools')
+
+
+
+
+    //# 必选，内部默认使用系统mediaplayer进行解码
+    api 'com.github.dueeeke.dkplayer:dkplayer-java:3.0.2'
+    //# 可选，包含StandardVideoController的实现
+    api 'com.github.dueeeke.dkplayer:dkplayer-ui:3.0.2'
+    //# 可选，使用exoplayer进行解码
+//    api 'com.github.dueeeke.dkplayer:player-exo:3.0.2'
+    // # 可选，使用ijkplayer进行解码
+    api 'com.github.dueeeke.dkplayer:player-ijk:3.0.2'
+    api 'com.github.dueeeke.dkplayer:ijk-armv7a:3.0.2'
+//    api 'com.github.dueeeke.dkplayer:ijk-armv5:3.0.2'
+//    api 'com.github.dueeeke.dkplayer:ijk-arm64:3.0.2'
+    api 'com.github.dueeeke.dkplayer:ijk-x86:3.0.2'
+//    api 'com.github.dueeeke.dkplayer:ijk-x86_64:3.0.2'
+
+
 }

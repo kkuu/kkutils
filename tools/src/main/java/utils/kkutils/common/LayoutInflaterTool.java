@@ -3,6 +3,7 @@ package utils.kkutils.common;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -161,11 +162,14 @@ public class LayoutInflaterTool {
     }
 
     public View inflate() {
+        return inflate(null);
+    }
+    public View inflate(ViewGroup parent) {
         //
         View view = getQueueViews(resource).poll();
         try {
             if (view == null) {
-                view = layoutInflater.inflate(resource, null);
+                view = layoutInflater.inflate(resource, parent,false);
             }
             initViews();
         } catch (Exception e) {
@@ -174,14 +178,13 @@ public class LayoutInflaterTool {
         }
         try {
             if (view == null) {
-                view = AppTool.currActivity.getLayoutInflater().inflate(resource, null);
+                view = AppTool.currActivity.getLayoutInflater().inflate(resource, parent,false);
             }
         } catch (Exception e) {
             LogTool.ex(e);
         }
         return view;
     }
-
     private void initViews() {
         // LogTool.s("layouttool--"+ViewTool.getNameById(resource, R.layout.class));
         if (!canUseInThread||stopUse) return;

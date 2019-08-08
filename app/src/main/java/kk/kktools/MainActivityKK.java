@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import kk.kktools.shipin.DouYinTest;
 import utils.kkutils.AppTool;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.TestData;
@@ -45,6 +46,7 @@ public class MainActivityKK extends KKParentActivity {
                // KKVideoPlayer.go();
             }
         });
+        addItem("测试抖音效果",new DouYinTest(),null);
         refresh();
 
        // testWeb();

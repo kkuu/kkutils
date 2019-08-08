@@ -42,7 +42,8 @@ dependencies {
     // implementation (name: 'alipaySdk-15.5.9-20181123210601', ext: 'aar') 不能使用这种方式   要用：   implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
     //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
-    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    //api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
     api 'org.xutils:xutils:3.5.0'
     api 'com.google.code.gson:gson:2.8.2'
 
@@ -97,10 +98,19 @@ dependencies {
 
     //视频播放的 要用可以打开
     //KKVideoPlayer
-//    api 'com.github.dueeeke.dkplayer:dkplayer-java:2.5.7'
-//    api 'com.github.dueeeke.dkplayer:dkplayer-ui:2.5.7'
-//    api 'com.github.dueeeke.dkplayer:dkplayer-armv7a:2.5.7'
-//    api 'com.github.dueeeke.dkplayer:dkplayer-x86:2.5.7'
+//    //# 必选，内部默认使用系统mediaplayer进行解码
+//    api 'com.github.dueeeke.dkplayer:dkplayer-java:3.0.2'
+//    //# 可选，包含StandardVideoController的实现
+//    api 'com.github.dueeeke.dkplayer:dkplayer-ui:3.0.2'
+//    //# 可选，使用exoplayer进行解码
+////    api 'com.github.dueeeke.dkplayer:player-exo:3.0.2'
+//    // # 可选，使用ijkplayer进行解码
+//    api 'com.github.dueeeke.dkplayer:player-ijk:3.0.2'
+//    api 'com.github.dueeeke.dkplayer:ijk-armv7a:3.0.2'
+////    api 'com.github.dueeeke.dkplayer:ijk-armv5:3.0.2'
+////    api 'com.github.dueeeke.dkplayer:ijk-arm64:3.0.2'
+//    api 'com.github.dueeeke.dkplayer:ijk-x86:3.0.2'
+////    api 'com.github.dueeeke.dkplayer:ijk-x86_64:3.0.2'
     //视频播放的
 
 
