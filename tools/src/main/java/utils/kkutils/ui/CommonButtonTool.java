@@ -63,15 +63,15 @@ public class CommonButtonTool implements Serializable {
             compoundButton.setChecked(true);
             checkedBtn = compoundButton;
             for (int i = 0; i < compoundButtonList.size(); i++) {
-                CompoundButton compoundButton1 = compoundButtonList.get(i);
-                if (!compoundButton1.equals(compoundButton)) {
-                    compoundButton1.setChecked(false);
+                CompoundButton cb_curr = compoundButtonList.get(i);
+                if (!cb_curr.equals(compoundButton)) {
+                    cb_curr.setChecked(false);
                     if (onCheckedChangeListener != null) {
-                        onCheckedChangeListener.onCheckedChanged(compoundButton, false);
+                        onCheckedChangeListener.onCheckedChanged(cb_curr, false);
                     }
                 } else {
                     if (onCheckedChangeListener != null) {
-                        onCheckedChangeListener.onCheckedChanged(compoundButton, true);
+                        onCheckedChangeListener.onCheckedChanged(cb_curr, true);
                     }
                 }
             }
