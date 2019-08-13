@@ -72,12 +72,17 @@ public class KKParentRecycleView extends RecyclerView {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if(newState==SCROLL_STATE_IDLE){
-                    ImgTool.resume();
-                    autoLoadMoreCheck(newState);
-                }else {
-                    ImgTool.pause();
+                try {
+                    if(newState==SCROLL_STATE_IDLE){
+                        ImgTool.resume();
+                        autoLoadMoreCheck(newState);
+                    }else {
+                        ImgTool.pause();
+                    }
+                }catch (Exception e){
+                    LogTool.ex(e);
                 }
+
             }
 
             @Override
@@ -92,6 +97,7 @@ public class KKParentRecycleView extends RecyclerView {
      * @param state 当前滑动状态
      */
      void  autoLoadMoreCheck(int state){
+         if(getAdapter()==null)return;
         if(autoLoadMorePageSize>0&&state==SCROLL_STATE_IDLE){
             try {
                 if(getLayoutManager() instanceof LinearLayoutManager){//自动加载下一页
