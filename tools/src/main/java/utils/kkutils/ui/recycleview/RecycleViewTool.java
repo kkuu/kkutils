@@ -99,7 +99,7 @@ public class RecycleViewTool {
      * @param onItemSizeChange 用于可能需要根据item 宽来动态设置view 宽的情况
      * @param itemDecorationEnd 可用于自定义间隔， 默认可不传
      */
-    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount, final int paddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
         GridLayoutManager layoutManager=null;
 
         {//判断是否设置过， 设置过就不要设置了，不然ui 刷新会出问题
@@ -128,7 +128,8 @@ public class RecycleViewTool {
             RecycleViewTool.removeAllDecoration(recyclerView);
 
             final double jiangeCount=spanCount+1;
-            final int padding= CommonTool.dip2px(paddingDp);
+            final int padding= CommonTool.dip2px(itemPaddingDp);
+            final int headPadding= CommonTool.dip2px(headPaddingDp);
             recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
                 @Override
                 public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
@@ -154,7 +155,7 @@ public class RecycleViewTool {
 
                         boolean isHead=position<=headCount-1;//当前条是否是head
                         if(isHead){
-                            outRect.set(padding,padding,padding,paddingBottom);
+                            outRect.set(headPadding,headPadding,headPadding,headPadding);
                         }else {
 
 
