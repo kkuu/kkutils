@@ -89,6 +89,9 @@ public class RecycleViewTool {
 
 
 
+    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount,final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+        initRecycleViewGrid(recyclerView,spanCount,headCount,itemPaddingDp,itemPaddingDp,onItemSizeChange,itemDecorationEnd);
+    }
 
     /***
      * 用于  多列 的 列表
