@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.parent.KKParentRecycleView;
 
 public class RecycleViewTool {
 
@@ -127,6 +128,46 @@ public class RecycleViewTool {
             }
         });
 
+        initDecoration(recyclerView,spanCount,headCount,headPaddingDp,itemPaddingDp,onItemSizeChange,itemDecorationEnd);
+
+    }
+
+    /***
+     * 一般用于瀑布流
+     * @param recyclerView
+     * @param spanCount
+     * @param headCount
+     * @param headPaddingDp
+     * @param itemPaddingDp
+     * @param onItemSizeChange
+     * @param itemDecorationEnd
+     * 如果需要head
+     *
+     *  StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
+     *         layoutParams.setFullSpan(true);//将 StaggeredGrid的某个item直接占满宽
+     *
+     * 图片不固定大小的时候，在initdata里面
+     * UiTool.setWH(itemView.findViewById(R.id.imgv_youwu_item),(recycler_view.getWidth()-CommonTool.dip2px(10*3))/2,CommonTool.dip2px( (150+position*10)));
+     */
+    public static void initRecycleViewStaggeredGrid(final RecyclerView recyclerView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+        StaggeredGridLayoutManager layoutManager=null;
+        {//判断是否设置过， 设置过就不要设置了，不然ui 刷新会出问题
+            RecyclerView.LayoutManager layoutManagerOld= recyclerView.getLayoutManager();
+            if(layoutManagerOld!=null&&layoutManagerOld instanceof StaggeredGridLayoutManager){
+                layoutManager= (StaggeredGridLayoutManager) layoutManagerOld;
+            }else {
+                layoutManager=new StaggeredGridLayoutManager(spanCount,StaggeredGridLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(layoutManager);
+            }
+        }
+        layoutManager.setSpanCount(spanCount);
+
+        initDecoration(recyclerView,spanCount,headCount,headPaddingDp,itemPaddingDp,onItemSizeChange,itemDecorationEnd);
+
+    }
+
+
+    public static void initDecoration(final RecyclerView recyclerView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
         {//设置间隔
             RecycleViewTool.removeAllDecoration(recyclerView);
 
@@ -195,7 +236,6 @@ public class RecycleViewTool {
 
         }
     }
-
 
     /***
      * 是否最后一行
