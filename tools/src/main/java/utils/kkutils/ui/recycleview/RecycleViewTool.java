@@ -146,7 +146,7 @@ public class RecycleViewTool {
      *  StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
      *         layoutParams.setFullSpan(true);//将 StaggeredGrid的某个item直接占满宽
      *
-     * 图片不固定大小的时候，在initdata里面
+     * 图片不固定大小的时候，高度随时在变，所以在initdata里面
      * UiTool.setWH(itemView.findViewById(R.id.imgv_youwu_item),(recycler_view.getWidth()-CommonTool.dip2px(10*3))/2,CommonTool.dip2px( (150+position*10)));
      */
     public static void initRecycleViewStaggeredGrid(final RecyclerView recyclerView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
