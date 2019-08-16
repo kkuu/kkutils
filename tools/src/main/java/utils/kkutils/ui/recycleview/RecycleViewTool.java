@@ -136,11 +136,6 @@ public class RecycleViewTool {
      * 一般用于瀑布流
      * @param recyclerView
      * @param spanCount
-     * @param headCount
-     * @param headPaddingDp
-     * @param itemPaddingDp
-     * @param onItemSizeChange
-     * @param itemDecorationEnd
      * 如果需要head
      *
      *  StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
@@ -148,8 +143,10 @@ public class RecycleViewTool {
      *
      * 图片不固定大小的时候，高度随时在变，所以在initdata里面
      * UiTool.setWH(itemView.findViewById(R.id.imgv_youwu_item),(recycler_view.getWidth()-CommonTool.dip2px(10*3))/2,CommonTool.dip2px( (150+position*10)));
+     *
+     * 间隔 需要在item xml 里面配置margin 5， 在recycleview 里面设置padding 5   最后就是 10 的间距
      */
-    public static void initRecycleViewStaggeredGrid(final RecyclerView recyclerView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+    public static void initRecycleViewStaggeredGrid(final RecyclerView recyclerView, final int spanCount){
         StaggeredGridLayoutManager layoutManager=null;
         {//判断是否设置过， 设置过就不要设置了，不然ui 刷新会出问题
             RecyclerView.LayoutManager layoutManagerOld= recyclerView.getLayoutManager();
@@ -161,9 +158,6 @@ public class RecycleViewTool {
             }
         }
         layoutManager.setSpanCount(spanCount);
-
-        initDecoration(recyclerView,spanCount,headCount,headPaddingDp,itemPaddingDp,onItemSizeChange,itemDecorationEnd);
-
     }
 
 
