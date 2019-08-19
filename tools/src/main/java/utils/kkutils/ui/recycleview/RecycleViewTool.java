@@ -142,7 +142,9 @@ public class RecycleViewTool {
      *         layoutParams.setFullSpan(true);//将 StaggeredGrid的某个item直接占满宽
      *
      * 图片不固定大小的时候，高度随时在变，所以在initdata里面
-     * UiTool.setWH(itemView.findViewById(R.id.imgv_youwu_item),(recycler_view.getWidth()-CommonTool.dip2px(10*3))/2,CommonTool.dip2px( (150+position*10)));
+     *
+     *  int w=(recycler_view.getMeasuredWidth()-CommonTool.dip2px(padding*(count+1)))/count;
+     *                             UiTool.setWH(itemView.findViewById(R.id.imgv_shipin_tupian_item),w,w);
      *
      * 间隔 需要在item xml 里面配置margin 5， 在recycleview 里面设置padding 5   最后就是 10 的间距
      */
