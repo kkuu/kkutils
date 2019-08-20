@@ -5,27 +5,27 @@
     <attr name="bottomLeftRadius" format="dimension"> </attr>
     <attr name="bottomRightRadius" format="dimension"> </attr>
 
-<!--    <declare-styleable name="RoundImageView">-->
-<!--        <attr name="radius" > </attr>-->
-<!--        <attr name="topLeftRadius"> </attr>-->
-<!--        <attr name="topRightRadius"> </attr>-->
-<!--        <attr name="bottomLeftRadius" > </attr>-->
-<!--        <attr name="bottomRightRadius" > </attr>-->
-<!--    </declare-styleable>-->
-<!--    <declare-styleable name="RoundLinearLayoutSimple">-->
-<!--        <attr name="radius" > </attr>-->
-<!--        <attr name="topLeftRadius"> </attr>-->
-<!--        <attr name="topRightRadius"> </attr>-->
-<!--        <attr name="bottomLeftRadius" > </attr>-->
-<!--        <attr name="bottomRightRadius" > </attr>-->
-<!--    </declare-styleable>-->
-<!--    <declare-styleable name="RoundRelativeLayoutSimple">-->
-<!--        <attr name="radius" > </attr>-->
-<!--        <attr name="topLeftRadius"> </attr>-->
-<!--        <attr name="topRightRadius"> </attr>-->
-<!--        <attr name="bottomLeftRadius" > </attr>-->
-<!--        <attr name="bottomRightRadius" > </attr>-->
-<!--    </declare-styleable>-->
+    <declare-styleable name="RoundImageView">
+        <attr name="radius" > </attr>
+        <attr name="topLeftRadius"> </attr>
+        <attr name="topRightRadius"> </attr>
+        <attr name="bottomLeftRadius" > </attr>
+        <attr name="bottomRightRadius" > </attr>
+    </declare-styleable>
+    <declare-styleable name="RoundLinearLayoutSimple">
+        <attr name="radius" > </attr>
+        <attr name="topLeftRadius"> </attr>
+        <attr name="topRightRadius"> </attr>
+        <attr name="bottomLeftRadius" > </attr>
+        <attr name="bottomRightRadius" > </attr>
+    </declare-styleable>
+    <declare-styleable name="RoundRelativeLayoutSimple">
+        <attr name="radius" > </attr>
+        <attr name="topLeftRadius"> </attr>
+        <attr name="topRightRadius"> </attr>
+        <attr name="bottomLeftRadius" > </attr>
+        <attr name="bottomRightRadius" > </attr>
+    </declare-styleable>
 
 
 
