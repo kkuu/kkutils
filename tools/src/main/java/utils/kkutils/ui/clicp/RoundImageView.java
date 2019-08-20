@@ -10,22 +10,22 @@ public class RoundImageView extends KKImageView {
     public RoundViewTool roundViewTool;
     public RoundImageView(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
     public RoundImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public RoundImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs);
     }
 
 
-    public void init(){
-        roundViewTool=new RoundViewTool(this);
+    public void init(AttributeSet attrs){
+        roundViewTool=new RoundViewTool(this, attrs);
         setScaleType(ScaleType.CENTER_CROP);
 
     }

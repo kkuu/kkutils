@@ -9,30 +9,27 @@ public class RoundLinearLayoutSimple extends LinearLayout {
     public RoundViewTool roundViewTool;
     public RoundLinearLayoutSimple(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
     public RoundLinearLayoutSimple(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public RoundLinearLayoutSimple(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs);
     }
 
     public RoundLinearLayoutSimple(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(attrs);
     }
 
 
-
-    public void init(){
-        roundViewTool=new RoundViewTool(this);
-        //roundViewTool.setRoundCornerDp(20);
-
+    public void init(AttributeSet attrs){
+        roundViewTool=new RoundViewTool(this, attrs);
     }
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
