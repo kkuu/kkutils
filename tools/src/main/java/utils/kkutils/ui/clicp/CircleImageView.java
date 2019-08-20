@@ -23,7 +23,7 @@ public class CircleImageView extends RoundImageView {
 
     @Override
     public void init() {
-        super.init();
+        super.init(null);
         roundViewTool.mRoundAsCircle=true;
     }
 }
