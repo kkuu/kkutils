@@ -25,6 +25,5 @@ public class CircleImageView extends RoundImageView {
     public void init() {
         super.init();
         roundViewTool.mRoundAsCircle=true;
-        setScaleType(ScaleType.CENTER_CROP);
     }
 }

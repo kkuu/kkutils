@@ -26,6 +26,7 @@ public class RoundImageView extends KKImageView {
 
     public void init(){
         roundViewTool=new RoundViewTool(this);
+        setScaleType(ScaleType.CENTER_CROP);
 
     }
     @Override
