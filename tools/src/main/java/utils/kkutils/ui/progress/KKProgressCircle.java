@@ -17,19 +17,19 @@ import android.view.View;
  */
 
 public class KKProgressCircle extends View {
-    int maxProgess = 100;
-    int currProgess = 67;
-    int colorBg = Color.parseColor("#ffffff");
-    int colorBgIn = Color.parseColor("#dcdcdc");
-    int colorBegin = Color.parseColor("#e61f5b");
-    int colorEnd = Color.parseColor("#f19d40");
-    Paint paintIn;
-    Paint paintClear;
-    Paint paintHuan;
-    int xCenter = 0;
-    int yCenter = 0;
-    int neiYuanWidth = 20;
-    int waiyuanWidth = 40;
+    protected int maxProgess = 100;
+    protected int currProgess = 67;
+    protected int colorBg = Color.parseColor("#ffffff");//整个背景， 也就是内圆背景
+    protected int colorBgIn = Color.parseColor("#dcdcdc");//圆环缺口bg
+    protected int colorBegin = Color.parseColor("#e61f5b");//圆环覆盖 背景开始， 可以和下面一样就是纯色
+    protected int colorEnd = Color.parseColor("#f19d40");//圆环覆盖 背景结束， 可以和下面一样就是纯色
+    protected Paint paintIn;
+    protected Paint paintClear;
+    protected  Paint paintHuan;
+    protected  int xCenter = 0;
+    protected int yCenter = 0;
+    protected  int neiYuanWidth = 20;
+    protected int waiyuanWidth = 40;
 
     public KKProgressCircle(Context context) {
         super(context);
@@ -54,24 +54,20 @@ public class KKProgressCircle extends View {
         colorEnd = Color.parseColor(colorEndStr);
         this.neiYuanWidth=neiYuanWidthPx;
         this.waiyuanWidth=waiyuanWidthPx;
+        initPaint();
         invalidate();
     }
     public void initPaint() {
         paintIn = new Paint(Paint.ANTI_ALIAS_FLAG);
         paintIn.setColor(colorBgIn);
 
-        paintClear = new Paint();
+        paintClear = new Paint(Paint.ANTI_ALIAS_FLAG);
         paintClear.setColor(colorBg);
 
         paintHuan = new Paint(Paint.ANTI_ALIAS_FLAG);
         Shader mShader = new LinearGradient(0, 0, 0, getWidth(), new int[]{colorBegin, colorEnd}, null, Shader.TileMode.CLAMP);
         paintHuan.setShader(mShader);
 
-
-        if (getWidth() > 0) {
-            neiYuanWidth = getWidth() / 21;
-            waiyuanWidth = getWidth() / 13;
-        }
     }
 
     @Override
