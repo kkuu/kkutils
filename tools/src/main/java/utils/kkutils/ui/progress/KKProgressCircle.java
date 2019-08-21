@@ -47,7 +47,15 @@ public class KKProgressCircle extends View {
 
     public void init() {
     }
-
+    public void setColorAndWidth(String colorBgStr,String colorBgInStr,String colorBeginStr,String colorEndStr,int neiYuanWidthPx,int waiyuanWidthPx){
+        colorBg = Color.parseColor(colorBgStr);
+        colorBgIn = Color.parseColor(colorBgInStr);
+        colorBegin = Color.parseColor(colorBeginStr);
+        colorEnd = Color.parseColor(colorEndStr);
+        this.neiYuanWidth=neiYuanWidthPx;
+        this.waiyuanWidth=waiyuanWidthPx;
+        invalidate();
+    }
     public void initPaint() {
         paintIn = new Paint(Paint.ANTI_ALIAS_FLAG);
         paintIn.setColor(colorBgIn);
