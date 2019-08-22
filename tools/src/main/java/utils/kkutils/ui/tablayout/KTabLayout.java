@@ -56,6 +56,18 @@ public class KTabLayout extends SlidingTabLayout {
         setIndicatorColor(Color.parseColor("#E2231A"));
     }
 
+    @Override
+    public void setCurrentTab(int currentTab, boolean smoothScroll) {
+        super.setCurrentTab(currentTab, smoothScroll);
+        onPageSelected(currentTab);
+    }
+
+    @Override
+    public void setCurrentTab(int currentTab) {
+        super.setCurrentTab(currentTab);
+        onPageSelected(currentTab);
+    }
+
     public void initViewPager(FragmentManager fragmentManager, ViewPager viewPager, final List<Fragment> fragments, List<String> titles) {
         initViewPager(null,fragmentManager,viewPager,fragments,titles.toArray(new String[0]));
     }
