@@ -59,13 +59,13 @@ public class KTabLayout extends SlidingTabLayout {
     @Override
     public void setCurrentTab(int currentTab, boolean smoothScroll) {
         super.setCurrentTab(currentTab, smoothScroll);
-        onPageSelected(currentTab);
+        onPageSelected(currentTab);//这样才可以 加粗选中
     }
 
     @Override
     public void setCurrentTab(int currentTab) {
         super.setCurrentTab(currentTab);
-        onPageSelected(currentTab);
+        onPageSelected(currentTab);////这样才可以 加粗选中
     }
 
     public void initViewPager(FragmentManager fragmentManager, ViewPager viewPager, final List<Fragment> fragments, List<String> titles) {
