@@ -32,9 +32,24 @@ public class KKDatePickerDialog extends RelativeLayout {
     int colorSelected=Color.parseColor("#e42b45");
     int colorNormal=Color.parseColor("#737373");
     public Calendar calendar=Calendar .getInstance();
-    Calendar maxCalendar=Calendar .getInstance();//最大时间
-    Calendar minCalendar=Calendar .getInstance();//最小时间
+    public Calendar maxCalendar=Calendar .getInstance();//最大时间
+    public Calendar minCalendar=Calendar .getInstance();//最小时间
+
+
+
+    public String title="选择时间";
+    public boolean justShowDate;//只显示日期；
+
+    public void setJustShowDate(boolean justShowDate) {
+        this.justShowDate = justShowDate;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
     public  void show(){
+        refreshView();
         DialogTool.initBottomDialog(this).show();
     }
 
@@ -58,6 +73,9 @@ public class KKDatePickerDialog extends RelativeLayout {
          maxCalendar.set(currYear+130,11,31,23,59);
          minCalendar.set(currYear-130,0,1,0,0);
 
+
+    }
+    public void refreshView(){
         ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         setLayoutParams(layoutParams);
         addContent();
@@ -80,6 +98,12 @@ public class KKDatePickerDialog extends RelativeLayout {
         dp_shi.setSelected(""+calendar.get(Calendar.HOUR_OF_DAY));
         dp_fen=addPickerDateItem(linearLayout,getList(0,59));
         dp_fen.setSelected(""+calendar.get(Calendar.MINUTE));
+
+        if(justShowDate){
+            dp_shi.setVisibility(GONE);
+            dp_fen.setVisibility(GONE);
+        }
+
 
         dp_nian.setOnSelectListener(new DatePickerView.onSelectListener() {
             @Override
@@ -228,6 +252,7 @@ public class KKDatePickerDialog extends RelativeLayout {
 
 
     public void addContent(){
+        removeAllViews();
         LinearLayout linearLayout=new LinearLayout(getContext());
         linearLayout.setBackgroundColor(Color.WHITE);
         LayoutParams lp=new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, -2);
@@ -249,7 +274,7 @@ public class KKDatePickerDialog extends RelativeLayout {
     public void addTitle(ViewGroup viewGroup){
         tvTitle=new TextView(getContext());
         UiTool.setWH(tvTitle,ViewGroup.LayoutParams.MATCH_PARENT,CommonTool.dip2px(40));
-        tvTitle.setText("选择时间");
+        tvTitle.setText(title);
         tvTitle.setGravity(Gravity.CENTER);
         tvTitle.setTextColor(colorNormal);
         viewGroup.addView(tvTitle);
@@ -275,8 +300,10 @@ public class KKDatePickerDialog extends RelativeLayout {
         addTitleDateText(linearLayout,"年");
         addTitleDateText(linearLayout,"月");
         addTitleDateText(linearLayout,"日");
-        addTitleDateText(linearLayout,"时");
-        addTitleDateText(linearLayout,"分");
+        if(!justShowDate){
+            addTitleDateText(linearLayout,"时");
+            addTitleDateText(linearLayout,"分");
+        }
         viewGroup.addView(linearLayout);
     }
 
