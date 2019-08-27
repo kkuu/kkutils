@@ -95,13 +95,15 @@ public class KKDatePickerDialog extends RelativeLayout {
             @Override
             public void onSelect(String text) {
                 int newMonth=Integer.valueOf(text)-1;
-                //处理2月问题  由于 如果日期当前是31号，  month 设置为2月的时候 那么month 就默认变为3月了。。，所以这里 不让超过28.
+                // 由于如果日期当前是31号， 如果新设置月份只有30天， 那么实际设置的月份就又加了一月，并且把日期改为了1， 所以这里要判断新的月份最大天数，
                 {
                     int day=calendar.get(Calendar.DAY_OF_MONTH);
-                    if(newMonth==1&&day>=28){//2月
-                        calendar.set(Calendar.DAY_OF_MONTH,28);
+                    int maxNew=getMaxDayByMonth(newMonth);
+                    if(day>maxNew){
+                        dp_ri.setSelected(""+maxNew);
+                        calendar.set(Calendar.DAY_OF_MONTH,maxNew);
                     }
-                    dp_ri.setSelected("28");
+
                 }
                 calendar.set(Calendar.MONTH,newMonth);
                 checkRi();
@@ -124,6 +126,18 @@ public class KKDatePickerDialog extends RelativeLayout {
                 checkFen();
             }
         });
+    }
+
+    /**
+     * 获取一个月最大天数， 月份从0开始
+     * @param month
+     * @return
+     */
+    public int getMaxDayByMonth(int month){
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH,1);
+        calendar.set(Calendar.MONTH,month);
+        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
     /**
