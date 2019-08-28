@@ -17,8 +17,8 @@ import android.view.View;
  */
 
 public class KKProgressCircle extends View {
-    protected int maxProgess = 100;
-    protected int currProgess = 67;
+    protected float maxProgess = 100;
+    protected float currProgess = 67;
     protected int colorBg = Color.parseColor("#ffffff");//整个背景， 也就是内圆背景
     protected int colorBgIn = Color.parseColor("#dcdcdc");//圆环缺口bg
     protected int colorBegin = Color.parseColor("#e61f5b");//圆环覆盖 背景开始， 可以和下面一样就是纯色
@@ -93,7 +93,7 @@ public class KKProgressCircle extends View {
         canvas.drawCircle(xCenter, yCenter, xCenter - waiyuanWidth, paintClear);
     }
 
-    public void setProgress(int currProgess) {
+    public void setProgress(float currProgess) {
         this.currProgess = currProgess;
         postInvalidate();
     }
