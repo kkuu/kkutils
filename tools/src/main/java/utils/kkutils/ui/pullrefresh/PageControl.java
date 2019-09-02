@@ -24,6 +24,9 @@ public class PageControl<T> implements Serializable {
     public void setHasMoreData(boolean hasMoreData) {
         this.hasMoreData = hasMoreData;
     }
+    public boolean hasMoreData() {
+        return hasMoreData;
+    }
 
     boolean hasMoreData=true;//是否还有下一页
     public static void setDefaultPageSize(int defaultPageSize) {
