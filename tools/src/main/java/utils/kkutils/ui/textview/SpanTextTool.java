@@ -160,9 +160,5 @@ public class SpanTextTool {
         }
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return builder.toString();
-    }
+
 }
