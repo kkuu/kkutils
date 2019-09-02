@@ -15,6 +15,43 @@ import utils.kkutils.common.LogTool;
 import utils.kkutils.parent.KKParentRecycleView;
 
 public class RecycleViewTool {
+    /**
+     * 线性布局  的间隔设置
+     * @param recyclerView
+     * @param dividerLeftDp
+     * @param dividerRightDp
+     * @param dividerVerticalDp
+     */
+    public static void initRecycleViewLinearlayout(final KKParentRecycleView recyclerView,int dividerLeftDp,int dividerRightDp, int dividerVerticalDp) {
+        removeAllDecoration(recyclerView);
+        final int dividerLeft= CommonTool.dip2px(dividerLeftDp);
+        final int dividerRight= CommonTool.dip2px(dividerRightDp);
+        final int dividerVertical= CommonTool.dip2px(dividerVerticalDp);
+        RecyclerView.ItemDecoration itemDecoration = new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                if(recyclerView.isEmptyView(view))return;//如果是空数据， 就不要间隔了
+                if(parent.getChildAdapterPosition(view)==0){
+                    outRect.set(dividerLeft, dividerVertical, dividerRight, dividerVertical);
+                }else {
+                    outRect.set(dividerLeft, 0, dividerRight, dividerVertical);
+                }
+            }
+        };
+        recyclerView.addItemDecoration(itemDecoration);
+    }
+
+    /***
+     * 线性布局  的间隔设置
+     * @param recyclerView
+     * @param paddingDp
+     */
+    public static void initRecycleViewLinearlayout(KKParentRecycleView recyclerView,int paddingDp ){
+        initRecycleViewLinearlayout(recyclerView,paddingDp,paddingDp,paddingDp);
+    }
+
+
+
 
     /***
      * 设置某一项铺满
@@ -259,24 +296,26 @@ public class RecycleViewTool {
 
 
 
-    public static void initRecycleViewLinearlayout(RecyclerView recyclerView,int paddingDp ){
-        removeAllDecoration(recyclerView);
-        final int padding= CommonTool.dip2px(paddingDp);
-        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-                try {
-                    int position = parent.getChildAdapterPosition(view);
-                    boolean isLastItem=parent.getAdapter().getItemCount()==position+1;
-                    int paddingBottom=isLastItem?padding:0;//最后一条才有
-                    outRect.set(padding,padding,padding,paddingBottom);
-                }catch (Exception e){
-                    LogTool.ex(e);
-                }
-            }
-        });
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /***
      * 删除所有间隔线
      * @param recyclerView
