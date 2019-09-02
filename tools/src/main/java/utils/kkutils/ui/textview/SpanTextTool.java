@@ -30,6 +30,7 @@ import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import utils.kkutils.AppTool;
 import utils.kkutils.R;
 import utils.kkutils.common.CommonTool;
@@ -159,4 +160,9 @@ public class SpanTextTool {
         }
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return builder.toString();
+    }
 }
