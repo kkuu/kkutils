@@ -287,12 +287,14 @@ public class HttpRequest {
     }
 
     public void printLog() {
-        LogTool.printBegin();
-        LogTool.printPart(true,"请求:"+getRequestMethod()+"  "+getUrlRequestGet());
-        printLogPost();
-        LogTool.printPart("返回数据: ");
-        LogTool.printPart(getResponseDataStr());
-        LogTool.printEnd();
+        synchronized (LogTool.class){
+            LogTool.printBegin();
+            LogTool.printPart(true,"请求:"+getRequestMethod()+"  "+getUrlRequestGet());
+            printLogPost();
+            LogTool.printPart("返回数据: ");
+            LogTool.printPart(getResponseDataStr());
+            LogTool.printEnd();
+        }
     }
 
     public void readySendRequest() {
