@@ -14,12 +14,44 @@ import utils.kkutils.AppTool;
  * **
  * 用来打印日志的
  *
- * @author wz
+ * @author kk
  */
 public class LogTool {
     public static boolean debug = true;//App.isDebug;
-    static String tag = "wzlog";
+    static String tag = "kk";
     static final String kongge="\t";
+
+    static final String beginStr=   "╔══════════════════════════════════════════════════════════════════════════";
+    static final String contentPre ="║ ";
+    static final String partStr    ="╟──────────────────────────────────────────────────────────────────────────";
+    static final String endStr     ="╚══════════════════════════════════════════════════════════════════════════";
+
+    public static void printBegin(){
+        LogTool.s(beginStr);
+    }
+    public static void printPart(boolean showPartStr,Object obj )
+    {
+        LogTool.s(contentPre,obj);
+        if(showPartStr)LogTool.s(partStr);
+    }
+    public static void printPart(Object obj )
+    {
+        printPart(true,obj);
+    }
+    public static void printEnd(){
+        LogTool.s(endStr);
+    }
+
+    public static void p(Object... obj ){
+        LogTool.s(beginStr);
+        for (int i = 0; i < obj.length; i++) {
+            printPart(i<obj.length-1,obj[i]);
+        }
+        LogTool.s(endStr);
+    }
+
+
+
     /**
      * **
      * 控制台打印一个对象

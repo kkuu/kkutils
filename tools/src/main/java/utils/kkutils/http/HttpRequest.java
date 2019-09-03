@@ -274,25 +274,25 @@ public class HttpRequest {
         }
         return sb.toString();
     }
-    public void printLogGet() {
-        LogTool.s("请求完成了: " + getRequestMethod()+"  "+getUrlRequestGet());
-    }
+
 
     public void printLogPost() {
-       // if(requestMethod!=RequestMethod.POST)return;
-       // LogTool.s("请求完成了" + getRequestMethod() + "\t  耗时：" + (System.currentTimeMillis() - timeBeginRequest) + "\t:" + getUrlStr());
-        LogTool.s("请求参数: ");
+        LogTool.printPart(false,"参数:");
+        LogTool.printPart(false,"");
         Iterator iterator = getQueryMap().entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry) iterator.next();
-            LogTool.s(entry.getKey() + "=" + entry.getValue());
+            LogTool.printPart(!iterator.hasNext(),entry.getKey() + "=" + entry.getValue());
         }
     }
 
     public void printLog() {
-        printLogGet();
+        LogTool.printBegin();
+        LogTool.printPart(true,"请求:"+getRequestMethod()+"  "+getUrlRequestGet());
         printLogPost();
-        LogTool.s("请求返回了: " + getResponseDataStr());
+        LogTool.printPart("返回数据: ");
+        LogTool.printPart(getResponseDataStr());
+        LogTool.printEnd();
     }
 
     public void readySendRequest() {
