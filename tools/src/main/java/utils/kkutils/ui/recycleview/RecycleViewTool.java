@@ -40,7 +40,6 @@ public class RecycleViewTool {
         };
         recyclerView.addItemDecoration(itemDecoration);
     }
-
     /***
      * 线性布局  的间隔设置
      * @param recyclerView
@@ -49,6 +48,79 @@ public class RecycleViewTool {
     public static void initRecycleViewLinearlayout(KKParentRecycleView recyclerView,int paddingDp ){
         initRecycleViewLinearlayout(recyclerView,paddingDp,paddingDp,paddingDp);
     }
+
+
+
+
+
+
+    public static abstract class RecycleViewBarOnChangeListener{
+        public boolean show;
+        public void onBarChange(boolean showIn){
+            if(this.show!=showIn){
+                onChange(showIn);
+            }
+            this.show=showIn;
+        }
+        public abstract void onChange(boolean show);
+    }
+    /**
+     * 主要用于首页 title 滑动 改变显示的
+     * 用于以下情况
+     * recycleview 的第一条 有一个bar（比如搜索框）
+     * 当recycle滚动的时候 这个bar 是处于显示的还是隐藏的 监听
+     *
+     * @param recyclerView
+     * @param barHeightDp
+     * @param onChangeListener
+     */
+    public static void initScrlloBarChange(RecyclerView recyclerView, final int barHeightDp, final RecycleViewBarOnChangeListener onChangeListener){
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int barHeight= CommonTool.dip2px(barHeightDp);
+            boolean isShowingTitleSearch=false;//title 上面的搜索框是否显示
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                View firstChildView = recyclerView.getChildAt(0);
+                int currPosition= recyclerView.getChildAdapterPosition(firstChildView);// 当前第一个view 在adaper 里面的position
+                int top = firstChildView.getTop();//第一个View 的上边距
+
+                if(currPosition==0){//是第一个View
+                    if(-top>=barHeight){//bar 被隐藏了
+                        if(onChangeListener!=null){
+                            onChangeListener.onBarChange(false);
+                        }
+                        return;
+                    }else {//bar  显示了
+                        if(onChangeListener!=null){
+                            onChangeListener.onBarChange(true);
+                        }
+                    }
+
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
