@@ -33,7 +33,7 @@ public class TestRecycleView extends KKParentFragment {
 
         kk_refresh.bindLoadDataAndRefresh(null, new KKRefreshLayout.LoadListDataInterface() {
             @Override
-            public void loadData(int page) {
+            public void loadPageData(int page) {
                 kk_refresh.stopRefresh(null);
 
                 initRecycleView(TestData.getTestStrList(10*page));

@@ -78,6 +78,32 @@ public class HttpRequest {
      */
     public HttpRequest addQueryParams(String queryKey, Object queryValue) {
         if (queryValue != null && !StringTool.isEmpty("" + queryValue)){
+
+            {//处理 queryValue 自身带有多个参数的情况
+                try {
+                    if(queryValue instanceof String){
+                        String value=""+queryValue;
+                        if(value.contains("&")){
+                            String[] split = value.split("&");
+                            for(String sp:split){
+                                String[] splitKeyValue = sp.split("=");
+                                if(splitKeyValue.length==1){
+                                    this.queryMap.put(queryKey, splitKeyValue[0]);
+                                }
+                                if(splitKeyValue.length>1){
+                                    this.queryMap.put(splitKeyValue[0], sp.substring(splitKeyValue[0].length()+1));
+                                }
+                            }
+                            return this;
+                        }
+                    }
+                }catch (Exception e){
+                    LogTool.ex(e);
+                }
+
+            }
+
+
             this.queryMap.put(queryKey, queryValue);
         }else {
             Object defaultObj=queryDefaultMap.get(queryKey);
