@@ -153,23 +153,23 @@ public class KKRefreshLayout extends SmartRefreshLayout {
     public void bindLoadDataAndRefresh( PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
         if(pageControl==null)pageControl=new PageControl();
         bindLoadDataAndRefreshNotRefresh(pageControl,loadListDataInterface);
-        loadListDataInterface.loadData(pageControl.init());
+        loadListDataInterface.loadPageData(pageControl.init());
     }
     public void bindLoadDataAndRefreshNotRefresh(final PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
         setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                loadListDataInterface.loadData(pageControl.getNextPageNum());
+                loadListDataInterface.loadPageData(pageControl.getNextPageNum());
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                loadListDataInterface.loadData(pageControl.init());
+                loadListDataInterface.loadPageData(pageControl.init());
             }
         });
     }
     public static interface LoadListDataInterface{
-        public void loadData(final int page);
+        public void loadPageData(final int page);
     }
 
 }
