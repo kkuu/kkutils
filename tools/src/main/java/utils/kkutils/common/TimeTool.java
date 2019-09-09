@@ -16,9 +16,32 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by coder on 15/12/25.
+ *  String format = "yyyy-MM-dd HH:mm:ss";
  */
 public class TimeTool {
     static long oneDayTime = 24 * 60 * 60 * 1000l;
+
+    /**
+     * 获取指定时间字符串  间隔afterday 后的字符串
+     * @param startDate
+     * @param afterDay
+     * @return
+     */
+    public static  String dateAfter(String startDate,String format,int afterDay)
+    {
+        try {
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat(format);
+            Date date=simpleDateFormat.parse(startDate);
+            long time=date.getTime()+afterDay * oneDayTime;
+            date.setTime(time);
+            return simpleDateFormat.format(date);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
+
+    }
+
 
     /***
      * 获取指定格式 的time  毫秒数
