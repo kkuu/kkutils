@@ -23,25 +23,20 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
     public View parent;
     public View vg_page_content;
     boolean isUseCacheView = true;
-
-
-
     boolean isSingleInParent=true;//是否父类只有这一个可显示的界面  自定义生命周期用的， 和只有一个的分开
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         currentFragment = this;
         LogTool.printClassLine("onCreate", this);
     }
-
     @Override
     public void onStart() {
         super.onStart();
         currentFragment = this;
     }
-
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -50,6 +45,61 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
         }
         LogTool.printClassLine("onDestroy", this);
     }
+
+
+
+
+    @Override
+    public void setArguments(@Nullable Bundle args) {
+        Bundle old=getArguments();
+        if(old!=null){
+            old.putAll(args);
+        }else {
+            super.setArguments(args);
+        }
+    }
+
+    /***
+     * 设置参数，需要在启动前调用
+     * @param key
+     * @param data
+     * @return
+     */
+    public KKParentFragment setArgument(String key,Serializable data){
+        Bundle bundle=new Bundle();
+        bundle.putSerializable(key,data);
+        setArguments(bundle);
+        return this;
+    }
+    public Object getArgument(String key, Object defaultObj) {
+        if (getArguments() != null) {
+            Object o = getArguments().get(key);
+            if (o == null) {
+                return defaultObj;
+            } else {
+                return o;
+            }
+        }
+        return defaultObj;
+    }
+    public Object getArgument(String key) {
+        return getArgument(key,null);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Activity getActivityKK(){
         if(getActivity()!=null)return getActivity();
         if(AppTool.currActivity!=null)return AppTool.currActivity;
@@ -143,17 +193,7 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
     }
 
 
-    public Object getArgument(String key, Object defaultObj) {
-        if (getArguments() != null) {
-            Object o = getArguments().get(key);
-            if (o == null) {
-                return defaultObj;
-            } else {
-                return o;
-            }
-        }
-        return defaultObj;
-    }
+
 
     /***
      * 是否父类只有这一个可显示的界面
