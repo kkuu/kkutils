@@ -529,7 +529,7 @@ public class UiTool {
      * @param textView
      * @return
      */
-    public String checkTextViewNull(TextView textView){
+    public static String checkTextViewNull(TextView textView){
         String str = textView.getText().toString().trim();
         if (StringTool.isEmpty(str)) {
             CommonTool.showToast(textView.getHint());
