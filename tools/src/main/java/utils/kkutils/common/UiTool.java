@@ -523,4 +523,18 @@ public class UiTool {
         }
 
     }
+
+    /***
+     * 检测 控件非空并提示
+     * @param textView
+     * @return
+     */
+    public String checkTextViewNull(TextView textView){
+        String str = textView.getText().toString().trim();
+        if (StringTool.isEmpty(str)) {
+            CommonTool.showToast(textView.getHint());
+            throw  new RuntimeException(textView.getHint().toString());
+        }
+        return str;
+    }
 }
