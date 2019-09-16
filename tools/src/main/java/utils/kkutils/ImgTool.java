@@ -192,13 +192,22 @@ public class ImgTool {
         return src == null || StringTool.isEmpty("" + src);
     }
 
+    /***
+     * //阿里云 降低质量
+     *             //?x-oss-process=image/resize,w_500,h_100/format,webp/quality,q_80
+     *
+     *              http://outin-cb4cc87b708c11e99d3800163e1a625e.oss-cn-shanghai.aliyuncs.com/sv/3cfd63bb-16d24c62846/3cfd63bb-16d24c62846.mp4?x-oss-process=video/snapshot,t_0,m_fast,w_260,ar_auto
+     * @param src
+     * @param w
+     * @param h
+     * @return
+     */
+    public static Object convertByAliYun(Object src, int w, int h){
 
-    public static Object convertSrc(Object src, int w, int h) {
-        src = convertSrc(src);
         if (src instanceof String) {
             if (((String) src).toLowerCase().endsWith(".gif")) return src;
-            //阿里云 降低质量
-            //?x-oss-process=image/resize,w_500,h_100/format,webp/quality,q_80
+            if(((String) src).contains("?x-oss-process"))return src;
+
             int maxWidth =Math.min(4000,(int) (CommonTool.getWindowSize().x * 1.5)) ;
             int maxHeight =Math.min (4000,(int) (CommonTool.getWindowSize().y * 1.5));
             if (w < 1 || w > maxWidth) {
@@ -207,7 +216,21 @@ public class ImgTool {
             if (h < 1 || h > maxHeight) {
                 h = maxHeight;
             }
-            src += "?x-oss-process=image/resize,w_" + w + ",h_" + h + "/format,webp" + "/quality,q_80";
+
+            if(((String) src).endsWith("mp4")){//获取视频封面
+                src+="?x-oss-process=video/snapshot,t_0,m_fast,w_"+w+",ar_auto";
+            }else {//图片压缩减小
+                src+="?x-oss-process=image/resize,w_" + w + ",h_" + h + "/format,webp" + "/quality,q_80";
+            }
+        }
+
+        return src;
+    }
+
+    public static Object convertSrc(Object src, int w, int h) {
+        src = convertSrc(src);
+        if (src instanceof String) {
+            src =convertByAliYun(src,w,h);
         }
         return src;
     }
