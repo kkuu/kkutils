@@ -46,7 +46,6 @@ public class DaoJiShiSimple extends DaoJiShiControl {
     DaoJiShiSimple currDaoJiShi;
     View clickBtn;
     TextView tvShow, tvPhone;
-    String endStr;
     String group;//是否全局使用
     OnHuoQuYanZhengMa onHuoQuYanZhengMa;
     public DaoJiShiSimple(long millisInFuture, long countDownInterval) {
@@ -66,8 +65,8 @@ public class DaoJiShiSimple extends DaoJiShiControl {
         return errorMsg;
     }
 
-    public void initDaoJiShi(String group, long currTime, View clickBtn, TextView tvShow, String endStr, OnHuoQuYanZhengMa onHuoQuYanZhengMa) {
-        initDaoJiShiWithPhoneCheck(group, currTime, null, clickBtn, tvShow, endStr, onHuoQuYanZhengMa);
+    public void initDaoJiShi(String group, long currTime, View clickBtn, TextView tvShow,  OnHuoQuYanZhengMa onHuoQuYanZhengMa) {
+        initDaoJiShiWithPhoneCheck(group, currTime, null, clickBtn, tvShow, onHuoQuYanZhengMa);
     }
 
     /***
@@ -76,13 +75,11 @@ public class DaoJiShiSimple extends DaoJiShiControl {
      * @param tvPhone
      * @param clickBtn
      * @param tvShow
-     * @param endStr
      * @param onHuoQuYanZhengMa
      */
-    public void initDaoJiShiWithPhoneCheck(String group, long currTime, final TextView tvPhone, View clickBtn, TextView tvShow, String endStr, OnHuoQuYanZhengMa onHuoQuYanZhengMa) {
+    public void initDaoJiShiWithPhoneCheck(String group, long currTime, final TextView tvPhone, View clickBtn, TextView tvShow, OnHuoQuYanZhengMa onHuoQuYanZhengMa) {
         this.clickBtn = clickBtn;
         this.tvShow = tvShow;
-        this.endStr = endStr;
         this.tvPhone = tvPhone;
         this.group = group;
         this.onHuoQuYanZhengMa = onHuoQuYanZhengMa;
@@ -101,10 +98,7 @@ public class DaoJiShiSimple extends DaoJiShiControl {
         }
         currDaoJiShi = daoJiShiSimple;
 
-        if (StringTool.isEmpty(endStr)) {
-            endStr = "获取验证码";
-        }
-        currDaoJiShi.setView(clickBtn, tvShow, endStr);
+        currDaoJiShi.setView(clickBtn, tvShow);
         clickBtn.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
@@ -130,7 +124,7 @@ public class DaoJiShiSimple extends DaoJiShiControl {
                     CommonTool.showToast(msg);
                 }
                 if (isDataOk) {
-                    initDaoJiShiWithPhoneCheck(group, time * 1000, tvPhone, clickBtn, tvShow, endStr, onHuoQuYanZhengMa);
+                    initDaoJiShiWithPhoneCheck(group, time * 1000, tvPhone, clickBtn, tvShow, onHuoQuYanZhengMa);
                     currDaoJiShi.start();
                 } else {
                     currDaoJiShi.stop();

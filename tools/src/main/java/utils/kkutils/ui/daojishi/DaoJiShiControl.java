@@ -14,16 +14,16 @@ public class DaoJiShiControl extends CountDownTimer {
     View clickBtn;
     TextView tvShow;
     long currentTime = 0;
-    String endStr = "";
+    String startString = "";//开始时显示的字符串， 结束后又会用它显示
 
     public DaoJiShiControl(long millisInFuture, long countDownInterval) {
         super(millisInFuture, countDownInterval);
     }
 
-    public void setView(View clickBtn, TextView tvShow, String endStr) {
+    public void setView(View clickBtn, TextView tvShow) {
         this.clickBtn = clickBtn;
         this.tvShow = tvShow;
-        this.endStr = "" + endStr;
+        this.startString = tvShow.getText().toString().trim();
         if (currentTime > 0) {
             onTick(currentTime);
         }
@@ -34,7 +34,7 @@ public class DaoJiShiControl extends CountDownTimer {
         currentTime = -1;
         if (clickBtn != null && tvShow != null) {
             clickBtn.setClickable(true);
-            tvShow.setText(endStr);
+            tvShow.setText(startString);
         }
     }
 
