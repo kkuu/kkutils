@@ -12,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import utils.kkutils.AppTool;
 import utils.kkutils.JsonTool;
 
@@ -25,17 +27,22 @@ public class BroadcastReceiverTool {
         sendAction(action, null);
     }
 
-    private static void sendAction(String action, Bundle bundle) {
+    private static void sendActionBundle(String action, Bundle bundle) {
         Intent intent = new Intent(action);
         if (bundle != null) intent.putExtras(bundle);
-        AppTool.getApplication().sendBroadcast(intent);
+
+        //发送广播
+        getManager().sendBroadcast(intent);
+//        AppTool.getApplication().sendBroadcast(intent);
         LogTool.s("发送了广播" + action);
     }
 
-    public static void sendAction(String action, Object obj) {
+    public static void sendAction(String action, Serializable obj) {
         Bundle bundle = new Bundle();
-        bundle.putString("json", JsonTool.toJsonStr(obj));
-        sendAction(action, bundle);
+        if(obj!=null){
+            bundle.putSerializable("data",  obj);
+        }
+        sendActionBundle(action, bundle);
     }
 
     /***
@@ -48,6 +55,9 @@ public class BroadcastReceiverTool {
         LiftFragment.bindAction(activity,  runnable,actions);
     }
 
+    public static LocalBroadcastManager getManager(){
+        return LocalBroadcastManager.getInstance(AppTool.getApplication());
+    }
     public abstract static class BroadCastWork<T> implements Runnable {
         public Intent getIntent() {
             if(intent==null)intent=new Intent();
@@ -57,6 +67,14 @@ public class BroadcastReceiverTool {
         private Intent intent;
         public String getJsonStr() {
             return "" + getIntent().getStringExtra("json");
+        }
+
+        /***
+         * 对象需要是可序列化的 Serializable
+         * @return
+         */
+        public Object getData(){
+            return getIntent().getSerializableExtra("data");
         }
     }
 
@@ -88,7 +106,10 @@ public class BroadcastReceiverTool {
             for(String actionItem:actions){
                 intentFilter.addAction(actionItem);
             }
-            activity.registerReceiver(broadcastReceiver,intentFilter);
+
+            //注册广播接收
+           getManager().registerReceiver(broadcastReceiver,intentFilter);
+
             if (fragment instanceof LiftFragment) {
                 ((LiftFragment) fragment).broadcastReceivers.add(broadcastReceiver);
             }
@@ -99,7 +120,7 @@ public class BroadcastReceiverTool {
             super.onDestroy();
             for (int i = 0; i < broadcastReceivers.size(); i++) {
                 try {
-                    getActivity().unregisterReceiver(broadcastReceivers.get(i));
+                    getManager().unregisterReceiver(broadcastReceivers.get(i));
                 } catch (Exception e) {
                     LogTool.ex(e);
                 }
