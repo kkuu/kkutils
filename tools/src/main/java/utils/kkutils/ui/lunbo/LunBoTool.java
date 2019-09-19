@@ -288,7 +288,7 @@ public class LunBoTool {
 
     public static class LunBoData {
         public Object imageUrl = "";
-        LunBoClickListener lunBoClickListener;
+        public LunBoClickListener lunBoClickListener;
 
         public LunBoData(Object imageUrl) {
             this.imageUrl =  imageUrl;
