@@ -68,10 +68,11 @@ public class LanguageTool {
     }
 
     /***
+     * 需要在每个 activity 初始化的时候调用， 可以放在父类里面
      *  @param activity
      * @param restartActivity  重新启动的 activity ， 启动页， null 不重启
      */
-    public void setLanguage(Activity activity, Class restartActivity, Locale locale) {
+    public static  void setLanguage(Activity activity, Class restartActivity, Locale locale) {
         Resources resources = AppTool.getApplication().getResources();// 获得res资源对象
         Configuration config = resources.getConfiguration();// 获得设置对象
         DisplayMetrics dm = resources.getDisplayMetrics();// 获得屏幕参数：主要是分辨率，像素等。
