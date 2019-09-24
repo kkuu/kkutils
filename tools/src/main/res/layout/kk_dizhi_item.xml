@@ -17,6 +17,6 @@
             android:paddingRight="15dp"
             android:paddingLeft="15dp"
             />
-        <View style="@style/line_h"></View>
+        <View style="@style/kk_line_h"></View>
     </LinearLayout>
 </RelativeLayout>

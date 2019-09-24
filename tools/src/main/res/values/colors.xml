@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#E2231A</color>
+    <color name="colorPrimaryDark">#E2231A</color>
+    <color name="colorAccent">#E2231A</color>
+
 
     <color name="huise">#999999</color>
     <color name="baise">#ffffff</color>
@@ -14,6 +15,9 @@
     <color name="kk_tv_h1">#333333</color>
     <color name="kk_tv_h2">#666666</color>
     <color name="kk_tv_h3">#999999</color>
-    <color name="kk_tv_h4">#bdbebe</color>
+    <color name="kk_tv_h4">#cccccc</color>
     <color name="kk_tv_h5">#d7d7d7</color>
+
+
+
 </resources>

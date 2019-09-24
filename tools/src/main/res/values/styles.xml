@@ -19,17 +19,16 @@
     </style>
 
 
-    <style name="line_h">
+    <style name="kk_line_h">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1px</item>
         <item name="android:background">@color/kk_tv_h5</item>
     </style>
-    <style name="line_v">
+    <style name="kk_line_v">
         <item name="android:layout_width">1px</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/kk_tv_h5</item>
     </style>
-
 
 
 </resources>
