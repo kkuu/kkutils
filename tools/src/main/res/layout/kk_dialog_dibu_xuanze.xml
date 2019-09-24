@@ -24,7 +24,7 @@
                 style="@style/kk_textview"
                 android:text="选择出售步数"
                 android:textColor="#ff8f8e94"
-                android:textSize="14dp"
+                android:textSize="13dp"
                 android:layout_height="45dp"
                 android:layout_width="match_parent"
                 android:gravity="center"
@@ -33,7 +33,10 @@
                 android:id="@+id/kk_vg_dialog_dibu_xuanze_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:orientation="vertical">
-
+                <View style="@style/kk_line_h"></View>
+                <TextView android:id="@+id/btn_dialog_xuanze_1" style="@style/kk_tv_dibu_dialog_xuanze_btn" android:text="1000步" />
+                <View style="@style/kk_line_h"></View>
+                <TextView  android:id="@+id/btn_dialog_xuanze_2" style="@style/kk_tv_dibu_dialog_xuanze_btn" android:text="2000步" />
             </LinearLayout>
 
         </LinearLayout>

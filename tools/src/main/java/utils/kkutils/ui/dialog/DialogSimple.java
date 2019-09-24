@@ -121,7 +121,7 @@ public class DialogSimple {
         UiTool.setTextView(view,R.id.kk_tv_dialog_dibu_xuanze_title,title);
 
         ViewGroup kk_vg_dialog_dibu_xuanze_items=dialog.findViewById(R.id.kk_vg_dialog_dibu_xuanze_items);
-
+        kk_vg_dialog_dibu_xuanze_items.removeAllViews();
         for(String item:items){
             TextView textView=new TextView(new ContextThemeWrapper(AppTool.getApplication(),R.style.kk_tv_dibu_dialog_xuanze_btn));
             UiTool.setTextView(textView,item);
