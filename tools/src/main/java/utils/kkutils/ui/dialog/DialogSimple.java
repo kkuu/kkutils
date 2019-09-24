@@ -1,17 +1,27 @@
 package utils.kkutils.ui.dialog;
 
 import android.app.Dialog;
+import android.content.ContextWrapper;
+import android.content.res.Resources;
+import android.os.Build;
+import android.provider.Settings;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import utils.kkutils.AppTool;
 import utils.kkutils.R;
+import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.LayoutInflaterTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.StringTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.parent.KKViewOnclickListener;
+import utils.kkutils.ui.animation.FloatView;
 
 public class DialogSimple {
 
@@ -93,6 +103,40 @@ public class DialogSimple {
             }
         }
 
+        dialog.show();
+        return dialog;
+    }
+
+
+    /***
+     * @param title
+     * @param onclickListener
+     * @param items
+     * @return
+     */
+    public static Dialog showBottomChooseDialog(String title, KKViewOnclickListener onclickListener, String ... items){
+        View view= LayoutInflaterTool.getInflater(3,R.layout.kk_dialog_dibu_xuanze).inflate();
+        final Dialog dialog = DialogTool.initBottomDialog(view);
+
+        UiTool.setTextView(view,R.id.kk_tv_dialog_dibu_xuanze_title,title);
+
+        ViewGroup kk_vg_dialog_dibu_xuanze_items=dialog.findViewById(R.id.kk_vg_dialog_dibu_xuanze_items);
+
+        for(String item:items){
+            TextView textView=new TextView(new ContextThemeWrapper(AppTool.getApplication(),R.style.kk_tv_dibu_dialog_xuanze_btn));
+            UiTool.setTextView(textView,item);
+            View lineView=new View(new ContextThemeWrapper(AppTool.getApplication(),R.style.kk_line_h));
+            lineView.setBackgroundColor(AppTool.getApplication().getResources().getColor(R.color.kk_line));
+            kk_vg_dialog_dibu_xuanze_items.addView(lineView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1));
+            kk_vg_dialog_dibu_xuanze_items.addView(textView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonTool.dip2px(58)));
+            textView.setOnClickListener(onclickListener);
+        }
+        view.findViewById(R.id.kk_tv_dialog_dibu_xuanze_quxiao).setOnClickListener(new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
         return dialog;
     }
