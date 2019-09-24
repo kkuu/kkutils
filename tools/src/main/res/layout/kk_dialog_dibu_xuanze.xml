@@ -41,7 +41,7 @@
 
         </LinearLayout>
         <TextView  android:id="@+id/kk_tv_dialog_dibu_xuanze_quxiao" style="@style/kk_tv_dibu_dialog_xuanze_btn"
-            android:layout_margin="10dp"
+            android:layout_margin="10dp" android:textColor="@color/colorPrimary"
             android:text="@string/quxiao" android:background="@drawable/kk_drawable_yuanjiao_13_bai"/>
 
     </LinearLayout>
