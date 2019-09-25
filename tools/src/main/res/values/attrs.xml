@@ -5,6 +5,14 @@
     <attr name="bottomLeftRadius" format="dimension"> </attr>
     <attr name="bottomRightRadius" format="dimension"> </attr>
 
+    <attr name="padding" format="dimension"> </attr>
+    <attr name="paddingLeft" format="dimension"> </attr>
+    <attr name="paddingTop" format="dimension"> </attr>
+    <attr name="paddingRight" format="dimension"> </attr>
+    <attr name="paddingBottom" format="dimension"> </attr>
+
+
+
     <declare-styleable name="RoundImageView">
         <attr name="radius" > </attr>
         <attr name="topLeftRadius"> </attr>
@@ -29,17 +37,18 @@
 
 
     <declare-styleable name="KKRatingBar">
+        <attr name="padding" > </attr>
+        <attr name="paddingLeft" > </attr>
+        <attr name="paddingTop"> </attr>
+        <attr name="paddingRight"> </attr>
+        <attr name="paddingBottom" > </attr>
+
         <attr name="starDrawbleUnCheck" format="reference" > </attr>
         <attr name="starDrawbleChecked" format="reference"> </attr>
         <attr name="maxRating" format="integer"> </attr>
         <attr name="rating" format="integer"> </attr>
         <attr name="canControl" format="boolean"> </attr>
 
-        <attr name="itemPadding" format="integer"> </attr>
-        <attr name="itemPaddingLeft" format="integer"> </attr>
-        <attr name="itemPaddingTop" format="integer"> </attr>
-        <attr name="itemPaddingRight" format="integer"> </attr>
-        <attr name="itemPaddingBottom" format="integer"> </attr>
     </declare-styleable>
 
 

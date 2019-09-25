@@ -81,17 +81,17 @@ public class KKRatingBar extends LinearLayout {
 
         boolean canControl= typedArray.getBoolean(R.styleable.KKRatingBar_canControl, true);
 
-        int itemPadding = typedArray.getInt(R.styleable.KKRatingBar_itemPadding, -1);
+        int itemPadding = typedArray.getInt(R.styleable.KKRatingBar_padding, -1);
         if(itemPadding>-1){
             itemPaddingLeft =itemPadding;
             itemPaddingTop=itemPadding;
             itemPaddingRight =itemPadding;
             itemPaddingBottom =itemPadding;
         }
-         itemPaddingLeft = typedArray.getInt(R.styleable.KKRatingBar_itemPaddingLeft, itemPaddingLeft);
-         itemPaddingTop = typedArray.getInt(R.styleable.KKRatingBar_itemPaddingTop, itemPaddingTop);
-         itemPaddingRight = typedArray.getInt(R.styleable.KKRatingBar_itemPaddingRight, itemPaddingRight);
-         itemPaddingBottom = typedArray.getInt(R.styleable.KKRatingBar_itemPaddingBottom, itemPaddingBottom);
+         itemPaddingLeft = typedArray.getInt(R.styleable.KKRatingBar_paddingLeft, itemPaddingLeft);
+         itemPaddingTop = typedArray.getInt(R.styleable.KKRatingBar_paddingTop, itemPaddingTop);
+         itemPaddingRight = typedArray.getInt(R.styleable.KKRatingBar_paddingRight, itemPaddingRight);
+         itemPaddingBottom = typedArray.getInt(R.styleable.KKRatingBar_paddingBottom, itemPaddingBottom);
 
 
 
