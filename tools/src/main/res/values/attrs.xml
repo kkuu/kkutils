@@ -35,6 +35,11 @@
         <attr name="rating" format="integer"> </attr>
         <attr name="canControl" format="boolean"> </attr>
 
+        <attr name="itemPadding" format="integer"> </attr>
+        <attr name="itemPaddingLeft" format="integer"> </attr>
+        <attr name="itemPaddingTop" format="integer"> </attr>
+        <attr name="itemPaddingRight" format="integer"> </attr>
+        <attr name="itemPaddingBottom" format="integer"> </attr>
     </declare-styleable>
 
 
