@@ -3,6 +3,9 @@ package utils.kkutils.ui;
 
 import android.content.Context;
 import androidx.annotation.Nullable;
+import utils.kkutils.R;
+
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,16 +22,16 @@ public class KKRatingBar extends LinearLayout {
     int resStarDrawableId = android.R.drawable.star_on;
     public KKRatingBar(Context context) {
         super(context);
-        init();
+        init(null,null);
     }
 
     public KKRatingBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context,attrs);
     }
     public KKRatingBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context,attrs);
     }
 
     public void setMax(int max) {
@@ -64,11 +67,27 @@ public class KKRatingBar extends LinearLayout {
         }
     }
 
-    public void init() {
-        setMax(5);
-        setRating(2);
+    public void init(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.KKRatingBar);
+
+
+        int resStarDrawableIdEmpty =  typedArray.getResourceId(R.styleable.KKRatingBar_starDrawbleUnCheck, android.R.drawable.star_off);
+        int resStarDrawableId = typedArray.getResourceId(R.styleable.KKRatingBar_starDrawbleChecked, android.R.drawable.star_on);
+
+
+        int max = typedArray.getInt(R.styleable.KKRatingBar_maxRating, 5);
+        int rating= typedArray.getInt(R.styleable.KKRatingBar_rating, 5);
+
+
+        boolean canControl= typedArray.getBoolean(R.styleable.KKRatingBar_canControl, true);
+
+        setMax(max);
+        setRating(rating);
         setCanControl(canControl);
 
+
+        setResStarDrawableIdEmpty(resStarDrawableIdEmpty);
+        setResStarDrawableId(resStarDrawableId);
     }
     public void setResStarDrawableIdEmpty(int resStarDrawableIdEmpty) {
         this.resStarDrawableIdEmpty = resStarDrawableIdEmpty;

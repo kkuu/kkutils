@@ -28,7 +28,14 @@
     </declare-styleable>
 
 
+    <declare-styleable name="KKRatingBar">
+        <attr name="starDrawbleUnCheck" format="reference" > </attr>
+        <attr name="starDrawbleChecked" format="reference"> </attr>
+        <attr name="maxRating" format="integer"> </attr>
+        <attr name="rating" format="integer"> </attr>
+        <attr name="canControl" format="boolean"> </attr>
 
+    </declare-styleable>
 
 
 
