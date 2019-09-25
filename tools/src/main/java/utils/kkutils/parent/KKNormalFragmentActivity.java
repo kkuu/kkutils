@@ -22,7 +22,7 @@ import utils.kkutils.common.ViewTool;
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  android:background="@color/bg"
+  android:background="@color/kk_bg"
   android:id="@+id/fragment_container"
   >
   </RelativeLayout>
