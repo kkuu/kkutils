@@ -45,4 +45,6 @@ dependencies {
 //    api 'com.github.dueeeke.dkplayer:ijk-x86_64:3.0.2'
 
 
+    api 'androidx.viewpager2:viewpager2:1.0.0-alpha04'
+
 }
