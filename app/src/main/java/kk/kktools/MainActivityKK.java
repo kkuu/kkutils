@@ -32,6 +32,7 @@ import com.bumptech.glide.request.transition.Transition;
 import java.util.ArrayList;
 
 import kk.kktools.shipin.DouYinTest;
+import kk.kktools.viewpager2.ViewPager2Test;
 import utils.kkutils.AppTool;
 import utils.kkutils.ImgTool;
 import utils.kkutils.common.CommonTool;
@@ -79,6 +80,7 @@ public class MainActivityKK extends KKParentActivity {
             }
         });
         addItem("测试抖音效果", new DouYinTest(), null);
+        addItem("viewpager2", new ViewPager2Test(), null);
 
         refresh();
 

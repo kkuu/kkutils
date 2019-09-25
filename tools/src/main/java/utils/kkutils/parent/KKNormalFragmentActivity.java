@@ -96,9 +96,11 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
 
         try {
             Fragment fragment = (Fragment) getIntent().getSerializableExtra("fragment");
-            Bundle arguments = getIntent().getBundleExtra("arguments");
-            fragment.setArguments(arguments);
-            setFragment(fragment);
+            if(fragment!=null){
+                Bundle arguments = getIntent().getBundleExtra("arguments");
+                fragment.setArguments(arguments);
+                setFragment(fragment);
+            }
         } catch (Exception e) {
             LogTool.ex(e);
         }
