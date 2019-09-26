@@ -1,0 +1,8 @@
+<resources>
+
+    <item name="kkSimpleRecycleView" type="id"></item>
+    <item name="kkRefreshLayout" type="id"></item>
+
+
+</resources>
+
