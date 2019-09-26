@@ -18,6 +18,12 @@ public class ClassTool {
      */
     public static List<Field> getAllFields(Object object) {
         Class clazz = object.getClass();
+        getAllFields(clazz);
+        return  getAllFields(clazz);
+    }
+    public static List<Field> getAllFields( Class clazz) {
+
+        if(clazz==null)return new ArrayList<>();
 
         List<Field> fieldList = fieldMap.get(clazz);
         if(CollectionsTool.NotEmptyList(fieldList)){
