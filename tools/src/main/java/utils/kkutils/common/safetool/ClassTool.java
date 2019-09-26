@@ -17,11 +17,28 @@ public class ClassTool {
      * @return
      */
     public static List<Field> getAllFields(Object object) {
-        Class clazz = object.getClass();
-        getAllFields(clazz);
-        return  getAllFields(clazz);
+        return  getAllFields(object.getClass());
     }
     public static List<Field> getAllFields( Class clazz) {
+        if(clazz==null)return new ArrayList<>();
+        List<Field> fieldList = fieldMap.get(clazz);
+        if(CollectionsTool.NotEmptyList(fieldList)){
+            return fieldList;
+        }else {
+            fieldList=new ArrayList<>();
+
+
+            Class temClass=clazz;
+            while (temClass != null) {
+                fieldList.addAll(getAllFieldsWithOutSuper(temClass));
+                temClass = temClass.getSuperclass();
+            }
+
+            fieldMap.put(clazz,fieldList);
+        }
+        return fieldList;
+    }
+    public static List<Field> getAllFieldsWithOutSuper( Class clazz) {
 
         if(clazz==null)return new ArrayList<>();
 
@@ -30,10 +47,7 @@ public class ClassTool {
             return fieldList;
         }
         fieldList=new ArrayList<>();
-        while (clazz != null) {
-            fieldList.addAll(new ArrayList<>(Arrays.asList(clazz.getDeclaredFields())));
-            clazz = clazz.getSuperclass();
-        }
+        fieldList.addAll(new ArrayList<>(Arrays.asList(clazz.getDeclaredFields())));
         //对属性进行处理
         for (Field field : fieldList) {
             int mod = field.getModifiers();
