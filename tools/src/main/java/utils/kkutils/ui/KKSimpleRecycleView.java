@@ -80,6 +80,7 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
     public void setData(List datas, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
         setDataImp(datas, null, viewsResId, viewsResId, KKRecycleAdapter);
     }
+    @Deprecated
     public void setData(List datas, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
         setDataImp(datas, null, types, viewsResId, KKRecycleAdapter);
     }
