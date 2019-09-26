@@ -69,14 +69,20 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
         setEmptyResId(defaultEmptyResId);
     }
 
-    public void setData(List datas, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
-        setDataImp(datas, null, types, viewsResId, KKRecycleAdapter);
+    public static int [] getTypes(int ...type){
+        return type;
     }
+
 
     public void setData(List datas, int resId, KKRecycleAdapter KKRecycleAdapter) {
         setData(datas, null, resId, KKRecycleAdapter);
     }
-
+    public void setData(List datas, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
+        setDataImp(datas, null, viewsResId, viewsResId, KKRecycleAdapter);
+    }
+    public void setData(List datas, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
+        setDataImp(datas, null, types, viewsResId, KKRecycleAdapter);
+    }
     public void setData(List datas, Class<WzViewHolder> holderClass, int resId, KKRecycleAdapter KKRecycleAdapter) {
         types = new int[]{0};
         viewsResId = new int[]{resId};
