@@ -5,8 +5,10 @@ import android.view.View;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.List;
 
 import utils.kkutils.AppTool;
+import utils.kkutils.common.safetool.ClassTool;
 
 /**
  * Created by coder on 15/12/25.
@@ -15,29 +17,9 @@ public class ViewTool {
     static final int keyBegin = 3 << 24;//用这种方式 可以保证 key>>>24 >2;
     static int key = keyBegin;
 
-    /**
-     * 初始化一些 view 的字段
-     *
-     * @param parentView      parentView (代替这里).findViewByid()
-     * @param classObj        要填充的对象
-     * @param onClickListener 给每个初始化的View 设置的点击事件
-     *                        <p>
-     *                        <p>
-     *                        -keepclasseswithmembers class * implements java.io.Serializable {
-     *                        ;
-     *                        }
-     */
-    public static void initViews(View parentView, Object classObj, View.OnClickListener onClickListener) {
-        try {
-            if (parentView == null) return;
-            initViewsByOtherClass(parentView, classObj.getClass(), classObj, onClickListener);
-        } catch (Exception e) {
-            LogTool.ex(e);
-        }
-    }
 
     /**
-     * 初始化一些 view 的字段 需要保证 c 是classObj 的父类
+     * 初始化一些 view 的字段 需要保证
      *
      * @param parentView      parentView (代替这里).findViewByid()
      * @param c               添加这个参数的目的是为了满足 可能需要去他父类的 字段来初始化,
@@ -48,17 +30,17 @@ public class ViewTool {
      *                        ;
      *                        }
      */
-    public static void initViewsByOtherClass(View parentView, Class c, Object classObj, View.OnClickListener onClickListener) {
+    public static void initViews(View parentView, Object classObj, View.OnClickListener onClickListener) {
         try {
             if (parentView == null) return;
             if (!(classObj instanceof Serializable)) {
                 CommonTool.showToast("自动初始化view 对象时, 传入的对象必须  实现 Serializable 接口,不然要被混淆");
                 throw new Exception("自动初始化view 对象时, 传入的对象必须  实现 Serializable 接口,不然要被混淆");
             }
-            Field[] fields = c.getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
+            List <Field>fields = ClassTool.getAllFields(classObj);
+            for (int i = 0; i < fields.size(); i++) {
                 try {
-                    Field field = fields[i];
+                    Field field = fields.get(i);
                     if (View.class.isAssignableFrom(field.getType()))// 如果这个控件是
                     {
                         int idInt = AppTool.getApplication().getResources().getIdentifier(field.getName(), "id", AppTool.getApplication().getPackageName());
@@ -80,7 +62,7 @@ public class ViewTool {
     }
     public static void initViewsByActivity(Activity activity) {
         try {
-            initViewsByOtherClass(activity.getWindow().getDecorView(),activity.getClass(),activity,null);
+            initViews(activity.getWindow().getDecorView(),activity,null);
         } catch (Exception e) {
             LogTool.ex(e);
         }
