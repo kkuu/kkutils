@@ -107,6 +107,7 @@ public class MathTool {
      * @return
      */
     public static double computNianLiLvEnd(double moneyBegin,int day,double moneyEnd){
+       // return (moneyEnd-moneyBegin)/moneyBegin/day*365*100;
         return computNianLiLv(moneyBegin, day, moneyEnd-moneyBegin);
     }
 
