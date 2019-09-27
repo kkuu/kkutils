@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
@@ -146,8 +147,14 @@ public class DialogTool {
                 }
             });
         }
-        AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button button = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+               if(button!=null)button.setTextColor(Color.BLACK);
+            }
+        });
         return alertDialog;
     }
     public static interface OnDialogInputEnd{
