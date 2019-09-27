@@ -20,11 +20,7 @@ import java.util.ArrayList;
  *             app:tl_tab_space_equal="true"
  *             ></tjyutils.ui.KTabLayout>
  *
- *         <utils.wzutils.ui.WzViewPager
- *             android:id="@+id/viewPager"
- *             android:layout_width="match_parent"
- *             android:layout_height="match_parent"></utils.wzutils.ui.WzViewPager>
- *
+
  *
  */
 public class KTabNormalLayout extends CommonTabLayout {
@@ -47,13 +43,13 @@ public class KTabNormalLayout extends CommonTabLayout {
         //setIndicatorWidthEqualTitle(true);
         setIndicatorHeight(2);
         setTextsize(15);
-        setTabSpaceEqual(false);//这个属性好像只能在xml 里面设置
+        setTabSpaceEqual(false);
 
         setTextSelectColor(Color.parseColor("#E2231A"));
         setTextUnselectColor(Color.parseColor("#333333"));
         setIndicatorColor(Color.parseColor("#E2231A"));
 
-
+        notifyDataSetChanged();//很重要，设置样式后都需要调用这个才能修改
     }
 
     public void setTabData(int tabWidthDp,String ...tabDatas){

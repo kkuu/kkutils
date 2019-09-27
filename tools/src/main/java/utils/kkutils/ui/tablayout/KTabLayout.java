@@ -49,11 +49,13 @@ public class KTabLayout extends SlidingTabLayout {
         setIndicatorWidthEqualTitle(true);
         setIndicatorHeight(2);
         setTextsize(15);
-        setTabSpaceEqual(true);//这个属性好像只能在xml 里面设置
+        setTabSpaceEqual(true);
 
         setTextSelectColor(Color.parseColor("#E2231A"));
         setTextUnselectColor(Color.parseColor("#333333"));
         setIndicatorColor(Color.parseColor("#E2231A"));
+
+        notifyDataSetChanged();//很重要，设置样式后都需要调用这个才能修改
     }
 
     @Override
