@@ -54,6 +54,13 @@ public class KTabNormalLayout extends CommonTabLayout {
 
     /***
      * 不等距，不铺满的
+     *      * <utils.kkutils.ui.tablayout.KTabNormalLayout
+     *      *             android:id="@+id/c2c_tab_jiaoyi"
+     *      *             android:layout_width="match_parent"
+     *      *             android:layout_height="40dp"
+     *      *             android:layout_marginLeft="-18dp"
+     *      *             >
+     *
      * @param tab
      */
     public static void initTab(KTabNormalLayout tab){
