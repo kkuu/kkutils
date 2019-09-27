@@ -52,6 +52,53 @@ public class KTabNormalLayout extends CommonTabLayout {
         notifyDataSetChanged();//很重要，设置样式后都需要调用这个才能修改
     }
 
+    /***
+     * 不等距，不铺满的
+     * @param tab
+     */
+    public static void initTab(KTabNormalLayout tab){
+        tab.setTabData(0,"购买","出售","订单","发布");
+        tab.setIndicatorHeight(4);
+        tab.setIndicatorWidth(30);
+        tab.setTextsize(18);
+        tab.setTextBold(2);//都加粗
+        tab.setTabPadding(20);//tab 间距， 需要靠左的话就设置 tab 的marginLeft=-20;
+        tab.setTabSpaceEqual(false);
+
+        tab.setTextSelectColor(Color.parseColor("#E2231A"));
+        tab.setTextUnselectColor(Color.parseColor("#999999"));
+        tab.setIndicatorColor(Color.parseColor("#E2231A"));
+        tab.notifyDataSetChanged();
+    }
+
+    /***
+     * 等距 铺满
+     * @param tab
+     */
+    public static void initTabEqual(KTabNormalLayout tab){
+        tab.setIndicatorHeight(4);
+        tab.setTextsize(18);
+        tab.setTextBold(2);
+        tab.setTabSpaceEqual(true);//这个属性好像只能在xml 里面设置
+
+        tab.setTextSelectColor(Color.parseColor("#E2231A"));
+        tab.setTextUnselectColor(Color.parseColor("#999999"));
+        tab.setIndicatorColor(Color.parseColor("#E2231A"));
+
+        tab.notifyDataSetChanged();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public void setTabData(int tabWidthDp,String ...tabDatas){
         setTabWidth(tabWidthDp);
         ArrayList<CustomTabEntity> customTabEntities = new ArrayList<>();
