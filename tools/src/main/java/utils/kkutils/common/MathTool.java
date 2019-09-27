@@ -87,4 +87,38 @@ public class MathTool {
         return get2num(num);
     }
 
+
+    /***
+     * 计算年利率
+     * @param money 本金
+     * @param day  天数
+     * @param moneyAdd  增加的本金
+     * @return
+     */
+    public static double computNianLiLv(double money,int day,double moneyAdd){
+        return moneyAdd/money/day*365*100;
+    }
+
+    /***
+     * 计算年利率
+     * @param moneyBegin  初始本金
+     * @param day  天数
+     * @param moneyEnd 结束本金
+     * @return
+     */
+    public static double computNianLiLvEnd(double moneyBegin,int day,double moneyEnd){
+        return computNianLiLv(moneyBegin, day, moneyEnd-moneyBegin);
+    }
+
+    /***
+     * 计算收益
+     * @param money 本金
+     * @param lilv 年化利率（365） 比如  4
+     * @param day  计算天数
+     * @return
+     */
+    public static double computeNianLiXi(double money,double lilv,int day){
+        return money/365*lilv/100*day;
+    }
+
 }

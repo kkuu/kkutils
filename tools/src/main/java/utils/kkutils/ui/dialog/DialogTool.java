@@ -113,12 +113,8 @@ public class DialogTool {
      * @param quxiao
      * @return
      */
-    public static Dialog initNormalQueDingDialog(String title, String msg, String queding, final DialogInterface.OnClickListener queDingOnClickListener, String quxiao) {
-        AlertDialog.Builder dialogBuilder = initNormalQueDingBuilder(title,msg,queding,queDingOnClickListener,quxiao);
-        return dialogBuilder.create();
-    }
 
-    public static AlertDialog.Builder initNormalQueDingBuilder(String title, String msg, String queding, final DialogInterface.OnClickListener queDingOnClickListener, String quxiao) {
+    public static AlertDialog initNormalQueDingDialog(String title, String msg, String queding, final DialogInterface.OnClickListener queDingOnClickListener, String quxiao) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AppTool.currActivity);
         if (StringTool.notEmpty(title)) {
             dialogBuilder.setTitle(title);
@@ -150,7 +146,9 @@ public class DialogTool {
                 }
             });
         }
-        return dialogBuilder;
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        return alertDialog;
     }
     public static interface OnDialogInputEnd{
         void onInputEnd(EditText editText);
@@ -164,7 +162,6 @@ public class DialogTool {
      * @param onDialogInputEnd
      * @param quxiao
      * @param defalutStr
-     * @param hint
      * @param inputType
      * @return
      */
@@ -180,24 +177,23 @@ public class DialogTool {
         relativeLayout.addView(tv_dialog_input,lp);
 
 
-        AlertDialog.Builder dialogBuilder = initNormalQueDingBuilder(title, msg, queding, new DialogInterface.OnClickListener() {
+
+        AlertDialog alertDialog = initNormalQueDingDialog(title, msg, queding, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                    try {
-                        if(onDialogInputEnd!=null){
-                            onDialogInputEnd.onInputEnd(tv_dialog_input);
-                        }
-                        }catch (Exception e){
-                        LogTool.ex(e);
+                try {
+                    if (onDialogInputEnd != null) {
+                        onDialogInputEnd.onInputEnd(tv_dialog_input);
                     }
+                } catch (Exception e) {
+                    LogTool.ex(e);
+                }
             }
         }, quxiao);
 
+        alertDialog.setView(relativeLayout);
 
-        dialogBuilder.setView(relativeLayout);
-
-        AlertDialog dialog=dialogBuilder.create();
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
                 tv_dialog_input.postDelayed(new Runnable() {
@@ -210,7 +206,7 @@ public class DialogTool {
 
             }
         });
-        return dialog;
+        return alertDialog;
     }
 
 
