@@ -118,7 +118,7 @@ public class MathTool {
      * @return
      */
     public static double computeNianLiXi(double money,double lilv,int day){
-        return money/365*lilv/100*day;
+        return money*lilv*day/365/100;
     }
 
 }
