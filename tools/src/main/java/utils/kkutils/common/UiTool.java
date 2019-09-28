@@ -187,6 +187,7 @@ public class UiTool {
 
     public static void setCompoundDrawables(Activity activity, TextView textView, int resIdLeft, int resIdTop, int resIdRight, int resIdBottom) {
         try {
+            if(activity==null||textView==null)return;
             Drawable drawableLeft = null;
             Drawable drawableTop = null;
             Drawable drawableRight = null;
@@ -489,7 +490,6 @@ public class UiTool {
     /***
      * 绑定 复制按钮
      * @param btnFuZhi
-     * @param textView
      */
     public static void bindFuZhi(View btnFuZhi, final String text){
         if(btnFuZhi==null||StringTool.isEmpty(text))return;
