@@ -30,6 +30,10 @@ import java.util.List;
  *
  */
 public class KTabLayout extends SlidingTabLayout {
+    public static final int TEXT_BOLD_NONE = 0;
+    public static final int TEXT_BOLD_WHEN_SELECT = 1;
+    public static final int TEXT_BOLD_BOTH = 2;
+
     public KTabLayout(Context context) {
         super(context);
         init();

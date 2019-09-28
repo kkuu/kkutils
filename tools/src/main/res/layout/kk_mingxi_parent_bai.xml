@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/kk_vg_mingxi_item"
+        android:layout_margin="15dp"
+        android:background="@drawable/kk_drawable_yuanjiao_3_bai"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/kk_mingxi_item"></include>
+        <include layout="@layout/kk_mingxi_item"></include>
+        <include layout="@layout/kk_mingxi_item"></include>
+        <include layout="@layout/kk_mingxi_item"></include>
+        <include layout="@layout/kk_mingxi_item"></include>
+        <View style="@style/kk_line_h" android:layout_marginBottom="15dp"></View>
+        <include layout="@layout/kk_mingxi_item"></include>
+
+    </LinearLayout>
+</RelativeLayout>
