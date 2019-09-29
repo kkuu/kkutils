@@ -49,6 +49,7 @@ public class KKToast {
         if (StringTool.isEmpty("" + toastStr)) return;
         if (!CommonTool.isForeground(AppTool.getApplication())) return;
 
+        LogTool.s("showTost:  "+toastStr);
         //Snackbar.make(AppTool.currActivity.getWindow().getDecorView(),""+toastStr,Snackbar.LENGTH_SHORT).show();
         //if(true)return;
         AppTool.uiHandler.post(new Runnable() {
