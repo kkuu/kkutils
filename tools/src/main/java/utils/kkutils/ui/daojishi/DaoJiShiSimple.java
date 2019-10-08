@@ -42,12 +42,12 @@ return true;
  */
 
 public class DaoJiShiSimple extends DaoJiShiControl {
-    private static HashMap<String, DaoJiShiSimple> daoJiShiMap = new HashMap<>();
-    DaoJiShiSimple currDaoJiShi;
-    View clickBtn;
-    TextView tvShow, tvPhone;
-    String group;//是否全局使用
-    OnHuoQuYanZhengMa onHuoQuYanZhengMa;
+    public static HashMap<String, DaoJiShiSimple> daoJiShiMap = new HashMap<>();
+    public DaoJiShiSimple currDaoJiShi;
+    public View clickBtn;
+    public TextView tvShow, tvPhone;
+    public String group;//是否全局使用
+    public  OnHuoQuYanZhengMa onHuoQuYanZhengMa;
     public DaoJiShiSimple(long millisInFuture, long countDownInterval) {
         super(millisInFuture, countDownInterval);
     }
@@ -56,7 +56,7 @@ public class DaoJiShiSimple extends DaoJiShiControl {
         super(90 * 1000, 1000);
     }
 
-    public static String checkPhone(String phone) {
+    public  String checkPhone(String phone) {
         String errorMsg = "";
         if (StringTool.isEmpty(phone) || phone.length() < 6) {
             errorMsg = "请输入正确的手机号码";
