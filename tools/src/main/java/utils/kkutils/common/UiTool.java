@@ -42,7 +42,26 @@ import utils.kkutils.ui.KKToast;
  */
 public class UiTool {
     static long preBackToQuitTime = 0;
-    static Toast toast;
+
+    /***
+     * 检测空并弹框
+     * @param textView
+     * @return
+     */
+    public static String checkNullAndToast(TextView textView){
+        return checkNullAndToast(textView,"");
+    }
+    public static String checkNullAndToast(TextView textView,String defaultHint){
+        if(StringTool.isEmpty(textView.getText().toString())){
+            if(StringTool.notEmpty(defaultHint)){
+                CommonTool.showToast(defaultHint);
+            }else {
+                CommonTool.showToast(textView.getHint());
+            }
+            throw new RuntimeException("参数为空：");
+        }
+        return textView.getText().toString().trim();
+    }
 
     /**
      * ***打电话*
