@@ -114,7 +114,7 @@ public class DialogSimple {
      * @param items
      * @return
      */
-    public static Dialog showBottomChooseDialog(String title, KKViewOnclickListener onclickListener, String ... items){
+    public static Dialog showBottomChooseDialog(String title, final OnBottomChooseDialogClick onclickListener, String ... items){
         View view= LayoutInflaterTool.getInflater(3,R.layout.kk_dialog_dibu_xuanze).inflate();
         final Dialog dialog = DialogTool.initBottomDialog(view);
 
@@ -122,14 +122,21 @@ public class DialogSimple {
 
         ViewGroup kk_vg_dialog_dibu_xuanze_items=dialog.findViewById(R.id.kk_vg_dialog_dibu_xuanze_items);
         kk_vg_dialog_dibu_xuanze_items.removeAllViews();
-        for(String item:items){
+        for(final String item:items){
             TextView textView=new TextView(new ContextThemeWrapper(AppTool.getApplication(),R.style.kk_tv_dibu_dialog_xuanze_btn));
             UiTool.setTextView(textView,item);
             View lineView=new View(new ContextThemeWrapper(AppTool.getApplication(),R.style.kk_line_h));
             lineView.setBackgroundColor(AppTool.getApplication().getResources().getColor(R.color.kk_line));
             kk_vg_dialog_dibu_xuanze_items.addView(lineView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1));
             kk_vg_dialog_dibu_xuanze_items.addView(textView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonTool.dip2px(58)));
-            textView.setOnClickListener(onclickListener);
+            textView.setOnClickListener(new KKViewOnclickListener() {
+                @Override
+                public void onClickKK(View v) {
+                    if(onclickListener!=null){
+                        onclickListener.onClick(dialog,item);
+                    }
+                }
+            });
         }
         view.findViewById(R.id.kk_tv_dialog_dibu_xuanze_quxiao).setOnClickListener(new KKViewOnclickListener() {
             @Override
@@ -139,5 +146,8 @@ public class DialogSimple {
         });
         dialog.show();
         return dialog;
+    }
+    public static interface OnBottomChooseDialogClick{
+        public void onClick(Dialog dialog,String item);
     }
 }
