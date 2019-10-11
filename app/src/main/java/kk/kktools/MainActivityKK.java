@@ -31,6 +31,7 @@ import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 
+import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.shipin.DouYinTest;
 import kk.kktools.viewpager2.ViewPager2Test;
 import utils.kkutils.AppTool;
@@ -53,7 +54,7 @@ public class MainActivityKK extends KKParentActivity {
         AppTool.init(getApplication(), true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        addItem("计算器", new JiSuanQi(), null);
         addItem("测试大图", null, new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {

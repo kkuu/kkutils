@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".MainActivityKK">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView style="@style/kk_textview" android:text="计算利息" android:layout_marginRight="20dp"></TextView>
+        <TextView android:id="@+id/tv_lixi_jieguo" style="@style/kk_textview" android:text="0" ></TextView>
+    </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"  android:layout_height="100dp">
+            <EditText style="@style/kk_textview" android:id="@+id/tv_lixi_money" android:hint="金额" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:inputType="numberDecimal"></EditText>
+            <EditText style="@style/kk_textview"  android:id="@+id/tv_lixi_lilv" android:hint="利率" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:inputType="numberDecimal"></EditText>
+            <EditText style="@style/kk_textview" android:id="@+id/tv_lixi_time"  android:hint="时间（天）" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:inputType="numberDecimal"></EditText>
+        </LinearLayout>
+        <Button style="@style/kk_textview" android:id="@+id/btn_lixi_jisuan" android:text="计算" ></Button>
+
+
+</LinearLayout>
