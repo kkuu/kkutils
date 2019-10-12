@@ -80,6 +80,7 @@ public class KKProgressKeDu extends View {
      */
     public void setProgress(float progress){
         currProgress= startProgress+(int) ((endProgress-startProgress)*progress/100.0);
+        invalidate();
     }
 
     Paint paint;
