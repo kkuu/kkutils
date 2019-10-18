@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.shipin.DouYinTest;
+import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.viewpager2.ViewPager2Test;
 import utils.kkutils.AppTool;
 import utils.kkutils.ImgTool;
@@ -82,6 +83,8 @@ public class MainActivityKK extends KKParentActivity {
         });
         addItem("测试抖音效果", new DouYinTest(), null);
         addItem("viewpager2", new ViewPager2Test(), null);
+
+        addItem("图片选择器", new KKChooseImgFragmentKK(), null);
 
         refresh();
 

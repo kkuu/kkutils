@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout android:id="@+id/vg_choose_img"
+            tools:layout_width="100dp"
+            tools:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+
+                android:layout_alignParentRight="true"
+
+                android:scaleType="centerCrop"
+                android:id="@+id/imgv_add_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/kk_choose_img_camera"
+                />
+            <ImageView
+                android:id="@+id/imgv_delete_photo"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/kk_choose_img_delete"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical"
+    android:background="#ddd"
+    android:contentDescription="用于测试的， 实际中复制过去就行了"
+    tools:context=".MainActivityKK">
+
+
+    <RelativeLayout android:background="@color/baise"
+        android:id="@+id/vg_fabu_tupian"
+        tools:layout_height="110dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="15dp"
+        >
+        <include layout="@layout/kk_choose_img_fragment_item"></include>
+    </RelativeLayout>
+
+
+</RelativeLayout>

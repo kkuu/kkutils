@@ -22,11 +22,13 @@ import java.util.List;
 import utils.kkutils.AppTool;
 import utils.kkutils.ImgTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.UiTool;
 import utils.kkutils.common.UpLoadFilesTool;
 import utils.kkutils.parent.KKParentFragmentLife;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.dialog.DialogTool;
+import utils.kkutils.ui.recycleview.RecycleViewTool;
 
 /**
  * Created by ishare on 2016/6/14.
@@ -46,6 +48,7 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
     public int itemImageViewId;
     public View parent;
     public int maxSize;
+    public int spanCount;
     public ArrayList<String> datas = new ArrayList<>();
     public String addPhoto = "addphoto";
     protected KKTakePhotoTool takePhotoTool;
@@ -99,6 +102,15 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
         bundle.putSerializable("onAddPhotoInitDataListener", onAddPhotoInitDataListener);
         addToParent(fragmentManager, containerId, bundle);
     }
+    public void addToParent(FragmentManager fragmentManager, int containerId, int itemId, int maxSize,int spanCount, OnAddPhotoInitDataListener onAddPhotoInitDataListener) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("itemId", itemId);
+        bundle.putInt("maxSize", maxSize);
+        bundle.putInt("spanCount",spanCount);
+        bundle.putSerializable("onAddPhotoInitDataListener", onAddPhotoInitDataListener);
+        addToParent(fragmentManager, containerId, bundle);
+    }
+
 
     private void addToParent(FragmentManager fragmentManager, int containerId, Bundle bundle) {
         setArguments(bundle);
@@ -131,6 +143,7 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
                 this.itemId = getArguments().getInt("itemId", itemId);
                 this.itemImageViewId = getArguments().getInt("itemImageViewId", itemImageViewId);
                 this.maxSize = getArguments().getInt("maxSize", 3);
+                this.spanCount= (int) getArgument("spanCount",3);
                 Object temListener = getArguments().getSerializable("onAddPhotoInitDataListener");
                 if (temListener != null && temListener instanceof OnAddPhotoInitDataListener) {
                     this.onAddPhotoInitDataListener = (OnAddPhotoInitDataListener) temListener;
@@ -171,12 +184,22 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
 
 
             takePhotoTool = new KKTakePhotoTool(this);
-            int col = 3;
-            if (maxSize < col) {
-                col = maxSize;
-            }
-            recycleView.setLayoutManager(new StaggeredGridLayoutManager(col, StaggeredGridLayoutManager.VERTICAL));
-            recycleView.setDividerDp(10,10);
+//            int col = 3;
+//            if (maxSize < col) {
+//                col = maxSize;
+//            }
+//            recycleView.setLayoutManager(new StaggeredGridLayoutManager(col, StaggeredGridLayoutManager.VERTICAL));
+//            recycleView.setDividerDp(10,10);
+
+
+            RecycleViewTool.initRecycleViewGrid(recycleView, spanCount, 0, 0, new RecycleViewTool.OnItemSizeChange() {
+                @Override
+                public void onItemSizeChange(RecyclerView recyclerView, int position, View itemView, int width) {
+                    UiTool.setWH(itemView,width,width);
+                }
+            },null);
+
+
             recycleView.setData(datas, itemId, new KKSimpleRecycleView.KKRecycleAdapter() {
                 @Override
                 public void initData(final int positon, int type, final View itemView) {

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.yanzhenjie.album.Action;
@@ -18,8 +21,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import androidx.fragment.app.FragmentManager;
 import utils.kkutils.AppTool;
 import utils.kkutils.ImgTool;
+import utils.kkutils.R;
 
 
 /**
@@ -34,26 +39,13 @@ import utils.kkutils.ImgTool;
  */
 
 public class TakePhotoSimpleFragment extends TakePhotoFragment {
+    public static void initChooseMedia(FragmentManager fragmentManager, View parent){
+        ((ViewGroup)parent.findViewById(R.id.vg_fabu_tupian)).removeAllViews();
+        new TakePhotoSimpleFragment().addToParent(fragmentManager, R.id.vg_fabu_tupian, R.layout.kk_choose_img_fragment_item, 12,4,
+                new TakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_choose_img_camera, R.drawable.kk_choose_img_camera));
+    }
     @Override
     public void showChooseDialog() {
-//
-//
-//        {//使用  album//https://github.com/yanzhenjie/Album/blob/master/README-CN.md
-//            Album.album(this)
-//                    //.toolBarColor(toolbarColor) // Toolbar 颜色，默认蓝色。
-//                    //.statusBarColor(statusBarColor) // StatusBar 颜色，默认蓝色。
-//                    //.navigationBarColor(navigationBarColor) // NavigationBar 颜色，默认黑色，建议使用默认。
-//                    .title("图库") // 配置title。
-//                    .selectCount(maxSize) // 最多选择几张图片。
-//                    .columnCount(3) // 相册展示列数，默认是2列。
-//                    .camera(true) // 是否有拍照功能。
-//                    .checkedList(datas) // 已经选择过得图片，相册会自动选中选过的图片，并计数。
-//                    .start(999); // 999是请求码，返回时onActivityResult()的第一个参数。
-//        }
-////
-
-
-
         ArrayList<AlbumFile> result=new ArrayList<>();
         for(String data:datas){
             AlbumFile albumFile=new AlbumFile();
@@ -130,26 +122,6 @@ public class TakePhotoSimpleFragment extends TakePhotoFragment {
                     }
                 })
                 .start();
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-
-//
-//        {//使用  album
-//            if(requestCode == 999) {
-//                if (resultCode == RESULT_OK) { // Successfully.
-//                    // 不要质疑您的眼睛，就是这么简单。
-//                    ArrayList<String> pathList = Album.parseResult(data);
-//                    datas=pathList;
-//                    initListView();
-//                } else if (resultCode == RESULT_CANCELED) { // User canceled.
-//                    // 用户取消了操作。
-//                }
-//            }
-//        }
-
-
     }
     public static void init(){
 
