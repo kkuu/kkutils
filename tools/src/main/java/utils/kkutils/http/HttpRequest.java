@@ -315,7 +315,8 @@ public class HttpRequest {
     public void printLog() {
         synchronized (LogTool.class){
             LogTool.printBegin();
-            LogTool.printPart(true,"请求:"+getRequestMethod()+"  "+getUrlRequestGet());
+            LogTool.printPart(true,"请求耗时  "+((System.currentTimeMillis()-timeBeginRequest))+"  ：  "+getRequestMethod()+"  "+getUrlRequestGet());
+
             printLogPost();
             LogTool.printPart("返回数据: ");
             LogTool.printPart(getResponseDataStr());
