@@ -36,11 +36,14 @@ import kk.kktools.shipin.DouYinTest;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.viewpager2.ViewPager2Test;
 import utils.kkutils.AppTool;
+import utils.kkutils.HttpTool;
 import utils.kkutils.ImgTool;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
+import utils.kkutils.http.HttpRequest;
+import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.parent.KKParentActivity;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
@@ -90,6 +93,12 @@ public class MainActivityKK extends KKParentActivity {
 
 
 
+        HttpTool.request(HttpRequest.url("https://www.baidu.com").addQueryParams("a", "b"), String.class, new HttpUiCallBack<String>() {
+            @Override
+            public void onSuccess(String data) {
+                LogTool.s(data);
+            }
+        });
 
 
         // testWeb();

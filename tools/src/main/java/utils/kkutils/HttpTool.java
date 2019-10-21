@@ -7,6 +7,7 @@ import java.io.Serializable;
 import utils.kkutils.http.HttpRequest;
 import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.http.InterfaceHttpTool;
+import utils.kkutils.http.implement.HttpToolOkHttp;
 import utils.kkutils.http.implement.HttpToolXutils;
 
 /**
@@ -14,7 +15,7 @@ import utils.kkutils.http.implement.HttpToolXutils;
  * 网络请求工具类
  */
 public class HttpTool {
-    private static InterfaceHttpTool httpTool = new HttpToolXutils();
+    public static InterfaceHttpTool httpTool = new HttpToolOkHttp();
 
     /**
      * 初始化
