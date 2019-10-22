@@ -69,9 +69,9 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
     public OkHttpClient.Builder getDefaultBuilder(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cookieJar(initCookieJar())
-                .connectTimeout(10, TimeUnit.MINUTES)
-                .readTimeout(10, TimeUnit.MINUTES)
-                .writeTimeout(10, TimeUnit.MINUTES)
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(10, TimeUnit.DAYS)
+                .writeTimeout(10, TimeUnit.DAYS)
                 // .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.110.200", 8888)))
                 .dns(new Dns() {//dns 优先ipv4,否则android 可能导致慢
                     @NotNull
