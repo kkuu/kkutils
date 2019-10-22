@@ -27,6 +27,7 @@ import okhttp3.Call;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
 import okhttp3.Dns;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -49,6 +50,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
 
     String[] crts;
     OkHttpClient client = new OkHttpClient();
+
     /**
      * 初始化
      *
@@ -56,7 +58,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
      */
     @Override
     public void init(Context context) {
-       init(context,null);
+        init(context, null);
     }
 
     @Override
@@ -67,6 +69,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
                 .connectTimeout(5, TimeUnit.MINUTES)
                 .readTimeout(5, TimeUnit.MINUTES)
                 .writeTimeout(5, TimeUnit.MINUTES)
+                // .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.110.200", 8888)))
                 .dns(new Dns() {//dns 优先ipv4,否则android 可能导致慢
                     @NotNull
                     @Override
@@ -103,27 +106,29 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
 
         if (crts != null) {
             builder.sslSocketFactory(SSLTool.initSSLFactoryByCrt(crts));
-        }else {
+        } else {
             builder.sslSocketFactory(SSLTool.initAllowSSLFactory());
         }
-        client=builder.build();
+        client = builder.build();
 
     }
-    CookieJar initCookieJar(){
-        CookieJar cookieJar=new CookieJar() {
+
+    CookieJar initCookieJar() {
+        CookieJar cookieJar = new CookieJar() {
             private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
 
             @Override
             public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-                ArrayList<Cookie> cookieArrayList=new ArrayList<>();
-                List<Cookie> oldCookie=cookieStore.get(url.host());
-                if(oldCookie!=null){
+                ArrayList<Cookie> cookieArrayList = new ArrayList<>();
+                List<Cookie> oldCookie = cookieStore.get(url.host());
+                if (oldCookie != null) {
                     cookieArrayList.addAll(oldCookie);
                 }
                 cookieArrayList.addAll(cookies);
 
                 cookieStore.put(url.host(), cookieArrayList);
             }
+
             @Override
             public List<Cookie> loadForRequest(HttpUrl url) {
                 List<Cookie> cookies = cookieStore.get(url.host());
@@ -132,6 +137,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
         };
         return cookieJar;
     }
+
     /***
      * 同步的, 直接返回请求数据
      *
@@ -145,7 +151,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
         try {
             request.readySendRequest();
             Request.Builder builder = convertHttpRequestToRequestParams(request);
-            String temStr =  client.newCall(builder.build()).execute().body().string();
+            String temStr = client.newCall(builder.build()).execute().body().string();
             T result = JsonTool.toJava(temStr, clzz);
             request.setResponseDataStr(temStr, clzz);
             return result;
@@ -199,27 +205,42 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
         }
     }
 
-    public static MultipartBody.Builder getBody(Map<String,Object> map)
-    {
-        MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.setType(MultipartBody.FORM);
-        if (map!=null)
-        {
-            for (Map.Entry<String,Object> entry:map.entrySet())
-            {
-                if(entry.getValue() instanceof File){
+    public static RequestBody getBody(Map<String, Object> map) {
+        if (map == null) return new FormBody.Builder().build();
+
+        boolean hasFile = false;
+
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            if (entry.getValue() != null && entry.getValue() instanceof File) {//有文件
+                hasFile = true;
+                break;
+            }
+        }
+
+        if (!hasFile) {
+            FormBody.Builder builder1 = new FormBody.Builder();
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                builder1.add(entry.getKey(), "" + entry.getValue());
+            }
+            return builder1.build();
+        } else {
+            MultipartBody.Builder builder = new MultipartBody.Builder();
+            builder.setType(MultipartBody.FORM);
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                if (entry.getValue() instanceof File) {
                     File value = (File) entry.getValue();
                     String TYPE = "application/octet-stream";
                     RequestBody fileBody = RequestBody.create(MediaType.parse(TYPE), value);
-                    builder.addFormDataPart(entry.getKey(),value.getName(),fileBody);
-                }else {
-                    builder.addFormDataPart(entry.getKey(),""+entry.getValue());
+                    builder.addFormDataPart(entry.getKey(), value.getName(), fileBody);
+                } else {
+                    builder.addFormDataPart(entry.getKey(), "" + entry.getValue());
                 }
             }
+            return builder.build();
         }
-        return builder;
 
     }
+
     private synchronized Request.Builder convertHttpRequestToRequestParams(HttpRequest httpRequest) {
         //第二步构建Request对象
         Request.Builder builder = new Request.Builder()
@@ -234,9 +255,13 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
             builder.addHeader(entry.getKey(), entry.getValue());
         }
         //放入参数
-        MultipartBody.Builder body = getBody(httpRequest.getQueryMap());
+        if (HttpRequest.RequestMethod.GET.equals(httpRequest.getRequestMethod())) {
+            builder.url(httpRequest.getUrlRequestGet());
+            builder.get();
+        } else {
+            builder.post(getBody(httpRequest.getQueryMap()));
+        }
 
-        builder.post(body.build());
         return builder;
     }
 }
