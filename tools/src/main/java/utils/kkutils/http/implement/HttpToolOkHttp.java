@@ -64,6 +64,9 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
     @Override
     public void init(Context context, String... crts) {
         this.crts = crts;
+        client = getDefaultBuilder().build();
+    }
+    public OkHttpClient.Builder getDefaultBuilder(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cookieJar(initCookieJar())
                 .connectTimeout(5, TimeUnit.MINUTES)
@@ -96,12 +99,13 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
                         }
                     }
                 })
-                .hostnameVerifier(new HostnameVerifier() {
-                    @Override
-                    public boolean verify(String s, SSLSession sslSession) {
-                        return true;
-                    }
-                });
+//                .hostnameVerifier(new HostnameVerifier() {
+//                    @Override
+//                    public boolean verify(String s, SSLSession sslSession) {
+//                        return true;
+//                    }
+//                })
+                ;
 
 
         if (crts != null) {
@@ -109,11 +113,10 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
         } else {
             builder.sslSocketFactory(SSLTool.initAllowSSLFactory());
         }
-        client = builder.build();
-
+        return builder;
     }
 
-    CookieJar initCookieJar() {
+    protected CookieJar initCookieJar() {
         CookieJar cookieJar = new CookieJar() {
             private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
 
@@ -205,18 +208,15 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
         }
     }
 
-    public static RequestBody getBody(Map<String, Object> map) {
+    protected  RequestBody getBody(Map<String, Object> map) {
         if (map == null) return new FormBody.Builder().build();
-
         boolean hasFile = false;
-
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             if (entry.getValue() != null && entry.getValue() instanceof File) {//有文件
                 hasFile = true;
                 break;
             }
         }
-
         if (!hasFile) {
             FormBody.Builder builder1 = new FormBody.Builder();
             for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -241,7 +241,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
 
     }
 
-    private synchronized Request.Builder convertHttpRequestToRequestParams(HttpRequest httpRequest) {
+    protected synchronized Request.Builder convertHttpRequestToRequestParams(HttpRequest httpRequest) {
         //第二步构建Request对象
         Request.Builder builder = new Request.Builder()
                 .url(httpRequest.getUrlStr());
