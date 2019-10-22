@@ -35,6 +35,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import utils.kkutils.AppTool;
 import utils.kkutils.JsonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.http.HttpRequest;
@@ -69,7 +70,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
     public OkHttpClient.Builder getDefaultBuilder(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cookieJar(initCookieJar())
-                .connectTimeout(1, TimeUnit.MINUTES)
+                .connectTimeout(AppTool.isDebug?5:60, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.DAYS)
                 .writeTimeout(10, TimeUnit.DAYS)
                 // .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.110.200", 8888)))
