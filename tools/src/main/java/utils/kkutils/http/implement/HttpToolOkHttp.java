@@ -69,7 +69,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
     public OkHttpClient.Builder getDefaultBuilder(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cookieJar(initCookieJar())
-                .connectTimeout(10, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.MINUTES)
                 .readTimeout(10, TimeUnit.MINUTES)
                 .writeTimeout(10, TimeUnit.MINUTES)
                 // .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.110.200", 8888)))
