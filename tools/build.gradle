@@ -88,7 +88,10 @@ dependencies {
     //y验证码
     api 'com.justkiddingbaby:vercodeedittext:1.1.0'
     //密码输入框
-    implementation 'com.github.maning0303:MNPasswordEditText:V1.0.2'
+    api 'com.github.maning0303:MNPasswordEditText:V1.0.2'
+
+
+
     //tablayout  比较全的tab效果
     api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     api 'com.github.warkiz.widget:indicatorseekbar:2.1.0'
