@@ -207,6 +207,7 @@ public class ImgTool {
         if (src instanceof String) {
             if (((String) src).toLowerCase().endsWith(".gif")) return src;
             if(((String) src).contains("?x-oss-process"))return src;
+            if(!((String) src).startsWith("http"))return src;
 
             int maxWidth =Math.min(4000,(int) (CommonTool.getWindowSize().x * 1.5)) ;
             int maxHeight =Math.min (4000,(int) (CommonTool.getWindowSize().y * 1.5));
