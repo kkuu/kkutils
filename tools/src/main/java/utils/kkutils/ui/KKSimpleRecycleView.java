@@ -66,7 +66,7 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
         setOverScrollMode(OVER_SCROLL_NEVER);
         //setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false)); //这个在父类里面设置了
         adapter = new AdapterRecycle(this);
-        setEmptyResId(defaultEmptyResId);
+        setAdapter(adapter);
     }
 
     public static int [] getTypes(int ...type){
@@ -91,8 +91,7 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
     }
 
     protected void setDataImp(List datas, Class<WzViewHolder> holderClass, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
-        if(getAdapter()==null)setAdapter(adapter);//放在这里设置的目的是  因为有了默认空界面后， 设置了这个就会显示空数据， 所以放在这里
-
+       if(getEmptyView()==null) setEmptyResId(defaultEmptyResId);
 
 
         if (datas == null) datas = new ArrayList<>();

@@ -196,6 +196,9 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
                             request.setResponseDataStr(response.body().string(), clzz);
                             callBack.notifyState(HttpUiCallBack.State.stateOnSuccess, request, clzz);
                         }
+                        if(!response.isSuccessful()){
+                            LogTool.ex(new Throwable("返回错误"+response.code()+"   "+response.message()));
+                        }
                     }
                 });
 

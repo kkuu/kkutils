@@ -146,7 +146,7 @@ public class KKRefreshLayout extends SmartRefreshLayout {
 
     static {
          final int tvColor=Color.parseColor("#979797");
-         final int bgColor=Color.parseColor("#35384B");
+         final int bgColor=Color.parseColor("#00000000");
          setDefaultColor(bgColor,tvColor);
     }
 
@@ -155,16 +155,18 @@ public class KKRefreshLayout extends SmartRefreshLayout {
         bindLoadDataAndRefreshNotRefresh(pageControl,loadListDataInterface);
         loadListDataInterface.loadPageData(pageControl.init());
     }
-    public void bindLoadDataAndRefreshNotRefresh(final PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
+    public void bindLoadDataAndRefreshNotRefresh( PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
+        if(pageControl==null)pageControl=new PageControl();
+        final PageControl finalPageControl = pageControl;
         setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                loadListDataInterface.loadPageData(pageControl.getNextPageNum());
+                loadListDataInterface.loadPageData(finalPageControl.getNextPageNum());
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                loadListDataInterface.loadPageData(pageControl.init());
+                loadListDataInterface.loadPageData(finalPageControl.init());
             }
         });
     }
