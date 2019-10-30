@@ -59,7 +59,11 @@ public class KTabLayout extends SlidingTabLayout {
         setTextUnselectColor(Color.parseColor("#333333"));
         setIndicatorColor(Color.parseColor("#E2231A"));
 
-        notifyDataSetChanged();//很重要，设置样式后都需要调用这个才能修改
+        try {
+            notifyDataSetChanged();//很重要，设置样式后都需要调用这个才能修改
+        }catch (Exception e){
+
+        }
     }
 
     @Override
