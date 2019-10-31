@@ -1,5 +1,6 @@
 package kk.kktools;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -50,6 +51,7 @@ import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 import utils.kkutils.ui.webview.X5WebView;
+import utils.kkutils.zhifu.KKZhiFuUiTool;
 
 public class MainActivityKK extends KKParentActivity {
 
@@ -88,6 +90,16 @@ public class MainActivityKK extends KKParentActivity {
         addItem("viewpager2", new ViewPager2Test(), null);
 
         addItem("图片选择器", new KKChooseImgFragmentKK(), null);
+        addItem("密码输入", new KKChooseImgFragmentKK(), new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                new KKZhiFuUiTool().showZhiFuMiMa(false, new KKZhiFuUiTool.ZhiFuInterface() {
+                    @Override
+                    public void zhifu(Dialog dialogZhiFuMiMa, String password, String captcha) {
+                    }
+                }, null, null).show();
+            }
+        });
 
         refresh();
 

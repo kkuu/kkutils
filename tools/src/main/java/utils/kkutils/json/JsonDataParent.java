@@ -10,4 +10,7 @@ import java.io.Serializable;
 public abstract class JsonDataParent implements Serializable {
     public int code = 9999;
     public String msg = "";
+    public boolean isDataOk(){
+        return false;
+    }
 }

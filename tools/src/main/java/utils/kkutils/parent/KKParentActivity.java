@@ -12,6 +12,8 @@ import android.view.WindowManager;
 
 import java.io.Serializable;
 
+import androidx.core.app.ComponentActivity;
+import androidx.fragment.app.FragmentActivity;
 import utils.kkutils.AppTool;
 import utils.kkutils.R;
 import utils.kkutils.common.LogTool;
@@ -20,7 +22,7 @@ import utils.kkutils.common.LogTool;
  * Created by kk on 2017/3/23.
  */
 
-public class KKParentActivity extends AppCompatActivity implements Serializable {
+public class KKParentActivity extends FragmentActivity implements Serializable {
     ProgressDialog progressDialog;
 
     /***

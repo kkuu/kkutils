@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:background="@color/baise"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/kk_icon_back_black" android:alpha="0.5"
+                android:layout_centerVertical="true"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                ></ImageView>
+            <TextView android:layout_centerInParent="true"
+                android:id="@+id/kk_zhifu_pwd_title"
+                style="@style/kk_textview"
+                android:text="请输入支付密码"
+                android:textColor="#ff333333"
+                android:textSize="18sp"
+                />
+        </RelativeLayout>
+        <View style="@style/kk_line_h"></View>
+
+        <LinearLayout
+            android:paddingBottom="20dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView android:id="@+id/kk_tv_zhifu_mima_label"
+                android:visibility="gone" tools:visibility="visible"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:text="请输入支付密码"
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                />
+
+            <com.maning.pswedittextlibrary.MNPasswordEditText
+                android:id="@+id/kk_et_zhifu_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="230241"
+                android:focusableInTouchMode="true"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textSize="20dp"
+                app:mnPsw_border_color="#999999"
+                app:mnPsw_border_radius="3dp"
+                app:mnPsw_border_width="1px"
+                app:mnPsw_cover_circle_color="@color/kk_tv_h0"
+                app:mnPsw_cover_circle_radius="8dp" />
+
+            <TextView
+                android:id="@+id/kk_tv_go_zhaohui_zhifu_mima"
+                style="@style/kk_textview"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="找回密码"
+                android:textColor="#ff108ee9"
+                android:textSize="14dp"
+                />
+            <LinearLayout android:visibility="gone" tools:visibility="visible"
+                android:id="@+id/kk_vg_google_pwd" android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/kk_textview"
+                    android:layout_marginBottom="15dp"
+                    android:text="请输入谷歌验证码"
+                    android:textColor="#ff333333"
+                    android:textSize="14dp"
+                    />
+                <com.maning.pswedittextlibrary.MNPasswordEditText
+                    android:id="@+id/kk_et_zhifu_google_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="230241"
+                    android:focusableInTouchMode="true"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textSize="20dp"
+                    app:mnPsw_border_color="#999999"
+                    app:mnPsw_border_radius="3dp"
+                    app:mnPsw_border_width="1px"
+                    app:mnPsw_cover_circle_color="@color/kk_tv_h0"
+                    app:mnPsw_cover_circle_radius="8dp" />
+
+                <TextView
+                    android:id="@+id/kk_tv_go_bangding_google_mima"
+                    style="@style/kk_textview"
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="去绑定谷歌验证"
+                    android:textColor="#ff108ee9"
+                    android:textSize="14dp"
+                    />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
