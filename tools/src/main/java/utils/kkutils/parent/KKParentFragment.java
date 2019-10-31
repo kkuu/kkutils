@@ -14,11 +14,17 @@ import utils.kkutils.AppTool;
 import utils.kkutils.common.LayoutInflaterTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.ViewTool;
+import utils.kkutils.ui.KKSimpleRecycleView;
+import utils.kkutils.ui.pullrefresh.KKRefreshLayout;
 
 /**
  * Created by ishare on 2016/7/7.
  */
 public abstract class KKParentFragment extends Fragment implements Serializable {
+    public KKSimpleRecycleView kkSimpleRecycleView;
+    public KKRefreshLayout kkRefreshLayout;
+
+
     public static Fragment currentFragment;
     public View parent;
     public View vg_page_content;
