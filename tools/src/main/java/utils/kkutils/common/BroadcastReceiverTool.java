@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import utils.kkutils.AppTool;
-import utils.kkutils.JsonTool;
 
 /**
  * Created by ishare on 2016/8/10.
@@ -65,9 +64,7 @@ public class BroadcastReceiverTool {
         }
 
         private Intent intent;
-        public String getJsonStr() {
-            return "" + getIntent().getStringExtra("json");
-        }
+
 
         /***
          * 对象需要是可序列化的 Serializable
