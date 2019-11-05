@@ -42,11 +42,10 @@ public class DouYinAdapter extends RecyclerView.Adapter {
         VideoBean item = mVideoList.get(position);
         viewHolder.mTikTokController.initData(item);
         holder.itemView.setTag(position);
-//
-//
-//        //开始预加载
-//        PreloadManager.getInstance(AppTool.getApplication()).addPreloadTask(mVideoList.get(position+1).getUrl(), position+1);
-//        PreloadManager.getInstance(AppTool.getApplication()).addPreloadTask(mVideoList.get(position-1).getUrl(), position-1);
+
+
+        //开始预加载
+        PreloadManager.getInstance(AppTool.getApplication()).addPreloadTask(item.getUrl(), position);
 
     }
 
