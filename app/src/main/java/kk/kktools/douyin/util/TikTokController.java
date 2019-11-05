@@ -14,9 +14,11 @@ import com.dueeeke.videoplayer.util.L;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import kk.kktools.R;
+import kk.kktools.douyin.util.simple.VideoBean;
+import utils.kkutils.ImgTool;
 
 /**
- * 抖音
+ * 抖音  一般改这个就好了
  * Created by xinyu on 2018/1/6.
  */
 
@@ -55,6 +57,9 @@ public class TikTokController extends BaseVideoController<MediaPlayerControl> {
         });
     }
 
+    public void initData(VideoBean item){
+        ImgTool.loadImage(item.getThumb(),thumb);
+    }
     @Override
     public void setPlayState(int playState) {
         super.setPlayState(playState);

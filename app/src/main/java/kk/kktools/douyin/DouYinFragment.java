@@ -15,11 +15,10 @@ import java.util.List;
 
 import androidx.viewpager2.widget.ViewPager2;
 import kk.kktools.R;
-import kk.kktools.douyin.util.DataUtil;
-import kk.kktools.douyin.util.DouYinAdapter;
-import kk.kktools.douyin.util.VideoBean;
+import kk.kktools.douyin.util.simple.DataUtil;
+import kk.kktools.douyin.util.simple.DouYinAdapter;
+import kk.kktools.douyin.util.simple.VideoBean;
 import kk.kktools.douyin.util.cache.PreloadManager;
-import kk.kktools.douyin.util.cache.ProxyVideoCacheManager;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.ui.StatusBarTool;
@@ -131,8 +130,7 @@ public class DouYinFragment extends KKParentFragment {
 
     private void startPlay(int position) {
         {
-            View itemView = mViewPager.findViewWithTag(position);
-            VideoView videoView = itemView.findViewById(R.id.kk_video_view);
+            VideoView videoView = mViewPager.findViewWithTag(position);
             VideoBean tiktokBean = mVideoList.get(position);
             String playUrl = mPreloadManager.getPlayUrl(tiktokBean.getUrl());
             L.i("startPlay: " + "position: " + position + "  url: " + playUrl);

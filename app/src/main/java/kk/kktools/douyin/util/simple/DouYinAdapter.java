@@ -1,11 +1,8 @@
-package kk.kktools.douyin.util;
+package kk.kktools.douyin.util.simple;
 
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.dueeeke.videoplayer.player.VideoView;
 
@@ -14,10 +11,9 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import kk.kktools.R;
+import kk.kktools.douyin.util.TikTokController;
 import kk.kktools.douyin.util.cache.PreloadManager;
 import utils.kkutils.AppTool;
-import utils.kkutils.ImgTool;
 
 
 /**
@@ -34,26 +30,37 @@ public class DouYinAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(AppTool.getApplication()).inflate(R.layout.kk_douyin_fragment_item, parent,false);
-        return new DouYinViewHolder(view);
+        VideoView videoView=new VideoView(AppTool.getApplication());
+        videoView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        DouYinViewHolder douYinViewHolder = new DouYinViewHolder(videoView);
+        douYinViewHolder.setVideoController(newController());
+        return douYinViewHolder;
     }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         DouYinViewHolder viewHolder= (DouYinViewHolder) holder;
         VideoBean item = mVideoList.get(position);
-        //开始预加载
-        PreloadManager.getInstance(AppTool.getApplication()).addPreloadTask(item.getUrl(), position);
-        ImgTool.loadImage(item.getThumb(),viewHolder.mThumb);
-        viewHolder.mTitle.setText(item.getTitle());
-        viewHolder.mPosition = position;
+        viewHolder.mTikTokController.initData(item);
         holder.itemView.setTag(position);
+//
+//
+//        //开始预加载
+//        PreloadManager.getInstance(AppTool.getApplication()).addPreloadTask(mVideoList.get(position+1).getUrl(), position+1);
+//        PreloadManager.getInstance(AppTool.getApplication()).addPreloadTask(mVideoList.get(position-1).getUrl(), position-1);
+
     }
 
+    /***
+     * 可复写这个 改变
+     * @return
+     */
+    public TikTokController newController(){
+        return new TikTokController(AppTool.getApplication());
+    }
     @Override
     public int getItemCount() {
         return mVideoList.size();
     }
-
 
     /**
      * 借鉴ListView item复用方法
@@ -61,20 +68,18 @@ public class DouYinAdapter extends RecyclerView.Adapter {
     public static class DouYinViewHolder extends RecyclerView.ViewHolder {
         public TikTokController mTikTokController;
         public VideoView mVideoView;
-        public int mPosition;
-        public TextView mTitle;//标题
-        public ImageView mThumb;//封面图
 
         DouYinViewHolder(View itemView) {
             super(itemView);
-            mVideoView = itemView.findViewById(R.id.kk_video_view);
+            mVideoView = (VideoView) itemView;
             mVideoView.setLooping(true);
             mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
-            mTikTokController = new TikTokController(itemView.getContext());
-            mVideoView.setVideoController(mTikTokController);
-            mTitle = mTikTokController.findViewById(R.id.kk_tv_title);
-            mThumb = mTikTokController.findViewById(R.id.kk_iv_thumb);
         }
 
+
+        public void setVideoController(TikTokController newController) {
+            mVideoView.setVideoController(newController);
+            this.mTikTokController=newController;
+        }
     }
 }

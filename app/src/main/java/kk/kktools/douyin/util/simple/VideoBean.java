@@ -1,4 +1,4 @@
-package kk.kktools.douyin.util;
+package kk.kktools.douyin.util.simple;
 
 /**
  * Created by Devlin_n on 2017/6/1.

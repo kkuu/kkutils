@@ -1,4 +1,4 @@
-package kk.kktools.douyin.util;
+package kk.kktools.douyin.util.simple;
 
 import java.util.ArrayList;
 import java.util.List;
