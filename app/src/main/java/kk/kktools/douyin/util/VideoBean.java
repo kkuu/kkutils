@@ -1,4 +1,4 @@
-package kk.kktools.shipin;
+package kk.kktools.douyin.util;
 
 /**
  * Created by Devlin_n on 2017/6/1.

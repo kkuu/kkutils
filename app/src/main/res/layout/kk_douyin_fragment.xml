@@ -2,12 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" android:orientation="vertical"
-    tools:context=".MainActivityKK">
+    android:layout_height="match_parent"
+    android:background="@color/kk_tv_h0" >
 
-    <utils.kkutils.ui.KKSimpleRecycleView
-        android:id="@+id/recycler_view"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/kk_view_pager2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleView>
+        android:layout_height="match_parent" />
+
+
 </RelativeLayout>
