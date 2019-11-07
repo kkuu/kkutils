@@ -1,4 +1,4 @@
-package kk.kktools.douyin.util;
+package com.douyin;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.douyin.util.simple.VideoBean;
 import com.dueeeke.videoplayer.controller.BaseVideoController;
 import com.dueeeke.videoplayer.controller.MediaPlayerControl;
 import com.dueeeke.videoplayer.player.VideoView;
@@ -14,7 +15,6 @@ import com.dueeeke.videoplayer.util.L;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import kk.kktools.R;
-import kk.kktools.douyin.util.simple.VideoBean;
 import utils.kkutils.ImgTool;
 
 /**
@@ -22,20 +22,20 @@ import utils.kkutils.ImgTool;
  * Created by xinyu on 2018/1/6.
  */
 
-public class TikTokController extends BaseVideoController<MediaPlayerControl> {
+public class DouYinController extends BaseVideoController<MediaPlayerControl> {
 
     private ImageView thumb;
     private ImageView mPlayBtn;
 
-    public TikTokController(@NonNull Context context) {
+    public DouYinController(@NonNull Context context) {
         super(context);
     }
 
-    public TikTokController(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public DouYinController(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TikTokController(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public DouYinController(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

@@ -1,4 +1,4 @@
-package kk.kktools.douyin.util.cache;
+package com.douyin.util.cache;
 
 import android.content.Context;
 
@@ -11,6 +11,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import utils.kkutils.AppTool;
 
 /**
  * 抖音预加载工具，使用AndroidVideoCache实现
@@ -45,11 +47,11 @@ public class PreloadManager {
         mHttpProxyCacheServer = ProxyVideoCacheManager.getProxy(context);
     }
 
-    public static PreloadManager getInstance(Context context) {
+    public static PreloadManager getInstance() {
         if (sPreloadManager == null) {
             synchronized (PreloadManager.class) {
                 if (sPreloadManager == null) {
-                    sPreloadManager = new PreloadManager(context.getApplicationContext());
+                    sPreloadManager = new PreloadManager(AppTool.getApplication());
                 }
             }
         }

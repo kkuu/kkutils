@@ -1,38 +1,13 @@
 package kk.kktools;
 
 import android.app.Dialog;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.palette.graphics.Palette;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
+import com.douyin.DouYinFragment;
 
 import java.util.ArrayList;
 
-import kk.kktools.douyin.DouYinFragment;
 import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.viewpager2.ViewPager2Test;

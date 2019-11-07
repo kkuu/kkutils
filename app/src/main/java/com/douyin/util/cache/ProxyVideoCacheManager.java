@@ -1,4 +1,4 @@
-package kk.kktools.douyin.util.cache;
+package com.douyin.util.cache;
 
 import android.content.Context;
 
