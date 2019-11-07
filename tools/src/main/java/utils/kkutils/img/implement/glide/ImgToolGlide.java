@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import androidx.annotation.Nullable;
+
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -143,8 +145,12 @@ public class ImgToolGlide implements InterfaceImgTool {
     }
     @Override
     public void preloadImage(Context context, Object src, int width, int height) {
-        RequestBuilder requestBuilder=initBuilder(context,src,null,width,height);
-        requestBuilder.preload(width,height);
+        ImageView imageView=new ImageView(AppTool.currActivity);
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(width,height));
+        loadImage(AppTool.currActivity,src,imageView,width,height);
+
+//        RequestBuilder requestBuilder=initBuilder(context,src,null,width,height);
+//        requestBuilder.preload(width,height);
     }
 
     @Override
