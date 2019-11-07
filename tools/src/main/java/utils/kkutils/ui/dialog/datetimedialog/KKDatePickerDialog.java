@@ -1,5 +1,6 @@
 package utils.kkutils.ui.dialog.datetimedialog;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -15,6 +16,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.dialog.DialogTool;
@@ -46,11 +48,27 @@ public class KKDatePickerDialog extends RelativeLayout {
     public void setTitle(String title) {
         this.title = title;
     }
-
+    Dialog dialog;
 
     public  void show(){
-        refreshView();
-        DialogTool.initBottomDialog(this).show();
+        try {
+            refreshView();
+            dialog = DialogTool.initBottomDialog(this);
+            dialog.show();
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
+    }
+    public void dismiss(){
+        try {
+            if(dialog!=null){
+                dialog.dismiss();
+            }
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
     }
 
     public KKDatePickerDialog(Context context) {
