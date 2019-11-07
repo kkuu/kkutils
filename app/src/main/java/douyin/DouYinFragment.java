@@ -1,13 +1,12 @@
-package com.douyin;
+package douyin;
 
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.douyin.util.simple.DataUtil;
-import com.douyin.util.simple.DouYinAdapter;
-
+import douyin.util.simple.DataUtil;
+import douyin.util.simple.DouYinAdapter;
 import kk.kktools.R;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.parent.KKParentFragment;

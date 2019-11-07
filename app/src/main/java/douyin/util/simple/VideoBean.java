@@ -1,4 +1,4 @@
-package com.douyin.util.simple;
+package douyin.util.simple;
 
 /**
  * Created by Devlin_n on 2017/6/1.

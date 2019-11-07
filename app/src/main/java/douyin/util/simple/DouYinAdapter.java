@@ -1,11 +1,9 @@
-package com.douyin.util.simple;
+package douyin.util.simple;
 
 
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.douyin.DouYinController;
-import com.douyin.util.cache.PreloadManager;
 import com.dueeeke.videoplayer.BuildConfig;
 import com.dueeeke.videoplayer.ijk.IjkPlayerFactory;
 import com.dueeeke.videoplayer.player.VideoView;
@@ -21,6 +19,8 @@ import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
+import douyin.DouYinController;
+import douyin.util.cache.PreloadManager;
 import utils.kkutils.AppTool;
 import utils.kkutils.common.LogTool;
 

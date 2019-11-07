@@ -1,4 +1,4 @@
-package com.douyin.util.cache;
+package douyin.util.cache;
 
 import android.content.Context;
 

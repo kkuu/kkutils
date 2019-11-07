@@ -1,4 +1,4 @@
-package com.douyin;
+package douyin;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.douyin.util.simple.VideoBean;
 import com.dueeeke.videoplayer.controller.BaseVideoController;
 import com.dueeeke.videoplayer.controller.MediaPlayerControl;
 import com.dueeeke.videoplayer.player.VideoView;
@@ -14,6 +13,7 @@ import com.dueeeke.videoplayer.util.L;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import douyin.util.simple.VideoBean;
 import kk.kktools.R;
 import utils.kkutils.ImgTool;
 

@@ -1,4 +1,4 @@
-package com.douyin.util.cache;
+package douyin.util.cache;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.dueeeke.videoplayer.util.L;

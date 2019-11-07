@@ -1,4 +1,4 @@
-package com.douyin.util.simple;
+package douyin.util.simple;
 
 import java.util.ArrayList;
 import java.util.List;

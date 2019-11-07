@@ -4,10 +4,10 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import com.douyin.DouYinFragment;
 
 import java.util.ArrayList;
 
+import douyin.DouYinFragment;
 import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.viewpager2.ViewPager2Test;
