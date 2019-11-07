@@ -12,12 +12,9 @@
 
     <ImageView
         android:id="@+id/kk_play_btn"
-        android:layout_width="@dimen/dkplayer_play_btn_size"
-        android:layout_height="@dimen/dkplayer_play_btn_size"
+        style="@style/kk_textview"
         android:layout_gravity="center"
-        android:background="@drawable/dkplayer_shape_play_bg"
-        android:padding="@dimen/dkplayer_default_spacing"
-        android:src="@drawable/dkplayer_selector_play_button"
+        android:src="@drawable/kk_video_icon_play"
         android:visibility="gone"
         tools:visibility="visible"/>
 

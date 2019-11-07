@@ -1,17 +1,20 @@
 package douyin;
 
 
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import douyin.util.simple.DataUtil;
 import douyin.util.simple.DouYinAdapter;
-import kk.kktools.R;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.ui.StatusBarTool;
 
+/***
+ * 直接复制当前包到项目 根 包下面
+ */
 public class DouYinFragment extends KKParentFragment {
 
 
@@ -23,14 +26,14 @@ public class DouYinFragment extends KKParentFragment {
     RelativeLayout relativeLayout;
     @Override
     public View initContentView() {
-         relativeLayout = new RelativeLayout(getContext());
+        relativeLayout = new RelativeLayout(getContext());
         relativeLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         return relativeLayout;
     }
 
     @Override
     public void initData() {
-        StatusBarTool.setStatusBarColor(getActivity(),getResources().getColor(R.color.kk_tv_h0),true,false);
+        StatusBarTool.setStatusBarColor(getActivity(),Color.BLACK,true,false);
         CommonTool.setSoftInputAdjustPan(getActivity());
 
         initDouYin();
