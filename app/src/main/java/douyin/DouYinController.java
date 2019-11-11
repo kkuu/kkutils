@@ -11,6 +11,8 @@ import com.dueeeke.videoplayer.controller.MediaPlayerControl;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.dueeeke.videoplayer.util.L;
 
+import java.io.Serializable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import douyin.util.simple.VideoBean;
@@ -22,7 +24,8 @@ import utils.kkutils.ImgTool;
  * Created by xinyu on 2018/1/6.
  */
 
-public class DouYinController extends BaseVideoController<MediaPlayerControl> {
+public class DouYinController extends BaseVideoController<MediaPlayerControl> implements Serializable {
+
 
     private ImageView thumb;
     private ImageView mPlayBtn;
@@ -41,11 +44,11 @@ public class DouYinController extends BaseVideoController<MediaPlayerControl> {
 
     @Override
     protected int getLayoutId() {
-        return  R.layout.kk_douyin_fragment_control;
+        return R.layout.kk_douyin_fragment_control;
     }
 
     @Override
-    protected void initView() {
+    public void initView() {
         super.initView();
         thumb = mControllerView.findViewById(R.id.kk_iv_thumb);
         mPlayBtn = mControllerView.findViewById(R.id.kk_play_btn);
@@ -57,9 +60,18 @@ public class DouYinController extends BaseVideoController<MediaPlayerControl> {
         });
     }
 
-    public void initData(VideoBean item){
-        ImgTool.loadImage(item.getThumb(),thumb);
+    public ImageView getThumb() {
+        return thumb;
     }
+
+    public ImageView getmPlayBtn() {
+        return mPlayBtn;
+    }
+
+    public void initData(VideoBean item) {
+        ImgTool.loadImage(item.getThumb(), thumb);
+    }
+
     @Override
     public void setPlayState(int playState) {
         super.setPlayState(playState);
@@ -87,7 +99,40 @@ public class DouYinController extends BaseVideoController<MediaPlayerControl> {
                 Toast.makeText(getContext(), R.string.dkplayer_error_message, Toast.LENGTH_SHORT).show();
                 break;
         }
+
+        /***
+         * 需要进度就要打开这个歌
+         */
+        if (showProgress) {
+            if (playState == VideoView.STATE_PLAYING) {
+                removeCallbacks(mShowProgress);
+                post(mShowProgress);
+            }
+        }
+
     }
+
+    /***
+     * 释放回调进度，可以通过setProgress 来获取
+     */
+    public boolean showProgress = false;
+
+    /**
+     * 需要就打开可以设置进度， 返回950 代表 间隔 1000-950 调用一次
+     *
+     * @return
+     */
+    @Override
+    protected int setProgress() {
+//        showProgress=true;
+        long duration = mMediaPlayer.getDuration();
+        long currentPosition = mMediaPlayer.getCurrentPosition();
+//        seekBarShouYe.setMax(duration);
+//        seekBarShouYe.setProgress(currentPosition);
+//        LogTool.s(""+currentPosition+"  "+duration);
+        return 950;
+    }
+
 
     @Override
     public boolean showNetWarning() {
