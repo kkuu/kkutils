@@ -39,6 +39,8 @@ dependencies {
 //    api 'androidx.viewpager2:viewpager2:1.0.0-alpha04'
     api 'com.google.android.material:material:1.0.0'
 
+    api 'com.google.android:flexbox:1.1.1'
+
     api 'androidx.recyclerview:recyclerview:1.0.0'
     // implementation (name: 'alipaySdk-15.5.9-20181123210601', ext: 'aar') 不能使用这种方式   要用：   implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
     //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
