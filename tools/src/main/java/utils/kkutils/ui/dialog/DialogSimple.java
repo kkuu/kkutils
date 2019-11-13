@@ -117,23 +117,26 @@ public class DialogSimple {
      * @return
      */
     public static Dialog showBottomChooseDialog(String title, final OnBottomChooseDialogClick onclickListener, final String ... items){
+
+
         View view= LayoutInflaterTool.getInflater(3,R.layout.kk_dialog_dibu_xuanze).inflate();
         final Dialog dialog = DialogTool.initBottomDialog(view);
-
+        if(StringTool.isEmpty(title)){
+            UiTool.getParentView(view.findViewById(R.id.kk_tv_dialog_dibu_xuanze_title)).setVisibility(View.GONE);
+        }
         UiTool.setTextView(view,R.id.kk_tv_dialog_dibu_xuanze_title,title);
-
         ViewGroup kk_vg_dialog_dibu_xuanze_items=dialog.findViewById(R.id.kk_vg_dialog_dibu_xuanze_items);
         kk_vg_dialog_dibu_xuanze_items.removeAllViews();
-
-
         for(int i=0;i<items.length;i++){
             final String item=items[i];
             TextView textView=new TextView(new ContextThemeWrapper(AppTool.getApplication(),R.style.kk_tv_dibu_dialog_xuanze_btn));
             UiTool.setTextView(textView,item);
             View lineView=new View(new ContextThemeWrapper(AppTool.getApplication(),R.style.kk_line_h));
             lineView.setBackgroundColor(AppTool.getApplication().getResources().getColor(R.color.kk_line));
-            kk_vg_dialog_dibu_xuanze_items.addView(lineView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1));
             kk_vg_dialog_dibu_xuanze_items.addView(textView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommonTool.dip2px(58)));
+            if(i!=items.length-1){
+                kk_vg_dialog_dibu_xuanze_items.addView(lineView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1));
+            }
             final int index = i;
             textView.setOnClickListener(new KKViewOnclickListener() {
                 @Override
