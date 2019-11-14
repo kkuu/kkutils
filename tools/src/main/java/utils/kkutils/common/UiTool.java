@@ -285,7 +285,7 @@ public class UiTool {
     }
 
     public static int getColorByResId(int colorResId){
-        return AppTool.currActivity.getResources().getColor(colorResId);
+        return ResourcesTool.getColor(colorResId);
     }
     /***
      * 给控件设置w h
