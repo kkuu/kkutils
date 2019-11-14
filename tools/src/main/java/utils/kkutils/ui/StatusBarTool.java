@@ -13,6 +13,7 @@ import com.blankj.utilcode.util.BarUtils;
 
 import utils.kkutils.R;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.ResourcesTool;
 
 /***
  * 只用 这个  public static void setStatusBarColor(Activity activity,int bgColor, boolean isTvBlack,boolean isLayoutBelowToStatusBar)
@@ -31,6 +32,7 @@ public class StatusBarTool {
      */
     public static void setStatusBarColor(Activity activity,int bgColor, boolean isTvBlack,boolean isLayoutBelowToStatusBar){
         try {
+            bgColor= ResourcesTool.getColor(bgColor);
             LogTool.s("setStatusBarColor "+activity);
             int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
             if(!isLayoutBelowToStatusBar)option=0;
