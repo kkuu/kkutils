@@ -37,8 +37,8 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
     public KKRecycleAdapter kkRecycleAdapter;
     public Class<WzViewHolder> holderClass;
 
-    public static boolean isInflateViewUseParent=true;//是否inflate 用parentView; 临时兼容老项目的，以后一直是true
-
+    public static boolean inflateViewUseParentDefault=true;//是否inflate 用parentView; 临时兼容老项目的，以后一直是true 全局的，
+    public boolean inflateViewUseParent=inflateViewUseParentDefault;//部分的用这个改
 
     /***
      * 设置 缓存的 layout 的个数， 和recyle cache 不一样， LayoutInflaterTool 这个用的
@@ -177,9 +177,9 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
                 }
 
                 if (wzRecycleView.getLayoutCacheCount() > 0) {
-                    itemView = LayoutInflaterTool.getInflater(wzRecycleView.getLayoutCacheCount(), resId).inflate(isInflateViewUseParent?parent:null);
+                    itemView = LayoutInflaterTool.getInflater(wzRecycleView.getLayoutCacheCount(), resId).inflate(wzRecycleView.inflateViewUseParent?parent:null);
                 } else {
-                    itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, isInflateViewUseParent?parent:null);
+                    itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, wzRecycleView.inflateViewUseParent?parent:null);
                 }
 
             }
