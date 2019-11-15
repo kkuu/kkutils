@@ -179,7 +179,7 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
                 if (wzRecycleView.getLayoutCacheCount() > 0) {
                     itemView = LayoutInflaterTool.getInflater(wzRecycleView.getLayoutCacheCount(), resId).inflate(wzRecycleView.inflateViewUseParent?parent:null);
                 } else {
-                    itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, wzRecycleView.inflateViewUseParent?parent:null);
+                    itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, wzRecycleView.inflateViewUseParent?parent:null,false);
                 }
 
             }
