@@ -1,7 +1,9 @@
 package utils.kkutils.ui;
 
 import android.content.Context;
+
 import androidx.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +36,6 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
     public int[] viewsResId = new int[0];
     public KKRecycleAdapter kkRecycleAdapter;
     public Class<WzViewHolder> holderClass;
-    public boolean isOnCreateViewUseRootView;//在创建的时候 使用rootView
     /***
      * 设置 缓存的 layout 的个数， 和recyle cache 不一样， LayoutInflaterTool 这个用的
      */
@@ -69,7 +70,7 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
         setAdapter(adapter);
     }
 
-    public static int [] getTypes(int ...type){
+    public static int[] getTypes(int... type) {
         return type;
     }
 
@@ -77,13 +78,16 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
     public void setData(List datas, int resId, KKRecycleAdapter KKRecycleAdapter) {
         setData(datas, null, resId, KKRecycleAdapter);
     }
+
     public void setData(List datas, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
         setDataImp(datas, null, viewsResId, viewsResId, KKRecycleAdapter);
     }
+
     @Deprecated
     public void setData(List datas, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
         setDataImp(datas, null, types, viewsResId, KKRecycleAdapter);
     }
+
     public void setData(List datas, Class<WzViewHolder> holderClass, int resId, KKRecycleAdapter KKRecycleAdapter) {
         types = new int[]{0};
         viewsResId = new int[]{resId};
@@ -91,7 +95,7 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
     }
 
     protected void setDataImp(List datas, Class<WzViewHolder> holderClass, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
-       if(getEmptyView()==null) setEmptyResId(defaultEmptyResId);
+        if (getEmptyView() == null) setEmptyResId(defaultEmptyResId);
 
 
         if (datas == null) datas = new ArrayList<>();
@@ -107,26 +111,20 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
 
     }
 
-    public void addData(int position,Object data){
-        this.datas.add(position,data);
+    public void addData(int position, Object data) {
+        this.datas.add(position, data);
         adapter.notifyItemInserted(position);
         adapter.notifyItemRangeChanged(position, adapter.getItemCount());
     }
-    public void addDataList(int position,List dataList){
-        if(CollectionsTool.NotEmptyList(dataList)){
-            this.datas.addAll(position,dataList);
-            adapter.notifyItemRangeInserted(position,dataList.size());
-            adapter.notifyItemRangeChanged(0,position);//刷新前面的
-            adapter.notifyItemRangeChanged(position+dataList.size(),datas.size()-dataList.size());//刷新后面的
+
+    public void addDataList(int position, List dataList) {
+        if (CollectionsTool.NotEmptyList(dataList)) {
+            this.datas.addAll(position, dataList);
+            adapter.notifyItemRangeInserted(position, dataList.size());
+            adapter.notifyItemRangeChanged(0, position);//刷新前面的
+            adapter.notifyItemRangeChanged(position + dataList.size(), datas.size() - dataList.size());//刷新后面的
         }
     }
-
-
-
-
-
-
-
 
 
     public void setEmptyResId(int emptyResId) {
@@ -146,7 +144,7 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
     }
 
     @Override
-    public View getEmptyView(){
+    public View getEmptyView() {
         return adapter.emptyView;
     }
 
@@ -173,14 +171,11 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
                         resId = wzRecycleView.viewsResId[i];
                     }
                 }
-                if(wzRecycleView.isOnCreateViewUseRootView){
-                    itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, parent,false);
-                }else {
-                    if (wzRecycleView.getLayoutCacheCount() > 0) {
-                        itemView = LayoutInflaterTool.getInflater(wzRecycleView.getLayoutCacheCount(), resId).inflate();
-                    } else {
-                        itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, null);
-                    }
+
+                if (wzRecycleView.getLayoutCacheCount() > 0) {
+                    itemView = LayoutInflaterTool.getInflater(wzRecycleView.getLayoutCacheCount(), resId).inflate(parent);
+                } else {
+                    itemView = LayoutInflater.from(wzRecycleView.getContext()).inflate(resId, null);
                 }
 
             }
@@ -240,10 +235,10 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
 
         public void initData(int position) {
             try {
-                int type=getItemViewType();
-                if(wzRecycleView.kkRecycleAdapter.isEmptyType(type)){
-                    wzRecycleView.kkRecycleAdapter.initEmptyData(position,type,itemView);
-                }else {
+                int type = getItemViewType();
+                if (wzRecycleView.kkRecycleAdapter.isEmptyType(type)) {
+                    wzRecycleView.kkRecycleAdapter.initEmptyData(position, type, itemView);
+                } else {
                     wzRecycleView.kkRecycleAdapter.initData(position, type, itemView);
                     wzRecycleView.kkRecycleAdapter.initData(position, type, itemView, this);
                 }
@@ -274,6 +269,7 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
         public void initEmptyData(int position, int type, View itemView) {
 
         }
+
         public boolean isEmptyType(int type) {
             return type == AdapterRecycle.emptyType;
         }
