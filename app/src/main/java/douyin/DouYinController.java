@@ -70,6 +70,8 @@ public class DouYinController extends BaseVideoController<MediaPlayerControl> im
 
     public void initData(VideoBean item) {
         ImgTool.loadImage(item.getThumb(), thumb);
+
+//        new ImgToolGlide().initBuilder(getContext(),thumb,item.getThumb(),0,0).into()
     }
 
     @Override
@@ -83,6 +85,7 @@ public class DouYinController extends BaseVideoController<MediaPlayerControl> im
                 break;
             case VideoView.STATE_PLAYING:
                 L.e("STATE_PLAYING " + hashCode());
+
                 thumb.setVisibility(GONE);
                 mPlayBtn.setVisibility(GONE);
                 break;

@@ -32,7 +32,7 @@
 //public class DouYinRecycleViewTool {
 //    public KKSimpleRecycleView recycler_view;
 //    public VideoView mVideoView;
-//    public  DouYinController mTikTokController;
+//    public DouYinController mTikTokController;
 //    public List<VideoBean> tikTokVideoList;
 //
 //    public int startPosition;
@@ -47,7 +47,7 @@
 //                .setPlayerFactory(IjkPlayerFactory.create())
 //                .build());
 //
-//        tikTokVideoList = DataUtil.getTikTokVideoList();
+//        tikTokVideoList = DataUtil.getVideoList();
 //        mVideoView = new VideoView(AppTool.getApplication());
 //        mVideoView.setLooping(true);
 //        mTikTokController = new DouYinController(AppTool.getApplication());
@@ -75,7 +75,6 @@
 //    public int w=0;
 //    public int h=0;
 //    public void initLayoutManager(){
-//        recycler_view.isOnCreateViewUseRootView=true;
 //        recycler_view.setItemViewCacheSize(10);
 //        final RecycleViewViewPagerLayoutManager viewPagerLayoutManager = new RecycleViewViewPagerLayoutManager(AppTool.getApplication(), RecyclerView.VERTICAL);
 //        viewPagerLayoutManager.setOnViewPagerListener(new RecycleViewViewPagerLayoutManager.OnViewPagerListener() {

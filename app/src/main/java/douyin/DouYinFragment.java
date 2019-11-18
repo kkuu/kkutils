@@ -41,7 +41,7 @@ public class DouYinFragment extends KKParentFragment {
     }
     public void initDouYin(){
         //核心就这一句，自定义UI注意重写DouYinController
-        new DouYinAdapterViewPager(getLifecycle(),relativeLayout, DataUtil.getTikTokVideoList()){
+        new DouYinAdapterViewPager(getLifecycle(),relativeLayout, DataUtil.getVideoList()){
             @Override
             public DouYinController newController() {
                 return super.newController();

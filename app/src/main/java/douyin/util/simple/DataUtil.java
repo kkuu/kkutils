@@ -40,9 +40,30 @@ public class DataUtil {
 
     public static List<VideoBean> getVideoList() {
         List<VideoBean> videoList = new ArrayList<>();
+
+        videoList.add(new VideoBean("",
+                "http://p3-dy.byteimg.com/large/tos-cn-p-0015/102bc745c6984e5fb962f90e8cd4ab0f.jpeg",
+                "https://aweme.snssdk.com/aweme/v1/play/?video_id=v0300f5e0000bmir1gu9taafbguk4m6g&line=0&ratio=540p&watermark=1&media_type=4&vr_type=0&improve_bitrate=0&logo_name=aweme"));
+
+
+        videoList.add(new VideoBean("",
+                "http://outin-cb4cc87b708c11e99d3800163e1a625e.oss-cn-shanghai.aliyuncs.com/c04a99be266049f59fd773d51965009f/6b2e205abd4e769ff0d3a6a23fa43d42-hd.mp4?x-oss-process=video/snapshot,t_0000,f_jpg,w_1080,m_fast",
+                "http://outin-cb4cc87b708c11e99d3800163e1a625e.oss-cn-shanghai.aliyuncs.com/c04a99be266049f59fd773d51965009f/6b2e205abd4e769ff0d3a6a23fa43d42-hd.mp4"));
+
+
+
         videoList.add(new VideoBean("预告片1",
                 "https://cms-bucket.nosdn.127.net/eb411c2810f04ffa8aaafc42052b233820180418095416.jpeg",
                 "http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4"));
+
+        videoList.add(new VideoBean("",
+                "https://p1.pstatp.com/large/4bea0014e31708ecb03e.jpeg",
+                "https://aweme.snssdk.com/aweme/v1/play/?video_id=374e166692ee4ebfae030ceae117a9d0&line=0&ratio=720p&media_type=4&vr_type=0"));
+
+        videoList.add(new VideoBean("",
+                "https://p1.pstatp.com/large/4bb500130248a3bcdad0.jpeg",
+                "https://aweme.snssdk.com/aweme/v1/play/?video_id=8a55161f84cb4b6aab70cf9e84810ad2&line=0&ratio=720p&media_type=4&vr_type=0"));
+
 
         videoList.add(new VideoBean("预告片2",
                 "https://cms-bucket.nosdn.127.net/cb37178af1584c1588f4a01e5ecf323120180418133127.jpeg",
@@ -96,14 +117,20 @@ public class DataUtil {
                 "https://cms-bucket.nosdn.127.net/cb37178af1584c1588f4a01e5ecf323120180418133127.jpeg",
                 "http://vfx.mtime.cn/Video/2019/03/12/mp4/190312083533415853.mp4"));
 
+        videoList.add(new VideoBean("",
+                "https://p9.pstatp.com/large/4c87000639ab0f21c285.jpeg",
+                "http://outin-cb4cc87b708c11e99d3800163e1a625e.oss-cn-shanghai.aliyuncs.com/c04a99be266049f59fd773d51965009f/6b2e205abd4e769ff0d3a6a23fa43d42-hd.mp4"));
         return videoList;
     }
 
     /**
      * 抖音演示数据
      */
+    @Deprecated
     public static List<VideoBean> getTikTokVideoList() {
         List<VideoBean> videoList = new ArrayList<>();
+
+
         videoList.add(new VideoBean("",
                 "https://p9.pstatp.com/large/4c87000639ab0f21c285.jpeg",
                 "https://aweme.snssdk.com/aweme/v1/play/?video_id=97022dc18711411ead17e8dcb75bccd2&line=0&ratio=720p&media_type=4&vr_type=0"));

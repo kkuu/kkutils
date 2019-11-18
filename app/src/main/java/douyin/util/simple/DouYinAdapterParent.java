@@ -3,6 +3,7 @@ package douyin.util.simple;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.dueeeke.videoplayer.BuildConfig;
 import com.dueeeke.videoplayer.ijk.IjkPlayerFactory;
@@ -22,6 +23,7 @@ import douyin.DouYinController;
 import douyin.util.cache.PreloadManager;
 import utils.kkutils.AppTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.ViewTool;
 
 
 /**
@@ -126,9 +128,18 @@ public abstract class DouYinAdapterParent extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        VideoView videoView = new VideoView(AppTool.getApplication());
-        videoView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        DouYinViewHolder douYinViewHolder = new DouYinViewHolder(videoView);
+        RelativeLayout relativeLayout=new RelativeLayout(parent.getContext());
+        relativeLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        relativeLayout.setGravity(RelativeLayout.CENTER_IN_PARENT);
+        relativeLayout.setClipChildren(true);
+
+        VideoView videoView = new KVideoView(parent.getContext());
+        videoView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        videoView.setId(DouYinViewHolder.idVideoView);
+        relativeLayout.addView(videoView);
+
+        DouYinViewHolder douYinViewHolder = new DouYinViewHolder(relativeLayout);
+
         douYinViewHolder.setVideoController(newController());
         return douYinViewHolder;
     }
@@ -138,7 +149,7 @@ public abstract class DouYinAdapterParent extends RecyclerView.Adapter {
         DouYinViewHolder viewHolder = (DouYinViewHolder) holder;
         VideoBean item = mVideoList.get(position);
         viewHolder.mTikTokController.initData(item);
-        holder.itemView.setTag(position);
+        viewHolder.mVideoView.setTag(position);
         //开始预加载
         mPreloadManager.addPreloadTask(item.getUrl(), position);
         LogTool.s("预加载："+position+"  "+item.getUrl());
@@ -154,12 +165,12 @@ public abstract class DouYinAdapterParent extends RecyclerView.Adapter {
     public static class DouYinViewHolder extends RecyclerView.ViewHolder {
         public DouYinController mTikTokController;
         public VideoView mVideoView;
+        public static final int idVideoView= ViewTool.initKey();
 
         DouYinViewHolder(View itemView) {
             super(itemView);
-            mVideoView = (VideoView) itemView;
+            mVideoView =((ViewGroup)itemView).findViewById(idVideoView);
             mVideoView.setLooping(true);
-            mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
         }
         public void setVideoController(DouYinController newController) {
             mVideoView.setVideoController(newController);
