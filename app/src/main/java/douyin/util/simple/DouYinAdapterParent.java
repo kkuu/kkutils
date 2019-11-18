@@ -23,6 +23,7 @@ import douyin.DouYinController;
 import douyin.util.cache.PreloadManager;
 import utils.kkutils.AppTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.StringTool;
 import utils.kkutils.common.ViewTool;
 
 
@@ -51,6 +52,13 @@ public abstract class DouYinAdapterParent extends RecyclerView.Adapter {
     }
     public abstract void initViewsImp();
     public abstract void setCurrentPosition(int position);
+    public void setData( List<VideoBean> mVideoList){
+        this.mVideoList=mVideoList;
+        notifyDataSetChanged();
+    }
+
+
+
     public void initLife(){
         lifecycle.addObserver(new LifecycleEventObserver() {
             @Override
@@ -94,21 +102,42 @@ public abstract class DouYinAdapterParent extends RecyclerView.Adapter {
     }
 
     public void startPlay(int position) {
-        {
-            VideoView videoView = container.findViewWithTag(position);
+        try {
+
+            KVideoView videoView = container.findViewWithTag(position);
             if(videoView==null){
                 LogTool.s("播放失败没找到VideoView"+position);
                 return;
             }
-            VideoBean tiktokBean = mVideoList.get(position);
-            String playUrl = mPreloadManager.getPlayUrl(tiktokBean.getUrl());
-            LogTool.s("startPlay: " + "position: " + position + "  url: " + playUrl);
-            videoView.setUrl(playUrl);
-            videoView.start();
-            mPlayingPosition = position;
-        }
-    }
 
+
+            try {//播放
+                VideoBean tiktokBean = mVideoList.get(position);
+                LogTool.s("准备播放 " + tiktokBean.getUrl());
+                if(StringTool.notEmpty(tiktokBean.getUrl())){
+
+                    String playUrl = mPreloadManager.getPlayUrl(tiktokBean.getUrl());
+                    LogTool.s("startPlay: " + "position: " + position + "  playurl: " + playUrl);
+                    videoView.setUrl(playUrl);
+                    videoView.start();
+                }
+                mPlayingPosition = position;
+            }catch (Exception e){
+                LogTool.ex(e);
+            }
+
+            try {//control 可能需要回调， 不管是否成功
+                DouYinController controller = (DouYinController) videoView.getController();
+                controller.onCommitStartPlay(videoView,position);
+            }catch (Exception e){
+                LogTool.ex(e);
+            }
+
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
+    }
 
 
 
@@ -148,7 +177,7 @@ public abstract class DouYinAdapterParent extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         DouYinViewHolder viewHolder = (DouYinViewHolder) holder;
         VideoBean item = mVideoList.get(position);
-        viewHolder.mTikTokController.initData(item);
+        viewHolder.mTikTokController.initData(mVideoList,position,item);
         viewHolder.mVideoView.setTag(position);
         //开始预加载
         mPreloadManager.addPreloadTask(item.getUrl(), position);

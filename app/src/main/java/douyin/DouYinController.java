@@ -7,24 +7,26 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dueeeke.videoplayer.controller.BaseVideoController;
-import com.dueeeke.videoplayer.controller.MediaPlayerControl;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.dueeeke.videoplayer.util.L;
 
 import java.io.Serializable;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import douyin.util.simple.KVideoView;
 import douyin.util.simple.VideoBean;
 import kk.kktools.R;
 import utils.kkutils.ImgTool;
+import utils.kkutils.common.LogTool;
 
 /**
  * 抖音  一般改这个就好了
  * Created by xinyu on 2018/1/6.
  */
 
-public class DouYinController extends BaseVideoController<MediaPlayerControl> implements Serializable {
+public class DouYinController extends BaseVideoController implements Serializable {
 
 
     private ImageView thumb;
@@ -60,6 +62,9 @@ public class DouYinController extends BaseVideoController<MediaPlayerControl> im
         });
     }
 
+    public View getView(){
+        return mControllerView;
+    }
     public ImageView getThumb() {
         return thumb;
     }
@@ -68,16 +73,20 @@ public class DouYinController extends BaseVideoController<MediaPlayerControl> im
         return mPlayBtn;
     }
 
-    public void initData(VideoBean item) {
+    protected List<VideoBean> mVideoList;
+    protected int position;
+    protected VideoBean item;
+    public void initData(List<VideoBean> mVideoList, int position, VideoBean item) {
         ImgTool.loadImage(item.getThumb(), thumb);
-
-//        new ImgToolGlide().initBuilder(getContext(),thumb,item.getThumb(),0,0).into()
+        this.mVideoList=mVideoList;
+        this.position=position;
+        this.item=item;
     }
 
     @Override
     public void setPlayState(int playState) {
         super.setPlayState(playState);
-
+        if(item!=null) LogTool.s(item.getUrl()+"   "+playState);
         switch (playState) {
             case VideoView.STATE_IDLE:
                 L.e("STATE_IDLE " + hashCode());
@@ -141,5 +150,15 @@ public class DouYinController extends BaseVideoController<MediaPlayerControl> im
     public boolean showNetWarning() {
         //不显示移动网络播放警告
         return false;
+    }
+
+    /***
+     * 调用了start ， 但是不一定播放了,   加载下一页可以在这里判断
+     * if(shiPinData.pageControl.hasMoreData()&&position==videoBeanList.size()-1)
+     * @param videoView
+     * @param position
+     */
+    public void onCommitStartPlay(KVideoView videoView, int position) {
+
     }
 }

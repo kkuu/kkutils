@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import douyin.util.simple.DataUtil;
-import douyin.util.simple.DouYinAdapterViewPager;
+import douyin.util.simple.DouYinAdapter;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.ui.StatusBarTool;
@@ -41,7 +41,7 @@ public class DouYinFragment extends KKParentFragment {
     }
     public void initDouYin(){
         //核心就这一句，自定义UI注意重写DouYinController
-        new DouYinAdapterViewPager(getLifecycle(),relativeLayout, DataUtil.getVideoList()){
+        new DouYinAdapter(getLifecycle(),relativeLayout, DataUtil.getVideoList()){
             @Override
             public DouYinController newController() {
                 return super.newController();

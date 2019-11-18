@@ -3,6 +3,7 @@ package douyin.util.simple;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.dueeeke.videoplayer.controller.BaseVideoController;
 import com.dueeeke.videoplayer.player.VideoView;
 
 import androidx.annotation.NonNull;
@@ -31,4 +32,7 @@ public class KVideoView extends VideoView {
        if(mRenderView!=null) LogTool.s(    "计算后高度"+    mRenderView.getView().getWidth()+"  "+mRenderView.getView().getHeight());
     }
 
+    public BaseVideoController getController(){
+        return mVideoController;
+    }
 }

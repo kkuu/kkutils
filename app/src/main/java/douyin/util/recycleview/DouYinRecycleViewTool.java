@@ -1,4 +1,4 @@
-//package douyin.util.recycleview;
+package douyin.util.recycleview;//package douyin.util.recycleview;
 //
 //import android.view.View;
 //import android.view.ViewParent;
