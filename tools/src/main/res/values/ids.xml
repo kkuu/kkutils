@@ -1,7 +1,7 @@
 <resources>
 
-    <item name="kkSimpleRecycleView" type="id"></item>
-    <item name="kkRefreshLayout" type="id"></item>
+    <item name="recycleView" type="id"></item>
+    <item name="refreshLayout" type="id"></item>
     <item name="kTabNormalLayout" type="id"></item>
 
 

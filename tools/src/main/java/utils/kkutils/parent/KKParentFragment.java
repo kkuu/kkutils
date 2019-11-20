@@ -21,8 +21,8 @@ import utils.kkutils.ui.pullrefresh.KKRefreshLayout;
  * Created by ishare on 2016/7/7.
  */
 public abstract class KKParentFragment extends Fragment implements Serializable {
-    public KKSimpleRecycleView kkSimpleRecycleView;
-    public KKRefreshLayout kkRefreshLayout;
+    public KKSimpleRecycleView recycleView;
+    public KKRefreshLayout refreshLayout;
 
 
     public static Fragment currentFragment;

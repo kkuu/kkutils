@@ -59,7 +59,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
      */
     @Override
     public void init(Context context) {
-        init(context, null);
+        init(context, new String[0]);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
                 ;
 
 
-        if (crts != null) {
+        if (crts != null&&crts.length>0) {
             builder.sslSocketFactory(SSLTool.initSSLFactoryByCrt(crts));
         } else {
             builder.sslSocketFactory(SSLTool.initAllowSSLFactory());
