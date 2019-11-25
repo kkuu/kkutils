@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import utils.kkutils.common.CollectionsTool;
 import utils.kkutils.common.LayoutInflaterTool;
 import utils.kkutils.common.LogTool;
@@ -98,12 +99,35 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
         setDataImp(datas, holderClass, types, viewsResId, KKRecycleAdapter);
     }
 
+    @Override
+    public void setLayoutManager(@Nullable LayoutManager layoutManager) {
+        super.setLayoutManager(layoutManager);
+        if(layoutManager!=layoutManagerEmpty){
+            layoutManagerNotEmpty=layoutManager;
+        }
+    }
+    public LayoutManager layoutManagerNotEmpty;
+    public LayoutManager layoutManagerEmpty;
+    public void checkEmpty(){
+        {//检查是否空
+            if(CollectionsTool.isEmptyList(datas)){
+                if(layoutManagerEmpty==null)layoutManagerEmpty=new LinearLayoutManager(getContext(),VERTICAL,false);
+                setLayoutManager(layoutManagerEmpty);
+            }else {
+                if(layoutManagerNotEmpty!=null)setLayoutManager(layoutManagerNotEmpty);
+            }
+
+        }
+    }
     protected void setDataImp(List datas, Class<WzViewHolder> holderClass, int[] types, int[] viewsResId, KKRecycleAdapter KKRecycleAdapter) {
         if (getEmptyView() == null) setEmptyResId(defaultEmptyResId);
 
 
         if (datas == null) datas = new ArrayList<>();
         this.datas = datas;
+        {//检查是否空
+           checkEmpty();
+        }
 
         if (types != null && viewsResId != null && types.length == viewsResId.length) {
             this.types = types;
