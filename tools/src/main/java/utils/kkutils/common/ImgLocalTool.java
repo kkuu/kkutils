@@ -8,6 +8,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.View;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -128,6 +129,22 @@ public class ImgLocalTool {
                 if (listener != null) listener.succeed(fileInput);
             }
         }).start();
+
+    }
+
+    /***
+     * 保存view 图片到相册
+     * @param view
+     * @param picName
+     */
+    public static void saveViewBitmap2Gallery(View view,String picName){
+        try {
+            if(view==null)return;
+            view.setDrawingCacheEnabled(true);
+            ImgLocalTool.saveBmp2Gallery(view.getDrawingCache(),picName);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
 
     }
     /**
