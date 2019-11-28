@@ -132,21 +132,7 @@ public class ImgLocalTool {
 
     }
 
-    /***
-     * 保存view 图片到相册
-     * @param view
-     * @param picName
-     */
-    public static void saveViewBitmap2Gallery(View view,String picName){
-        try {
-            if(view==null)return;
-            view.setDrawingCacheEnabled(true);
-            ImgLocalTool.saveBmp2Gallery(view.getDrawingCache(),picName);
-        }catch (Exception e){
-            LogTool.ex(e);
-        }
 
-    }
     /**
      * @param bmp     获取的bitmap数据
      * @param picName 自定义的图片名
