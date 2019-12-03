@@ -39,10 +39,10 @@ public class ClassTool {
         return fieldList;
     }
     public static List<Field> getAllFieldsWithOutSuper( Class clazz) {
-
+        String key="withOutSuper"+clazz;
         if(clazz==null)return new ArrayList<>();
 
-        List<Field> fieldList = fieldMap.get(clazz);
+        List<Field> fieldList = fieldMap.get(key);
         if(CollectionsTool.NotEmptyList(fieldList)){
             return fieldList;
         }
@@ -58,7 +58,7 @@ public class ClassTool {
             //设置属性为可修改
             field.setAccessible(true);
         }
-        fieldMap.put(clazz,fieldList);
+        fieldMap.put(key,fieldList);
         return fieldList;
     }
 }
