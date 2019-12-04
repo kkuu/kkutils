@@ -30,15 +30,19 @@ public class PermissionTool {
     public static boolean checkPermission( String title,final String... permission){
         String test=Manifest.permission.WRITE_EXTERNAL_STORAGE;
         if(!PermissionUtils.isGranted(permission)){
-            if(StringTool.notEmpty(title)){
-                DialogTool.initNormalQueDingDialog("提示", title, "去设置", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ActivityCompat.requestPermissions(AppTool.currActivity, permission,1);
-                    }
-                },"取消").show();
-            }else {
-                ActivityCompat.requestPermissions(AppTool.currActivity,permission,1);
+            try {
+                if(StringTool.notEmpty(title)){
+                    DialogTool.initNormalQueDingDialog("提示", title, "去设置", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ActivityCompat.requestPermissions(AppTool.currActivity, permission,1);
+                        }
+                    },"取消").show();
+                }else {
+                    ActivityCompat.requestPermissions(AppTool.currActivity,permission,1);
+                }
+            }catch (Exception e){
+                LogTool.ex(e);
             }
             return false;
         }

@@ -1,5 +1,6 @@
 package utils.kkutils.common;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -138,6 +139,10 @@ public class ImgLocalTool {
      * @param picName 自定义的图片名
      */
     public static void saveBmp2Gallery(Bitmap bmp, String picName) {
+
+        if(!PermissionTool.checkPermission("", Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            return;
+        }
 
         try {
             String fileName = null;
