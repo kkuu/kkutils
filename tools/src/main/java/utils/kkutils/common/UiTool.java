@@ -90,6 +90,18 @@ public class UiTool {
         }
     }
 
+    /**
+     * 启动浏览器 浏览Url
+     * @param url
+     */
+    public static void startUrlView(String url){
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(url));//Url 就是你要打开的网址
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppTool.getApplication().startActivity(intent);
+    }
+
     /***
      * 双击退出程序
      */
