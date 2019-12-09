@@ -37,7 +37,7 @@ public class DoubleClickListener implements View.OnTouchListener{
 
     public boolean onTouch(View v, MotionEvent event) {
 
-        if (event.getAction() == MotionEvent.ACTION_UP) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
             clickCount++;
 
@@ -75,7 +75,7 @@ public class DoubleClickListener implements View.OnTouchListener{
 
 //让点击事件继续传播，方便再给View添加其他事件监听
 
-        return true;
+        return false;////当setOnTouchListener和setOnclickListener一起使用，onTouch为true，则不会执行onClick方法，为false的才会执行onClick方法。    但是false 的时候只能收到 ACTION_DOWN事件
 
     }
 }
