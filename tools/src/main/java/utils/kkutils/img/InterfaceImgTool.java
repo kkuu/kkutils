@@ -42,4 +42,10 @@ public interface InterfaceImgTool {
 
     void pauseRequest();
     void resumeRequest();
+    /***
+     * 直接加载原始图片， 不做宽高处理
+     * @param src
+     * @param imageView
+     */
+    void loadOriginalImage(Object src, ImageView imageView);
 }

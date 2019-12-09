@@ -206,4 +206,20 @@ public class ImgToolGlide implements InterfaceImgTool {
        // Glide.with(AppTool.getApplication()).resumeRequests();
     }
 
+    /***
+     * 直接加载原始图片， 不做宽高处理
+     * @param src
+     * @param imageView
+     */
+    @Override
+    public void loadOriginalImage(Object src, ImageView imageView) {
+        if(imageView==null)return;
+        RequestOptions options = new RequestOptions()
+                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
+        Glide.with(imageView.getContext())
+                .load(src)
+                .apply(options)
+                .into(imageView);
+    }
+
 }
