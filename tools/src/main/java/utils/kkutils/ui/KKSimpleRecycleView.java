@@ -25,6 +25,13 @@ import utils.kkutils.parent.KKParentRecycleView;
  * 主要是用于简化 列表操作的
  * <p>
  * recycle  如果加了 item type  好像效率不理想
+ *
+ *
+ * 技巧：
+ *
+ * 1 . notifyItemChanged(position,"使用这个参数可以不经历清空数据再刷新，不会被删除再重新初始化，性能更高，(有视频的话不会重置播放状态)");
+ *
+ *
  */
 public class KKSimpleRecycleView extends KKParentRecycleView {
     /***
