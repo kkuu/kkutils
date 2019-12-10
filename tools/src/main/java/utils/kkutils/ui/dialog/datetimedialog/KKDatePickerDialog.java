@@ -372,7 +372,7 @@ public class KKDatePickerDialog extends RelativeLayout {
                 int fen=Integer.valueOf(dp_fen.getCurrSelected());
                 Calendar calendar=Calendar.getInstance();
                 calendar.set(Calendar.YEAR,nian);
-                calendar.set(Calendar.MONTH,yue);
+                calendar.set(Calendar.MONTH,yue-1);
                 calendar.set(Calendar.DATE,ri);
                 calendar.set(Calendar.HOUR,shi);
                 calendar.set(Calendar.MINUTE,fen);
