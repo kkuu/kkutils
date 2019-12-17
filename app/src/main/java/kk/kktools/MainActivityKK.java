@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import douyin.DouYinFragment;
 import kk.kktools.jinrong.JiSuanQi;
+import kk.kktools.tab.TestTab;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.viewpager2.ViewPager2Test;
 import utils.kkutils.AppTool;
@@ -75,7 +76,7 @@ public class MainActivityKK extends KKParentActivity {
                 }, null, null).show();
             }
         });
-
+        addItem("tab", new TestTab(), null);
         refresh();
 
 
