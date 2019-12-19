@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import douyin.DouYinFragment;
 import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
+import kk.kktools.tuya.TestEditView;
 import kk.kktools.viewpager2.ViewPager2Test;
 import utils.kkutils.AppTool;
 import utils.kkutils.HttpTool;
@@ -75,7 +76,7 @@ public class MainActivityKK extends KKParentActivity {
                 }, null, null).show();
             }
         });
-
+        addItem("图片编辑", new TestEditView(), null);
         refresh();
 
 
