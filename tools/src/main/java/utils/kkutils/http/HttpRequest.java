@@ -243,9 +243,7 @@ public class HttpRequest {
 
     public void setResponseDataStr(String responseDataStr, Class clzz) {
         responseDataStr = "" + responseDataStr;
-        //LogTool.s("未转unicode的返回数据: " + responseDataStr);
-       // responseDataStr = StringTool.unicode2String(responseDataStr);
-
+        setResponseData(null);//清空数据
         this.responseDataStr = responseDataStr;
     }
 
