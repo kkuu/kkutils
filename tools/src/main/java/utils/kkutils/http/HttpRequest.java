@@ -40,7 +40,6 @@ public class HttpRequest {
 
 
 
-    private long minimumTimeInterval=500;//相同请求两次时间间隔， 防止频繁请求
 
     /**
      * 返回的数据
@@ -203,13 +202,7 @@ public class HttpRequest {
         this.requestMethod = requestMethod;
         return this;
     }
-    public long getMinimumTimeInterval() {
-        return minimumTimeInterval;
-    }
 
-    public void setMinimumTimeInterval(long minimumTimeInterval) {
-        this.minimumTimeInterval = minimumTimeInterval;
-    }
     public Map<String, Object> getQueryMap() {
         return queryMap;
     }
