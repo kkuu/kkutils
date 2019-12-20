@@ -32,13 +32,13 @@ public class X5WebView extends WebView {
 	TextView title;
 	private WebViewClient client = new KKX5WebViewClientDefault();
 	public static class KKX5WebViewClientDefault extends WebViewClient{
-		/**
-		 * 防止加载网页时调起系统浏览器
-		 */
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			view.loadUrl(url);
-			return true;
-		}
+//		/**
+//		 * 防止加载网页时调起系统浏览器
+//		 */
+//		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//			//view.loadUrl(url);
+//			return true;
+//		}
 	}
 
 	/**
