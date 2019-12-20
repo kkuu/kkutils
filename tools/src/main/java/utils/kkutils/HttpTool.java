@@ -3,7 +3,10 @@ package utils.kkutils;
 import android.content.Context;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
+import utils.kkutils.common.LogTool;
 import utils.kkutils.http.HttpRequest;
 import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.http.InterfaceHttpTool;
@@ -35,13 +38,41 @@ public class HttpTool {
     }
 
     public static <T extends Serializable> T request(HttpRequest request, Class<T> clzz) {
+        if(!checkRequest(request))return null;
+
         request.setResponseClass(clzz);
         return httpTool.request(request, clzz);
     }
 
     public static <T extends Serializable> void request(HttpRequest request, Class<T> clzz, HttpUiCallBack<T> callBack) {
+        if(!checkRequest(request))return;
+
         request.setResponseClass(clzz);
         httpTool.request(request, clzz, callBack);
+    }
+
+
+    static Map<Object ,Long> requestMap=new HashMap<>();
+    public static boolean checkRequest(HttpRequest request){
+        try {
+            {//频繁请求过滤
+                String key=request.getCacheKey();
+                Long time = requestMap.get(key);
+                if(requestMap.size()>500)requestMap.clear();//清理
+                if(time!=null){
+                    if(System.currentTimeMillis()-time<request.getMinimumTimeInterval()){
+                        LogTool.s("请求太频繁,取消请求"+request.getUrlRequestGet());
+                        return false;
+                    }
+                }
+                requestMap.put(request.getCacheKey(),System.currentTimeMillis());
+            }
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
+        return true;
+
     }
 
 
