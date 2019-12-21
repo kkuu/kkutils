@@ -87,7 +87,7 @@ public class EditViewFragment extends KKParentFragment {
             });
             btnParent.addView(btn_back);
         }
-        {//保存
+        {//橡皮檫
             CheckBox cb_xiang_pi_cha=new CheckBox(getContext());
             cb_xiang_pi_cha.setText("橡皮檫");
             cb_xiang_pi_cha.setLayoutParams(new ViewGroup.LayoutParams(-2,-2));
@@ -99,6 +99,32 @@ public class EditViewFragment extends KKParentFragment {
             });
 
             btnParent.addView(cb_xiang_pi_cha);
+        }
+        {//上一步
+            CheckBox cb_fangda=new CheckBox(getContext());
+            cb_fangda.setText("放大");
+            cb_fangda.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                FangDaView build;
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                         build = new FangDaView.Builder(getContext())
+                                .intiLT(100, 200)
+                                .viewWH(320, 320)
+                                .scale(2f)
+                                .alpha(16)
+                                .color("#ff00ff")
+                                .build();
+
+                        build.startViewToRoot();
+                    }else {
+                        build.closeViewToRoot();
+                    }
+                }
+            });
+            btnParent.addView(cb_fangda);
+
+
         }
     }
 
