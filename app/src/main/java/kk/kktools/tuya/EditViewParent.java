@@ -6,12 +6,18 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+
+import utils.kkutils.common.LogTool;
 
 
 public class EditViewParent extends FrameLayout {
@@ -34,21 +40,69 @@ public class EditViewParent extends FrameLayout {
         super(context, attrs, defStyleAttr);
         init();
     }
+    CheckBox checkBoxWenZi;
+    EditViewCanvasView editViewCanvasView;
+    ViewGroup.LayoutParams lp_wrap=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    public void initBtns(){
+        LinearLayout btnParent=new LinearLayout(getContext());
+        addView(btnParent,lp_wrap);
+
+
+
+        {//上一步
+            Button btn_back=new Button(getContext());
+            btn_back.setText("上一步");
+            btn_back.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    back();
+                }
+            });
+            btnParent.addView(btn_back);
+        }
+        {//文字 选择
+            checkBoxWenZi=new CheckBox(getContext());
+            checkBoxWenZi.setText("文字");
+            checkBoxWenZi.setLayoutParams(new ViewGroup.LayoutParams(lp_wrap));
+            checkBoxWenZi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        setMode(mode_wenzi);
+                    }else {
+                        setMode(mode_huabi);
+                    }
+                }
+            });
+            btnParent.addView(checkBoxWenZi);
+        }
+
+
+    }
     public void init(){
+
         setBackgroundColor(Color.parseColor("#333333"));
-        EditViewCanvasView editViewCanvasView = new EditViewCanvasView(getContext());
+        editViewCanvasView = new EditViewCanvasView(getContext());
         editViewCanvasView.parent=this;
         addView(editViewCanvasView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        initBtns();
+
     }
+
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        LogTool.s("onInterceptTouchEvent"+ev.getAction()+"  "+ev.getX()+"  "+ev.getY());
         if(mode==mode_wenzi){
             if(ev.getAction()== MotionEvent.ACTION_DOWN){
                 addEditText(ev.getX(),ev.getY());
             }
+            if(ev.getAction()== MotionEvent.ACTION_UP){
+                checkBoxWenZi.setChecked(false);
+            }
         }
-        return mode!=mode_huabi;
+        return false;
     }
     public void setMode(int mode) {
         this.mode=mode;
@@ -58,6 +112,19 @@ public class EditViewParent extends FrameLayout {
         dongzuo.add(o);
     }
 
+
+    public void addEditText(float x, float y){
+        EditText editText=new EditText(getContext());
+        editText.setHint("请输入文字");
+        addView(editText,-2,-2,x,y);
+    }
+    public void addView(View view,int w,int h,float x,float y){
+        ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(w, h);
+        view.setLayoutParams(layoutParams);
+        view.setTranslationX(x);
+        view.setTranslationY(y);
+        addViewWithDongZuo(view);
+    }
     public void addViewWithDongZuo(final View view){
         addView(view);
         addDongZuo(new Runnable() {
@@ -67,19 +134,15 @@ public class EditViewParent extends FrameLayout {
             }
         });
     }
-    public void addEditText(float x, float y){
-        EditText editText=new EditText(getContext());
-        ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        editText.setLayoutParams(layoutParams);
-        editText.setHint("请输入文字");
-        editText.setTranslationX(x);
-        editText.setTranslationY(y);
-        addViewWithDongZuo(editText);
-    }
+
+
     public void back(){
+        LogTool.s("back:"+dongzuo.size());
         if(dongzuo.size()>0){
             Runnable o = dongzuo.get(dongzuo.size()-1);
             o.run();
+            dongzuo.remove(o);
+            editViewCanvasView.invalidate();
         }
     }
 }

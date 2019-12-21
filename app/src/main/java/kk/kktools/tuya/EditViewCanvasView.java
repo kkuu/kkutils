@@ -71,18 +71,28 @@ public class EditViewCanvasView extends View {
             }
         });
     }
+    Path currDownPath;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(getEditParent().mode!=getEditParent().mode_huabi)return true;
         Log.v("kk","event"+event.getX()+"  "+event.getY());
+
+
         if(event.getAction()== MotionEvent.ACTION_DOWN){
-            addPath(new Path());
-            getPath().moveTo(event.getX(),event.getY());
+            currDownPath=new Path();
+            currDownPath.moveTo(event.getX(),event.getY());
         }
+        if(currDownPath==null)return true;
+
+
         if(event.getAction()== MotionEvent.ACTION_MOVE){
-            getPath().lineTo(event.getX(),event.getY());
+            currDownPath.lineTo(event.getX(),event.getY());
+            if(!pathList.contains(currDownPath)){
+                addPath(currDownPath);
+            }
         }
         if(event.getAction()== MotionEvent.ACTION_UP){
-            getPath().moveTo(event.getX(),event.getY());
+            currDownPath.moveTo(event.getX(),event.getY());
         }
         invalidate();
         return true;
