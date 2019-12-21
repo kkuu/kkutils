@@ -3,6 +3,8 @@ package utils.kkutils.ui.tuya;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -85,7 +87,19 @@ public class EditViewFragment extends KKParentFragment {
             });
             btnParent.addView(btn_back);
         }
+        {//保存
+            CheckBox cb_xiang_pi_cha=new CheckBox(getContext());
+            cb_xiang_pi_cha.setText("橡皮檫");
+            cb_xiang_pi_cha.setLayoutParams(new ViewGroup.LayoutParams(-2,-2));
+            cb_xiang_pi_cha.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    editViewCanvasView.setXiangPiMode(isChecked);
+                }
+            });
 
+            btnParent.addView(cb_xiang_pi_cha);
+        }
     }
 
     @Override
