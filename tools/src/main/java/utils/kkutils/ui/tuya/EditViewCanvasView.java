@@ -21,13 +21,16 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import utils.kkutils.R;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.ShareTool;
+import utils.kkutils.common.TimeTool;
 import utils.kkutils.ui.dialog.DialogTool;
 
 public class EditViewCanvasView extends FrameLayout {
@@ -228,7 +231,10 @@ public class EditViewCanvasView extends FrameLayout {
      */
     public void baocun(){
         clearFocus();
-        ShareTool.saveView2Gallery(this,"图片1");
+        File f = ShareTool.saveView2Gallery(this, "img"+ TimeTool.nowTimeString());
+        if(f!=null){
+            CommonTool.showToast("保存相册成功："+f.getAbsolutePath());
+        }
     }
 
     /***

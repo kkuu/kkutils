@@ -63,15 +63,15 @@ public class ShareTool {
      * @param view
      * @param picName
      */
-    public static boolean saveView2Gallery(View view,String picName){
+    public static File saveView2Gallery(View view,String picName){
         try {
-            if(view==null)return false;
+            if(view==null)return null;
             view.setDrawingCacheEnabled(true);
            return ImgLocalTool.saveBmp2Gallery(view.getDrawingCache(),picName);
         }catch (Exception e){
             LogTool.ex(e);
         }
-        return false;
+        return null;
     }
 
     // 調用系統方法分享文件

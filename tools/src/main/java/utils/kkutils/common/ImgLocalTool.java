@@ -138,10 +138,10 @@ public class ImgLocalTool {
      * @param bmp     获取的bitmap数据
      * @param picName 自定义的图片名
      */
-    public static boolean saveBmp2Gallery(Bitmap bmp, String picName) {
+    public static File saveBmp2Gallery(Bitmap bmp, String picName) {
 
         if(!PermissionTool.checkPermission("", Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-            return false;
+            return null;
         }
 
         try {
@@ -187,12 +187,12 @@ public class ImgLocalTool {
             intent.setData(uri);
             AppTool.getApplication().sendBroadcast(intent);
 
-            return true;
+            return file;
         }catch (Exception e){
             LogTool.ex(e);
         }
 
-        return false;
+        return null;
     }
 
     public interface OnConvertSuccessListener {
