@@ -6,6 +6,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -33,9 +35,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import utils.kkutils.AppTool;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKToast;
+import utils.kkutils.ui.dialog.DialogSimple;
 
 /**
  * Created by kk on 2016/5/10.
@@ -89,6 +94,55 @@ public class UiTool {
             LogTool.ex(e);
         }
     }
+
+    /**
+     * 启动浏览器 浏览Url
+     * @param url
+     */
+    public static void startUrlView(String url){
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(url));//Url 就是你要打开的网址
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        AppTool.getApplication().startActivity(intent);
+    }
+
+    /***
+     * 一定弹出选框
+     * @param url
+     */
+    public static void startUrlViewWithChoose(String url){
+        try {
+            final Intent intent = new Intent();
+            intent.setData(Uri.parse(url));//Url 就是你要打开的网址
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addCategory(Intent.CATEGORY_BROWSABLE);
+
+            final List<ResolveInfo> list = AppTool.getApplication().getPackageManager()
+                    .queryIntentActivities(intent, 0);
+            String[] items=new String[list.size()];
+            for(int i=0;i<list.size();i++){
+                ResolveInfo resolveInfo = list.get(i);
+                String name=""+resolveInfo.activityInfo.loadLabel(AppTool.getApplication().getPackageManager());
+                items[i]=name;
+            }
+
+            DialogSimple.showBottomChooseDialog("打开链接", new DialogSimple.OnBottomChooseDialogClick() {
+                @Override
+                public void onClick(Dialog dialog, String[] items, int index, String item) {
+                    ActivityInfo activityInfo = list.get(index).activityInfo;
+                    intent.setClassName(activityInfo.packageName,activityInfo.name);
+                    AppTool.getApplication().startActivity(intent);
+                }
+            },items).show();
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
+    }
+
+
 
     /***
      * 双击退出程序

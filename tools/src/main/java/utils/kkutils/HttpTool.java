@@ -3,7 +3,10 @@ package utils.kkutils;
 import android.content.Context;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
+import utils.kkutils.common.LogTool;
 import utils.kkutils.http.HttpRequest;
 import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.http.InterfaceHttpTool;
@@ -43,6 +46,9 @@ public class HttpTool {
         request.setResponseClass(clzz);
         httpTool.request(request, clzz, callBack);
     }
+
+
+
 
 
 }

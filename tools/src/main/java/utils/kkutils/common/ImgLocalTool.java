@@ -1,5 +1,6 @@
 package utils.kkutils.common;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +9,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.View;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -130,11 +132,17 @@ public class ImgLocalTool {
         }).start();
 
     }
+
+
     /**
      * @param bmp     获取的bitmap数据
      * @param picName 自定义的图片名
      */
-    public static void saveBmp2Gallery(Bitmap bmp, String picName) {
+    public static boolean saveBmp2Gallery(Bitmap bmp, String picName) {
+
+        if(!PermissionTool.checkPermission("", Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            return false;
+        }
 
         try {
             String fileName = null;
@@ -179,10 +187,12 @@ public class ImgLocalTool {
             intent.setData(uri);
             AppTool.getApplication().sendBroadcast(intent);
 
+            return true;
         }catch (Exception e){
             LogTool.ex(e);
         }
 
+        return false;
     }
 
     public interface OnConvertSuccessListener {

@@ -370,14 +370,14 @@ public class KKDatePickerDialog extends RelativeLayout {
                 int ri=Integer.valueOf(dp_ri.getCurrSelected());
                 int shi=Integer.valueOf(dp_shi.getCurrSelected());
                 int fen=Integer.valueOf(dp_fen.getCurrSelected());
-                Calendar calendar=Calendar.getInstance();
-                calendar.set(Calendar.YEAR,nian);
-                calendar.set(Calendar.MONTH,yue);
-                calendar.set(Calendar.DATE,ri);
-                calendar.set(Calendar.HOUR,shi);
-                calendar.set(Calendar.MINUTE,fen);
+//                Calendar calendar=Calendar.getInstance();
+//                calendar.set(Calendar.YEAR,nian);
+//                calendar.set(Calendar.MONTH,yue-1);
+//                calendar.set(Calendar.DATE,ri);
+//                calendar.set(Calendar.HOUR,shi);
+//                calendar.set(Calendar.MINUTE,fen);
                 if(getOnChooseDateTimeListener()!=null){
-                    getOnChooseDateTimeListener().onChoose(calendar);
+                    getOnChooseDateTimeListener().onChoose(nian,yue,ri,shi,fen);
                 }
                 CommonTool.showToast(""+nian+" "+yue+" "+ri+" "+shi+" "+fen);
             }
@@ -407,7 +407,7 @@ public class KKDatePickerDialog extends RelativeLayout {
     }
     OnChooseDateTimeListener onChooseDateTimeListener;
     public static interface  OnChooseDateTimeListener{
-        void onChoose(Calendar calendar);
+        void onChoose(int nian, int yue, int ri, int shi, int fen);
     }
     public List<String> getList(int min,int max){
         List<String>  list=new ArrayList<>();

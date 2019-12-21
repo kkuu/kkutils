@@ -47,7 +47,11 @@ dependencies {
     //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
     //api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
+    api 'com.tencent.tbs.tbssdk:sdk:43697'//x5webview
+
+
     api 'org.xutils:xutils:3.5.0'
     api 'com.google.code.gson:gson:2.8.2'
 
@@ -101,7 +105,7 @@ dependencies {
 
     //seekbar
     //很多的工具类
-    api 'com.blankj:utilcode:1.24.6'
+    api 'com.blankj:utilcode:1.26.0'
 
     //底部导航栏
     api 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
@@ -125,6 +129,4 @@ dependencies {
     //视频播放的
 
 
-    //x5webview
-    api files('libs/tbs_sdk_thirdapp_v4.3.0.1072_43646_sharewithdownloadwithfile_withoutGame_obfs_20190429_175122.jar')
 }

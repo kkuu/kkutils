@@ -12,6 +12,7 @@ import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.tuya.TestEditView;
 import kk.kktools.viewpager2.ViewPager2Test;
+import kk.kktools.web.WebFragment;
 import utils.kkutils.AppTool;
 import utils.kkutils.HttpTool;
 import utils.kkutils.ImgTool;
@@ -26,6 +27,7 @@ import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
+import utils.kkutils.ui.webview.WebViewBigImg;
 import utils.kkutils.ui.webview.X5WebView;
 import utils.kkutils.zhifu.KKZhiFuUiTool;
 
@@ -76,6 +78,7 @@ public class MainActivityKK extends KKParentActivity {
                 }, null, null).show();
             }
         });
+        addItem("webview", WebFragment.byData("https://www.baidu.com","123"), null);
         addItem("图片编辑", new TestEditView(), null);
         refresh();
 

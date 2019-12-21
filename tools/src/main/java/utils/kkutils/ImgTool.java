@@ -99,6 +99,19 @@ public class ImgTool {
         }
     }
 
+    /***
+     * 直接加载原始图片， 不做宽高处理
+     * @param src
+     * @param imageView
+     */
+    public static void loadOriginalImage(Object src,ImageView imageView){
+        try {
+            imgToolInterface.loadOriginalImage(src,imageView);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+    }
+
     static int keyMeasure = ViewTool.initKey();
 
     /**

@@ -58,6 +58,21 @@ public class ShareTool {
             LogTool.ex(e);
         }
     }
+    /***
+     * 保存view 图片到相册
+     * @param view
+     * @param picName
+     */
+    public static boolean saveView2Gallery(View view,String picName){
+        try {
+            if(view==null)return false;
+            view.setDrawingCacheEnabled(true);
+           return ImgLocalTool.saveBmp2Gallery(view.getDrawingCache(),picName);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+        return false;
+    }
 
     // 調用系統方法分享文件
     public static void shareFile(Activity activity,String title, File file) {

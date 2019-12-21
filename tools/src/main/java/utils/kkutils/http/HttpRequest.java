@@ -35,6 +35,12 @@ public class HttpRequest {
     private Map<String, String> headerMap = new TreeMap<String, String>();
     private String bodyCountent = "";//发送内容就是一个字符串
     private Class responseClass;//返回数据的class
+    String[]excludeCacheParams;//缓存key  不包含字段
+
+
+
+
+
     /**
      * 返回的数据
      */
@@ -60,15 +66,20 @@ public class HttpRequest {
         return useCache;
     }
 
-    public HttpRequest setUseCache() {
-        return setUseCache(excludeCacheParams);
+    public HttpRequest setUseCache(boolean useCache) {
+        this.useCache=useCache;
+        return this;
     }
-    String[]excludeCacheParams;
-    public HttpRequest setUseCache(String...excludeCacheParams) {
-        this.useCache = true;
+    //缓存key  不包含字段
+    public HttpRequest setExcludeCacheParams(String...excludeCacheParams) {
         this.excludeCacheParams=excludeCacheParams;
         return this;
     }
+
+
+
+
+
     /**
      * 放入一个请求参数
      *
@@ -243,9 +254,7 @@ public class HttpRequest {
 
     public void setResponseDataStr(String responseDataStr, Class clzz) {
         responseDataStr = "" + responseDataStr;
-        //LogTool.s("未转unicode的返回数据: " + responseDataStr);
-       // responseDataStr = StringTool.unicode2String(responseDataStr);
-
+        setResponseData(null);//清空数据
         this.responseDataStr = responseDataStr;
     }
 
@@ -328,7 +337,7 @@ public class HttpRequest {
         timeBeginRequest = System.currentTimeMillis();
     }
 
-    private String getCacheKey() {
+    public String getCacheKey() {
         try {
 
             Map<String, Object> queryMap=new HashMap(getQueryMap());
@@ -426,7 +435,7 @@ public class HttpRequest {
         String[] list=getCacheList();
         for(String tem:list){
             if(url.contains(tem)){
-                setUseCache();
+                setUseCache(true);
                 return;
             }
         }
