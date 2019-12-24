@@ -18,7 +18,52 @@ public class DragTool {
      * @param dragView  可拖动的控件
      * @param onClickListener
      */
-    public void bindView(ViewGroup parent, View dragView, View.OnClickListener onClickListener){
+    public void bindView( View dragView, final View.OnClickListener onClickListener){
+        dragView.setOnTouchListener(new View.OnTouchListener() {
+            float downX;
+            float downY;
+            float x;
+            float y;
+            long timeDown=0;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction() & MotionEvent.ACTION_MASK )
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        x=v.getX();
+                        y=v.getY();
+                        downX = event.getRawX();
+                        downY = event.getRawY();
+                        timeDown=System.currentTimeMillis();
+                        break;
+                    case MotionEvent.ACTION_MOVE://随手移动，getRawX()与getX()有区别
+                        if(onClickListener!=null&&(System.currentTimeMillis()-timeDown<100))break;//这样可以做点击
+                        v.setTranslationX(x+(event.getRawX()-downX));
+                        v.setTranslationY(y+(event.getRawY()-downY));
+                        v.invalidate();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(onClickListener!=null){
+                            if(System.currentTimeMillis()-timeDown<300) {
+                                    onClickListener.onClick(v);
+                            }
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    /***
+     *这个实现不好，用上面的 简单些
+     * @param parent  拖动到的容器
+     * @param dragView  可拖动的控件
+     * @param onClickListener
+     */
+    @Deprecated
+    public void bindViewOld(ViewGroup parent, View dragView, final View.OnClickListener onClickListener){
+
         parent.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View v, DragEvent event) {
@@ -57,8 +102,6 @@ public class DragTool {
        if(onClickListener!=null) dragView.setOnClickListener(onClickListener);
 
     }
-
-
 
     public static class DragData{
         public DragData(View view, Point pointIn) {

@@ -183,7 +183,7 @@ public class EditViewCanvasView extends FrameLayout {
     public void addDragTextView(String text){
         final TextView textView=new TextView(getContext());
         textView.setText(text);
-        new DragTool().bindView(this, textView, new OnClickListener() {
+        new DragTool().bindView( textView, new OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogTool.initNormalInputDialog("请输入文字", "", "确定", new DialogTool.OnDialogInputEnd() {
