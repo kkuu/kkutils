@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" android:orientation="vertical"
@@ -18,4 +19,58 @@
         android:layout_height="40dp">
 
     </utils.kkutils.ui.tablayout.KTabNormalLayout>
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/tl_8"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#6D8FB0"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        app:tl_iconVisible="false"
+        app:tl_indicator_margin_left="5dp"
+        app:tl_indicator_margin_right="5dp"
+        app:tl_indicator_style="BLOCK"
+        app:tl_textsize="14dp"
+        app:tl_indicator_color="#646464"
+        app:tl_textSelectColor="#FFFFFF"
+        app:tl_textUnselectColor="#646464"
+        />
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tl_10"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#222831"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        app:tl_indicator_color="#393E46"
+        app:tl_indicator_corner_radius="5dp"
+        app:tl_indicator_margin_left="2dp"
+        app:tl_indicator_margin_right="2dp"
+        app:tl_indicator_style="BLOCK"/>
+
+    <com.flyco.tablayout.SegmentTabLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/tl_5"
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        app:tl_indicator_color="#646464"
+        app:tl_textSelectColor="#FFFFFF"
+        app:tl_textUnselectColor="#646464"
+        tl:tl_indicator_anim_enable="true"
+        tl:tl_indicator_bounce_enable="false"
+        tl:tl_indicator_margin_top="2dp"
+        tl:tl_indicator_margin_bottom="2dp"
+        tl:tl_indicator_margin_left="2dp"
+        tl:tl_indicator_margin_right="2dp"
+        tl:tl_tab_space_equal="true"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></androidx.viewpager.widget.ViewPager>
 </LinearLayout>

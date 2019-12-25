@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import douyin.DouYinFragment;
 import kk.kktools.jinrong.JiSuanQi;
+import kk.kktools.tab.TestTab;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.tuya.TestEditView;
 import kk.kktools.viewpager2.ViewPager2Test;
@@ -79,6 +80,7 @@ public class MainActivityKK extends KKParentActivity {
             }
         });
         addItem("webview", WebFragment.byData("https://www.baidu.com","123"), null);
+        addItem("tab", new TestTab(), null);
         addItem("图片编辑", new TestEditView(), null);
         refresh();
 
