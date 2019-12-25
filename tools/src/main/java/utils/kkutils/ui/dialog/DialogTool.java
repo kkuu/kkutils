@@ -208,6 +208,7 @@ public class DialogTool {
                     public void run() {
                         InputMethodManager inputmanger = (InputMethodManager) AppTool.currActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
                         inputmanger.showSoftInput(tv_dialog_input,0);
+                        tv_dialog_input.setSelection(tv_dialog_input.getText().length());
                     }
                 },1);
 
