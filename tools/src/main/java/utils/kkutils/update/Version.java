@@ -8,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
@@ -20,6 +21,8 @@ import utils.kkutils.R;
 import utils.kkutils.common.FileTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.StringTool;
+import utils.kkutils.common.UiTool;
+import utils.kkutils.parent.KKViewOnclickListener;
 
 /**
  * Created by kk on 2016/5/18.
@@ -97,20 +100,25 @@ public class Version {
             dialogShowMsg.setButton(ProgressDialog.BUTTON_POSITIVE, context.getString(R.string.liji_gengxin), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                   if("1".equals(newVersion.isHtml)){//html 更新
-                       Intent intent = new Intent();
-                       intent.setData(Uri.parse(newVersion.updateUrl));//Url 就是你要打开的网址
-                       intent.setAction(Intent.ACTION_VIEW);
-                       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                       AppTool.getApplication().startActivity(intent);
-                   }else {
-                       newVersion. showDownLoadProgressDialog(context, newVersion, isForce);
-                   }
 
                 }
             });
 
             dialogShowMsg.show();
+            /***
+             * 这样设置点击确定后可以不 关闭弹框
+             */
+            dialogShowMsg.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new KKViewOnclickListener() {
+                @Override
+                public void onClickKK(View v) {
+                    if("1".equals(newVersion.isHtml)){//html 更新
+                        UiTool.startUrlView(newVersion.updateUrl);
+                    }else {
+                        dialogShowMsg.dismiss();
+                        newVersion. showDownLoadProgressDialog(context, newVersion, isForce);
+                    }
+                }
+            });
         }
         return hasNew;
     }

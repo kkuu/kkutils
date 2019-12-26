@@ -30,6 +30,7 @@ import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 import utils.kkutils.ui.webview.WebViewBigImg;
 import utils.kkutils.ui.webview.X5WebView;
+import utils.kkutils.update.Version;
 import utils.kkutils.zhifu.KKZhiFuUiTool;
 
 public class MainActivityKK extends KKParentActivity {
@@ -93,10 +94,18 @@ public class MainActivityKK extends KKParentActivity {
             }
         });
 
+        //testVersion();
 
         // testWeb();
     }
-
+    public void testVersion(){
+        Version version=new Version();
+        version.versionCode=100;
+        version.isHtml="1";
+        version.isForce="1";
+        version.updateUrl="https://hellowvideo.oss-cn-hongkong.aliyuncs.com/download/android/hello-video-app-8.apk";
+        Version.checkUpDate(this,version);
+    }
 
     public void testWeb() {
         //x5web 不支持x86
