@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -180,6 +181,7 @@ public class ImgLocalTool {
                 }
             }
             //通知相册更新
+//            notifyMediaStore(file.getAbsolutePath());//下面出错可以用这个
             MediaStore.Images.Media.insertImage(AppTool.getApplication().getContentResolver(),
                     bmp, fileName, null);
             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -194,7 +196,40 @@ public class ImgLocalTool {
 
         return null;
     }
+    static MediaScannerConnection connection;
+    /***
+     * 通知相册
+     * @param path
+     */
+    public static void notifyMediaStore(final String path){
+        try {
+            connection = new MediaScannerConnection(AppTool.getApplication(), new MediaScannerConnection.MediaScannerConnectionClient() {
+                @Override
+                public void onMediaScannerConnected() {
+                    try {
+                        connection.scanFile(path, null);
+                    }catch (Exception e){
+                        LogTool.ex(e);
+                    }
+                }
 
+                @Override
+                public void onScanCompleted(String path, Uri uri) {
+                    if (path.equals(path)) {
+                        try {
+                            connection.disconnect();
+                        }catch (Exception e){
+                            LogTool.ex(e);
+                        }
+                        connection=null;
+                    }
+                }
+            });
+            connection.connect();
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+    }
     public interface OnConvertSuccessListener {
         void succeed(File outFile);
     }
