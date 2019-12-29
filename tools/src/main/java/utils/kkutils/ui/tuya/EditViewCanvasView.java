@@ -19,19 +19,18 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import utils.kkutils.R;
+import androidx.annotation.Nullable;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.ShareTool;
 import utils.kkutils.common.TimeTool;
+import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.dialog.DialogTool;
+
 
 public class EditViewCanvasView extends FrameLayout {
     public EditViewCanvasView(Context context) {
@@ -78,9 +77,13 @@ public class EditViewCanvasView extends FrameLayout {
     public void initPaint(){
         paint.setAntiAlias(true);
         paint.setDither(true);
-        paint.setColor(Color.RED);
+        paint.setColor(paintColor);
         paint.setStrokeWidth(10);
         paint.setStyle(Paint.Style.STROKE);
+    }
+    int paintColor= Color.RED;
+    public void setPenColor(int color){
+        paintColor=color;
     }
 
     boolean isXiangPi=false;
@@ -95,11 +98,13 @@ public class EditViewCanvasView extends FrameLayout {
      * 初始化画笔面板路径和事件相关
      */
     public void initPenPanel(){
-        class PathWithXiangPi extends Path{
+        class PathWithXiangPi extends Path {
             public boolean isXiangPi;
+            public int paintColor;
 
-            public PathWithXiangPi(boolean isXiangPi) {
+            public PathWithXiangPi(boolean isXiangPi,int color) {
                 this.isXiangPi=isXiangPi;
+                paintColor=color;
             }
         }
         final List<PathWithXiangPi> pathList=new ArrayList<>();//画笔路径
@@ -126,6 +131,7 @@ public class EditViewCanvasView extends FrameLayout {
             public void drawPath(){
                 //先画的是 dst ，后画的是 src
                 for(PathWithXiangPi path:pathList){//先画src
+                    paint.setColor(path.paintColor);
                     if(!path.isXiangPi){
                         paint.setXfermode(xfermode_pen);//一定保留后画的
                         canvasBitmap.drawPath(path,paint);
@@ -135,6 +141,7 @@ public class EditViewCanvasView extends FrameLayout {
                     }
                 }
                 paint.setXfermode(null);//清除模式
+                paint.setColor(paintColor);
             }
         };
         addView(pathView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -154,7 +161,7 @@ public class EditViewCanvasView extends FrameLayout {
             public boolean onTouch(View v, MotionEvent event) {
                 Log.v("kk","event"+event.getX()+"  "+event.getY());
                 if(event.getAction()== MotionEvent.ACTION_DOWN){
-                    currDownPath=new PathWithXiangPi(isXiangPi);
+                    currDownPath=new PathWithXiangPi(isXiangPi,paintColor);
                     currDownPath.moveTo(event.getX(),event.getY());
                 }
                 if(currDownPath==null)return true;
@@ -183,9 +190,9 @@ public class EditViewCanvasView extends FrameLayout {
     public void addDragTextView(String text){
         final TextView textView=new TextView(getContext());
         textView.setText(text);
-        new DragTool().bindView(this, textView, new OnClickListener() {
+        new DragTool().bindView(textView, new KKViewOnclickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClickKK(View v) {
                 DialogTool.initNormalInputDialog("请输入文字", "", "确定", new DialogTool.OnDialogInputEnd() {
                     @Override
                     public void onInputEnd(final EditText editText) {
@@ -198,6 +205,17 @@ public class EditViewCanvasView extends FrameLayout {
     }
 
     /***
+     * 弹框添加文字
+     */
+    public void addDragTextViewWithDialog(){
+        DialogTool.initNormalInputDialog("请输入文字", "", "确定", new DialogTool.OnDialogInputEnd() {
+            @Override
+            public void onInputEnd(final EditText editText) {
+                addDragTextView(editText.getText().toString().trim());
+            }
+        },"取消","",-1).show();
+    }
+    /***
      * 可以回退删除的 添加控件
      * @param view
      * @param w
@@ -205,7 +223,7 @@ public class EditViewCanvasView extends FrameLayout {
      * @param x
      * @param y
      */
-    public void addViewWithDongZuo(View view,int w,int h,float x,float y){
+    public void addViewWithDongZuo(View view, int w, int h, float x, float y){
         ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(w, h);
         view.setLayoutParams(layoutParams);
         view.setTranslationX(x);
