@@ -127,7 +127,7 @@ public class KKZhiFuUiTool {
             public void onTextChange(String s, boolean isComplete) {
                 if(isComplete){
                     pwds[0]=s;
-                    et_zhifu_google_pwd.requestFocus();
+                    if(showGoogle)et_zhifu_google_pwd.requestFocus();
                     end.run();
                 }else {
                     pwds[0]="";

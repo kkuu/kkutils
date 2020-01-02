@@ -55,7 +55,7 @@
                 android:textSize="14sp"
                 />
 
-            <com.maning.pswedittextlibrary.MNPasswordEditText
+            <utils.kkutils.ui.textview.MiMaEditTextView
                 android:id="@+id/kk_et_zhifu_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -92,7 +92,7 @@
                     android:textColor="#ff333333"
                     android:textSize="14dp"
                     />
-                <com.maning.pswedittextlibrary.MNPasswordEditText
+                <utils.kkutils.ui.textview.MiMaEditTextView
                     android:id="@+id/kk_et_zhifu_google_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
