@@ -232,17 +232,12 @@ public class CommonTool {
     public static String getDeviceId() {
         try {
             if(StringTool.notEmpty(deviceId))return deviceId;
-            DisplayMetrics dm = AppTool.getApplication().getResources().getDisplayMetrics();
-            int screenWidth = dm.widthPixels;
-            int screenHeight = dm.heightPixels;
-            String screen=screenWidth+"x"+screenHeight;
-            deviceId=Build.VERSION.SDK_INT+"_"+screen+"_"+Build.MANUFACTURER+"_"+Build.MODEL+"_"+Build.PRODUCT+"_"+DeviceUtils.getUniqueDeviceId();
+            deviceId= "a"+CommonTool.getVersion()+"_" +Build.VERSION.SDK_INT+"_"+Build.MANUFACTURER+"_"+Build.MODEL+"_"+Build.PRODUCT+"_"+ DeviceUtils.getUniqueDeviceId();
         }catch (Exception e){
             LogTool.ex(e);
         }
         return deviceId;
     }
-
     ;
 
 //    /***
