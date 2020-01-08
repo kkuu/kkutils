@@ -13,10 +13,13 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.blankj.utilcode.util.DeviceUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -98,7 +101,7 @@ public class CommonTool {
      * 跳转指定App
      * @param packageName
      */
-    public static void goApp(String packageName){
+    public static void goApp(String packageName) {
         /**
          * QQ包名：com.tencent.mobileqq
 
@@ -224,39 +227,54 @@ public class CommonTool {
         return isNetOpen;
     }
 
-    static  String deviceId="";
-    /***
-     * 获取设备号
-     *
-     * @return
-     */
+    static String deviceId = "";
+
     public static String getDeviceId() {
-        if(StringTool.notEmpty(deviceId)){
-            return deviceId;
-        }else {
-            deviceId= MapDB.loadObjByDefault("deviceId",String.class,"");
-            if(StringTool.isEmpty(deviceId)){
-                deviceId=""+UUID.randomUUID();
-                MapDB.saveObj(true,"deviceId",deviceId);
-            }
+        try {
+            if(StringTool.notEmpty(deviceId))return deviceId;
+            DisplayMetrics dm = AppTool.getApplication().getResources().getDisplayMetrics();
+            int screenWidth = dm.widthPixels;
+            int screenHeight = dm.heightPixels;
+            String screen=screenWidth+"x"+screenHeight;
+            deviceId=Build.VERSION.SDK_INT+"_"+screen+"_"+Build.MANUFACTURER+"_"+Build.MODEL+"_"+Build.PRODUCT+"_"+DeviceUtils.getUniqueDeviceId();
+        }catch (Exception e){
+            LogTool.ex(e);
         }
         return deviceId;
+    }
 
+    ;
 
-
-
-//        String serial="";
+//    /***
+//     * 获取设备号
+//     *
+//     * @return
+//     */
+//    public static String getDeviceId2() {
+//        if (StringTool.notEmpty(deviceId)) {
+//            return deviceId;
+//        } else {
+//            deviceId = MapDB.loadObjByDefault("deviceId", String.class, "");
+//            if (StringTool.isEmpty(deviceId)) {
+//                deviceId = "" + UUID.randomUUID();
+//                MapDB.saveObj(true, "deviceId", deviceId);
+//            }
+//        }
+//        return deviceId;
+//
+//
+//        String serial = "";
 //        try {
 //            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
 //                Context context = AppTool.getApplication();
 //                TelephonyManager tm = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
-//                serial= tm.getDeviceId();
+//                serial = tm.getDeviceId();
 //            }
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
 //        try {
-//            if(StringTool.isEmpty(serial)){
+//            if (StringTool.isEmpty(serial)) {
 //
 //                String m_szDevIDShort = "35" +
 //                        Build.BOARD.length() % 10 + Build.BRAND.length() % 10 +
@@ -286,18 +304,16 @@ public class CommonTool {
 //                    serial = "serial"; // 随便一个初始化
 //                }
 //                //使用硬件信息拼凑出来的15位号码
-//                serial= new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
+//                serial = new UUID(m_szDevIDShort.hashCode(), serial.hashCode()).toString();
 //            }
-//        }catch (Exception e){
+//        } catch (Exception e) {
 //            LogTool.ex(e);
 //        }
 //
 //
-//
-//
-//        deviceId=serial;
+//        deviceId = serial;
 //        return serial;
-    }
+//    }
 
     /**
      * 获取版本号
@@ -340,10 +356,10 @@ public class CommonTool {
 
     }
 
-    public static String getMetaData(String key){
-        String result="";
+    public static String getMetaData(String key) {
+        String result = "";
         try {
-            result= AppTool.getApplication().getPackageManager().getApplicationInfo(AppTool.getApplication().getPackageName(), PackageManager.GET_META_DATA).metaData.getString(key,"");
+            result = AppTool.getApplication().getPackageManager().getApplicationInfo(AppTool.getApplication().getPackageName(), PackageManager.GET_META_DATA).metaData.getString(key, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -422,7 +438,8 @@ public class CommonTool {
         }
 
     }
-    public static boolean isSoftInputIsActive(){
+
+    public static boolean isSoftInputIsActive() {
         try {
             InputMethodManager inputmanger = (InputMethodManager) AppTool.currActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
             return inputmanger.isActive();
@@ -431,6 +448,7 @@ public class CommonTool {
         }
         return false;
     }
+
     /**
      * EditText获取焦点并显示软键盘
      */
@@ -439,17 +457,18 @@ public class CommonTool {
         editText.setFocusableInTouchMode(true);
         editText.requestFocus();
         InputMethodManager inputmanger = (InputMethodManager) AppTool.currActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputmanger.showSoftInput(editText,InputMethodManager.SHOW_FORCED);
+        inputmanger.showSoftInput(editText, InputMethodManager.SHOW_FORCED);
         //activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
 
 
     /**
      * 设置输入界面一直显示出来
+     *
      * @param activity
      */
-    public static void setSoftInputAdjustPan(Activity activity){
-        if(activity==null)return;
+    public static void setSoftInputAdjustPan(Activity activity) {
+        if (activity == null) return;
         activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
@@ -457,8 +476,8 @@ public class CommonTool {
      * 禁止截屏
      * @param activity
      */
-    public static void JingZhiJieTu(Activity activity){
-        if(activity==null)return;
+    public static void JingZhiJieTu(Activity activity) {
+        if (activity == null) return;
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
     }
 
@@ -518,9 +537,10 @@ public class CommonTool {
 
     /**
      * 获取当前程序进程名称
+     *
      * @return
      */
-    public static String getProcessName(Context context){
+    public static String getProcessName(Context context) {
         try {
             int pid = android.os.Process.myPid();
             ActivityManager mActivityManager = (ActivityManager) context
@@ -531,16 +551,16 @@ public class CommonTool {
                     return appProcess.processName;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return "";
     }
+
     public static boolean notEmptyList(List list) {
         return list != null && !list.isEmpty();
     }
-
 
 
 }
