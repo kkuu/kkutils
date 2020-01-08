@@ -233,12 +233,12 @@ public class CommonTool {
         try {
             if(StringTool.notEmpty(deviceId))return deviceId;
             deviceId= "a"+CommonTool.getVersion()+"_" +Build.VERSION.SDK_INT+"_"+Build.MANUFACTURER+"_"+Build.MODEL+"_"+Build.PRODUCT+"_"+ DeviceUtils.getUniqueDeviceId();
+            deviceId=deviceId.replace(" ","");
         }catch (Exception e){
             LogTool.ex(e);
         }
         return deviceId;
     }
-    ;
 
 //    /***
 //     * 获取设备号
