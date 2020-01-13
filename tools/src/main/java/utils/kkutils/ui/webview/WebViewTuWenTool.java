@@ -24,7 +24,7 @@ public abstract class WebViewTuWenTool  {
 			+"<style>img{width:100% !important ;height:auto !important;}</style>"
 			+"<style>p{font-size :17px !important;line-height:32px !important;} </sty1e>"
 			+"<style>body(max- width:100% !important;}</style>"
-			+"</head><body>";
+			+"</head><body style='margin:0;padding:0'>";
 
 	public   String html_end="</body></html>";
 
