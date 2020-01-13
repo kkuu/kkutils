@@ -57,7 +57,7 @@ public class JiuGongGeTool {
      */
     public static void initJiuGongGe(final View parentClickView, RecyclerView recyclerView, int spanCount, int paddingDp){
         initJiuGongGe(recyclerView,spanCount,paddingDp);
-        parentClickView.setOnTouchListener(new View.OnTouchListener() {
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return parentClickView.onTouchEvent(event);
