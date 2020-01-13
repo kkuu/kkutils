@@ -72,9 +72,12 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
      * @return
      */
     public KKParentFragment addArgument(String key,Serializable data){
-        Bundle bundle=new Bundle();
+        Bundle bundle=getArguments();
+        if(bundle==null){
+            bundle=new Bundle();
+            setArguments(bundle);
+        }
         bundle.putSerializable(key,data);
-        setArguments(bundle);
         return this;
     }
     public Object getArgument(String key, Object defaultObj) {
