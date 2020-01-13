@@ -29,15 +29,17 @@ public abstract class WebViewTuWenTool  {
 	public   String html_end="</body></html>";
 
 	public  void loadTuWen( String content) {
-		content=StringTool.unicode2String(content);
-		initShowBigImg(getBigImgWebChromeClient());
+
 		try {
+			content=StringTool.getNotNullText(content);
+			content=StringTool.unicode2String(content);
+			content=content.replace("&#x3D;","=").replace("\\&quot;","").replace("&quot;","");
 			content =html_start+ content+html_end;
-			if (!StringTool.isEmpty(content)) {
-				content=content.replace("&#x3D;","=").replace("\\&quot;","").replace("&quot;","");
-				content=handData(content);
-				loadTuWenDataWithBaseURL(null, content, "text/html", "utf-8", null);
-			}
+			content=convertBigImgData(content);
+
+
+			initShowBigImg(getBigImgWebChromeClient());
+			loadTuWenDataWithBaseURL(null, content, "text/html", "utf-8", null);
 		}catch (Exception e){
 			LogTool.ex(e);
 		}
@@ -48,17 +50,22 @@ public abstract class WebViewTuWenTool  {
 			@Override
 			public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
 				LogTool.s(consoleMessage.message());
-				try {
-					String src = consoleMessage.message().replace(tuWenPreStr, "");
-					new KKBigImgListFragment().go(getTuwenSrcList().indexOf(src),  getTuwenSrcList());
-				} catch (Exception e) {
-					LogTool.ex(e);
-				}
+				parseBigImgConsole(consoleMessage.message());
 				return true;
 			}
 		};
 	}
-	public String handData(String data) {
+	public void parseBigImgConsole(String msg){
+		try {
+			if(msg.contains(tuWenPreStr)){
+				String src = msg.replace(tuWenPreStr, "");
+				new KKBigImgListFragment().go(getTuwenSrcList().indexOf(src),  getTuwenSrcList());
+			}
+		} catch (Exception e) {
+			LogTool.ex(e);
+		}
+	}
+	public String convertBigImgData(String data) {
 		data = "" + data;
 		String tem="<img onclick=console.log('"+tuWenPreStr+"'+this.src)";
 		data = data.replace("<img", tem);
