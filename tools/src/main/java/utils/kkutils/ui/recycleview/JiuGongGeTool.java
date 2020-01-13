@@ -1,6 +1,7 @@
 package utils.kkutils.ui.recycleview;
 
 import android.graphics.Rect;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,22 @@ public class JiuGongGeTool {
         });
     }
 
+    /***
+     *
+     * @param parentClickView  父容器可点击的 就传入
+     * @param recyclerView
+     * @param spanCount
+     * @param paddingDp
+     */
+    public static void initJiuGongGe(final View parentClickView, RecyclerView recyclerView, int spanCount, int paddingDp){
+        initJiuGongGe(recyclerView,spanCount,paddingDp);
+        parentClickView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return parentClickView.onTouchEvent(event);
+            }
+        });
+    }
     /***
      *
      * @param itemView  不要直接传itemview ， 传itemView 里面的子控件
