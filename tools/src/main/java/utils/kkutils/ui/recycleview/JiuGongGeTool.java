@@ -10,6 +10,27 @@ import utils.kkutils.common.UiTool;
 
 /***
  * 用于9宫格的
+ *
+ *  recycleView.setData(TestData.getTestStrList(10), R.layout.jianwen_item, new KKSimpleRecycleView.KKRecycleAdapter() {
+ *             @Override
+ *             public void initData(int position, int type, View itemView) {
+ *                 super.initData(position, type, itemView);
+ *
+ *                 final KKSimpleRecycleView recycleView_jianwen_tupian=itemView.findViewById(R.id.recycleView_jianwen_tupian);
+ *
+ *                 JiuGongGeTool.initJiuGongGe(recycleView_jianwen_tupian,3,10);
+ *
+ *                 recycleView_jianwen_tupian.setData(TestData.getTestStrList(9), R.layout.jianwen_item_img, new KKSimpleRecycleView.KKRecycleAdapter() {
+ *                     @Override
+ *                     public void initData(int position, int type, View itemView) {
+ *                         super.initData(position, type, itemView);
+ *                         ImageView imgv_jianwen_item=itemView.findViewById(R.id.imgv_jianwen_item);
+ *                         JiuGongGeTool.initJiuGongGeItemView(imgv_jianwen_item,3,10,CommonTool.getWindowSize().x-CommonTool.dip2px(26));
+ *                         loadImage(R.drawable.logo,imgv_jianwen_item);
+ *                     }
+ *                 });
+ *             }
+ *         });
  */
 public class JiuGongGeTool {
     public static void initJiuGongGe(RecyclerView recyclerView, int spanCount, int paddingDp){
