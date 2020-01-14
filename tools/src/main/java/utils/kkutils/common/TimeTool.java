@@ -21,6 +21,36 @@ import java.util.concurrent.TimeUnit;
 public class TimeTool {
     static long oneDayTime = 24 * 60 * 60 * 1000l;
 
+    public static String formtShort="yyyy-MM-dd";
+    public static String formtLong="yyyy-MM-dd HH:mm:ss";
+
+    public static SimpleDateFormat getFormat(String format){
+        if(StringTool.isEmpty(format))format=formtLong;
+        return new SimpleDateFormat(format);
+    }
+    public static SimpleDateFormat getShortFormat(){
+        return new SimpleDateFormat(formtShort);
+    }
+    public static SimpleDateFormat getLongFormat(){
+        return new SimpleDateFormat(formtLong);
+    }
+
+    public static String getDateStr(String dateStr, String formatSrc, String formatDest) {
+        String result = dateStr;
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatSrc);
+            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(formatDest);
+            Date date = simpleDateFormat.parse(dateStr);
+            result = simpleDateFormat2.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+
+
     /**
      * 获取指定时间字符串  间隔afterday 后的字符串
      * @param startDate
@@ -121,42 +151,7 @@ public class TimeTool {
         return time;
     }
 
-    /**
-     *
-     *
-     * @param timeLong
-     * @return yyyy-MM-dd HH:mm:ss
-     */
-    public static String getLongTimeStr(String timeLong) {
-        try {
-            return getLongTimeStr(Long.valueOf(timeLong));
-        }catch (Exception e){
-            LogTool.ex(e);
-        }
-        return "";
-    }
-    public static String getLongTimeStr(long timeLong) {
-        String add_time = "";
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat(
-                    "yyyy-MM-dd HH:mm:ss");
-            add_time = formatter.format(timeLong );
-        } catch (Exception e) {
-            //LogTool.ex(e);
-        }
-        return add_time;
-    }
-    public static String getShortTimeStr(long timeLong) {
-        String add_time = "";
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat(
-                    "HH:mm:ss");
-            add_time = formatter.format(timeLong );
-        } catch (Exception e) {
-            //LogTool.ex(e);
-        }
-        return add_time;
-    }
+
 
     /***
      * 不要秒
@@ -193,7 +188,42 @@ public class TimeTool {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                 .format(new Date());
     }
-
+    /**
+     *
+     *
+     * @param timeLong
+     * @return yyyy-MM-dd HH:mm:ss
+     */
+    public static String getLongTimeStr(String timeLong) {
+        try {
+            return getLongTimeStr(Long.valueOf(timeLong));
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+        return "";
+    }
+    public static String getLongTimeStr(long timeLong) {
+        String add_time = "";
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "yyyy-MM-dd HH:mm:ss");
+            add_time = formatter.format(timeLong );
+        } catch (Exception e) {
+            //LogTool.ex(e);
+        }
+        return add_time;
+    }
+    public static String getShortTimeStr(long timeLong) {
+        String add_time = "";
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat(
+                    "HH:mm:ss");
+            add_time = formatter.format(timeLong );
+        } catch (Exception e) {
+            //LogTool.ex(e);
+        }
+        return add_time;
+    }
     /***
      * @param dateStr 2016-05-28 10:00:00
      * @return
@@ -226,24 +256,12 @@ public class TimeTool {
         calendar.set(Calendar.YEAR,nian);
         calendar.set(Calendar.MONTH,yue);
         calendar.set(Calendar.DAY_OF_MONTH,ri);
-       return new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
+       return getShortFormat().format(calendar.getTime());
     }
-    /***
-     * @param dateStr 2016-05-28 10:00:00
-     * @return
-     */
-    public static String getDateStr(String dateStr, String formatSrc, String formatDest) {
-        String result = dateStr;
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatSrc);
-            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(formatDest);
-            Date date = simpleDateFormat.parse(dateStr);
-            result = simpleDateFormat2.format(date);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
+
+
+
+
 
     /***
      * 获取今天最开始的时间 比如 2016-2-24 0:00:00
