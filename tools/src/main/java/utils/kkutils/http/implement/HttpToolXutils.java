@@ -62,11 +62,12 @@ public class HttpToolXutils implements InterfaceHttpTool {
     @Override
     public <T extends Serializable> T request(HttpRequest request, Class<T> clzz) {
         try {
-            request.readySendRequest();
+            request.beginRequest();
             RequestParams requestParams = convertHttpRequestToRequestParams(request);
             String temStr = x.http().requestSync(requestParams.getMethod(), requestParams, String.class);
             T result = JsonTool.toJava(temStr, clzz);
             request.setResponseDataStr(temStr, clzz);
+            request.endRequest();
             return result;
         } catch (Throwable t) {
             LogTool.ex(t);
@@ -86,14 +87,13 @@ public class HttpToolXutils implements InterfaceHttpTool {
     @Override
     public <T extends Serializable> void request(final HttpRequest request, final Class<T> clzz, final HttpUiCallBack callBack) {
         try {
-            request.readySendRequest();
+            request.beginRequest();
             RequestParams requestParams = convertHttpRequestToRequestParams(request);
             final Callback.Cancelable cancelable= x.http().request(requestParams.getMethod(), requestParams, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String t) {
-
+                    request.endRequest();
                     if (callBack != null) {
-
                         request.setResponseDataStr(t, clzz);
                         callBack.notifyState(HttpUiCallBack.State.stateOnSuccess, request, clzz);
                     }
@@ -101,6 +101,7 @@ public class HttpToolXutils implements InterfaceHttpTool {
 
                 @Override
                 public void onError(Throwable throwable, boolean b) {
+                    request.endRequest();
                     if (callBack != null) {
                         callBack.notifyState(HttpUiCallBack.State.stateOnNetLocalError, request, clzz);
                         LogTool.ex(throwable);

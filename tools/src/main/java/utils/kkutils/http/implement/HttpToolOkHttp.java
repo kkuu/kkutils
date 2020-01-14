@@ -3,9 +3,6 @@ package utils.kkutils.http.implement;
 import android.content.Context;
 
 import org.jetbrains.annotations.NotNull;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,9 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
 
 import okhttp3.Call;
 import okhttp3.Cookie;
@@ -153,11 +147,12 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
     @Override
     public <T extends Serializable> T request(HttpRequest request, Class<T> clzz) {
         try {
-            request.readySendRequest();
+            request.beginRequest();
             Request.Builder builder = convertHttpRequestToRequestParams(request);
             String temStr = client.newCall(builder.build()).execute().body().string();
             T result = JsonTool.toJava(temStr, clzz);
             request.setResponseDataStr(temStr, clzz);
+            request.endRequest();
             return result;
         } catch (Throwable t) {
             LogTool.ex(t);
@@ -176,14 +171,13 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
      */
     @Override
     public <T extends Serializable> void request(final HttpRequest request, final Class<T> clzz, final HttpUiCallBack callBack) {
-        try {
-            request.readySendRequest();
             try {
-                request.readySendRequest();
+                request.beginRequest();
                 Request.Builder builder = convertHttpRequestToRequestParams(request);
                 client.newCall(builder.build()).enqueue(new okhttp3.Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        request.endRequest();
                         if (callBack != null) {
                             callBack.notifyState(HttpUiCallBack.State.stateOnNetLocalError, request, clzz);
                             LogTool.ex(e);
@@ -192,6 +186,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
 
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        request.endRequest();
                         if (callBack != null) {
                             request.setResponseDataStr(response.body().string(), clzz);
                             callBack.notifyState(HttpUiCallBack.State.stateOnSuccess, request, clzz);
@@ -207,9 +202,6 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
             }
 
 
-        } catch (Throwable t) {
-            LogTool.ex(t);
-        }
     }
 
     protected  RequestBody getBody(Map<String, Object> map) {

@@ -25,7 +25,7 @@ public abstract class HttpUiCallBack<T> {
         return state;
     }
 
-    private void notifyStateInMessage(final State state, final HttpRequest httpRequest) {
+    public void notifyStateInMessage(final State state, final HttpRequest httpRequest) {
         Runnable runnable=new Runnable() {
             @Override
             public void run() {
@@ -114,6 +114,17 @@ public abstract class HttpUiCallBack<T> {
             LogTool.ex(e);
         }
     }
+
+    public HttpRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(HttpRequest request) {
+        this.request = request;
+    }
+
+    public HttpRequest request;
+
 
     public enum State {
         stateOnCache(3, "获取缓存数据成功"),

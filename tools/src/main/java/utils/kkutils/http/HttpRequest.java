@@ -23,6 +23,7 @@ import utils.kkutils.ui.pullrefresh.PageControl;
 public class HttpRequest {
     public Proxy proxy;//设置代理
     public long timeBeginRequest = 0;//开始请求的时间
+    public long timeEndRequest = 0;//结束请求的时间
     public String cacheStr = "";
     private String urlStr = "";
     private String charset = "UTF-8";
@@ -324,7 +325,7 @@ public class HttpRequest {
     public void printLog() {
         synchronized (LogTool.class){
             LogTool.printBegin();
-            LogTool.printPart(true,"请求耗时  "+((System.currentTimeMillis()-timeBeginRequest))+"  ：  "+getRequestMethod()+"  "+getUrlRequestGet());
+            LogTool.printPart(true,"请求耗时  "+((timeEndRequest-timeBeginRequest))+"  ：  "+getRequestMethod()+"  "+getUrlRequestGet());
 
             printLogPost();
             LogTool.printPart("返回数据: ");
@@ -333,8 +334,19 @@ public class HttpRequest {
         }
     }
 
-    public void readySendRequest() {
-        timeBeginRequest = System.currentTimeMillis();
+    public void beginRequest() {
+        try {
+            timeBeginRequest = System.currentTimeMillis();
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+    }
+    public void endRequest(){
+        try {
+            timeEndRequest = System.currentTimeMillis();
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
     }
 
     public String getCacheKey() {

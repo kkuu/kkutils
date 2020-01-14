@@ -44,6 +44,7 @@ public class HttpTool {
 
     public static <T extends Serializable> void request(HttpRequest request, Class<T> clzz, HttpUiCallBack<T> callBack) {
         request.setResponseClass(clzz);
+        callBack.setRequest(request);
         httpTool.request(request, clzz, callBack);
     }
 
