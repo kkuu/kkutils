@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import douyin.DouYinFragment;
 import kk.kktools.jinrong.JiSuanQi;
@@ -84,17 +86,52 @@ public class MainActivityKK extends KKParentActivity {
 
 
 
-        HttpTool.request(HttpRequest.url("https://www.baidu.com").addQueryParams("a", "b"), String.class, new HttpUiCallBack<String>() {
-            @Override
-            public void onSuccess(String data) {
-                LogTool.s(data);
-            }
-        });
 
+         List<String> urlsDefault=new ArrayList<String>(){
+            {
+                add("https://api.hellovideos.org");
+                add("https://api.95y8l.cn");
+                add("https://api.hellovideo.io");
+            }
+        };
+
+         loadData(urlsDefault);
         //testVersion();
 
         // testWeb();
     }
+
+
+
+
+    public static void loadData( final List<String>  urls){
+        for( final String urlStr:urls){
+            HttpTool.request(HttpRequest.url(urlStr+"/api/queryversion"), String.class, new HttpUiCallBack<String>() {
+                @Override
+                public void onSuccess(String data) {
+                    LogTool.s(data);
+                }
+            });
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void testVersion(){
         Version version=new Version();
         version.versionCode=100;
