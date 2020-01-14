@@ -65,7 +65,7 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
             intent = new Intent();
         }
         intent.setClass(AppTool.currActivity, getClass());
-        intent.putExtra("fragment", fragment);
+        intent.putExtra("fragment", fragment.getClass());
         intent.putExtra("arguments", fragment.getArguments());
         AppTool.currActivity.startActivityForResult(intent, 1);
     }
@@ -77,7 +77,7 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
     public void goForResult(KKParentFragment fragment, KKParentFragment fromFragment, int requestCode) {
         Intent intent = new Intent();
         intent.setClass(AppTool.currActivity, getClass());
-        intent.putExtra("fragment", fragment);
+        intent.putExtra("fragment", fragment.getClass());
         intent.putExtra("arguments", fragment.getArguments());
         fromFragment.startActivityForResult(intent, requestCode);
     }
@@ -95,9 +95,11 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
 //        ViewTool.initViews(getWindow().getDecorView(), this, null);
 
         try {
-            Fragment fragment = (Fragment) getIntent().getSerializableExtra("fragment");
-            if(fragment!=null){
+            Class<Fragment> fragmentClass = (Class<Fragment>) getIntent().getSerializableExtra("fragment");
+
+            if(fragmentClass!=null){
                 Bundle arguments = getIntent().getBundleExtra("arguments");
+                Fragment fragment = fragmentClass.newInstance();
                 fragment.setArguments(arguments);
                 setFragment(fragment);
             }
