@@ -19,12 +19,11 @@ public abstract class WebViewTuWenTool  {
 											 String mimeType, String encoding, String failUrl);
 	public abstract void initShowBigImg(WebChromeClient webChromeClient);
 
-	public   String html_start="<html><head> "
-			+"<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui\" />"
-			+"<style>img{width:100% !important ;height:auto !important;}</style>"
-			+"<style>p{font-size :14px !important;line-height:26px !important;} </sty1e>"
-			+"<style>body(max- width:100% !important;}</style>"
-			+"</head><body style='margin:0;padding:0'>";
+	public   String html_start="<html><head> <meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui\" />" +
+			"<style>img{width:100% !important ;height:auto !important;}</style>" +
+			"<style>p{font-size :14px !important;line-height:24px !important;color:#666666 !important;} </sty1e>" +
+			"<style>body(max- width:100% !important;}</style></head><body style='margin:0;padding:0'>";
+	;
 
 	public   String html_end="</body></html>";
 
