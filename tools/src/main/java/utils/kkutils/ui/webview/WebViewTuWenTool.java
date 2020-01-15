@@ -22,7 +22,7 @@ public abstract class WebViewTuWenTool  {
 	public   String html_start="<html><head> "
 			+"<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui\" />"
 			+"<style>img{width:100% !important ;height:auto !important;}</style>"
-			+"<style>p{font-size :17px !important;line-height:32px !important;} </sty1e>"
+			+"<style>p{font-size :14px !important;line-height:26px !important;} </sty1e>"
 			+"<style>body(max- width:100% !important;}</style>"
 			+"</head><body style='margin:0;padding:0'>";
 
