@@ -362,7 +362,13 @@ public class UiTool {
         }
     }
     public static void setWHDp(View view, int w, int h) {
-        setWH(view,CommonTool.dip2px(w),CommonTool.dip2px(h));
+        if(w>0){
+            w=CommonTool.dip2px(w);
+        }
+        if(h>0){
+            h=CommonTool.dip2px(h);
+        }
+        setWH(view,w,h);
     }
     public static void setMargin(View view, int left,int top,int right,int bottom) {
         if (view == null) return;
