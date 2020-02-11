@@ -67,7 +67,7 @@ public class DouYinViewPagerAdapter extends PagerAdapter {
         PreloadManager.getInstance().addPreloadTask(item.getUrl(), position);
         Glide.with(context)
                 .load(item.getThumb())
-                .placeholder(android.R.color.white)
+               // .placeholder(android.R.color.white)
                 .into(viewHolder.mThumb);
         viewHolder.mPosition = position;
         container.addView(view);
