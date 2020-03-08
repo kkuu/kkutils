@@ -22,6 +22,7 @@ import utils.kkutils.ui.pullrefresh.KKRefreshImp;
 
 /**
  * Created by ishare on 2016/6/7.
+ * 放在 wzscroll 里面的时候  如果高度不对 ，可以试试setWrapContentHeight
  */
 public class KKParentRecycleView extends RecyclerView {
     /******************
