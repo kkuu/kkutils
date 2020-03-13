@@ -39,7 +39,7 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
     /***
      * 跳转到一个Fragment
      */
-    private void go(KKParentFragment fragment, boolean inCurrActivity) {
+    private void go(Fragment fragment, boolean inCurrActivity) {
         if (inCurrActivity) {//就在当前页面 ， 不跳转
             if (AppTool.currActivity instanceof KKNormalFragmentActivity) {
                 ((KKNormalFragmentActivity) AppTool.currActivity).setFragment(fragment);
@@ -53,14 +53,14 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
     /***
      * 跳转到一个Fragment
      */
-    public void go(KKParentFragment fragment) {
+    public void go(Fragment fragment) {
         go(fragment, null);
     }
 
     /***
      * 跳转到一个Fragment
      */
-    public void go(KKParentFragment fragment, Intent intent) {
+    public void go(Fragment fragment, Intent intent) {
         if (intent == null) {
             intent = new Intent();
         }
@@ -74,11 +74,11 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
      * @param fragment     要去向的fragment
      * @param fromFragment 由哪个 fragment 启动的
      */
-    public void goForResult(KKParentFragment fragment, KKParentFragment fromFragment, int requestCode) {
+    public void goForResult(Fragment toFragment, Fragment fromFragment, int requestCode) {
         Intent intent = new Intent();
         intent.setClass(AppTool.currActivity, getClass());
-        intent.putExtra("fragment", fragment.getClass());
-        intent.putExtra("arguments", fragment.getArguments());
+        intent.putExtra("fragment", toFragment.getClass());
+        intent.putExtra("arguments", toFragment.getArguments());
         fromFragment.startActivityForResult(intent, requestCode);
     }
 

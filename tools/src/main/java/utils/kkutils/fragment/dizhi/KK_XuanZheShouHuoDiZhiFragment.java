@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import java.io.Serializable;
 
 import utils.kkutils.R;
@@ -138,14 +140,14 @@ public class KK_XuanZheShouHuoDiZhiFragment extends KKParentFragment {
     }
 
     @Override
-    public void goForResult(KKParentFragment KKParentFragment, int requestCode) {
-        super.goForResult(KKParentFragment, requestCode);
+    public void goForResult(Fragment fragment, int requestCode) {
+        super.goForResult(fragment, requestCode);
     }
-    public void goForResult(KKParentFragment KKParentFragment, int requestCode, int maxDep) {
+    public void goForResult(Fragment fragment, int requestCode, int maxDep) {
         Bundle bundle=new Bundle();
         bundle.putInt("maxDep",maxDep);
         setArguments(bundle);
-        super.goForResult(KKParentFragment, requestCode);
+        super.goForResult(fragment, requestCode);
     }
 
 }

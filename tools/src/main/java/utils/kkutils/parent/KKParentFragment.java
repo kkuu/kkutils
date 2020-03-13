@@ -252,9 +252,9 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
             LogTool.ex(e);
         }
     }
-    public void goForResult(KKParentFragment KKParentFragment, int requestCode) {
+    public void goForResult(Fragment fromFragment, int requestCode) {
         try {
-            new KKNormalFragmentActivity().goForResult(this, KKParentFragment,requestCode);
+            new KKNormalFragmentActivity().goForResult(this, fromFragment,requestCode);
             currentFragment=this;
         } catch (Exception e) {
             LogTool.ex(e);
