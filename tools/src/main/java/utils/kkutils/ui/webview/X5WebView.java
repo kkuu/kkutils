@@ -3,10 +3,15 @@ package utils.kkutils.ui.webview;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.WebSettings;
@@ -14,11 +19,16 @@ import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
+import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Map;
 
+import utils.kkutils.AppTool;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UiTool;
+
+import static com.blankj.utilcode.util.ActivityUtils.startActivity;
 
 /***
  * webview  通用bug
@@ -32,13 +42,54 @@ public class X5WebView extends WebView {
 	TextView title;
 	private WebViewClient client = new KKX5WebViewClientDefault();
 	public static class KKX5WebViewClientDefault extends WebViewClient{
-//		/**
-//		 * 防止加载网页时调起系统浏览器
-//		 */
-//		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//			//view.loadUrl(url);
-//			return true;
-//		}
+		/**
+		 * 防止加载网页时调起系统浏览器
+		 */
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			try {
+				//处理intent协议
+				if (url.startsWith("intent://")) {
+					Intent intent;
+					try {
+						intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+						intent.addCategory("android.intent.category.BROWSABLE");
+						intent.setComponent(null);
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+							intent.setSelector(null);
+						}
+						List<ResolveInfo> resolves = AppTool.currActivity.getPackageManager().queryIntentActivities(intent,0);
+						if(resolves.size()>0){
+							startActivity(intent);
+						}
+						return true;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				// 处理自定义scheme协议
+				if (!url.startsWith("http")) {
+					Log.e("yxx","处理自定义scheme-->" + url);
+					try {
+						// 以下固定写法
+						final Intent intent = new Intent(Intent.ACTION_VIEW,
+								Uri.parse(url));
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+								| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+						startActivity(intent);
+					} catch (Exception e) {
+						// 防止没有安装的情况
+						e.printStackTrace();
+						CommonTool.showToast("您所打开的第三方App未安装！");
+					}
+					return true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return super.shouldOverrideUrlLoading(view,url);
+		}
+
+
 	}
 
 	/**
