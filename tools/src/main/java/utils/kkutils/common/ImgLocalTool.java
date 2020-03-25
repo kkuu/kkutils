@@ -180,14 +180,25 @@ public class ImgLocalTool {
                     e.printStackTrace();
                 }
             }
+
             //通知相册更新
-//            notifyMediaStore(file.getAbsolutePath());//下面出错可以用这个
-            MediaStore.Images.Media.insertImage(AppTool.getApplication().getContentResolver(),
-                    bmp, fileName, null);
-            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            Uri uri =UriTool.getUriWithFileProvider(file);// Uri.fromFile(file);
-            intent.setData(uri);
-            AppTool.getApplication().sendBroadcast(intent);
+
+            try {
+                MediaStore.Images.Media.insertImage(AppTool.getApplication().getContentResolver(),
+                        bmp, fileName, null);
+                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri uri =UriTool.getUriWithFileProvider(file);// Uri.fromFile(file);
+                intent.setData(uri);
+                AppTool.getApplication().sendBroadcast(intent);
+            }catch (Exception e){
+                LogTool.ex(e);
+            }
+
+            try {
+                notifyMediaStore(file.getAbsolutePath());//上面面出错可以用这个
+            }catch (Exception e){
+                LogTool.ex(e);
+            }
 
             return file;
         }catch (Exception e){
