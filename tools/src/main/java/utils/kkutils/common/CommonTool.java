@@ -444,10 +444,9 @@ public class CommonTool {
 
     }
 
-    public static String getStrByResId(int resId) {
+    public static String getString(int resId) {
         try {
             return AppTool.getApplication().getResources().getString(resId);
-
         } catch (Exception e) {
             LogTool.ex(e);
         }

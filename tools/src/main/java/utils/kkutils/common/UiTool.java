@@ -306,7 +306,13 @@ public class UiTool {
 
     public static void setTextView(TextView textView, Object text) {
         try {
-            if(textView!=null)textView.setText(StringTool.getNotNullText(text));
+            if(textView!=null){
+                if(text instanceof Integer){
+                    textView.setText((Integer) text);
+                }else {
+                    textView.setText(StringTool.getNotNullText(text));
+                }
+            }
         } catch (Exception e) {
             LogTool.ex(e);
         }
