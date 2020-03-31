@@ -11,6 +11,15 @@
     <attr name="paddingRight" format="dimension"> </attr>
     <attr name="paddingBottom" format="dimension"> </attr>
 
+    <declare-styleable name="KKProgressYuan">
+        <attr name="kk_progress_backWidth" format="dimension" />    <!--背景圆环宽度-->
+        <attr name="kk_progress_progressWidth" format="dimension" />    <!--进度圆环宽度-->
+        <attr name="kk_progress_backColor" format="color" />        <!--背景圆环颜色-->
+        <attr name="kk_progress_progressColor" format="color" />        <!--进度圆环颜色-->
+        <attr name="kk_progress_progressStartColor" format="color" />   <!--进度圆环开始颜色-->
+        <attr name="kk_progress_progressEndColor" format="color" />   <!--进度圆环结束颜色-->
+        <attr name="kk_progress_progress" format="integer" />       <!--圆环进度-->
+    </declare-styleable>
 
 
     <declare-styleable name="RoundImageView">
