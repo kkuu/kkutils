@@ -10,11 +10,11 @@
 
 
     <utils.kkutils.ui.KKViewPager
-        android:id="@+id/viewPagerResId"
+        android:id="@+id/vg_lunbo_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <LinearLayout
-        android:id="@+id/dotParentResId"
+        android:id="@+id/vg_lunbo_btns"
         android:layout_width="wrap_content" android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

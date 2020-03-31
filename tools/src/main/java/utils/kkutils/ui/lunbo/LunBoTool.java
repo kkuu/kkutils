@@ -35,32 +35,13 @@ public class LunBoTool {
     public static final int beginPosition = maxCount / 2;
     static final int key = ViewTool.initKey();
 
-    /********轮播小红点布局
-     *
-     *
-     * <?xml version="1.0" encoding="utf-8"?>
-     <LinearLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="wrap_content" android:orientation="horizontal"
-     android:layout_height="wrap_content">
-     <CheckBox
-     android:id="@+id/cb_dot"
-     android:layout_width="10dp"
-     android:layout_height="10dp"
-     android:button="@drawable/selector_lunbo_dot"
-     />
-     <View
-     android:layout_width="3dp"
-     android:layout_height="1dp"></View>
-     </LinearLayout>
-     */
 
 
-    public static void initAds(final View parent, final int adsContainerId, final int vg_viewpager_btnId, final int dotBtnLayoutResId, final int dotBtnCompoundButtonResId, final int autoPlayDuration, List<LunBoData> lunBoDatas) {
+    public static void initAds(final View parent, final int vg_lunbo_content, final int vg_lunbo_btns, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas) {
         try {
-            ViewPager adsContainer = (ViewPager) parent.findViewById(adsContainerId);
-            LinearLayout vg_viewpager_btn = (LinearLayout) parent.findViewById(vg_viewpager_btnId);
-            initAds(adsContainer, vg_viewpager_btn, dotBtnLayoutResId, dotBtnCompoundButtonResId, autoPlayDuration, lunBoDatas, false);
+            ViewPager adsContainer = (ViewPager) parent.findViewById(vg_lunbo_content);
+            LinearLayout vg_viewpager_btn = (LinearLayout) parent.findViewById(vg_lunbo_btns);
+            initAds(adsContainer, vg_viewpager_btn, lunbo_dot_layout_resid, cb_lunbo_dot, autoPlayDuration, lunBoDatas, false);
         } catch (Exception e) {
             LogTool.ex(e);
         }
@@ -69,18 +50,18 @@ public class LunBoTool {
     /***
      * 查看大图用的
      * @param parent
-     * @param adsContainerId
-     * @param vg_viewpager_btnId
-     * @param dotBtnLayoutResId
-     * @param dotBtnCompoundButtonResId
+     * @param vg_lunbo_content
+     * @param vg_lunbo_btns
+     * @param lunbo_dot_layout_resid
+     * @param cb_lunbo_dot
      * @param autoPlayDuration
      * @param lunBoDatas
      */
-    public static void initAdsBigImage(final View parent, final int adsContainerId, final int vg_viewpager_btnId, final int dotBtnLayoutResId, final int dotBtnCompoundButtonResId, final int autoPlayDuration, List<LunBoData> lunBoDatas) {
+    public static void initAdsBigImage(final View parent, final int vg_lunbo_content, final int vg_lunbo_btns, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas) {
         try {
-            ViewPager adsContainer = (ViewPager) parent.findViewById(adsContainerId);
-            LinearLayout vg_viewpager_btn = (LinearLayout) parent.findViewById(vg_viewpager_btnId);
-            initAds(adsContainer, vg_viewpager_btn, dotBtnLayoutResId, dotBtnCompoundButtonResId, 0, lunBoDatas, true);
+            ViewPager adsContainer = (ViewPager) parent.findViewById(vg_lunbo_content);
+            LinearLayout vg_viewpager_btn = (LinearLayout) parent.findViewById(vg_lunbo_btns);
+            initAds(adsContainer, vg_viewpager_btn, lunbo_dot_layout_resid, cb_lunbo_dot, 0, lunBoDatas, true);
         } catch (Exception e) {
             LogTool.ex(e);
         }
@@ -90,14 +71,14 @@ public class LunBoTool {
      *
      * @param adsContainer                  ViewPager   放轮播图片的
      * @param vg_viewpager_btn              LinearLayout   放轮播图片下面的 小红点的
-     * @param dotBtnCompoundButtonResId     dotBtnCompoundButtonResId  小红点里面 的CompoundButton id ， 这个用于显示当前选中的
+     * @param cb_lunbo_dot     cb_lunbo_dot  小红点里面 的CompoundButton id ， 这个用于显示当前选中的
      * @param lunBoDatas                    轮播数据
      * @param autoPlayDuration              自动播放间隔时间， 大于0 并且 有超过1页的数据就自动播放，
      *
      * @param  imageCanScale 查看大图用的
      *
      */
-    public static void initAds(final ViewPager adsContainer, final LinearLayout vg_viewpager_btn, final int dotBtnLayoutResId, final int dotBtnCompoundButtonResId, final int autoPlayDuration, List<LunBoData> lunBoDatas, final boolean imageCanScale) {
+    public static void initAds(final ViewPager adsContainer, final LinearLayout vg_viewpager_btn, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas, final boolean imageCanScale) {
         try {
             if (lunBoDatas == null) lunBoDatas = new ArrayList<>();
             if (lunBoDatas.size() < 1) {
@@ -120,7 +101,7 @@ public class LunBoTool {
                 vg_viewpager_btn.removeAllViews();
                 if(lunBoDatas.size()>1){
                     for (int i = 0; i < lunBoDatas.size(); i++) {
-                        View dotBtn = LayoutInflaterTool.getInflater(20, dotBtnLayoutResId).inflate();
+                        View dotBtn = LayoutInflaterTool.getInflater(20, lunbo_dot_layout_resid).inflate();
                         vg_viewpager_btn.addView(dotBtn);
                     }
                 }
@@ -228,7 +209,7 @@ public class LunBoTool {
                         if (!imageCanScale)
                             positionIn = CommonTool.loopPosition(datasList.size(), beginPosition, positionIn);
                         for (int i = 0; i < vg_viewpager_btn.getChildCount(); i++) {
-                            CompoundButton rb = (CompoundButton) vg_viewpager_btn.getChildAt(i).findViewById(dotBtnCompoundButtonResId);
+                            CompoundButton rb = (CompoundButton) vg_viewpager_btn.getChildAt(i).findViewById(cb_lunbo_dot);
                             if (positionIn == i) {
                                 rb.setChecked(true);
                             } else {
@@ -250,41 +231,6 @@ public class LunBoTool {
         }
 
     }
-
-    /*** 轮播布局
-     *
-     *
-     *
-     * <?xml version="1.0" encoding="utf-8"?>
-     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:contentDescription="广告"
-     android:id="@+id/vg_guanggao"
-     >
-
-     <utils.wzutils.ui.WzViewPager
-     android:id="@+id/viewPagerResId"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"/>
-     <LinearLayout
-     android:id="@+id/dotParentResId"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_alignParentBottom="true"
-     android:layout_centerHorizontal="true"
-     android:layout_marginBottom="10dp"
-     android:orientation="horizontal"></LinearLayout>
-     </RelativeLayout>
-     *
-     *
-     *
-     *
-     *
-     *
-     */
 
     public static class LunBoData {
         public Object imageUrl = "";

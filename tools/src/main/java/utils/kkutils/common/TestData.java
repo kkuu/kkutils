@@ -16,9 +16,9 @@ public class TestData {
     public static String getTestImgUrl(int index) {
         List<String> imgs=new ArrayList<>();
 
-        imgs.add("http://img3.imgtn.bdimg.com/it/u=304048529,3594887020&fm=26&gp=0.jpg");
-        imgs.add("http://img2.imgtn.bdimg.com/it/u=420517602,2844897433&fm=214&gp=0.jpg");
-        imgs.add("http://photo2.tp88.net/upfile/20173/27/6906F28EBF77AA4B1BB45D82411D3D2C-0.jpg");
+//来自 http://www.win4000.com/
+        imgs.add("http://pic1.win4000.com/pic/b/73/7f090ba23f.jpg");
+        imgs.add("http://pic1.win4000.com/pic/b/73/8ae29ca745.jpg");
         imgs.add("http://pic1.win4000.com/wallpaper/1/57a2fa5f8da86.jpg");
         imgs.add("http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1309/13/c10/25636246_1379059568752.jpg");
         imgs.add("http://benyouhuifile.it168.com/forum/201210/31/040100zn8z874p4qmfgx7s.jpg");

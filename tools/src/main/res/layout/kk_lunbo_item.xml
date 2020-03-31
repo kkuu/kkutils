@@ -4,7 +4,7 @@
     android:layout_width="wrap_content" android:orientation="horizontal"
     android:layout_height="wrap_content">
     <CheckBox
-        android:id="@+id/cb_dot" android:enabled="false"
+        android:id="@+id/cb_lunbo_dot" android:enabled="false"
         android:layout_width="8dp"
         android:layout_height="8dp"
         android:button="@drawable/kk_lunbo_dot_selector"

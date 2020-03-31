@@ -82,6 +82,7 @@ public class MainActivityKK extends KKParentActivity {
         addItem("webview", WebFragment.byData("https://www.baidu.com","123"), null);
         addItem("tab", new TestTab(), null);
         addItem("图片编辑", new TestEditView(), null);
+        addItem("轮播", new TestLunBo(), null);
         refresh();
 
 

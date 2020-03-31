@@ -44,7 +44,7 @@ public class KKBigImgListFragment extends KKParentFragment {
     };
 
     static {
-        KKBigImgListFragment.init(R.layout.kk_lunbo_layout, R.id.viewPagerResId,R.id.dotParentResId,R.layout.kk_lunbo_item,R.id.cb_dot);
+        KKBigImgListFragment.init(R.layout.kk_lunbo_layout, R.id.vg_lunbo_content,R.id.vg_lunbo_btns,R.layout.kk_lunbo_item,R.id.cb_lunbo_dot);
 
     }
 
