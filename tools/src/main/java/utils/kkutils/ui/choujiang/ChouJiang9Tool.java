@@ -36,53 +36,47 @@ import utils.kkutils.parent.KKViewOnclickListener;
  *         ChouJiang9Tool.ChouJiangViewDefault.bg_drawable_light=getResources().getDrawable(R.drawable.candy_img_light);
  *         ChouJiang9Tool.ChouJiangViewDefault.bg_drawable_zhongJiang=getResources().getDrawable(R.drawable.candy_img_money);
  *         ChouJiang9Tool.ChouJiangViewDefault.bg_drawable_zhongJiang_no=getResources().getDrawable(R.drawable.candy_img_thanks);
- *         ChouJiang9Tool.initChouJiang(grid_view, new ChouJiang9Tool.ChouJiangViewFactory() {
+ *
+ *
+ *          new ChouJiang9Tool(grid_view) {
  *             @Override
- *             public ChouJiang9Tool.ChouJiangViewInterface newView() {
+ *             public boolean onChouJiangClick() {
+ *                 startChoujiang(3,1);
+ *                 return true;
+ *             }
+ *
+ *             @Override
+ *             public ChouJiangViewInterface newView() {
  *                 return new ChouJiang9Tool.ChouJiangViewDefault(getContext());
  *             }
- *         });
+ *         };
  *
  *
  *
  */
-public class ChouJiang9Tool {
+public abstract class ChouJiang9Tool {
+    /***
+     * 抽奖按钮被点击  记得调用 startChoujiang 并且返回true
+     */
+    public abstract boolean onChouJiangClick();
 
-    public static interface   ChouJiangViewInterface {
-
-
-        /**
-         * 重置为初始状态
-         */
-        public void reset();
-
-        /**
-         * 重置为抽奖按钮
-         */
-        public void resetBtnChouJiang();
-
-        /**
-         * 设置高亮
-         * @param isLight
-         */
-        public void setLight(boolean isLight);
-
-        public void setZhongJiang(Object o);
-
-        public void setNotZhongJiang();
-
-        public void setOnClickListener(View.OnClickListener clickListener);
-
-        public View getView();
+    /**
+     * 创建一个按钮， 总共会创建9个
+     * @return
+     */
+    public abstract ChouJiangViewInterface newView();
+    public ChouJiang9Tool(GridView gridView){
+       initChouJiang(gridView);
     }
 
 
-    public static int [] items=new int[]{0,1,2,5,8,7,6,3};
-    public static int i=0;
-    public static int timeAll=5000;
-    public static int timeCurr=0;
-    public static int timeAdd=0;
-    public static void reset(final List<ChouJiangViewInterface> viewList){
+
+    public  int [] items=new int[]{0,1,2,5,8,7,6,3};
+    public  int i=0;
+    public  int timeAll=5000;
+    public  int timeCurr=0;
+    public  int timeAdd=0;
+    public  void reset(){
         for (ChouJiangViewInterface jiangPinView : viewList) {
             jiangPinView.reset();
             if(viewList.indexOf(jiangPinView)==4){
@@ -90,15 +84,24 @@ public class ChouJiang9Tool {
                 jiangPinView.setOnClickListener(new KKViewOnclickListener() {
                     @Override
                     public void onClickKK(View view) {
-                        ChouJiang9Tool.choujiang(viewList,5,0);
+                        if(!onChouJiangClick()){
+                            startChoujiang(5,0);
+                        }
                     }
                 });
             }
 
         }
     }
-    public static void choujiang(final List<ChouJiangViewInterface> viewList, final int num, final int money){
-        reset(viewList);
+
+    /***
+     *
+     * @param num  选中哪个数字  0-8  除了4
+     * @param data 中奖数据， 没中奖  null
+     */
+    public  void startChoujiang( final int num, final Object data){
+        reset();
+
         i=0;
         timeCurr=0;
         timeAdd=50;
@@ -115,9 +118,9 @@ public class ChouJiang9Tool {
                 }
                 timeCurr+=timeAdd;
                 if(timeCurr>=timeAll&&p==num){
-                    LogTool.s("抽中了"+num+"  "+money);
-                    if(money>0){
-                        jiangPinView.setZhongJiang(money);
+                    LogTool.s("抽中了"+num+"  "+data);
+                    if(data!=null){
+                        jiangPinView.setZhongJiang(data);
                     }else {
                         jiangPinView.setNotZhongJiang();
                     }
@@ -214,19 +217,20 @@ public class ChouJiang9Tool {
         }
     }
 
-    public static interface ChouJiangViewFactory{
-        public ChouJiangViewInterface newView();
-    }
-    public static void initChouJiang(final GridView gridView, final ChouJiangViewFactory chouJiangViewFactory){
-        final List<ChouJiangViewInterface> viewList=new ArrayList<>();
 
+
+    List<ChouJiangViewInterface> viewList=new ArrayList<>();
+
+    public  void initChouJiang(final GridView gridView){
+        viewList.clear();
         {//初始化viewlist
             for(int i=0;i<9;i++){
-                ChouJiangViewInterface view=chouJiangViewFactory.newView();
+                ChouJiangViewInterface view=newView();
                 viewList.add(view);
             }
-            reset(viewList);
+            reset();
         }
+
 
         gridView.setAdapter(new BaseAdapter() {
             @Override
@@ -247,4 +251,45 @@ public class ChouJiang9Tool {
             }
         });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static interface   ChouJiangViewInterface {
+
+        /**
+         * 重置为初始状态
+         */
+        public void reset();
+
+        /**
+         * 重置为抽奖按钮
+         */
+        public void resetBtnChouJiang();
+
+        /**
+         * 设置高亮
+         * @param isLight
+         */
+        public void setLight(boolean isLight);
+
+        public void setZhongJiang(Object o);
+
+        public void setNotZhongJiang();
+
+        public void setOnClickListener(View.OnClickListener clickListener);
+
+        public View getView();
+    }
+
 }

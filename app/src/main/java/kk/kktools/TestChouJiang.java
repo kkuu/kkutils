@@ -18,12 +18,19 @@ public class TestChouJiang extends KKParentFragment {
     @Override
     public void initData() {
 
-        ChouJiang9Tool.initChouJiang(grid_view, new ChouJiang9Tool.ChouJiangViewFactory() {
+        new ChouJiang9Tool(grid_view) {
             @Override
-            public ChouJiang9Tool.ChouJiangViewInterface newView() {
+            public boolean onChouJiangClick() {
+                startChoujiang(3,1);
+                return true;
+            }
+
+            @Override
+            public ChouJiangViewInterface newView() {
                 return new ChouJiang9Tool.ChouJiangViewDefault(getContext());
             }
-        });
+        };
+
 
     }
 
