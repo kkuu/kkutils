@@ -15,7 +15,11 @@
        android:layout_height="match_parent">
 
        <utils.kkutils.ui.progress.KKProgressYuan
+           android:id="@+id/progress_yuan"
+
            android:layout_width="100dp"
            android:layout_height="100dp"></utils.kkutils.ui.progress.KKProgressYuan>
+
+
    </LinearLayout>
 </LinearLayout>

@@ -19,6 +19,8 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import utils.kkutils.R;
+import utils.kkutils.common.ResourcesTool;
+import utils.kkutils.common.UiTool;
 
 /**
  * abc on 2017/4/6.
@@ -32,10 +34,23 @@ public class KKProgressYuan extends View {
      */
 
 
-        private Paint mBackPaint, mProgPaint;   // 绘制画笔
-        private RectF mRectF;       // 绘制区域
-        private int[] mColorArray;  // 圆环渐变色
-        private int mProgress;      // 圆环进度(0-100)
+        public Paint mBackPaint, mProgPaint;   // 绘制画笔
+    public RectF mRectF;       // 绘制区域
+    public int[] mColorArray;  // 圆环渐变色
+    public int mProgress;      // 圆环进度(0-100)
+
+
+
+    public int angleStart;//开始角度  0
+
+
+    public int angleEnd;//结束角度  360
+
+    public int backColor;
+    public int progressColor;
+
+    public float backWidth;
+    public float progressWidth;
 
         public KKProgressYuan(Context context) {
             this(context, null);
@@ -49,15 +64,48 @@ public class KKProgressYuan extends View {
             super(context, attrs, defStyleAttr);
             @SuppressLint("Recycle")
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.KKProgressYuan);
+            // 初始化进度
+            mProgress = typedArray.getInteger(R.styleable.KKProgressYuan_kk_progress_progress, 90);
 
+            angleStart=typedArray.getInteger(R.styleable.KKProgressYuan_kk_progress_angleStart, 0);
+            angleEnd=typedArray.getInteger(R.styleable.KKProgressYuan_kk_progress_angleStart, 360);
+
+
+
+
+            backWidth=typedArray.getDimension(R.styleable.KKProgressYuan_kk_progress_backWidth, 5);
+            backColor=typedArray.getColor(R.styleable.KKProgressYuan_kk_progress_backColor, Color.LTGRAY);
+
+            progressWidth=typedArray.getDimension(R.styleable.KKProgressYuan_kk_progress_progressWidth, 10);
+            progressColor=typedArray.getColor(R.styleable.KKProgressYuan_kk_progress_progressColor, Color.BLUE);
+
+            // 初始化进度圆环渐变色
+            int startColor = typedArray.getColor(R.styleable.KKProgressYuan_kk_progress_progressStartColor, -1);
+            int endColor = typedArray.getColor(R.styleable.KKProgressYuan_kk_progress_progressEndColor, -1);
+            if (startColor != -1 && endColor != -1) mColorArray = new int[]{startColor, endColor};
+            else mColorArray = null;
+            typedArray.recycle();
+
+
+
+            initPaint();
+
+
+
+
+        }
+
+        public void initPaint(){
             // 初始化背景圆环画笔
             mBackPaint = new Paint();
             mBackPaint.setStyle(Paint.Style.STROKE);    // 只描边，不填充
             mBackPaint.setStrokeCap(Paint.Cap.ROUND);   // 设置圆角
             mBackPaint.setAntiAlias(true);              // 设置抗锯齿
             mBackPaint.setDither(true);                 // 设置抖动
-            mBackPaint.setStrokeWidth(typedArray.getDimension(R.styleable.KKProgressYuan_kk_progress_backWidth, 5));
-            mBackPaint.setColor(typedArray.getColor(R.styleable.KKProgressYuan_kk_progress_backColor, Color.LTGRAY));
+
+
+            mBackPaint.setStrokeWidth(backWidth);
+            mBackPaint.setColor(ResourcesTool.getColor(backColor));
 
             // 初始化进度圆环画笔
             mProgPaint = new Paint();
@@ -65,18 +113,13 @@ public class KKProgressYuan extends View {
             mProgPaint.setStrokeCap(Paint.Cap.ROUND);   // 设置圆角
             mProgPaint.setAntiAlias(true);              // 设置抗锯齿
             mProgPaint.setDither(true);                 // 设置抖动
-            mProgPaint.setStrokeWidth(typedArray.getDimension(R.styleable.KKProgressYuan_kk_progress_progressWidth, 10));
-            mProgPaint.setColor(typedArray.getColor(R.styleable.IndicatorSeekBar_isb_track_progress_color, Color.BLUE));
 
-            // 初始化进度圆环渐变色
-            int startColor = typedArray.getColor(R.styleable.KKProgressYuan_kk_progress_progressStartColor, -1);
-            int firstColor = typedArray.getColor(R.styleable.KKProgressYuan_kk_progress_progressEndColor, -1);
-            if (startColor != -1 && firstColor != -1) mColorArray = new int[]{startColor, firstColor};
-            else mColorArray = null;
+            mProgPaint.setStrokeWidth(progressWidth);
+            mProgPaint.setColor(ResourcesTool.getColor(progressColor));
 
-            // 初始化进度
-            mProgress = typedArray.getInteger(R.styleable.KKProgressYuan_kk_progress_progress, 10);
-            typedArray.recycle();
+           if(mColorArray!=null&&mColorArray.length>1) mProgPaint.setShader(new LinearGradient(0, 0, 0, getMeasuredWidth(), mColorArray, null, Shader.TileMode.MIRROR));
+
+            invalidate();
         }
 
         @Override
@@ -97,11 +140,34 @@ public class KKProgressYuan extends View {
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            canvas.drawArc(mRectF, 0, 360, false, mBackPaint);
-            canvas.drawArc(mRectF, 275, 360 * mProgress / 100, false, mProgPaint);
+            int angle=angleEnd-angleStart;
+            if(angle<0){
+                angle+=360;
+            }
+
+            canvas.drawArc(mRectF, angleStart, angle, false, mBackPaint);
+            canvas.drawArc(mRectF, angleStart, angle * mProgress / 100, false, mProgPaint);
         }
 
         // ---------------------------------------------------------------------------------------------
+
+    /**
+     *
+     * @param angleStart  进度条 的开始角度
+     */
+    public void setAngleStart(int angleStart) {
+        this.angleStart = angleStart;
+        initPaint();
+    }
+
+    /***
+     *
+     * @param angleEnd 进度条的结束角度
+     */
+    public void setAngleEnd(int angleEnd) {
+        this.angleEnd = angleEnd;
+        initPaint();
+    }
 
         /**
          * 获取当前进度
@@ -151,8 +217,9 @@ public class KKProgressYuan extends View {
          * @param width 背景圆环宽度
          */
         public void setBackWidth(int width) {
-            mBackPaint.setStrokeWidth(width);
-            invalidate();
+            this.backWidth=width;
+            initPaint();
+
         }
 
         /**
@@ -160,9 +227,10 @@ public class KKProgressYuan extends View {
          *
          * @param color 背景圆环颜色
          */
-        public void setBackColor(@ColorRes int color) {
-            mBackPaint.setColor(ContextCompat.getColor(getContext(), color));
-            invalidate();
+        public void setBackColor( int color) {
+            this.backColor=color;
+            initPaint();
+
         }
 
         /**
@@ -171,44 +239,29 @@ public class KKProgressYuan extends View {
          * @param width 进度圆环宽度
          */
         public void setProgWidth(int width) {
-            mProgPaint.setStrokeWidth(width);
-            invalidate();
+            this.progressWidth=width;
+            initPaint();
+
         }
 
-        /**
-         * 设置进度圆环颜色
-         *
-         * @param color 景圆环颜色
-         */
-        public void setProgColor(@ColorRes int color) {
-            mProgPaint.setColor(ContextCompat.getColor(getContext(), color));
-            mProgPaint.setShader(null);
-            invalidate();
-        }
 
-        /**
-         * 设置进度圆环颜色(支持渐变色)
-         *
-         * @param startColor 进度圆环开始颜色
-         * @param firstColor 进度圆环结束颜色
-         */
-        public void setProgColor(@ColorRes int startColor, @ColorRes int firstColor) {
-            mColorArray = new int[]{ContextCompat.getColor(getContext(), startColor), ContextCompat.getColor(getContext(), firstColor)};
-            mProgPaint.setShader(new LinearGradient(0, 0, 0, getMeasuredWidth(), mColorArray, null, Shader.TileMode.MIRROR));
-            invalidate();
-        }
 
         /**
          * 设置进度圆环颜色(支持渐变色)
          *
          * @param colorArray 渐变色集合
          */
-        public void setProgColor(@ColorRes int[] colorArray) {
-            if (colorArray == null || colorArray.length < 2) return;
-            mColorArray = new int[colorArray.length];
-            for (int index = 0; index < colorArray.length; index++)
-                mColorArray[index] = ContextCompat.getColor(getContext(), colorArray[index]);
-            mProgPaint.setShader(new LinearGradient(0, 0, 0, getMeasuredWidth(), mColorArray, null, Shader.TileMode.MIRROR));
-            invalidate();
+        public void setProgColor( int ...colorArray) {
+            if(colorArray==null)return;
+
+            if(colorArray.length==1){
+                this.progressColor=colorArray[0];
+            }else {
+                mColorArray = new int[colorArray.length];
+                for (int index = 0; index < colorArray.length; index++)
+                    mColorArray[index] = ResourcesTool.getColor( colorArray[index]);
+            }
+            initPaint();
+
         }
 }

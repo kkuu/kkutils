@@ -19,7 +19,14 @@
         <attr name="kk_progress_progressStartColor" format="color" />   <!--进度圆环开始颜色-->
         <attr name="kk_progress_progressEndColor" format="color" />   <!--进度圆环结束颜色-->
         <attr name="kk_progress_progress" format="integer" />       <!--圆环进度-->
+
+        <attr name="kk_progress_angleStart" format="integer" />       <!--开始角度-->
+        <attr name="kk_progress_angleEnd" format="integer" />       <!--结束角度-->
+
     </declare-styleable>
+
+
+
 
 
     <declare-styleable name="RoundImageView">

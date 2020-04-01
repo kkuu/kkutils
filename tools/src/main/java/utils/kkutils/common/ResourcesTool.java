@@ -13,7 +13,11 @@ public class ResourcesTool {
      */
     public static int getColor(int color){
         if(color>0){
-            color= AppTool.getApplication().getResources().getColor(color);
+            try {
+                color= AppTool.getApplication().getResources().getColor(color);
+            }catch (Exception e){
+                //LogTool.ex(e);
+            }
         }
         return color;
     }
