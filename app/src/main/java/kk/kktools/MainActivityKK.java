@@ -84,6 +84,7 @@ public class MainActivityKK extends KKParentActivity {
         addItem("图片编辑", new TestEditView(), null);
         addItem("轮播", new TestLunBo(), null);
         addItem("进度条", new TestProgress(), null);
+        addItem("抽奖", new TestChouJiang(), null);
         refresh();
 
 
