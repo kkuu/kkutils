@@ -13,19 +13,19 @@ import utils.kkutils.common.CommonTool;
 /**
  * 暂时按照宽高300dp 做的
  */
-public class ProgressKeDuSimple extends View {
+public class KKProgressKeDuSimple extends View {
 
-    public ProgressKeDuSimple(Context context) {
+    public KKProgressKeDuSimple(Context context) {
         super(context);
         init();
     }
 
-    public ProgressKeDuSimple(Context context, @Nullable AttributeSet attrs) {
+    public KKProgressKeDuSimple(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ProgressKeDuSimple(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public KKProgressKeDuSimple(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
 
