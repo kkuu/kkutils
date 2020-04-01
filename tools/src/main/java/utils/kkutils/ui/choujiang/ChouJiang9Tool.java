@@ -27,6 +27,24 @@ import utils.kkutils.parent.KKViewOnclickListener;
 
 /***
  * 9宫格抽奖，  使用的时候  替换 ChouJiangViewDefault 里面的几个drawable 就行了
+ *
+ *
+ *
+ *
+ *          ChouJiang9Tool.ChouJiangViewDefault.bg_drawable_btn=getResources().getDrawable(R.drawable.candy_btn_draw);
+ *         ChouJiang9Tool.ChouJiangViewDefault.bg_drawable_normal=getResources().getDrawable(R.drawable.candy_img_box);
+ *         ChouJiang9Tool.ChouJiangViewDefault.bg_drawable_light=getResources().getDrawable(R.drawable.candy_img_light);
+ *         ChouJiang9Tool.ChouJiangViewDefault.bg_drawable_zhongJiang=getResources().getDrawable(R.drawable.candy_img_money);
+ *         ChouJiang9Tool.ChouJiangViewDefault.bg_drawable_zhongJiang_no=getResources().getDrawable(R.drawable.candy_img_thanks);
+ *         ChouJiang9Tool.initChouJiang(grid_view, new ChouJiang9Tool.ChouJiangViewFactory() {
+ *             @Override
+ *             public ChouJiang9Tool.ChouJiangViewInterface newView() {
+ *                 return new ChouJiang9Tool.ChouJiangViewDefault(getContext());
+ *             }
+ *         });
+ *
+ *
+ *
  */
 public class ChouJiang9Tool {
 
