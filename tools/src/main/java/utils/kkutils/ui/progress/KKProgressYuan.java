@@ -68,7 +68,7 @@ public class KKProgressYuan extends View {
             mProgress = typedArray.getInteger(R.styleable.KKProgressYuan_kk_progress_progress, 90);
 
             angleStart=typedArray.getInteger(R.styleable.KKProgressYuan_kk_progress_angleStart, 0);
-            angleEnd=typedArray.getInteger(R.styleable.KKProgressYuan_kk_progress_angleStart, 360);
+            angleEnd=typedArray.getInteger(R.styleable.KKProgressYuan_kk_progress_angleEnd, 360);
 
 
 
