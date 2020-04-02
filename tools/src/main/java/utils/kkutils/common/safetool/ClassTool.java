@@ -2,12 +2,15 @@ package utils.kkutils.common.safetool;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import utils.kkutils.common.CollectionsTool;
+import utils.kkutils.common.LogTool;
 
 public class ClassTool {
     public static HashMap<Object,List<Field>> fieldMap=new HashMap<>();
@@ -60,6 +63,23 @@ public class ClassTool {
         }
         fieldMap.put(key,fieldList);
         return fieldList;
+    }
+
+
+    /***
+     * 获取泛型的 T  的class
+     * @param self
+     * @return
+     */
+    public static Class getTClass(Class self){
+        try {
+            ParameterizedType type= (ParameterizedType) self.getGenericSuperclass();
+            Type actualTypeArgument = type.getActualTypeArguments()[0];
+            return (Class) actualTypeArgument;
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+        return Object.class;
     }
 }
 
