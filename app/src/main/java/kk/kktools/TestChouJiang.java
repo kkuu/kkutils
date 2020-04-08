@@ -21,7 +21,8 @@ public class TestChouJiang extends KKParentFragment {
         new ChouJiang9Tool(grid_view) {
             @Override
             public boolean onChouJiangClick() {
-                startChoujiang(3,1);
+//                startChoujiang(3,3);
+                startChoujiangRandom(0);
                 return true;
             }
 

@@ -16,7 +16,9 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import androidx.annotation.Nullable;
 import utils.kkutils.AppTool;
@@ -73,7 +75,7 @@ public abstract class ChouJiang9Tool {
 
     public  int [] items=new int[]{0,1,2,5,8,7,6,3};
     public  int i=0;
-    public  int timeAll=5000;
+    public  int timeAll=500;
     public  int timeCurr=0;
     public  int timeAdd=0;
     public  void reset(){
@@ -93,7 +95,42 @@ public abstract class ChouJiang9Tool {
 
         }
     }
+    /***
+     *
+     * @param data 中奖数据， 没中奖  null
+     */
+    public  void startChoujiangRandom(  final Object data){
+        int num=items[new Random().nextInt(items.length)];
+        startChoujiang(num,data);
+    }
+    Object data;
+    int num;
+    Runnable choujiang=new Runnable() {
+        @Override
+        public void run() {
+            if(i>=items.length)i=0;
 
+            int p = items[i];
+            ChouJiangViewInterface jiangPinView = viewList.get(p);
+            for (int i1 = 0; i1 < viewList.size(); i1++) {
+                ChouJiangViewInterface btn = viewList.get(i1);
+                btn.setLight(p==i1);
+            }
+            timeCurr+=timeAdd;
+            if(timeCurr>=timeAll&&p==num){
+                LogTool.s("抽中了"+num+"  "+data);
+                if(data!=null){
+                    jiangPinView.setZhongJiang(data);
+                }else {
+                    jiangPinView.setNotZhongJiang();
+                }
+            }else {
+                i++;
+                timeAdd+=20;
+                AppTool.uiHandler.postDelayed(this,timeAdd);
+            }
+        }
+    };
     /***
      *
      * @param num  选中哪个数字  0-8  除了4
@@ -106,31 +143,11 @@ public abstract class ChouJiang9Tool {
         timeCurr=0;
         timeAdd=50;
 
-        AppTool.uiHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(i>=items.length)i=0;
-                int p = items[i];
-                ChouJiangViewInterface jiangPinView = viewList.get(p);
-                for (int i1 = 0; i1 < viewList.size(); i1++) {
-                    ChouJiangViewInterface btn = viewList.get(i1);
-                    btn.setLight(p==i1);
-                }
-                timeCurr+=timeAdd;
-                if(timeCurr>=timeAll&&p==num){
-                    LogTool.s("抽中了"+num+"  "+data);
-                    if(data!=null){
-                        jiangPinView.setZhongJiang(data);
-                    }else {
-                        jiangPinView.setNotZhongJiang();
-                    }
-                }else {
-                    i++;
-                    timeAdd+=20;
-                    AppTool.uiHandler.postDelayed(this,timeAdd);
-                }
-            }
-        },timeAdd);
+        this.num=num;
+        this.data=data;
+
+        AppTool.uiHandler.removeCallbacks(choujiang);
+        AppTool.uiHandler.postDelayed(choujiang,timeAdd);
 
     }
 
@@ -151,7 +168,7 @@ public abstract class ChouJiang9Tool {
         }
         public static Drawable bg_drawable_normal=new ColorDrawable(Color.BLUE);
         public static Drawable bg_drawable_btn=new ColorDrawable(Color.RED);
-        public static Drawable bg_drawable_light=new ColorDrawable(Color.parseColor("#33ffffff"));
+        public static Drawable bg_drawable_light=new ColorDrawable(Color.parseColor("#33000000"));
         public static Drawable bg_drawable_zhongJiang=new ColorDrawable(Color.YELLOW);
         public static Drawable bg_drawable_zhongJiang_no=new ColorDrawable(Color.BLACK);
 
