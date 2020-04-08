@@ -75,7 +75,7 @@ public abstract class ChouJiang9Tool {
 
     public  int [] items=new int[]{0,1,2,5,8,7,6,3};
     public  int i=0;
-    public  int timeAll=500;
+    public  int timeAll=5000;
     public  int timeCurr=0;
     public  int timeAdd=0;
     public  void reset(){
