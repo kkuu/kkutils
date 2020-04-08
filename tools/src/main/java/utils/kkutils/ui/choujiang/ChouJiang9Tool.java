@@ -184,6 +184,7 @@ public abstract class ChouJiang9Tool {
             setTextColor(Color.parseColor("#F8D060"));
             setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM);
             UiTool.setWH(this,w,h);
+            setText("");
 
             initDrawableBounds();
 
