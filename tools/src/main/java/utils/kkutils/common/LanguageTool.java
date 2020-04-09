@@ -25,10 +25,15 @@ public class LanguageTool {
      */
     public void initLanguage(Activity activity) {
 
-        Locale locale = MapDB.loadObjByDefault("locale", Locale.class, null);
-        if(locale!=null){
-            setLanguage(activity, null, locale);
+        try {
+            Locale locale = MapDB.loadObjByDefault("locale", Locale.class, null);
+            if(locale!=null){
+                setLanguage(activity, null, locale);
+            }
+        }catch (Exception e){
+            LogTool.ex(e);
         }
+
     }
 
     /**
@@ -73,23 +78,28 @@ public class LanguageTool {
      * @param restartActivity  重新启动的 activity ， 启动页， null 不重启
      */
     public static  void setLanguage(Activity activity, Class restartActivity, Locale locale) {
-        Resources resources = AppTool.getApplication().getResources();// 获得res资源对象
-        Configuration config = resources.getConfiguration();// 获得设置对象
-        DisplayMetrics dm = resources.getDisplayMetrics();// 获得屏幕参数：主要是分辨率，像素等。
-        config.locale=locale;
-        resources.updateConfiguration(config, dm);
-        if (activity != null) activity.getResources().updateConfiguration(config, dm);
+        try {
+            Resources resources = AppTool.getApplication().getResources();// 获得res资源对象
+            Configuration config = resources.getConfiguration();// 获得设置对象
+            DisplayMetrics dm = resources.getDisplayMetrics();// 获得屏幕参数：主要是分辨率，像素等。
+            config.locale=locale;
+            resources.updateConfiguration(config, dm);
+            if (activity != null) activity.getResources().updateConfiguration(config, dm);
 
 
-        MapDB.saveObj(true,"locale", locale);
+            MapDB.saveObj(true,"locale", locale);
 
-        if (restartActivity != null) {
-            LayoutInflaterTool.clearAll();
-            Intent intent = new Intent(AppTool.getApplication(), restartActivity);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-            AppTool.getApplication().startActivity(intent);
-            android.os.Process.killProcess(android.os.Process.myPid());
-             System.exit(0);
+            if (restartActivity != null) {
+                LayoutInflaterTool.clearAll();
+                Intent intent = new Intent(AppTool.getApplication(), restartActivity);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                AppTool.getApplication().startActivity(intent);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(0);
+            }
+        }catch (Exception e){
+            LogTool.ex(e);
         }
+
     }
 }
