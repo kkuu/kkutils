@@ -149,11 +149,6 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
             } catch (Exception e) {
                 LogTool.ex(e);
             }
-            try {
-                initListener();
-            } catch (Exception e) {
-                LogTool.ex(e);
-            }
 
 
         } catch (Exception e) {
@@ -187,7 +182,6 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
 
     public abstract void initData();
 
-    public abstract void initListener();
 
     public void showContent() {
         if (vg_page_content != null) {
