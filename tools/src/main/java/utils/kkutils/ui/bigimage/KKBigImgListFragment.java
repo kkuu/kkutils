@@ -73,10 +73,7 @@ public class KKBigImgListFragment extends KKParentFragment {
         LunBoTool.initAdsBigImage(parent, viewPagerResId, dotParentResId,dotItemLayoutId, cb_dot, 0, lunBoDataArrayList);
         ((ViewPager) parent.findViewById(viewPagerResId)).setCurrentItem(currentIndex);
     }
-    @Override
-    public void initListener() {
 
-    }
 
 
     public void go(int currentIndex, String... src) {

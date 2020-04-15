@@ -27,8 +27,5 @@ public class TestProgress extends KKParentFragment {
         progress_yuan.setProgress(10);
     }
 
-    @Override
-    public void initListener() {
 
-    }
 }

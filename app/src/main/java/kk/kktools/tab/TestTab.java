@@ -120,8 +120,5 @@ public class TestTab extends KKParentFragment {
     }
 
 
-    @Override
-    public void initListener() {
 
-    }
 }

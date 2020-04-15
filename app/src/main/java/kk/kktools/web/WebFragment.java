@@ -89,10 +89,7 @@ public class WebFragment extends KKParentFragment {
     }
 
 
-    @Override
-    public void initListener() {
 
-    }
 
     public static KKParentFragment byData(String detail, String title){
 

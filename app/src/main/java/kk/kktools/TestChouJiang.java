@@ -35,8 +35,5 @@ public class TestChouJiang extends KKParentFragment {
 
     }
 
-    @Override
-    public void initListener() {
 
-    }
 }

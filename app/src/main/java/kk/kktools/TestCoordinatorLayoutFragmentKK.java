@@ -48,8 +48,5 @@ public class TestCoordinatorLayoutFragmentKK extends KKParentFragment {
             LogTool.ex(e);
         }
     }
-    @Override
-    public void initListener() {
 
-    }
 }

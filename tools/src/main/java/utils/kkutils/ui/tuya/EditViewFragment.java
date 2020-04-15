@@ -128,9 +128,6 @@ public class EditViewFragment extends KKParentFragment {
         }
     }
 
-    @Override
-    public void initListener() {
 
-    }
 
 }

@@ -134,10 +134,7 @@ public class KK_XuanZheShouHuoDiZhiFragment extends KKParentFragment {
         }
     }
 
-    @Override
-    public void initListener() {
 
-    }
 
     @Override
     public void goForResult(Fragment fragment, int requestCode) {

@@ -23,10 +23,7 @@ public class X5WebViewFragment extends KKParentFragment {
 
     }
 
-    @Override
-    public void initListener() {
 
-    }
     public static void init(FragmentActivity activity, WebView webView){
         new X5WebViewFragment().initWebView(activity.getSupportFragmentManager(),webView);
     }

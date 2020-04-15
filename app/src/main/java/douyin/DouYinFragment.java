@@ -49,10 +49,7 @@ public class DouYinFragment extends KKParentFragment {
 
         };
     }
-    @Override
-    public void initListener() {
 
-    }
 
 
 

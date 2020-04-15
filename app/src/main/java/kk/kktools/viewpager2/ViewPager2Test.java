@@ -116,8 +116,5 @@ public class ViewPager2Test extends KKParentFragment {
             }
         });
     }
-    @Override
-    public void initListener() {
 
-    }
 }

@@ -39,8 +39,5 @@ public class KKChooseImgFragmentKK extends KKParentFragment {
     }
 
 
-    @Override
-    public void initListener() {
 
-    }
 }

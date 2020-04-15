@@ -64,9 +64,6 @@ public abstract class KKParentListFragment<Tdata extends JsonDataParent,Titem > 
             }
         });
     }
-    @Override
-    public void initListener() {
 
-    }
 
 }

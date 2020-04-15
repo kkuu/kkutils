@@ -25,8 +25,5 @@ public class TestLunBo extends KKParentFragment {
         LunBoTool.initAds(parent,R.id.vg_lunbo_content,R.id.vg_lunbo_btns,R.layout.kk_lunbo_item,R.id.cb_lunbo_dot,-1, LunBoTool.LunBoData.getTest());
     }
 
-    @Override
-    public void initListener() {
 
-    }
 }

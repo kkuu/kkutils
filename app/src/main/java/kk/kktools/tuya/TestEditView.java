@@ -20,9 +20,6 @@ public class TestEditView extends EditViewFragment {
 
     }
 
-    @Override
-    public void initListener() {
 
-    }
 
 }

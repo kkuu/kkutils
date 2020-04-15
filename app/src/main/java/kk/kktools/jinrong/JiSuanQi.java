@@ -102,8 +102,5 @@ public class JiSuanQi extends KKParentFragment {
          date = (int) TimeTool.dateAfterInt(TimeTool.getLongTimeStr(calendarBegin.getTimeInMillis()), TimeTool.getLongTimeStr(calendarEnd.getTimeInMillis()), "");
     }
 
-    @Override
-    public void initListener() {
 
-    }
 }
