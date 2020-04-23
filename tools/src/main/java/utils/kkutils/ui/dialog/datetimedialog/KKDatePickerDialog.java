@@ -379,7 +379,7 @@ public class KKDatePickerDialog extends RelativeLayout {
                 if(getOnChooseDateTimeListener()!=null){
                     getOnChooseDateTimeListener().onChoose(calendar,nian,yue,ri,shi,fen);
                 }
-                CommonTool.showToast(""+nian+" "+yue+" "+ri+" "+shi+" "+fen);
+                //CommonTool.showToast(""+nian+" "+yue+" "+ri+" "+shi+" "+fen);
             }
         });
         viewGroup.addView(linearLayout);
