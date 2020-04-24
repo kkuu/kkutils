@@ -58,7 +58,7 @@ public class Version {
      *
      * @param newVersion
      */
-    public static boolean checkUpDate(final Context context, final Version newVersion) {
+    public static boolean checkUpDate(final Context context, final Version newVersion, final Runnable onEnd) {
         int currVersionCode = newVersion.getCurrVersionCode(context);
         LogTool.s("检查更新： 当前版本" + currVersionCode + "  服务端版本" + newVersion.versionCode);
         boolean hasNew = currVersionCode < newVersion.versionCode;
@@ -119,7 +119,24 @@ public class Version {
                     }
                 }
             });
+            dialogShowMsg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    try {
+                        if(onEnd!=null)onEnd.run();
+                    }catch (Exception e){
+
+                    }
+                }
+            });
+        }else {
+            try {
+                if(onEnd!=null)onEnd.run();
+            }catch (Exception e){
+
+            }
         }
+
         return hasNew;
     }
 
