@@ -216,7 +216,7 @@ public class ImgToolGlide implements InterfaceImgTool {
         if(imageView==null)return;
         RequestOptions options = new RequestOptions()
                 .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
-        Glide.with(imageView.getContext())
+        Glide.with(AppTool.currActivity)
                 .load(src)
                 .apply(options)
                 .into(imageView);
