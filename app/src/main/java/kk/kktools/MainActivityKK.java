@@ -141,7 +141,7 @@ public class MainActivityKK extends KKParentActivity {
         version.isHtml="1";
         version.isForce="1";
         version.updateUrl="https://hellowvideo.oss-cn-hongkong.aliyuncs.com/download/android/hello-video-app-8.apk";
-        Version.checkUpDate(this,version);
+        Version.checkUpDate(this,version,null);
     }
 
     public void testWeb() {
