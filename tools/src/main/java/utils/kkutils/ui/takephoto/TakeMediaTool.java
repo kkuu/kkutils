@@ -47,6 +47,9 @@ public class TakeMediaTool {
                 .selectionMedia(listDefaultSelected)
                 .maxSelectNum(maxSelectNum)
                 .enableCrop(crop)
+                .compress(true)
+                .compressQuality(80)
+                .minimumCompressSize(100)//// 小于100kb的图片不压缩
 //                .cropImageWideHigh(512,512)
                 .withAspectRatio(1,1)
                 .forResult(new OnResultCallbackListener<LocalMedia>() {
@@ -88,7 +91,9 @@ public class TakeMediaTool {
         if(onImageChooseListener!=null&& CollectionsTool.NotEmptyList(result)){
             for (LocalMedia localMedia : result) {
                 String resultPath="";
-                if(StringTool.notEmpty(localMedia.getCutPath())){
+                if(StringTool.notEmpty(localMedia.getCompressPath())){
+                    resultPath=localMedia.getCompressPath();
+                }else  if(StringTool.notEmpty(localMedia.getCutPath())){
                     resultPath=localMedia.getCutPath();
                 }else  if(StringTool.notEmpty(localMedia.getAndroidQToPath())){
                     resultPath=localMedia.getAndroidQToPath();

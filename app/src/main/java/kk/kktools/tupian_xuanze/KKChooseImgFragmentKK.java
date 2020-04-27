@@ -3,12 +3,14 @@ package kk.kktools.tupian_xuanze;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import kk.kktools.R;
 import utils.kkutils.ImgTool;
 import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.LogTool;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.takephoto.TakeMediaTool;
@@ -31,10 +33,11 @@ public class KKChooseImgFragmentKK extends KKParentFragment {
         image_touxiang.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
-                TakeMediaTool.pickSingleImg(KKChooseImgFragmentKK.this,true, new TakeMediaTool.OnImageChooseListener() {
+                TakeMediaTool.pickSingleImg(KKChooseImgFragmentKK.this,false, new TakeMediaTool.OnImageChooseListener() {
                     @Override
                     public void onImageChoose(List<String> resultList) {
                         ImgTool.loadImage(resultList.get(0),image_touxiang);
+                        LogTool.s("大小："+new File(resultList.get(0)).length());
 
                     }
                 });

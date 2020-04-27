@@ -129,7 +129,7 @@ import utils.kkutils.ui.takephoto.tool.GlideEngine;
 public class TakePhotoSimpleFragment extends TakePhotoFragment {
     public static void initChooseMedia(FragmentManager fragmentManager, View parent){
         ((ViewGroup)parent.findViewById(R.id.vg_fabu_tupian)).removeAllViews();
-        new TakePhotoSimpleFragment().addToParent(fragmentManager, R.id.vg_fabu_tupian, R.layout.kk_choose_img_fragment_item, 12,4,
+        new TakePhotoSimpleFragment().addToParent(fragmentManager, R.id.vg_fabu_tupian, R.layout.kk_choose_img_fragment_item, 9,4,
                 new TakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_choose_img_camera, R.drawable.kk_choose_img_camera));
     }
     @Override
