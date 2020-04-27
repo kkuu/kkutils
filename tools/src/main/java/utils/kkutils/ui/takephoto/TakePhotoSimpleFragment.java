@@ -135,7 +135,7 @@ public class TakePhotoSimpleFragment extends TakePhotoFragment {
     @Override
     public void showChooseDialog() {
 
-        TakeMediaTool.pick(this, TakeMediaTool.PickType.image, maxSize, false, getSelectPhoto(), new TakeMediaTool.OnImageChooseListener() {
+        TakeMediaTool.pick(this, TakeMediaTool.PickType.image, maxSize, false, getSelectSrcPhoto(), new TakeMediaTool.OnImageChooseListener() {
             @Override
             public void onImageChoose(List<String> resultList) {
                 datas=new ArrayList<>();

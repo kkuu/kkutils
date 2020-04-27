@@ -6,10 +6,13 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.fragment.app.Fragment;
 import utils.kkutils.common.CollectionsTool;
+import utils.kkutils.common.StringTool;
 import utils.kkutils.ui.takephoto.tool.GlideEngine;
 
 public class TakeMediaTool {
@@ -79,15 +82,21 @@ public class TakeMediaTool {
             return type;
         }
     }
+    static Map<String,String> mapChoose=new HashMap<>();
     private static void notifyChoose(boolean crop,List<LocalMedia> result, OnImageChooseListener onImageChooseListener){
         List<String> resultList=new ArrayList<>();
         if(onImageChooseListener!=null&& CollectionsTool.NotEmptyList(result)){
             for (LocalMedia localMedia : result) {
-                if(crop){
-                    resultList.add(localMedia.getCutPath());
-                }else {
-                    resultList.add(localMedia.getPath());
+                String resultPath="";
+                if(StringTool.notEmpty(localMedia.getCutPath())){
+                    resultPath=localMedia.getCutPath();
+                }else  if(StringTool.notEmpty(localMedia.getAndroidQToPath())){
+                    resultPath=localMedia.getAndroidQToPath();
+                }else  if(StringTool.notEmpty(localMedia.getRealPath())){
+                    resultPath=localMedia.getRealPath();
                 }
+                resultList.add(resultPath);
+                mapChoose.put(resultPath,localMedia.getPath());
             }
             onImageChooseListener.onImageChoose(resultList);
         }

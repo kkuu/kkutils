@@ -22,6 +22,7 @@ import java.util.List;
 import utils.kkutils.AppTool;
 import utils.kkutils.ImgTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.StringTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.common.UpLoadFilesTool;
 import utils.kkutils.parent.KKParentFragmentLife;
@@ -173,6 +174,23 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
         }
         return paths;
     }
+
+    /***
+     * 当前选中的图片路径，源路径用于下次默认选中的
+     * @return
+     */
+    protected ArrayList<String> getSelectSrcPhoto() {
+        ArrayList<String> paths = new ArrayList<>();
+        for (int i = 0; i < datas.size(); i++) {
+            String path = datas.get(i);
+            String s = TakeMediaTool.mapChoose.get(path);
+            if (StringTool.notEmpty(s)) {
+                paths.add(s);
+            }
+        }
+        return paths;
+    }
+
 
     public void initListView() {
         if (itemId < 1) return;
