@@ -17,6 +17,11 @@ android {
         }
     }
     buildToolsVersion = '29.0.2'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -28,7 +33,7 @@ dependencies {
     annotationProcessor 'androidx.annotation:annotation:1.0.0'
     api project(':tools')
 
-    implementation 'com.github.SharryChoo:SAlbum:1.0.2'
+//    implementation 'com.github.SharryChoo:SAlbum:1.0.2'
 
 
     //#必选， 视频用到

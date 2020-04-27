@@ -1,4 +1,4 @@
-package utils.kkutils.ui.takephoto;
+package utils.kkutils.ui.takephoto.tool;
 
 import android.app.Activity;
 import android.app.AlertDialog;

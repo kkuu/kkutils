@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +29,7 @@ import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.dialog.DialogTool;
 import utils.kkutils.ui.recycleview.RecycleViewTool;
+import utils.kkutils.ui.takephoto.tool.KKTakePhotoTool;
 
 /**
  * Created by ishare on 2016/6/14.
