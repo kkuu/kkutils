@@ -33,9 +33,10 @@ public class TakeMediaTool {
         ArrayList<LocalMedia> listDefaultSelected=new ArrayList<>();
         if(selectedList!=null){//默认选中
             for(String data:selectedList){
-                LocalMedia albumFile=new LocalMedia();
-                albumFile.setPath(data);
-                listDefaultSelected.add(albumFile);
+                LocalMedia localMedia = mapChoose.get(data);
+                if(localMedia!=null){
+                    listDefaultSelected.add(localMedia);
+                }
             }
         }
 
@@ -85,7 +86,7 @@ public class TakeMediaTool {
             return type;
         }
     }
-    static Map<String,String> mapChoose=new HashMap<>();
+    static Map<String,LocalMedia> mapChoose=new HashMap<>();
     private static void notifyChoose(boolean crop,List<LocalMedia> result, OnImageChooseListener onImageChooseListener){
         List<String> resultList=new ArrayList<>();
         if(onImageChooseListener!=null&& CollectionsTool.NotEmptyList(result)){
@@ -101,7 +102,7 @@ public class TakeMediaTool {
                     resultPath=localMedia.getRealPath();
                 }
                 resultList.add(resultPath);
-                mapChoose.put(resultPath,localMedia.getPath());
+                mapChoose.put(resultPath,localMedia);
             }
             onImageChooseListener.onImageChoose(resultList);
         }

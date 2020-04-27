@@ -175,21 +175,21 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
         return paths;
     }
 
-    /***
-     * 当前选中的图片路径，源路径用于下次默认选中的
-     * @return
-     */
-    protected ArrayList<String> getSelectSrcPhoto() {
-        ArrayList<String> paths = new ArrayList<>();
-        for (int i = 0; i < datas.size(); i++) {
-            String path = datas.get(i);
-            String s = TakeMediaTool.mapChoose.get(path);
-            if (StringTool.notEmpty(s)) {
-                paths.add(s);
-            }
-        }
-        return paths;
-    }
+//    /***
+//     * 当前选中的图片路径，源路径用于下次默认选中的
+//     * @return
+//     */
+//    protected ArrayList<String> getSelectSrcPhoto() {
+//        ArrayList<String> paths = new ArrayList<>();
+//        for (int i = 0; i < datas.size(); i++) {
+//            String path = datas.get(i);
+//            String s = TakeMediaTool.mapChoose.get(path);
+//            if (StringTool.notEmpty(s)) {
+//                paths.add(s);
+//            }
+//        }
+//        return paths;
+//    }
 
 
     public void initListView() {
