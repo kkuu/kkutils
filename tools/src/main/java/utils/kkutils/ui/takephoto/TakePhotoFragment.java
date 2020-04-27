@@ -336,7 +336,7 @@ public class TakePhotoFragment extends KKParentFragmentLife implements Serializa
 
     public static void showDeleteDialog(final List<String> datas, final String path, final TakePhotoFragment currFragment){
         try {
-            DialogTool.initNormalQueDingDialog("", "是否删除这张图片？", "删除", new DialogInterface.OnClickListener() {
+            DialogTool.initNormalQueDingDialog("", "确认删除？", "删除", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     datas.remove(path);
