@@ -38,10 +38,12 @@ import utils.kkutils.ui.takephoto.tool.GlideEngine;
  *
  *android {
 
- *     compileOptions {
- *         sourceCompatibility JavaVersion.VERSION_1_8
- *         targetCompatibility JavaVersion.VERSION_1_8
- *     }
+ compileOptions {
+ sourceCompatibility JavaVersion.VERSION_1_8
+ targetCompatibility JavaVersion.VERSION_1_8
+ }
+
+ *
  * }
  *
  * PictureSelector.create(this)
