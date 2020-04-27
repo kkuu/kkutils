@@ -1,9 +1,12 @@
 package utils.kkutils.ui.takephoto;
 
+import com.luck.picture.lib.PictureSelectionModel;
 import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
+import com.luck.picture.lib.style.PictureParameterStyle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.fragment.app.Fragment;
+import utils.kkutils.R;
 import utils.kkutils.common.CollectionsTool;
 import utils.kkutils.common.StringTool;
 import utils.kkutils.ui.takephoto.tool.GlideEngine;
@@ -40,10 +44,21 @@ public class TakeMediaTool {
             }
         }
 
+        int selectionMode;
+        if(maxSelectNum<2){
+            selectionMode = PictureConfig.SINGLE;
+        }else {
+            selectionMode=PictureConfig.MULTIPLE;
+        }
 
 
         PictureSelector.create(fragment)
                 .openGallery(type)
+                .theme(R.style.picture_WeChat_style)
+                .isWeChatStyle(true)
+
+                .selectionMode(selectionMode)
+
                 .loadImageEngine(GlideEngine.createGlideEngine())
                 .selectionMedia(listDefaultSelected)
                 .maxSelectNum(maxSelectNum)
