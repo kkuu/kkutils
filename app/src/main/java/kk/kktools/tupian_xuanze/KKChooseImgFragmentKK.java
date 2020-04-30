@@ -33,14 +33,20 @@ public class KKChooseImgFragmentKK extends KKParentFragment {
         image_touxiang.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
-                TakeMediaTool.pickSingleImg(KKChooseImgFragmentKK.this,false, new TakeMediaTool.OnImageChooseListener() {
+                TakeMediaTool.pick(KKChooseImgFragmentKK.this, TakeMediaTool.PickType.video, 1, false, null, new TakeMediaTool.OnImageChooseListener() {
                     @Override
                     public void onImageChoose(List<String> resultList) {
                         ImgTool.loadImage(resultList.get(0),image_touxiang);
-                        LogTool.s("大小："+new File(resultList.get(0)).length());
-
                     }
                 });
+//                TakeMediaTool.pickSingleImg(KKChooseImgFragmentKK.this,false, new TakeMediaTool.OnImageChooseListener() {
+//                    @Override
+//                    public void onImageChoose(List<String> resultList) {
+//                        ImgTool.loadImage(resultList.get(0),image_touxiang);
+//                        LogTool.s("大小："+new File(resultList.get(0)).length());
+//
+//                    }
+//                });
 
             }
         });

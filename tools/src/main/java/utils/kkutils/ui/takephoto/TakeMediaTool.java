@@ -115,6 +115,8 @@ public class TakeMediaTool {
                     resultPath=localMedia.getAndroidQToPath();
                 }else  if(StringTool.notEmpty(localMedia.getRealPath())){
                     resultPath=localMedia.getRealPath();
+                }else  if(StringTool.notEmpty(localMedia.getPath())){
+                    resultPath=localMedia.getPath();
                 }
                 resultList.add(resultPath);
                 mapChoose.put(resultPath,localMedia);
