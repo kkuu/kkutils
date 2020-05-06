@@ -16,7 +16,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -59,8 +58,9 @@ import utils.kkutils.parent.KKViewOnclickListener;
 public abstract class ChouJiang9Tool {
     /***
      * 抽奖按钮被点击  记得调用 startChoujiang 并且返回true
+     * @param view
      */
-    public abstract boolean onChouJiangClick();
+    public abstract boolean onChouJiangClick(View view);
 
     /**
      * 创建一个按钮， 总共会创建9个
@@ -86,7 +86,7 @@ public abstract class ChouJiang9Tool {
                 jiangPinView.setOnClickListener(new KKViewOnclickListener() {
                     @Override
                     public void onClickKK(View view) {
-                        if(!onChouJiangClick()){
+                        if(!onChouJiangClick(view)){
                             startChoujiang(5,0);
                         }
                     }
