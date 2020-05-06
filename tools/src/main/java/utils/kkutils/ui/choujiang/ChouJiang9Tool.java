@@ -68,7 +68,7 @@ public abstract class ChouJiang9Tool {
      */
     public abstract ChouJiangViewInterface newView();
 
-    public abstract void onChouJiangAnimationEnd();
+    public  void onChouJiangAnimationEnd(){};
 
     public ChouJiang9Tool(GridView gridView){
        initChouJiang(gridView);
@@ -81,14 +81,18 @@ public abstract class ChouJiang9Tool {
     public  int timeAll=5000;
     public  int timeCurr=0;
     public  int timeAdd=0;
+    ChouJiangViewInterface btnChouJiang;
     public  void reset(){
         for (ChouJiangViewInterface jiangPinView : viewList) {
             jiangPinView.reset();
             if(viewList.indexOf(jiangPinView)==4){
+                btnChouJiang=jiangPinView;
                 jiangPinView.resetBtnChouJiang();
                 jiangPinView.setOnClickListener(new KKViewOnclickListener() {
                     @Override
                     public void onClickKK(View view) {
+                        view.setEnabled(false);
+                        LogTool.s("设置抽奖按钮不可点击");
                         if(!onChouJiangClick(view)){
                             startChoujiang(5,0);
                         }
@@ -122,10 +126,15 @@ public abstract class ChouJiang9Tool {
             timeCurr+=timeAdd;
             if(timeCurr>=timeAll&&p==num){
                 LogTool.s("抽中了"+num+"  "+data);
+
                 if(data!=null){
                     jiangPinView.setZhongJiang(data);
                 }else {
                     jiangPinView.setNotZhongJiang();
+                }
+                try {
+                    btnChouJiang.getView().setEnabled(true);
+                }catch (Exception e){
                 }
                 onChouJiangAnimationEnd();
             }else {
