@@ -83,7 +83,7 @@ public abstract class ChouJiang9Tool {
             jiangPinView.reset();
             if(viewList.indexOf(jiangPinView)==4){
                 jiangPinView.resetBtnChouJiang();
-                jiangPinView.setOnClickListener(new KKViewOnclickListener() {
+                jiangPinView.setOnClickListener(new KKViewOnclickListener(2000) {
                     @Override
                     public void onClickKK(View view) {
                         if(!onChouJiangClick(view)){
