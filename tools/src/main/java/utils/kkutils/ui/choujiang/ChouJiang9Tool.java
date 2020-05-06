@@ -67,6 +67,9 @@ public abstract class ChouJiang9Tool {
      * @return
      */
     public abstract ChouJiangViewInterface newView();
+
+    public abstract void onChouJiangAnimationEnd();
+
     public ChouJiang9Tool(GridView gridView){
        initChouJiang(gridView);
     }
@@ -124,6 +127,7 @@ public abstract class ChouJiang9Tool {
                 }else {
                     jiangPinView.setNotZhongJiang();
                 }
+                onChouJiangAnimationEnd();
             }else {
                 i++;
                 timeAdd+=20;
