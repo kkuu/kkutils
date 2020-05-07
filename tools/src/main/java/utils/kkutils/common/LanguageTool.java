@@ -31,7 +31,7 @@ public class LanguageTool {
                 setLanguage(activity, null, locale);
             }
         }catch (Exception e){
-            LogTool.ex(e);
+            //LogTool.ex(e);
         }
 
     }
