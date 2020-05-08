@@ -60,7 +60,7 @@ dependencies {
     //api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
-    api 'com.tencent.tbs.tbssdk:sdk:43697'//x5webview 暂时不支持 api 29，android10
+    api 'com.tencent.tbs.tbssdk:sdk:43903'//x5webview 暂时不支持 api 29，android10
     //x5webview
 //    api files('libs/tbs_sdk_thirdapp_v4.3.0.1072_43646_sharewithdownloadwithfile_withoutGame_obfs_20190429_175122.jar')
 
