@@ -106,11 +106,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
                 ;
 
 
-        if (crts != null&&crts.length>0) {
-            builder.sslSocketFactory(SSLTool.initSSLFactoryByCrt(crts));
-        } else {
-            builder.sslSocketFactory(SSLTool.initAllowSSLFactory());
-        }
+//        builder.sslSocketFactory(SSLTool.initSSLFactoryByCrt(crts),null);
         return builder;
     }
 
