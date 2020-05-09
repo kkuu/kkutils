@@ -85,6 +85,15 @@ public class MainActivityKK extends KKParentActivity {
         addItem("轮播", new TestLunBo(), null);
         addItem("进度条", new TestProgress(), null);
         addItem("抽奖", new TestChouJiang(), null);
+
+        addItem("拼多多", null, new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                String url="https://mobile.yangkeduo.com/app.html?use_reload=1&launch_url=duo_coupon_landing.html%3Fgoods_id%3D95338609834%26pid%3D10421334_140080857%26cpsSign%3DCC_200509_10421334_140080857_ec5843bacb7bd87c61f810a79da659a4%26duoduo_type%3D2&campaign=ddjb&cid=launch_dl_force_";
+
+                ShopTool.openUrl(url);
+            }
+        });
         refresh();
 
 

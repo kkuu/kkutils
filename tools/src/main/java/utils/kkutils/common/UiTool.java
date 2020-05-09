@@ -100,10 +100,14 @@ public class UiTool {
      * @param url
      */
     public static void startUrlView(String url){
+        startUrlView(url,null);
+    }
+    public static void startUrlView(String url,String packageStr){
         Intent intent = new Intent();
         intent.setData(Uri.parse(url));//Url 就是你要打开的网址
         intent.setAction(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setPackage(packageStr);
         AppTool.getApplication().startActivity(intent);
     }
 
