@@ -26,12 +26,14 @@ import okhttp3.CookieJar;
 import okhttp3.Dns;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.internal.http.RetryAndFollowUpInterceptor;
 import utils.kkutils.AppTool;
 import utils.kkutils.JsonTool;
 import utils.kkutils.common.LogTool;
@@ -64,10 +66,36 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
         this.crts = crts;
         client = getDefaultBuilder().build();
     }
+    public static class ReTryInterceptor implements Interceptor {
+        public int maxRetry=10;//最大重试次数
+        @NotNull
+        @Override
+        public Response intercept(@NotNull Interceptor.Chain chain) throws IOException {
+            int retryNum = 1;//假如设置为3次重试的话，则最大可能请求4次（默认1次+3次重试）
+
+            Request request = chain.request();
+            Response response = chain.proceed(request);
+            while (!response.isSuccessful() && retryNum < maxRetry) {
+                retryNum++;
+                LogTool.s(response.code()+"  "+response.message()+"重试：请求："+retryNum+"   "+chain.request().url());
+                try {
+                    Thread.sleep(100*retryNum);
+                    response.close();
+                }catch (Exception e){
+                    LogTool.ex(e);
+                }
+                response = chain.proceed(request);
+            }
+            return response;
+
+        }
+    }
     public OkHttpClient.Builder getDefaultBuilder(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cookieJar(initCookieJar())
                 .connectTimeout(AppTool.isDebug?5:60, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+                .addInterceptor(new ReTryInterceptor())//重试
                 .readTimeout(10, TimeUnit.DAYS)
                 .writeTimeout(10, TimeUnit.DAYS)
                 // .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.110.200", 8888)))
