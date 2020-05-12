@@ -40,8 +40,12 @@ public class JsonTool {
             {
                 return (T) jsonStr;
             } else if (StringTool.isEmpty(jsonStr)) {
-               // LogTool.ex(new Throwable("解析json 失败了" + jsonStr));
-                return tClass.newInstance();
+                try {
+                    return tClass.newInstance();
+                }catch (Exception e){
+                    LogTool.s("没有空的构造方法"+tClass);
+                    return null;
+                }
             }
             T o = jsonToolImp.toJava(jsonStr, tClass);
             return o;
@@ -52,7 +56,7 @@ public class JsonTool {
                 T o = tClass.newInstance();
                 return o;
             } catch (Exception e2) {
-                LogTool.ex(e);
+                LogTool.s("没有空的构造方法"+tClass);
             }
         }
         return null;
