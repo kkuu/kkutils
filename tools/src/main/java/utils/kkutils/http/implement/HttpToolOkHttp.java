@@ -67,7 +67,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
         client = getDefaultBuilder().build();
     }
     public static class ReTryInterceptor implements Interceptor {
-        public int maxRetry=10;//最大重试次数
+        public int maxRetry=5;//最大重试次数
         @NotNull
         @Override
         public Response intercept(@NotNull Interceptor.Chain chain) throws IOException {
@@ -79,7 +79,7 @@ public class HttpToolOkHttp implements InterfaceHttpTool {
                 retryNum++;
                 LogTool.s(response.code()+"  "+response.message()+"重试：请求："+retryNum+"   "+chain.request().url());
                 try {
-                    Thread.sleep(100*retryNum);
+                    Thread.sleep(200*retryNum);
                     response.close();
                 }catch (Exception e){
                     LogTool.ex(e);
