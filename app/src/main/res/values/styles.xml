@@ -1,4 +1,14 @@
 <resources>
 
-
+    <style name="progress" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:maxHeight">10dp</item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:progressDrawable">@drawable/kk_drawable_progress</item>
+        <item name="android:max">100</item>
+        <item name="android:progress">10</item>
+    </style>
 </resources>

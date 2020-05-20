@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" android:orientation="vertical"
-    android:padding="15dp"
+    android:padding="15dp" android:background="@color/heise"
     tools:context=".MainActivityKK">
 
 
@@ -20,6 +20,7 @@
            android:layout_width="100dp"
            android:layout_height="100dp"></utils.kkutils.ui.progress.KKProgressYuan>
 
+       <ProgressBar style="@style/progress"  ></ProgressBar>
 
    </LinearLayout>
 </LinearLayout>
