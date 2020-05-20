@@ -7,7 +7,7 @@
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:maxHeight">10dp</item>
         <item name="android:minHeight">10dp</item>
-        <item name="android:progressDrawable">@drawable/kk_drawable_progress</item>
+        <item name="android:progressDrawable">@drawable/kk_progress_selector</item>
         <item name="android:max">100</item>
         <item name="android:progress">10</item>
     </style>

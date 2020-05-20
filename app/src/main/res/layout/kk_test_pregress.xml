@@ -20,7 +20,18 @@
            android:layout_width="100dp"
            android:layout_height="100dp"></utils.kkutils.ui.progress.KKProgressYuan>
 
-       <ProgressBar style="@style/progress"  ></ProgressBar>
+       <ProgressBar
+           android:layout_width="120dp"
+           android:layout_height="wrap_content"
+           style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+           android:progressDrawable="@drawable/kk_progress_selector"
+           android:maxHeight="10dp"
+           android:minHeight="10dp"
+           android:max="100"
+           android:progress="30"
+           ></ProgressBar>
+
+
 
    </LinearLayout>
 </LinearLayout>
