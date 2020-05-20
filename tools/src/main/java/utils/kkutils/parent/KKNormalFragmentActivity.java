@@ -1,6 +1,7 @@
 package utils.kkutils.parent;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.FrameLayout;
 import utils.kkutils.AppTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.ViewTool;
+import utils.kkutils.ui.StatusBarTool;
 
 /**
 
@@ -88,6 +90,7 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarTool.setStatusBarColor(this, Color.WHITE,true,false);
         parentId=ViewTool.initKey();
         FrameLayout frameLayout=new FrameLayout(this);
         frameLayout.setId(parentId);

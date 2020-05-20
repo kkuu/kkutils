@@ -63,7 +63,7 @@ public class DemoMessageReceiver extends PushMessageReceiver {
 
     @Override
     public void onReceivePassThroughMessage(Context context, MiPushMessage message) {
-        CommonTool.showToast(message);
+        LogTool.s(message);
 //        Log.v(DemoApplication.TAG,
 //                "onReceivePassThroughMessage is called. " + message.toString());
 //        String log = context.getString(R.string.recv_passthrough_message, message.getContent());
@@ -82,7 +82,7 @@ public class DemoMessageReceiver extends PushMessageReceiver {
 
     @Override
     public void onNotificationMessageClicked(Context context, MiPushMessage message) {
-        CommonTool.showToast(message);
+        LogTool.s(message);
 //        Log.v(DemoApplication.TAG,
 //                "onNotificationMessageClicked is called. " + message.toString());
 //        String log = context.getString(R.string.click_notification_message, message.getContent());
@@ -103,7 +103,7 @@ public class DemoMessageReceiver extends PushMessageReceiver {
 
     @Override
     public void onNotificationMessageArrived(Context context, MiPushMessage message) {
-        CommonTool.showToast(message);
+        CommonTool.showToast(message.getContent());
 //        Log.v(DemoApplication.TAG,
 //                "onNotificationMessageArrived is called. " + message.toString());
 //        String log = context.getString(R.string.arrive_notification_message, message.getContent());
@@ -122,7 +122,7 @@ public class DemoMessageReceiver extends PushMessageReceiver {
 
     @Override
     public void onCommandResult(Context context, MiPushCommandMessage message) {
-        CommonTool.showToast(message);
+        LogTool.s(message);
 //        Log.v(DemoApplication.TAG,
 //                "onCommandResult is called. " + message.toString());
 //        String command = message.getCommand();
@@ -199,7 +199,7 @@ public class DemoMessageReceiver extends PushMessageReceiver {
 
     @Override
     public void onReceiveRegisterResult(Context context, MiPushCommandMessage message) {
-        CommonTool.showToast(message);
+        LogTool.s(message);
 //        Log.v(DemoApplication.TAG,
 //                "onReceiveRegisterResult is called. " + message.toString());
 //        String command = message.getCommand();
@@ -225,7 +225,7 @@ public class DemoMessageReceiver extends PushMessageReceiver {
     @Override
     public void onRequirePermissions(Context context, String[] permissions) {
         super.onRequirePermissions(context, permissions);
-        CommonTool.showToast(
+        LogTool.s(
                 "onRequirePermissions is called. need permission" + arrayToString(permissions));
 //
 //        if (Build.VERSION.SDK_INT >= 23 && context.getApplicationInfo().targetSdkVersion >= 23) {
