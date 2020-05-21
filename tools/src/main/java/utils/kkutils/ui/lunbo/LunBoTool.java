@@ -46,7 +46,15 @@ public class LunBoTool {
             LogTool.ex(e);
         }
     }
-
+    public static void initAds(final View parent, final int vg_lunbo_content, final int vg_lunbo_btns, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas,boolean isLoop,boolean imageCanScale) {
+        try {
+            ViewPager adsContainer = (ViewPager) parent.findViewById(vg_lunbo_content);
+            LinearLayout vg_viewpager_btn = (LinearLayout) parent.findViewById(vg_lunbo_btns);
+            initAds(adsContainer, vg_viewpager_btn, lunbo_dot_layout_resid, cb_lunbo_dot, autoPlayDuration, lunBoDatas, isLoop,imageCanScale);
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
     /***
      * 查看大图用的
      * @param parent
@@ -79,6 +87,22 @@ public class LunBoTool {
      *
      */
     public static void initAds(final ViewPager adsContainer, final LinearLayout vg_viewpager_btn, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas, final boolean imageCanScale) {
+
+        initAds(adsContainer,vg_viewpager_btn,lunbo_dot_layout_resid,cb_lunbo_dot,autoPlayDuration,lunBoDatas,!imageCanScale,imageCanScale);
+
+    }
+    /***
+     *
+     * @param adsContainer                  ViewPager   放轮播图片的
+     * @param vg_viewpager_btn              LinearLayout   放轮播图片下面的 小红点的
+     * @param cb_lunbo_dot     cb_lunbo_dot  小红点里面 的CompoundButton id ， 这个用于显示当前选中的
+     * @param lunBoDatas                    轮播数据
+     * @param autoPlayDuration              自动播放间隔时间， 大于0 并且 有超过1页的数据就自动播放，
+     *
+     * @param  imageCanScale 查看大图用的
+     *
+     */
+    public static void initAds(final ViewPager adsContainer, final LinearLayout vg_viewpager_btn, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas,boolean isLoop, final boolean imageCanScale) {
         try {
             if (lunBoDatas == null) lunBoDatas = new ArrayList<>();
             if (lunBoDatas.size() < 1) {
@@ -113,7 +137,7 @@ public class LunBoTool {
                 public int getCount() {
                     if (datasList == null) return 0;
                     if (datasList.size() == 1) return 1;//1个的时候禁止无限滑动
-                    if (imageCanScale) return datasList.size();
+                    if (!isLoop) return datasList.size();
                     return maxCount;
                 }
 
@@ -124,7 +148,7 @@ public class LunBoTool {
 
                 @Override
                 public Object instantiateItem(ViewGroup container, int positionIn) {
-                    if (!imageCanScale) {
+                    if (isLoop) {
                         positionIn = CommonTool.loopPosition(datasList.size(), beginPosition, positionIn);
                     }
                     final LunBoData lunBoData = datasList.get(positionIn);
@@ -194,19 +218,15 @@ public class LunBoTool {
 
             }
 
-
-            adsContainer.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
                 }
 
                 @Override
                 public void onPageSelected(int positionIn) {
                     try {
-
-
-                        if (!imageCanScale)
+                        if (isLoop)
                             positionIn = CommonTool.loopPosition(datasList.size(), beginPosition, positionIn);
                         for (int i = 0; i < vg_viewpager_btn.getChildCount(); i++) {
                             CompoundButton rb = (CompoundButton) vg_viewpager_btn.getChildAt(i).findViewById(cb_lunbo_dot);
@@ -224,14 +244,20 @@ public class LunBoTool {
                 @Override
                 public void onPageScrollStateChanged(int state) {
                 }
-            });
-            adsContainer.setCurrentItem(beginPosition, false);
+            };
+            adsContainer.addOnPageChangeListener(onPageChangeListener);
+            if(isLoop){
+                adsContainer.setCurrentItem(beginPosition, false);
+            }else {
+                adsContainer.setCurrentItem(0, false);
+            }
+            onPageChangeListener.onPageSelected(adsContainer.getCurrentItem());
+
         } catch (Exception e) {
             LogTool.ex(e);
         }
 
     }
-
     public static class LunBoData {
         public Object imageUrl = "";
         public LunBoClickListener lunBoClickListener;
