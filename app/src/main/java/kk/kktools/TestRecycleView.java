@@ -18,7 +18,6 @@ import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.pullrefresh.KKRefreshLayout;
 
 public class TestRecycleView extends KKParentFragment {
-    KKSimpleRecycleView recycler_view;
     View btn_add_top;
 
     KKRefreshLayout kk_refresh;
@@ -29,7 +28,7 @@ public class TestRecycleView extends KKParentFragment {
 
     @Override
     public void initData() {
-        recycler_view.setNestedScrollingEnabled(true);
+        recycleView.setNestedScrollingEnabled(true);
 
         kk_refresh.bindLoadDataAndRefresh(null, new KKRefreshLayout.LoadListDataInterface() {
             @Override
@@ -43,12 +42,12 @@ public class TestRecycleView extends KKParentFragment {
 
     }
     public void initRecycleView(List<String> list){
-        recycler_view.setData(list, R.layout.activity_main_item, new KKSimpleRecycleView.KKRecycleAdapter() {
+        recycleView.setData(list, R.layout.activity_main_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);
 
-                Object o = recycler_view.datas.get(position);
+                Object o = recycleView.datas.get(position);
                 UiTool.setTextView(itemView,R.id.tv_main_title,"测试"+position+"  "+o );
 
                 itemView.setOnClickListener(new KKViewOnclickListener() {
@@ -72,7 +71,7 @@ public class TestRecycleView extends KKParentFragment {
                 List list=new ArrayList();
                 list.add(new Object());
                 list.add(new Object());
-                recycler_view.addDataList(5,list);
+                recycleView.addDataList(5,list);
             }
         });
     }
