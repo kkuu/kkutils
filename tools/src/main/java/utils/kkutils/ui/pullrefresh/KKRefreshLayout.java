@@ -90,16 +90,22 @@ public class KKRefreshLayout extends SmartRefreshLayout {
 
     /***
      * 可以设置这个背景颜色
-     * @param resColor
+     * @param bgColor
      */
-    public void setRefreshPrimaryColor(final int resColor){
+    public void setRefreshPrimaryColor( int bgColor,int tvColor){
+        bgColor=UiTool.getColorByResId(bgColor);
+        tvColor=UiTool.getColorByResId(tvColor);
+        int finalTvColor = tvColor;
+        int finalBgColor = bgColor;
         post(new Runnable() {
             @Override
             public void run() {
                 ClassicsHeader classicsHeader= (ClassicsHeader) getRefreshHeader();
-                classicsHeader.setPrimaryColor(UiTool.getColorByResId(resColor));
+                classicsHeader.setPrimaryColor(finalBgColor);
+                classicsHeader.setAccentColor(finalTvColor);
                 ClassicsFooter classicsFooter= (ClassicsFooter) getRefreshFooter();
-                classicsFooter.setPrimaryColor(UiTool.getColorByResId(resColor));
+                classicsFooter.setPrimaryColor(finalBgColor);
+                classicsFooter.setAccentColor(finalTvColor);
             }
         });
     }

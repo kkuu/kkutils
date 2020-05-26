@@ -1,6 +1,7 @@
 package kk.kktools;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,8 +20,6 @@ import utils.kkutils.ui.pullrefresh.KKRefreshLayout;
 
 public class TestRecycleView extends KKParentFragment {
     View btn_add_top;
-
-    KKRefreshLayout kk_refresh;
     @Override
     public int initContentViewId() {
         return R.layout.test_recyclevew;
@@ -30,10 +29,11 @@ public class TestRecycleView extends KKParentFragment {
     public void initData() {
         recycleView.setNestedScrollingEnabled(true);
 
-        kk_refresh.bindLoadDataAndRefresh(null, new KKRefreshLayout.LoadListDataInterface() {
+        refreshLayout.setRefreshPrimaryColor(Color.BLUE,Color.RED);
+        refreshLayout.bindLoadDataAndRefresh(null, new KKRefreshLayout.LoadListDataInterface() {
             @Override
             public void loadPageData(int page) {
-                kk_refresh.stopRefresh(null);
+                refreshLayout.stopRefresh(null);
 
                 initRecycleView(TestData.getTestStrList(10*page));
             }
