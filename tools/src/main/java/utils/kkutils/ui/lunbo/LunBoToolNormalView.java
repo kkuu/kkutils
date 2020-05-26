@@ -14,6 +14,7 @@ import utils.kkutils.common.LogTool;
 /***
  * 可自定义 view 的轮播
  */
+@Deprecated
 public class LunBoToolNormalView {
     public static void initAds(final ViewPager adsContainer, final LinearLayout vg_viewpager_btn, final int dotBtnLayoutResId, final int dotBtnCompoundButtonResId, final int count, final LunBoGetView lunBoGetView) {
         try {
