@@ -22,6 +22,28 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+//可以让main 下面 含有res 的文件夹都变成资源目录，方便维护，比如，main/res-nongchang/layout  里面就可以放layout文件，
+    def listSubFile = {
+        def resFolder = 'src/main'
+        def files = file(resFolder).listFiles()
+        def folders = []
+        files.each {
+            item ->
+                if(item.isDirectory()){
+                    println(item.absolutePath)
+                    if(item.absolutePath.contains("res")){
+                        folders.add(item.absolutePath)
+                    }
+                }
+        }
+        return folders
+    }
+    sourceSets {
+        main {
+            res.srcDirs = listSubFile()
+        }
+    }
 }
 
 dependencies {
