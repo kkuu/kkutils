@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.UiTool;
 import utils.kkutils.parent.KKParentRecycleView;
 
 public class RecycleViewTool {
@@ -240,7 +241,18 @@ public class RecycleViewTool {
         initDecoration(recyclerView,spanCount,headCount,headPaddingDp,itemPaddingDp,onItemSizeChange,itemDecorationEnd);
 
     }
+    /***
+     * 瀑布流
+     */
+    public static void initPuBuLiu(final RecyclerView recycleView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+        if(recycleView.getLayoutManager()==null||!(recycleView.getLayoutManager() instanceof StaggeredGridLayoutManager)){
+            StaggeredGridLayoutManager layoutManager=new StaggeredGridLayoutManager(spanCount,StaggeredGridLayoutManager.VERTICAL);
+            recycleView.setLayoutManager(layoutManager);
 
+            RecycleViewTool.initDecoration(recycleView, spanCount, headCount, headPaddingDp, itemPaddingDp, onItemSizeChange, itemDecorationEnd);
+
+        }
+    }
     /***
      * 一般用于瀑布流
      * @param recyclerView
@@ -270,6 +282,7 @@ public class RecycleViewTool {
         }
         layoutManager.setSpanCount(spanCount);
     }
+
 
 
     public static void initDecoration(final RecyclerView recyclerView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
