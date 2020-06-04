@@ -72,7 +72,7 @@ public class DouYinFragment2 extends KKParentFragment {
              }
          });
 
-        douYinTool.startPlayPosition(5);
+        douYinTool.startPlayPosition(50);
     }
 
 
@@ -88,7 +88,7 @@ public class DouYinFragment2 extends KKParentFragment {
                 String result = new String(buffer, Charset.forName("UTF-8"));
                 tiktokData = TiktokBean.arrayTiktokBeanFromData(result);
             }
-            return tiktokData;
+            return new ArrayList<>(tiktokData);
         } catch (IOException e) {
             e.printStackTrace();
         }
