@@ -46,24 +46,25 @@ public class DouYinController extends BaseVideoController implements Serializabl
 
     @Override
     protected int getLayoutId() {
-        return R.layout.kk_douyin_fragment_control;
+        return R.layout.kk_douyin_control;
     }
 
     @Override
     public void initView() {
         super.initView();
-        thumb = mControllerView.findViewById(R.id.kk_iv_thumb);
-        mPlayBtn = mControllerView.findViewById(R.id.kk_play_btn);
+        thumb = findViewById(R.id.kk_iv_thumb);
+        mPlayBtn = findViewById(R.id.kk_play_btn);
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                doPauseResume();
+                mControlWrapper.togglePlay();
+//                doPauseResume();
             }
         });
     }
 
     public View getView(){
-        return mControllerView;
+        return this;
     }
     public ImageView getThumb() {
         return thumb;
@@ -129,22 +130,11 @@ public class DouYinController extends BaseVideoController implements Serializabl
      */
     public boolean showProgress = false;
 
-    /**
-     * 需要就打开可以设置进度， 返回950 代表 间隔 1000-950 调用一次
-     *
-     * @return
-     */
-    @Override
-    protected int setProgress() {
-//        showProgress=true;
-        long duration = mMediaPlayer.getDuration();
-        long currentPosition = mMediaPlayer.getCurrentPosition();
-//        seekBarShouYe.setMax(duration);
-//        seekBarShouYe.setProgress(currentPosition);
-//        LogTool.s(""+currentPosition+"  "+duration);
-        return 950;
-    }
 
+    @Override
+    protected void setProgress(int duration, int position) {
+        super.setProgress(duration, position);
+    }
 
     @Override
     public boolean showNetWarning() {

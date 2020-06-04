@@ -2,6 +2,7 @@ package douyin.util.simple;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 
 import com.dueeeke.videoplayer.controller.BaseVideoController;
 import com.dueeeke.videoplayer.player.VideoView;
@@ -23,7 +24,9 @@ public class KVideoView extends VideoView {
         super(context, attrs, defStyleAttr);
     }
 
-
+    {
+        setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
+    }
     @Override
     public void onVideoSizeChanged(int videoWidth, int videoHeight) {
         super.onVideoSizeChanged(videoWidth, videoHeight);

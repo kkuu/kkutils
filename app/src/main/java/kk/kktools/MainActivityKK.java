@@ -66,6 +66,7 @@ public class MainActivityKK extends KKParentActivity {
             }
         });
         addItem("测试抖音效果", new DouYinFragment(), null);
+        addItem("测试抖音效果2", new douyin2.DouYinFragment2(), null);
         addItem("viewpager2", new ViewPager2Test(), null);
 
         addItem("图片选择器", new KKChooseImgFragmentKK(), null);

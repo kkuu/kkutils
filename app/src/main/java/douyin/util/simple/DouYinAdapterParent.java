@@ -63,16 +63,16 @@ public abstract class DouYinAdapterParent extends RecyclerView.Adapter {
         lifecycle.addObserver(new LifecycleEventObserver() {
             @Override
             public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
-                if(event== Lifecycle.Event.ON_RESUME){
-                    VideoViewManager.instance().resume();
-                }
-                if(event== Lifecycle.Event.ON_PAUSE){
-                    VideoViewManager.instance().pause();
-                }
-                if(event== Lifecycle.Event.ON_DESTROY){
-                    VideoViewManager.instance().release();
-                    PreloadManager.getInstance().removeAllPreloadTask();
-                }
+//                if(event== Lifecycle.Event.ON_RESUME){
+//                    VideoViewManager.instance().resume();
+//                }
+//                if(event== Lifecycle.Event.ON_PAUSE){
+//                    VideoViewManager.instance().pause();
+//                }
+//                if(event== Lifecycle.Event.ON_DESTROY){
+//                    VideoViewManager.instance().release();
+//                    PreloadManager.getInstance().removeAllPreloadTask();
+//                }
             }
         });
     }

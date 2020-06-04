@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/heise"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/kk_iv_thumb"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
         />
 
     <ImageView
@@ -19,6 +19,5 @@
         android:src="@drawable/kk_video_icon_play"
         android:visibility="gone"
         tools:visibility="visible"/>
-
 
 </RelativeLayout>
