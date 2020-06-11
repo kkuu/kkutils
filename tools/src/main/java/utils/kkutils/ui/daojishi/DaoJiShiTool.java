@@ -11,7 +11,6 @@ public class DaoJiShiTool {
         public void onSet(TextView tv, int second);
     }
     public static void showDaoJiShi(TextView tv_daojishi,int secondIn,OnSetTime onSetTime ){
-        secondIn=1230;
         tv_daojishi.setTag(secondIn);
         tv_daojishi.post(new Runnable() {
             @Override
