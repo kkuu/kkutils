@@ -8,6 +8,7 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.util.Log;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.Utils;
 
 import java.lang.ref.WeakReference;
@@ -45,7 +46,9 @@ public class AppTool {
         if(application.getPackageName().equals(CommonTool.getProcessName(application))){//避免启动多少次
             isDebug=isDebugIn;
             app = application;
-
+            LogTool.s("签名SHA1  "+ AppUtils.getAppSignatureSHA1());
+            LogTool.s("签名MD5  "+AppUtils.getAppSignatureMD5());
+            LogTool.s("签名MD5  "+AppUtils.getAppSignatureMD5().toLowerCase().replace(":",""));
             initUiHander();
             initRecycleLife();
             ImgTool.init(application, 0, 0);
