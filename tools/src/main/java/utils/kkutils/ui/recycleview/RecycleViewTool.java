@@ -14,8 +14,19 @@ import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.parent.KKParentRecycleView;
+import utils.kkutils.ui.KKSimpleRecycleView;
 
 public class RecycleViewTool {
+    public static void initLastLine(KKSimpleRecycleView recycleView, View itemView, int position,int lineId) {
+        View line = itemView.findViewById(lineId);
+        if(line==null)return;
+        if (position == recycleView.getAdapter().getItemCount() - 1) {
+            line.setVisibility(View.GONE);
+        }else {
+            line.setVisibility(View.VISIBLE);
+        }
+    }
+
     /**
      * 线性布局  的间隔设置
      * @param recyclerView
