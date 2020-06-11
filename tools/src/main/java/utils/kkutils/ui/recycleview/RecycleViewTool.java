@@ -17,6 +17,13 @@ import utils.kkutils.parent.KKParentRecycleView;
 import utils.kkutils.ui.KKSimpleRecycleView;
 
 public class RecycleViewTool {
+    /***
+     * 去掉最后一项的间隔线
+     * @param recycleView
+     * @param itemView
+     * @param position
+     * @param lineId
+     */
     public static void initLastLine(KKSimpleRecycleView recycleView, View itemView, int position,int lineId) {
         View line = itemView.findViewById(lineId);
         if(line==null)return;
