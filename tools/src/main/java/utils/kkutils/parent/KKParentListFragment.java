@@ -29,12 +29,13 @@ public abstract class KKParentListFragment<Tdata extends JsonDataParent,Titem > 
 
     @Override
     public void initData() {
-        refreshLayout.bindLoadDataAndRefresh(pageControl, new KKRefreshLayout.LoadListDataInterface() {
+        refreshLayout.bindLoadDataAndRefreshNotRefresh(pageControl, new KKRefreshLayout.LoadListDataInterface() {
             @Override
             public void loadPageData(int i) {
                 loadData(i);
             }
         });
+        refreshLayout.autoRefresh();
     }
 
     public Tdata data;
