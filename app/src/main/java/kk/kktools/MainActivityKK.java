@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import douyin.DouYinFragment;
+import kk.kktools.color.TestColorFragmentKK;
 import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.tab.TestTab;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
@@ -70,6 +71,7 @@ public class MainActivityKK extends KKParentActivity {
         addItem("viewpager2", new ViewPager2Test(), null);
 
         addItem("图片选择器", new KKChooseImgFragmentKK(), null);
+        addItem("颜色选择器", new TestColorFragmentKK(), null);
         addItem("密码输入", new KKChooseImgFragmentKK(), new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {

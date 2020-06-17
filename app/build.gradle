@@ -55,6 +55,9 @@ dependencies {
     annotationProcessor 'androidx.annotation:annotation:1.0.0'
     api project(':tools')
 
+    implementation 'com.github.shixiuwen:colorpicker:v1.0.3'//取色器
+
+
 //    implementation 'com.github.SharryChoo:SAlbum:1.0.2'
 
 
