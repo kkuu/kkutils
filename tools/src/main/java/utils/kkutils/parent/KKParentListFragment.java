@@ -22,7 +22,7 @@ public abstract class KKParentListFragment<Tdata extends JsonDataParent,Titem > 
     public abstract int getPageCurrPage(Tdata data);
     public abstract List<Titem> getPageListData(Tdata data);
     public abstract int getListItemLayout();
-    public abstract  void initItem(View itemView,Titem titem);
+    public abstract  void initItem(int position, View itemView, Titem titem);
     public abstract void onDataLoad(Tdata tdata);
 
 
@@ -61,7 +61,7 @@ public abstract class KKParentListFragment<Tdata extends JsonDataParent,Titem > 
             @Override
             public void initData(int position, int type, View itemView, KKSimpleRecycleView.WzViewHolder wzViewHolder) {
                 super.initData(position, type, itemView, wzViewHolder);
-                initItem(itemView,allDatas.get(position));
+                initItem(position,itemView,allDatas.get(position));
             }
         });
     }
