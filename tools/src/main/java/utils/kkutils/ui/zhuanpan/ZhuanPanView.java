@@ -67,12 +67,12 @@ public class ZhuanPanView extends RelativeLayout {
      * @param angleIn
      * @param animationListener
      */
-    public void animToAngle(final int angleIn, final Animation.AnimationListener animationListener){
+    public void animToAngle(final float angleIn, final Animation.AnimationListener animationListener){
         if(isAnimating==true){
             LogTool.s("动画中，待会再点");
             return;
         }
-        final int angle=-angleIn;
+        final float angle=-angleIn;
         RotateAnimation rotate  = new RotateAnimation((float) (viewRotation.getRotation()*180/Math.PI), 360*10+angle, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotate.setInterpolator(new AccelerateDecelerateInterpolator(){
             @Override
