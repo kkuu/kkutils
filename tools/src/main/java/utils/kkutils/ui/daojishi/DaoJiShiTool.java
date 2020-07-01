@@ -55,6 +55,11 @@ public class DaoJiShiTool {
 
     }
 
+    /***
+     * 14天06小时16分24秒
+     * @param timeMillis
+     * @return
+     */
     public static String getDaoJiShi_Tian(long timeMillis){
         try {
             int[] ints = TimeTool.splitTimes(timeMillis);
@@ -64,6 +69,12 @@ public class DaoJiShiTool {
         }
         return "";
     }
+
+    /***
+     * 342:16:24
+     * @param timeMillis
+     * @return
+     */
     public static String getDaoJiShi_Long(long timeMillis){
         try {
             int[] ints = TimeTool.splitTimes(timeMillis);
