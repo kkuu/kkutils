@@ -23,7 +23,7 @@ public class DaoJiShiTool {
                     if (onSetTime != null) {
                         onSetTime.onSet(tv_daojishi, second);
                     } else {
-                        UiTool.setTextView(tv_daojishi, TimeTool.getShortTimeStr(second * 1000));
+                        UiTool.setTextView(tv_daojishi, TimeTool.getDaoJiShiShortTimeStr(second * 1000,""));
                     }
                     LogTool.s("倒计时：" + second);
                     if (second > 0) {

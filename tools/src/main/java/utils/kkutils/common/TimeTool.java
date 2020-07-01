@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -153,22 +154,7 @@ public class TimeTool {
 
 
 
-    /***
-     * 不要秒
-     * @param timeLong
-     * @return
-     */
-    public static String getShortTimeStrWithOutSecond(long timeLong) {
-        String add_time = "";
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat(
-                    "HH:mm");
-            add_time = formatter.format(timeLong );
-        } catch (Exception e) {
-            //LogTool.ex(e);
-        }
-        return add_time;
-    }
+
     /**
      * 获取当前时间
      *
@@ -213,17 +199,28 @@ public class TimeTool {
         }
         return add_time;
     }
-    public static String getShortTimeStr(long timeLong) {
+
+    /***
+     * 用于倒计时之类，给定毫秒返回 小时倒计时
+     * @param timeLong
+     * @param format 格式默认 HH:mm:ss
+     * @return
+     */
+    public static String getDaoJiShiShortTimeStr(long timeLong,String format) {
         String add_time = "";
         try {
+            if(StringTool.isEmpty(format))format="HH:mm:ss";
             SimpleDateFormat formatter = new SimpleDateFormat(
-                    "HH:mm:ss");
+                    format);
+            formatter.setTimeZone(TimeZone.getTimeZone("GMT+0"));
             add_time = formatter.format(timeLong );
         } catch (Exception e) {
             //LogTool.ex(e);
         }
         return add_time;
     }
+
+
     /***
      * @param dateStr 2016-05-28 10:00:00
      * @return
