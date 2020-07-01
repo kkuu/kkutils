@@ -29,6 +29,7 @@ import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
+import utils.kkutils.ui.daojishi.DaoJiShiTool;
 import utils.kkutils.ui.webview.X5WebView;
 import utils.kkutils.update.Version;
 import utils.kkutils.zhifu.KKZhiFuUiTool;
@@ -100,17 +101,20 @@ public class MainActivityKK extends KKParentActivity {
         refresh();
 
 
+        LogTool.s(DaoJiShiTool.getDaoJiShi_Tian(1232184793));
 
+        LogTool.s(DaoJiShiTool.getDaoJiShi_Long(1232184793));
 
-         List<String> urlsDefault=new ArrayList<String>(){
-            {
-                add("https://api.hellovideos.org");
-                add("https://api.95y8l.cn");
-                add("https://api.hellovideo.io");
-            }
-        };
-
-         loadData(urlsDefault);
+        LogTool.s(DaoJiShiTool.getDaoJiShi_Long(0));
+//         List<String> urlsDefault=new ArrayList<String>(){
+//            {
+//                add("https://api.hellovideos.org");
+//                add("https://api.95y8l.cn");
+//                add("https://api.hellovideo.io");
+//            }
+//        };
+//
+//         loadData(urlsDefault);
         //testVersion();
 
         // testWeb();

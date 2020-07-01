@@ -200,25 +200,7 @@ public class TimeTool {
         return add_time;
     }
 
-    /***
-     * 用于倒计时之类，给定毫秒返回 小时倒计时
-     * @param timeLong
-     * @param format 格式默认 HH:mm:ss
-     * @return
-     */
-    public static String getDaoJiShiShortTimeStr(long timeLong,String format) {
-        String add_time = "";
-        try {
-            if(StringTool.isEmpty(format))format="HH:mm:ss";
-            SimpleDateFormat formatter = new SimpleDateFormat(
-                    format);
-            formatter.setTimeZone(TimeZone.getTimeZone("GMT+0"));
-            add_time = formatter.format(timeLong );
-        } catch (Exception e) {
-            //LogTool.ex(e);
-        }
-        return add_time;
-    }
+
 
 
     /***

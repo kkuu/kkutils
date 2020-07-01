@@ -2,6 +2,8 @@ package utils.kkutils.ui.daojishi;
 
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.TimeTool;
 import utils.kkutils.common.UiTool;
@@ -23,7 +25,7 @@ public class DaoJiShiTool {
                     if (onSetTime != null) {
                         onSetTime.onSet(tv_daojishi, second);
                     } else {
-                        UiTool.setTextView(tv_daojishi, TimeTool.getDaoJiShiShortTimeStr(second * 1000,""));
+                        UiTool.setTextView(tv_daojishi, getDaoJiShi_Long(second * 1000));
                     }
                     LogTool.s("倒计时：" + second);
                     if (second > 0) {
@@ -52,4 +54,25 @@ public class DaoJiShiTool {
         }
 
     }
+
+    public static String getDaoJiShi_Tian(long timeMillis){
+        try {
+            int[] ints = TimeTool.splitTimes(timeMillis);
+            return String.format("%02d天%02d小时%02d分%02d秒", ints[0],ints[1],ints[2],ints[3]);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+        return "";
+    }
+    public static String getDaoJiShi_Long(long timeMillis){
+        try {
+            int[] ints = TimeTool.splitTimes(timeMillis);
+            ints[1]=ints[1]+ints[0]*24;
+            return String.format("%02d:%02d:%02d", ints[1],ints[2],ints[3]);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+        return "";
+    }
+
 }
