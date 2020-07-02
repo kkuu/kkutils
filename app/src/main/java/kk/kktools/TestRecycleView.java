@@ -1,18 +1,17 @@
 package kk.kktools;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.kkutils.common.LogTool;
 import utils.kkutils.common.SaoMaTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
-import utils.kkutils.fragment.dizhi.KK_XuanZheShouHuoDiZhiFragment;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
@@ -22,7 +21,7 @@ public class TestRecycleView extends KKParentFragment {
     View btn_add_top;
     @Override
     public int initContentViewId() {
-        return R.layout.test_recyclevew;
+        return R.layout.kk_test_recyclevew;
     }
 
     @Override
@@ -42,20 +41,21 @@ public class TestRecycleView extends KKParentFragment {
 
     }
     public void initRecycleView(List<String> list){
-        recycleView.setData(list, R.layout.activity_main_item, new KKSimpleRecycleView.KKRecycleAdapter() {
+        recycleView.setData(list, R.layout.kk_test_recyclevew_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
                 super.initData(position, type, itemView);
 
-                Object o = recycleView.datas.get(position);
-                UiTool.setTextView(itemView,R.id.tv_main_title,"测试"+position+"  "+o );
 
-                itemView.setOnClickListener(new KKViewOnclickListener() {
+                KKSimpleRecycleView recycleView_heng=itemView.findViewById(R.id.recycleView_heng);
+                recycleView_heng.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
+                recycleView_heng.setData(TestData.getTestStrList(10), R.layout.kk_test_recyclevew_item_item, new KKSimpleRecycleView.KKRecycleAdapter() {
                     @Override
-                    public void onClickKK(View v) {
-                        SaoMaTool.startSaoMa(TestRecycleView.this);
+                    public void initData(int position, int type, View itemView) {
+                        super.initData(position, type, itemView);
                     }
                 });
+
             }
         });
     }
