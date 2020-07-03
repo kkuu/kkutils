@@ -261,14 +261,13 @@ public class RecycleViewTool {
     }
     /***
      * 瀑布流
+     * head 功能暂时不能用
      */
-    public static void initPuBuLiu(final RecyclerView recycleView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+    public static void initPuBuLiu(final RecyclerView recycleView, final int spanCount, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
         if(recycleView.getLayoutManager()==null||!(recycleView.getLayoutManager() instanceof StaggeredGridLayoutManager)){
             StaggeredGridLayoutManager layoutManager=new StaggeredGridLayoutManager(spanCount,StaggeredGridLayoutManager.VERTICAL);
             recycleView.setLayoutManager(layoutManager);
-
-            RecycleViewTool.initDecoration(recycleView, spanCount, headCount, headPaddingDp, itemPaddingDp, onItemSizeChange, itemDecorationEnd);
-
+            RecycleViewTool.initDecoration(recycleView, spanCount, 0, 0, itemPaddingDp, onItemSizeChange, itemDecorationEnd);
         }
     }
     /***
@@ -287,6 +286,7 @@ public class RecycleViewTool {
      *
      * 间隔 需要在item xml 里面配置margin 5， 在recycleview 里面设置padding 5   最后就是 10 的间距
      */
+    @Deprecated
     public static void initRecycleViewStaggeredGrid(final RecyclerView recyclerView, final int spanCount){
         StaggeredGridLayoutManager layoutManager=null;
         {//判断是否设置过， 设置过就不要设置了，不然ui 刷新会出问题
@@ -325,13 +325,22 @@ public class RecycleViewTool {
                 public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                     super.getItemOffsets(outRect, view, parent, state);
                     try {
-                        int position = parent.getChildAdapterPosition(view);
+                        int position = parent.getChildAdapterPosition(view);//数据索引
+                        boolean isLastLine=RecycleViewTool.isLastLine(parent.getAdapter().getItemCount()-headCount,position-headCount,spanCount);
 
-                        boolean isLastLine=isLastLine(parent.getAdapter().getItemCount()-headCount,position-headCount,spanCount);
+
+                        int spanIndex=-1;//在一行中得索引，StaggeredGridLayoutManager GridLayoutManager这个才用
+                        {//有span
+                            if(view.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams){
+                                spanIndex=((StaggeredGridLayoutManager.LayoutParams)view.getLayoutParams()).getSpanIndex();
+                            }
+                            if(view.getLayoutParams() instanceof GridLayoutManager.LayoutParams){
+                                spanIndex=((GridLayoutManager.LayoutParams)view.getLayoutParams()).getSpanIndex();
+                            }
+                        }
+
 
                         int paddingBottom=isLastLine?padding:0;//最后一行才有,  paddingTop 一直有， paddingBottom 只有最后一条才有
-
-
 
                         boolean isHead=position<=headCount-1;//当前条是否是head
                         if(isHead){
@@ -348,14 +357,23 @@ public class RecycleViewTool {
                                 }
                             }
 
-                            int index=position-headCount+1;
-
-                            if(index%spanCount==1){//最左边的
-                                outRect.set(padding,padding,padding/2,paddingBottom);
-                            }else if(index%spanCount==0){//最右边的
-                                outRect.set(padding/2,padding,padding,paddingBottom);
-                            }else {//中间的
-                                outRect.set(padding/2,padding,padding/2,paddingBottom);
+                            if(spanIndex<0){//普通得
+                                int index=position-headCount+1;
+                                if(index%spanCount==1){//最左边的
+                                    outRect.set(padding,padding,padding/2,paddingBottom);
+                                }else if(index%spanCount==0){//最右边的
+                                    outRect.set(padding/2,padding,padding,paddingBottom);
+                                }else {//中间的
+                                    outRect.set(padding/2,padding,padding/2,paddingBottom);
+                                }
+                            }else {//格子类型得 需要spanindex 大于0
+                                if(spanIndex==0){//最左边的
+                                    outRect.set(padding,padding,padding/2,paddingBottom);
+                                }else if(spanIndex==spanCount-1){//最右边的
+                                    outRect.set(padding/2,padding,padding,paddingBottom);
+                                }else {//中间的
+                                    outRect.set(padding/2,padding,padding/2,paddingBottom);
+                                }
                             }
                         }
                     }catch (Exception e){

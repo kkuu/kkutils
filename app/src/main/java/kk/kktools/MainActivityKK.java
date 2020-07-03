@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import douyin.DouYinFragment;
+import kk.kktools.animation.KKTestCanvas;
 import kk.kktools.color.TestColorFragmentKK;
 import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.tab.TestTab;
@@ -48,6 +49,7 @@ public class MainActivityKK extends KKParentActivity {
                 new KKBigImgListFragment().go(0, TestData.getTestImgUrlList(2));
             }
         });
+        addItem("测试canvas", new KKTestCanvas(), null);
         addItem("测试CoordinatorLayout,和选择收货地址", null, new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
