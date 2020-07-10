@@ -63,7 +63,7 @@ public class KKParentRecycleView extends RecyclerView {
     }
 
     public void init() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         setLayoutManager(linearLayoutManager);
        // setNestedScrollingEnabled(false);
 
