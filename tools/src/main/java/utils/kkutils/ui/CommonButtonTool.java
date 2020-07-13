@@ -1,5 +1,6 @@
 package utils.kkutils.ui;
 
+import android.view.View;
 import android.widget.CompoundButton;
 
 import java.io.Serializable;
@@ -44,6 +45,12 @@ public class CommonButtonTool implements Serializable {
                 if (isChecked) {
                     setChecked(buttonView);
                 }
+            }
+        });
+        compoundButton.setOnClickListener(new View.OnClickListener() {//防止不能点击
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
