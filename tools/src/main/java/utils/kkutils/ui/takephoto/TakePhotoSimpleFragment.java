@@ -1,22 +1,13 @@
 package utils.kkutils.ui.takephoto;
 
-import androidx.fragment.app.Fragment;
-
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.config.PictureMimeType;
-import com.luck.picture.lib.entity.LocalMedia;
-import com.luck.picture.lib.listener.OnResultCallbackListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.fragment.app.FragmentManager;
 import utils.kkutils.R;
-import utils.kkutils.common.CollectionsTool;
-import utils.kkutils.ui.takephoto.tool.GlideEngine;
 
 
 /**
@@ -132,7 +123,7 @@ public class TakePhotoSimpleFragment extends TakePhotoFragment {
     public static void initChooseMedia(FragmentManager fragmentManager, View parent){
         ((ViewGroup)parent.findViewById(R.id.vg_fabu_tupian)).removeAllViews();
         new TakePhotoSimpleFragment().addToParent(fragmentManager, R.id.vg_fabu_tupian, R.layout.kk_choose_img_fragment_item, 9,4,
-                new TakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_choose_img_camera, R.drawable.kk_choose_img_camera));
+                new TakePhotoFragment.OnAddPhotoInitDataListenerImpDefault(R.id.imgv_add_photo, R.id.imgv_delete_photo, R.drawable.kk_choose_img_add, R.drawable.kk_choose_img_add));
     }
     @Override
     public void showChooseDialog() {
