@@ -34,9 +34,9 @@ repositories{
 }
 
 dependencies {
-    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    compileOnly fileTree(include: [ '*.aar'], dir: 'libs')//需要自己导入  alipaySdk_15.5.9_20181123210601.aar
 
-
+    api fileTree(include: ['*.jar'], dir: 'libs')
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////utils
     //api (name:'tools-release', ext:'aar')
 
