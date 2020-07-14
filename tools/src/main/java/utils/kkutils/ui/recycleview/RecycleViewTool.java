@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UiTool;
@@ -130,7 +133,100 @@ public class RecycleViewTool {
 
 
 
+    /***
+     * 用于recycleview  中需要一个 浮动得 tab导航条得
+     *实现原理：
+     * recycleview 根容器里面放一个 实际使用得tab，
+     * recycleview 里面放一个 用来占位得 tab
+     * recycleview 滚动得时候 根据占位tab  设置 实际使用得tab位置和可见
+     *
+     *
+     *
+     * @param recycleView  主recyleview
+     * @param tabTitle  tab按钮，不是列表中得
+     * @param tabInRecyleViewResId  recycleView 里面得tab 得id   用来占位得
+     * @param tabInRecyleViewIndex 占位tab 在列表中得索引
+     *
+     * @param refreshTop  是否刷新第一页
+     * @param resultList  数据
+     * @param minItem   数据最少多少条，  两列得话可以传入4
+     * @param headCount 头部数量
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> initRecycleViewTabBar(KKSimpleRecycleView recycleView, View tabTitle, int tabInRecyleViewResId, int tabInRecyleViewIndex, boolean refreshTop, List<T> resultList, int minItem, int headCount){
 
+
+        {//构建一些模拟数据
+            resultList=new ArrayList<>(resultList);
+
+            if(resultList.size()<minItem){//添加空条目  暂时防止 没数据得时候 体验不好（不加 没数据得时候会跳到底部）
+                int add=minItem-resultList.size();
+                for(int i=0;i<add;i++){
+                    resultList.add(null);
+                }
+            }
+
+
+            for(int i=0;i<headCount;i++){//添加head 模拟条目
+                resultList.add(0,null);
+            }
+        }
+
+
+
+        int[] recycleViewLocation=new int[2];
+        recycleView.getLocationInWindow(recycleViewLocation);
+
+        {
+            if(refreshTop){//如果是第一页刷新，head 在顶部固定得时候 刷新得，就滚动到 tab 所在得索引，
+                if(tabTitle.getY()>100&&tabTitle.getY()==recycleViewLocation[1]){
+                    recycleView.scrollToPosition(tabInRecyleViewIndex);
+                }
+            }
+        }
+
+
+
+        if(recycleView.getTag()==null){
+            recycleView.setTag(1);//只添加一次scrolllistener
+            recycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                float preY=90000;
+                @Override
+                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                    View tab = recyclerView.findViewById(tabInRecyleViewResId);
+                    if(tab!=null) {
+                        int[] tabLocation=new int[2];
+
+                        tab.getLocationInWindow(tabLocation);
+
+//                        LogTool.s("当前："+tabLocation[0]+"  "+tabLocation[1]+"   "+recycleViewLocation[1]+"   "+tab.getPivotY());
+
+                        if(tabLocation[1]<recycleViewLocation[1]){
+                            tabLocation[1]=recycleViewLocation[1];
+                        }
+                        tabTitle.setX(tabLocation[0]);
+                        tabTitle.setY(tabLocation[1]);
+                        tabTitle.bringToFront();
+                        tabTitle.setVisibility(View.VISIBLE);
+                        preY=tabTitle.getY();
+                    }else {
+                        int firstVisibleItemPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                        if(firstVisibleItemPosition<tabInRecyleViewIndex){//第一个可见得 比tab 得还小， 说明占位tab 在底部下面去了，直接隐藏外面得tab
+                            tabTitle.setVisibility(View.INVISIBLE);
+                        }else {//占位tab 在顶部上面去了， 固定外面tab 在顶部
+                            tabTitle.setVisibility(View.VISIBLE);
+                            tabTitle.setY(recycleViewLocation[1]);
+                        }
+                    }
+                }
+            });
+
+        }
+        return resultList;
+    }
 
 
 
