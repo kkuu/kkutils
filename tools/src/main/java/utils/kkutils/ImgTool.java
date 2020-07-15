@@ -25,7 +25,8 @@ public class ImgTool {
     public static String defaultPreStr = "";//默认前缀
     static InterfaceImgTool imgToolInterface = new ImgToolGlide();
     static int keyImageUrl = ViewTool.initKey();
-
+    //是否使用阿里云压缩大小
+    public static boolean useAliyunResize=true;
     /***
      * 初始化
      *
@@ -234,7 +235,11 @@ public class ImgTool {
             if(((String) src).endsWith("mp4")){//获取视频封面
                 src+="?x-oss-process=video/snapshot,t_0,m_fast,w_"+w+",ar_auto";
             }else {//图片压缩减小
-                src+="?x-oss-process=image/resize,w_" + w + ",h_" + h + "/format,webp" + "/quality,q_80";
+                if(useAliyunResize){
+                    src+="?x-oss-process=image/resize,w_" + w + ",h_" + h + "/format,webp" + "/quality,q_80";
+                }else {
+                    src+="?x-oss-process=image/format,webp";
+                }
             }
         }
 
