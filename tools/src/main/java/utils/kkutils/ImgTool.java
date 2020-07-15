@@ -25,7 +25,7 @@ public class ImgTool {
     public static String defaultPreStr = "";//默认前缀
     static InterfaceImgTool imgToolInterface = new ImgToolGlide();
     static int keyImageUrl = ViewTool.initKey();
-    //是否使用阿里云压缩大小
+    //是否使用阿里云压缩大小,压缩后图片可能模糊
     public static boolean useAliyunResize=false;
     /***
      * 初始化
