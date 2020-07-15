@@ -26,7 +26,7 @@ public class ImgTool {
     static InterfaceImgTool imgToolInterface = new ImgToolGlide();
     static int keyImageUrl = ViewTool.initKey();
     //是否使用阿里云压缩大小
-    public static boolean useAliyunResize=true;
+    public static boolean useAliyunResize=false;
     /***
      * 初始化
      *
