@@ -11,6 +11,8 @@
     <attr name="paddingRight" format="dimension"> </attr>
     <attr name="paddingBottom" format="dimension"> </attr>
 
+    <attr name="maxHeight" format="dimension"> </attr>
+
     <declare-styleable name="KKProgressYuan">
         <attr name="kk_progress_backWidth" format="dimension" />    <!--背景圆环宽度-->
         <attr name="kk_progress_progressWidth" format="dimension" />    <!--进度圆环宽度-->
@@ -26,7 +28,9 @@
     </declare-styleable>
 
 
-
+    <declare-styleable name="KKScrollView">
+        <attr name="maxHeight" > </attr>
+    </declare-styleable>
 
 
     <declare-styleable name="RoundImageView">
