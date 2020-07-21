@@ -1,8 +1,11 @@
 package utils.kkutils.ui.textview;
 
 import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.MaskFilter;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.ParcelableSpan;
@@ -62,7 +65,7 @@ public class SpanTextTool {
         return this;
     }
 
-    public  SpanTextTool addStringSpan(String textAdd, ParcelableSpan ...spans){
+    public  SpanTextTool addStringSpan(String textAdd, Object ...spans){
         if(textAdd==null)return this;
         int begin=builder.length();
         int end=begin+textAdd.length();
@@ -74,6 +77,58 @@ public class SpanTextTool {
     }
 
 
+    /***
+     * 获取imagespan  w 不传用图片本身大小，传了就用传的
+     * @param drawableId
+     * @param w
+     * @param h
+     * @return
+     */
+    public static ImageSpan getImageSpan(int drawableId,int w, int h ){
+        final Drawable drawable = AppTool.getApplication().getResources().getDrawable(drawableId);
+        if(w>0){
+            drawable.setBounds(0,0, w, h);
+        }else {
+            drawable.setBounds(0,0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        }
+        //设置图片
+        ImageSpan imageSpan=new ImageSpan(drawable){
+            public int getSize(Paint paint, CharSequence text, int start, int end,
+                               Paint.FontMetricsInt fm) {
+                Drawable d = getDrawable();
+                Rect rect = d.getBounds();
+                if (fm != null) {
+                    Paint.FontMetricsInt fmPaint=paint.getFontMetricsInt();
+                    int fontHeight = fmPaint.bottom - fmPaint.top;
+                    int drHeight=rect.bottom-rect.top;
+
+                    int top= drHeight/2 - fontHeight/4;
+                    int bottom=drHeight/2 + fontHeight/4;
+
+                    fm.ascent=-bottom;
+                    fm.top=-bottom;
+                    fm.bottom=top;
+                    fm.descent=top;
+                }
+                return rect.right;
+            }
+            //剧中设置
+            @Override
+            public void draw(Canvas canvas, CharSequence text, int start, int end,
+                             float x, int top, int y, int bottom, Paint paint) {
+                Drawable b = getDrawable();
+                canvas.save();
+                int fontHeight = (int) paint.getTextSize();
+                int drHeight=b.getBounds().bottom-b.getBounds().top;
+                int transY = (fontHeight-drHeight)/2;
+                canvas.translate(x, y-drHeight-transY);
+                b.draw(canvas);
+                canvas.restore();
+
+            }
+        };
+        return  imageSpan;
+    }
 
 
     public void setTextView(TextView textView){
