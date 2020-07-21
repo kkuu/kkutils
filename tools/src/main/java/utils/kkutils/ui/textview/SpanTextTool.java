@@ -120,7 +120,7 @@ public class SpanTextTool {
                 canvas.save();
                 int fontHeight = (int) paint.getTextSize();
                 int drHeight=b.getBounds().bottom-b.getBounds().top;
-                int transY = (fontHeight-drHeight)/2;
+                int transY = (fontHeight-drHeight)/2-paint.getFontMetricsInt().descent/2;
                 canvas.translate(x, y-drHeight-transY);
                 b.draw(canvas);
                 canvas.restore();
