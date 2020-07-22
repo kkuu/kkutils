@@ -8,8 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.text.ParcelableSpan;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -26,7 +24,6 @@ import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.SubscriptSpan;
 import android.text.style.SuperscriptSpan;
-import android.text.style.TextAppearanceSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
@@ -34,6 +31,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.target.CustomViewTarget;
+import com.bumptech.glide.request.transition.Transition;
+
 import utils.kkutils.AppTool;
 import utils.kkutils.R;
 import utils.kkutils.common.CommonTool;
@@ -42,6 +46,11 @@ import utils.kkutils.common.UiTool;
 /***\
  * 使用方法
  *  text.setText(spanTextTool.builder);
+ *
+ *  /
+ *         new SpanTextTool("").addString("年时奋进砺奋进", R.color.kk_tv_h0)
+ *                 .addStringSpan("1", SpanTextTool.getImageGifSpan(R.drawable.kk_test_gif, 30, 30,tv_span)).addString("年时砥年时砥砺奋进年时砥砺奋进年时年时砥年时砥砺奋进年时砥砺奋进年时", R.color.kk_tv_h0)
+ *                 .setTextView(tv_span);
  */
 public class SpanTextTool {
     public SpannableStringBuilder builder;
@@ -91,6 +100,72 @@ public class SpanTextTool {
         }else {
             drawable.setBounds(0,0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         }
+
+        return  getImageSpan(drawable);
+    }
+
+    /***
+     * 图片比文字大  一定要传w ，h
+     * @param drawableId
+     * @param w
+     * @param h
+     * @param textView
+     * @return
+     */
+    public static ImageSpan getImageGifSpan(Object drawableId,int w, int h ,TextView textView){
+        SpanAsyncDrawable spanDrawable=new SpanAsyncDrawable() ;
+        if(w>0){
+            spanDrawable.setBounds(0,0,w,h);
+        }
+        Glide.with(AppTool.getApplication()).asGif().load(drawableId).into(new CustomViewTarget(textView) {
+            @Override
+            public void onLoadFailed(@Nullable Drawable errorDrawable) {
+            }
+            @Override
+            public void onResourceReady(@NonNull Object o, @Nullable Transition transition) {
+                GifDrawable resource= (GifDrawable) o;
+                if(w>0){
+                    resource.setBounds(0,0,w,h);
+                }else {
+                    resource.setBounds(0,0,resource.getIntrinsicWidth(),resource.getIntrinsicHeight());
+                }
+                spanDrawable.setDrawable(resource);
+                resource.setCallback(new Drawable.Callback() {
+                    @Override
+                    public void invalidateDrawable(@NonNull Drawable drawable) {
+                        textView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(textView.isShown()){
+                                    textView.invalidate();
+                                }
+                            }
+                        }, 80);
+                    }
+
+                    @Override
+                    public void scheduleDrawable(@NonNull Drawable drawable, @NonNull Runnable runnable, long l) {
+
+                    }
+
+                    @Override
+                    public void unscheduleDrawable(@NonNull Drawable drawable, @NonNull Runnable runnable) {
+
+                    }
+                });
+                resource.setLoopCount(GifDrawable.LOOP_FOREVER);
+                resource.start();
+            }
+            @Override
+            protected void onResourceCleared(@Nullable Drawable placeholder) {
+
+            }
+        });
+
+        return getImageSpan(spanDrawable);
+    }
+
+    public static ImageSpan getImageSpan(Drawable drawable){
         //设置图片
         ImageSpan imageSpan=new ImageSpan(drawable){
             public int getSize(Paint paint, CharSequence text, int start, int end,
@@ -127,9 +202,8 @@ public class SpanTextTool {
 
             }
         };
-        return  imageSpan;
+        return imageSpan;
     }
-
 
     public void setTextView(TextView textView){
         if(textView!=null)textView.setText(builder);

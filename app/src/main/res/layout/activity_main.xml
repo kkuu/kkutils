@@ -8,6 +8,7 @@
 
 
 
+    <TextView style="@style/kk_textview" android:id="@+id/tv_span"></TextView>
 
     <utils.kkutils.ui.KKSimpleRecycleView
         android:id="@+id/recycleView"
