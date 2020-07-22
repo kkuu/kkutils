@@ -112,11 +112,16 @@ public class SpanTextTool {
      * @param textView
      * @return
      */
-    public static ImageSpan getImageGifSpan(Object drawableId,int w, int h ,TextView textView){
+    public static ImageSpan getImageGifSpan(Object drawableId,int w, int h ,TextView textView,int refreshDuration){
+        if(refreshDuration<1){
+            refreshDuration=80;
+        }
+
         SpanAsyncDrawable spanDrawable=new SpanAsyncDrawable() ;
         if(w>0){
             spanDrawable.setBounds(0,0,w,h);
         }
+        int finalRefreshDuration = refreshDuration;
         Glide.with(AppTool.getApplication()).asGif().load(drawableId).into(new CustomViewTarget(textView) {
             @Override
             public void onLoadFailed(@Nullable Drawable errorDrawable) {
@@ -140,7 +145,7 @@ public class SpanTextTool {
                                     textView.invalidate();
                                 }
                             }
-                        }, 80);
+                        }, finalRefreshDuration);
                     }
 
                     @Override
