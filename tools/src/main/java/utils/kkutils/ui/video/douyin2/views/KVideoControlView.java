@@ -1,4 +1,4 @@
-package douyin2.views;
+package utils.kkutils.ui.video.douyin2.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -20,9 +20,9 @@ import com.dueeeke.videoplayer.controller.IControlComponent;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.dueeeke.videoplayer.util.L;
 
-import douyin2.library.cache.PreloadManager;
-import kk.kktools.R;
+import utils.kkutils.R;
 import utils.kkutils.common.UiTool;
+import utils.kkutils.ui.video.douyin2.library.cache.PreloadManager;
 
 
 public  class KVideoControlView extends RelativeLayout implements IControlComponent {

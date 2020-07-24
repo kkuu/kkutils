@@ -1,4 +1,4 @@
-package douyin2.imp;
+package utils.kkutils.ui.video.douyin2.imp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,8 +12,9 @@ import androidx.viewpager.widget.PagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import douyin2.library.cache.PreloadManager;
-import douyin2.views.KVideoControlView;
+import utils.kkutils.ui.video.douyin2.library.cache.PreloadManager;
+import utils.kkutils.ui.video.douyin2.views.KVideoControlView;
+
 
 public abstract class DouYinViewPagerAdapter<T extends DouYinData> extends PagerAdapter {
 

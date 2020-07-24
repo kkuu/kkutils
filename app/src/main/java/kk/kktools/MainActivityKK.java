@@ -50,6 +50,7 @@ import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 import utils.kkutils.ui.daojishi.DaoJiShiTool;
 import utils.kkutils.ui.textview.HtmlTool;
 import utils.kkutils.ui.textview.SpanTextTool;
+import utils.kkutils.ui.video.douyin2.DouYinFragment2;
 import utils.kkutils.ui.webview.X5WebView;
 import utils.kkutils.update.Version;
 import utils.kkutils.zhifu.KKZhiFuUiTool;
@@ -94,7 +95,7 @@ public class MainActivityKK extends KKParentActivity {
             }
         });
         addItem("测试抖音效果", new DouYinFragment(), null);
-        addItem("测试抖音效果2", new douyin2.DouYinFragment2(), null);
+        addItem("测试抖音效果2", new DouYinFragment2(), null);
         addItem("viewpager2", new ViewPager2Test(), null);
 
         addItem("图片选择器", new KKChooseImgFragmentKK(), null);

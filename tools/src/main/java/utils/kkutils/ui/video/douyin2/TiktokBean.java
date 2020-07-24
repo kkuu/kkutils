@@ -1,4 +1,4 @@
-package douyin2;
+package utils.kkutils.ui.video.douyin2;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -7,8 +7,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import douyin2.imp.DouYinData;
-import kk.kktools.R;
+import utils.kkutils.ui.video.douyin2.imp.DouYinData;
+
 
 public class TiktokBean implements DouYinData {
     public String coverImgUrl;

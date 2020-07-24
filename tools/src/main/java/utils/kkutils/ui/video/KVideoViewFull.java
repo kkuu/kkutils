@@ -1,20 +1,25 @@
-package utils.kkutils.ui.media;
+package utils.kkutils.ui.video;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.WindowManager;
 import android.widget.VideoView;
 
-public class KVideoView extends VideoView {
-    public KVideoView(Context context) {
+import utils.kkutils.ui.video.douyin2.views.KVideoView;
+
+/***
+ * 全屏播放
+ */
+public class KVideoViewFull extends KVideoView {
+    public KVideoViewFull(Context context) {
         super(context);
     }
 
-    public KVideoView(Context context, AttributeSet attrs) {
+    public KVideoViewFull(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public KVideoView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public KVideoViewFull(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

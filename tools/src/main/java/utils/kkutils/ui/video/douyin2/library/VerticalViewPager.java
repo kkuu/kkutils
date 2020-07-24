@@ -1,4 +1,4 @@
-package douyin2.library;
+package utils.kkutils.ui.video.douyin2.library;
 
 import android.content.Context;
 import android.content.res.Resources;

@@ -1,4 +1,4 @@
-package douyin2.imp;
+package utils.kkutils.ui.video.douyin2.imp;
 
 public interface DouYinData {
     public String getCoverImgUrl();

@@ -1,4 +1,4 @@
-package douyin2;
+package utils.kkutils.ui.video.douyin2;
 
 import android.content.Context;
 import android.view.View;
@@ -20,14 +20,15 @@ import com.dueeeke.videoplayer.render.IRenderView;
 import com.dueeeke.videoplayer.render.RenderViewFactory;
 import com.dueeeke.videoplayer.render.TextureRenderView;
 
-import douyin2.library.cache.PreloadManager;
-import douyin2.imp.DouYinData;
-import douyin2.imp.DouYinViewPagerAdapter;
-import douyin2.views.KVideoView;
-import douyin2.library.TikTokRenderView;
-import douyin2.library.VerticalViewPager;
+
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UiTool;
+import utils.kkutils.ui.video.douyin2.imp.DouYinData;
+import utils.kkutils.ui.video.douyin2.imp.DouYinViewPagerAdapter;
+import utils.kkutils.ui.video.douyin2.library.TikTokRenderView;
+import utils.kkutils.ui.video.douyin2.library.VerticalViewPager;
+import utils.kkutils.ui.video.douyin2.library.cache.PreloadManager;
+import utils.kkutils.ui.video.douyin2.views.KVideoView;
 
 public class DouYinTool {
     public Context context;
@@ -38,13 +39,13 @@ public class DouYinTool {
 
 
 
-    public DouYinTool(Lifecycle lifecycle, ViewGroup container, DouYinViewPagerAdapter adapter) {
+    public DouYinTool( ViewGroup container, DouYinViewPagerAdapter adapter) {
         context = container.getContext();
         DouYinTool.init();
         mPreloadManager = PreloadManager.getInstance(context);
         mVideoView = getDouYinVideoView(context);
 
-        initLifeCycle(lifecycle,mVideoView);
+       // initLifeCycle(lifecycle,mVideoView);
 
         {//初始化ViewPager
             VerticalViewPager mViewPager = new VerticalViewPager(container.getContext());
@@ -151,26 +152,6 @@ public class DouYinTool {
 
 
 
-
-
-
-    public static void initLifeCycle(Lifecycle lifecycle, KVideoView mVideoView){
-        lifecycle.addObserver(new LifecycleEventObserver() {
-            @Override
-            public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
-                if(event== Lifecycle.Event.ON_RESUME){
-                    mVideoView.resume();
-                }
-                if(event== Lifecycle.Event.ON_PAUSE){
-                    mVideoView.pause();
-                }
-                if(event== Lifecycle.Event.ON_DESTROY){
-                    mVideoView.release();
-                    PreloadManager.getInstance(mVideoView.getContext()).removeAllPreloadTask();
-                }
-            }
-        });
-    }
     public static KVideoView getDouYinVideoView(Context context) {
         KVideoView mVideoView = new KVideoView(context);
         mVideoView.setLooping(true);
