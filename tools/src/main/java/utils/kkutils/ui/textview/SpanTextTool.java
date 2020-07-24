@@ -44,6 +44,7 @@ import java.util.Map;
 import utils.kkutils.AppTool;
 import utils.kkutils.R;
 import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.common.ViewTool;
 
@@ -134,7 +135,11 @@ public class SpanTextTool {
             tag=new Drawable.Callback() {
                 @Override
                 public void invalidateDrawable(@NonNull Drawable who) {
-                    textView.postInvalidate();
+                    try {
+                        if(textView!=null)textView.postInvalidate();
+                    }catch (Exception e){
+                        LogTool.ex(e);
+                    }
                 }
 
                 @Override

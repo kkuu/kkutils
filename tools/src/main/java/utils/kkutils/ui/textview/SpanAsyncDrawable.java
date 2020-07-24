@@ -12,6 +12,8 @@ import com.bumptech.glide.load.resource.gif.GifDrawable;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.kkutils.common.LogTool;
+
 
 /**
  *  异步专用drawable
@@ -62,22 +64,40 @@ public class SpanAsyncDrawable extends Drawable implements Drawable.Callback{
     @Override
     public void invalidateDrawable(Drawable who) {
         for (Callback callback : callbackList) {
-            callback.invalidateDrawable(who);
+            try {
+                callback.invalidateDrawable(who);
+            }catch (Exception e){
+                LogTool.ex(e);
+            }
         }
-//        if (getCallback() != null) {
-//            getCallback().invalidateDrawable(who);
-//        }
+        if (getCallback() != null) {
+            getCallback().invalidateDrawable(who);
+        }
     }
 
     @Override
     public void scheduleDrawable(Drawable who, Runnable what, long when) {
+        for (Callback callback : callbackList) {
+            try {
+                callback.scheduleDrawable(who, what, when);
+            }catch (Exception e){
+                LogTool.ex(e);
+            }
+        }
         if (getCallback() != null) {
-            getCallback().scheduleDrawable(who, what, when);
+            getCallback().scheduleDrawable(who, what,when);
         }
     }
 
     @Override
     public void unscheduleDrawable(Drawable who, Runnable what) {
+        for (Callback callback : callbackList) {
+            try {
+                callback.unscheduleDrawable(who, what);
+            }catch (Exception e){
+                LogTool.ex(e);
+            }
+        }
         if (getCallback() != null) {
             getCallback().unscheduleDrawable(who, what);
         }
