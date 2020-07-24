@@ -8,6 +8,8 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.Utils;
 

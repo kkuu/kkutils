@@ -51,7 +51,7 @@ public class DouYinFragment2 extends KKParentFragment {
         data1.videoDownloadUrl="https://aweme.snssdk.com/aweme/v1/play/?video_id=v0300f5e0000bmir1gu9taafbguk4m6g&line=0&ratio=540p&watermark=1&media_type=4&vr_type=0&improve_bitrate=0&logo_name=aweme";
 
         data.add(0, data1);
-        douYinTool =new DouYinTool(relativeLayout,new DouYinViewPagerAdapter(data){
+        douYinTool =new DouYinTool(getLifecycle(),relativeLayout,new DouYinViewPagerAdapter(data){
 
 
             @Override

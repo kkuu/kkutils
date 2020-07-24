@@ -39,14 +39,14 @@ public class DouYinTool {
 
 
 
-    public DouYinTool( ViewGroup container, DouYinViewPagerAdapter adapter) {
+    public DouYinTool(Lifecycle lifecycle, ViewGroup container, DouYinViewPagerAdapter adapter) {
         context = container.getContext();
         DouYinTool.init();
         mPreloadManager = PreloadManager.getInstance(context);
         mVideoView = getDouYinVideoView(context);
 
-       // initLifeCycle(lifecycle,mVideoView);
-
+//        initLifeCycle(lifecycle,mVideoView);
+//
         {//初始化ViewPager
             VerticalViewPager mViewPager = new VerticalViewPager(container.getContext());
             container.addView(mViewPager);
@@ -152,6 +152,26 @@ public class DouYinTool {
 
 
 
+
+
+
+//    public static void initLifeCycle(Lifecycle lifecycle, KVideoView mVideoView){
+//        lifecycle.addObserver(new LifecycleEventObserver() {
+//            @Override
+//            public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
+//                if(event== Lifecycle.Event.ON_RESUME){
+//                    mVideoView.resume();
+//                }
+//                if(event== Lifecycle.Event.ON_PAUSE){
+//                    mVideoView.pause();
+//                }
+//                if(event== Lifecycle.Event.ON_DESTROY){
+//                    mVideoView.release();
+//                    PreloadManager.getInstance(mVideoView.getContext()).removeAllPreloadTask();
+//                }
+//            }
+//        });
+//    }
     public static KVideoView getDouYinVideoView(Context context) {
         KVideoView mVideoView = new KVideoView(context);
         mVideoView.setLooping(true);

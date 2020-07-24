@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
+
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
