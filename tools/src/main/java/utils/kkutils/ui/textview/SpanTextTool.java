@@ -162,7 +162,7 @@ public class SpanTextTool {
             return getImageSpan(spanDrawable);
         }
         spanDrawable=new SpanAsyncDrawable();
-        spanDrawable.setCallback(callback);// 第一次不能用add
+        spanDrawable.setCallback(callback);// 第一次不能用add  这里面是弱引用， 要在下面保持强引用
         mapCallback.put(drawableId, callback);//保持强引用， 免得被低内存时候销毁了
 
 
