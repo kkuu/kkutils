@@ -126,10 +126,9 @@ public class SpanTextTool {
      * @param w
      * @param h
      * @param textView
-     * @param refreshDuration
      * @return
      */
-    public static ImageSpan getImageGifSpan(Object drawableId,int w, int h ,TextView textView,int refreshDuration){
+    public static ImageSpan getImageGifSpan(Object drawableId,int w, int h ,TextView textView){
         Object tag = ViewTool.getTag(textView, gif_key);
         if(tag==null){
             tag=new Drawable.Callback() {

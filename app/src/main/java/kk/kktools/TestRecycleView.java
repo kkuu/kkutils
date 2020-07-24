@@ -57,7 +57,7 @@ public class TestRecycleView extends KKParentFragment {
                         super.initData(position, type, itemView);
 
                         TextView textView=itemView.findViewById(R.id.textView);
-                        new SpanTextTool("").addStringSpan("s", SpanTextTool.getImageGifSpan(R.drawable.kk_test_gif,100, 100, textView, 80))
+                        new SpanTextTool("").addStringSpan("s", SpanTextTool.getImageGifSpan(R.drawable.kk_test_gif,100, 100, textView))
                                 .setTextView(textView);
                     }
                 });
