@@ -38,10 +38,14 @@ import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.target.CustomViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import utils.kkutils.AppTool;
 import utils.kkutils.R;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.UiTool;
+import utils.kkutils.common.ViewTool;
 
 /***\
  * 使用方法
@@ -112,16 +116,55 @@ public class SpanTextTool {
      * @param textView
      * @return
      */
-    public static ImageSpan getImageGifSpan(Object drawableId,int w, int h ,TextView textView,int refreshDuration){
-        if(refreshDuration<1){
-            refreshDuration=80;
-        }
+    static Map<Object ,SpanAsyncDrawable> map=new HashMap<>();
+    static int gif_key= ViewTool.initKey();
 
-        SpanAsyncDrawable spanDrawable=new SpanAsyncDrawable() ;
+    /***
+     *  这里一个drawableId  对应 一个SpanAsyncDrawable  ， 也就是 底层只加载一次，加载多了会加载失败
+     * @param drawableId
+     * @param w
+     * @param h
+     * @param textView
+     * @param refreshDuration
+     * @return
+     */
+    public static ImageSpan getImageGifSpan(Object drawableId,int w, int h ,TextView textView,int refreshDuration){
+        Object tag = ViewTool.getTag(textView, gif_key);
+        if(tag==null){
+            tag=new Drawable.Callback() {
+                @Override
+                public void invalidateDrawable(@NonNull Drawable who) {
+                    textView.postInvalidate();
+                }
+
+                @Override
+                public void scheduleDrawable(@NonNull Drawable who, @NonNull Runnable what, long when) {
+
+                }
+
+                @Override
+                public void unscheduleDrawable(@NonNull Drawable who, @NonNull Runnable what) {
+
+                }
+            };
+            ViewTool.setTag(textView, tag, gif_key);
+
+        }
+        Drawable.Callback callback = (Drawable.Callback) ViewTool.getTag(textView, gif_key);
+        SpanAsyncDrawable spanDrawable  = map.get(drawableId);
+        if(spanDrawable!=null){
+            spanDrawable.addCallBack( callback);
+            return getImageSpan(spanDrawable);
+        }
+        spanDrawable=new SpanAsyncDrawable();
+        spanDrawable.setCallback(callback);// 第一次不能用add
+
+
+        map.put(drawableId, spanDrawable);
         if(w>0){
             spanDrawable.setBounds(0,0,w,h);
         }
-        int finalRefreshDuration = refreshDuration;
+        SpanAsyncDrawable finalSpanDrawable = spanDrawable;
         Glide.with(AppTool.getApplication()).asGif().load(drawableId).into(new CustomViewTarget(textView) {
             @Override
             public void onLoadFailed(@Nullable Drawable errorDrawable) {
@@ -134,30 +177,7 @@ public class SpanTextTool {
                 }else {
                     resource.setBounds(0,0,resource.getIntrinsicWidth(),resource.getIntrinsicHeight());
                 }
-                spanDrawable.setDrawable(resource);
-                resource.setCallback(new Drawable.Callback() {
-                    @Override
-                    public void invalidateDrawable(@NonNull Drawable drawable) {
-                        textView.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(textView.isShown()){
-                                    textView.invalidate();
-                                }
-                            }
-                        }, finalRefreshDuration);
-                    }
-
-                    @Override
-                    public void scheduleDrawable(@NonNull Drawable drawable, @NonNull Runnable runnable, long l) {
-
-                    }
-
-                    @Override
-                    public void unscheduleDrawable(@NonNull Drawable drawable, @NonNull Runnable runnable) {
-
-                    }
-                });
+                finalSpanDrawable.setDrawable(resource);
                 resource.setLoopCount(GifDrawable.LOOP_FOREVER);
                 resource.start();
             }

@@ -2,6 +2,7 @@ package kk.kktools;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.pullrefresh.KKRefreshLayout;
+import utils.kkutils.ui.textview.SpanTextTool;
 
 public class TestRecycleView extends KKParentFragment {
     View btn_add_top;
@@ -34,7 +36,7 @@ public class TestRecycleView extends KKParentFragment {
             public void loadPageData(int page) {
                 refreshLayout.stopRefresh(null);
 
-                initRecycleView(TestData.getTestStrList(10*page));
+                initRecycleView(TestData.getTestStrList(100));
             }
         });
 
@@ -53,6 +55,10 @@ public class TestRecycleView extends KKParentFragment {
                     @Override
                     public void initData(int position, int type, View itemView) {
                         super.initData(position, type, itemView);
+
+                        TextView textView=itemView.findViewById(R.id.textView);
+                        new SpanTextTool("").addStringSpan("s", SpanTextTool.getImageGifSpan(R.drawable.kk_test_gif,100, 100, textView, 80))
+                                .setTextView(textView);
                     }
                 });
 

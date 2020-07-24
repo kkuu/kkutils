@@ -9,11 +9,14 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *  异步专用drawable
  */
-public class SpanAsyncDrawable extends Drawable {
+public class SpanAsyncDrawable extends Drawable implements Drawable.Callback{
 
     private Drawable mDrawable;
 
@@ -51,7 +54,42 @@ public class SpanAsyncDrawable extends Drawable {
             this.mDrawable.setCallback(null);
         }
         this.mDrawable = drawable;
+        drawable.setCallback(this);
         setBounds(drawable.getBounds());
     }
 
+
+    @Override
+    public void invalidateDrawable(Drawable who) {
+        for (Callback callback : callbackList) {
+            callback.invalidateDrawable(who);
+        }
+//        if (getCallback() != null) {
+//            getCallback().invalidateDrawable(who);
+//        }
+    }
+
+    @Override
+    public void scheduleDrawable(Drawable who, Runnable what, long when) {
+        if (getCallback() != null) {
+            getCallback().scheduleDrawable(who, what, when);
+        }
+    }
+
+    @Override
+    public void unscheduleDrawable(Drawable who, Runnable what) {
+        if (getCallback() != null) {
+            getCallback().unscheduleDrawable(who, what);
+        }
+    }
+    public List<Drawable.Callback> callbackList=new ArrayList<>();
+    public void addCallBack(Drawable.Callback callback){
+        if(callbackList.size()>50){
+            callbackList.clear();
+        }
+        if(!callbackList.contains(callback)){
+            callbackList.add(callback);
+        }
+
+    }
 }
