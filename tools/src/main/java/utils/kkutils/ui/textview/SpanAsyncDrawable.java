@@ -105,10 +105,10 @@ public class SpanAsyncDrawable extends Drawable implements Drawable.Callback{
     public List<Drawable.Callback> callbackList=new ArrayList<>();
     public void addCallBack(Drawable.Callback callback){
         if(callbackList.size()>70){
-            callbackList.clear();
+            callbackList.remove(callbackList.size()-1);
         }
         if(!callbackList.contains(callback)){
-            callbackList.add(callback);
+            callbackList.add(0,callback);
         }
 
     }
