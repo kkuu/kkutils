@@ -118,6 +118,7 @@ public class SpanTextTool {
      * @return
      */
     static Map<Object ,SpanAsyncDrawable> map=new HashMap<>();
+    static Map<Object ,Drawable.Callback> mapCallback=new HashMap<>();
     static int gif_key= ViewTool.initKey();
 
     /***
@@ -162,6 +163,7 @@ public class SpanTextTool {
         }
         spanDrawable=new SpanAsyncDrawable();
         spanDrawable.setCallback(callback);// 第一次不能用add
+        mapCallback.put(drawableId, callback);//保持强引用， 免得被低内存时候销毁了
 
 
         map.put(drawableId, spanDrawable);
