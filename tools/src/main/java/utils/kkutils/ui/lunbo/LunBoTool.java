@@ -314,6 +314,10 @@ public class LunBoTool {
             }
             return lunBoDatas;
         }
+
+        public boolean isVideo(){
+            return LunBoTool.isVideo(imageUrl);
+        }
     }
 
     public static abstract class LunBoClickListener extends KKViewOnclickListener {
@@ -325,8 +329,8 @@ public class LunBoTool {
 
         }
     }
-    public static boolean isVideo(String url){
-        url=(""+url).toLowerCase();
+    public static boolean isVideo(Object urlIn){
+        String url=(""+urlIn).toLowerCase();
 
         List<String> endStr=new ArrayList<>();
         endStr.add("avi");
