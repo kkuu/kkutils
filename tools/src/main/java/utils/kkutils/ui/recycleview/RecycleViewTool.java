@@ -44,7 +44,7 @@ public class RecycleViewTool {
      * @param dividerRightDp
      * @param dividerVerticalDp
      */
-    public static void initRecycleViewLinearlayout(final KKParentRecycleView recyclerView,int dividerLeftDp,int dividerRightDp, int dividerVerticalDp) {
+    public static void initRecycleViewLinearlayout(final KKParentRecycleView recyclerView,double dividerLeftDp,double dividerRightDp, double dividerVerticalDp) {
         removeAllDecoration(recyclerView);
         final int dividerLeft= CommonTool.dip2px(dividerLeftDp);
         final int dividerRight= CommonTool.dip2px(dividerRightDp);
@@ -67,7 +67,7 @@ public class RecycleViewTool {
      * @param recyclerView
      * @param paddingDp
      */
-    public static void initRecycleViewLinearlayout(KKParentRecycleView recyclerView,int paddingDp ){
+    public static void initRecycleViewLinearlayout(KKParentRecycleView recyclerView,double paddingDp ){
         initRecycleViewLinearlayout(recyclerView,paddingDp,paddingDp,paddingDp);
     }
 
@@ -96,7 +96,7 @@ public class RecycleViewTool {
      * @param barHeightDp
      * @param onChangeListener
      */
-    public static void initScrlloBarChange(RecyclerView recyclerView, final int barHeightDp, final RecycleViewBarOnChangeListener onChangeListener){
+    public static void initScrlloBarChange(RecyclerView recyclerView, final double barHeightDp, final RecycleViewBarOnChangeListener onChangeListener){
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int barHeight= CommonTool.dip2px(barHeightDp);
             boolean isShowingTitleSearch=false;//title 上面的搜索框是否显示
@@ -266,7 +266,7 @@ public class RecycleViewTool {
      * @param lineWidth
      * @param color
      */
-    public static RecyclerView.ItemDecoration initGridLineSimple( final int paddingIn, final int spanCount, final int lineWidth, final int color){
+    public static RecyclerView.ItemDecoration initGridLineSimple( final double paddingIn, final int spanCount, final double lineWidth, final int color){
         return  new RecyclerView.ItemDecoration() {
             Paint paint=new Paint();
             int padding=CommonTool.dip2px(paddingIn);
@@ -290,7 +290,7 @@ public class RecycleViewTool {
                         for(int i=1;i<count;i++){
                             int preLineIndex=(i-1)*spanCount+1;//用上一行的第一个来作为线的top
                             int top=parent.getChildAt(preLineIndex).getBottom()+padding/2;
-                            c.drawRect(padding, top, parent.getWidth()-padding, top+lineWidth, paint);
+                            c.drawRect(padding, top, parent.getWidth()-padding, (float) (top+lineWidth), paint);
                         }
                     }
                 }
@@ -298,11 +298,11 @@ public class RecycleViewTool {
                     int itemW=parent.getWidth()/spanCount;
                     int step=itemW;
                     int top=padding;
-                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
+                    c.drawRect(itemW, top, (float) (itemW+lineWidth), parent.getHeight()-top, paint);
                     itemW+=step;
-                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
+                    c.drawRect(itemW, top, (float) (itemW+lineWidth), parent.getHeight()-top, paint);
                     itemW+=step;
-                    c.drawRect(itemW, top, itemW+lineWidth, parent.getHeight()-top, paint);
+                    c.drawRect(itemW, top, (float) (itemW+lineWidth), parent.getHeight()-top, paint);
                 }
             }
         };
@@ -314,7 +314,7 @@ public class RecycleViewTool {
 
 
 
-    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount,final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount,final double itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
         initRecycleViewGrid(recyclerView,spanCount,headCount,itemPaddingDp,itemPaddingDp,onItemSizeChange,itemDecorationEnd);
     }
 
@@ -327,7 +327,7 @@ public class RecycleViewTool {
      * @param onItemSizeChange 用于可能需要根据item 宽来动态设置view 宽的情况
      * @param itemDecorationEnd 可用于自定义间隔， 默认可不传
      */
-    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+    public static void initRecycleViewGrid(final RecyclerView recyclerView, final int spanCount, final int headCount,final double headPaddingDp, final double itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
         GridLayoutManager layoutManager=null;
 
         {//判断是否设置过， 设置过就不要设置了，不然ui 刷新会出问题
@@ -359,7 +359,7 @@ public class RecycleViewTool {
      * 瀑布流
      * head 功能暂时不能用
      */
-    public static void initPuBuLiu(final RecyclerView recycleView, final int spanCount, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+    public static void initPuBuLiu(final RecyclerView recycleView, final int spanCount, final double itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
         if(recycleView.getLayoutManager()==null||!(recycleView.getLayoutManager() instanceof StaggeredGridLayoutManager)){
             StaggeredGridLayoutManager layoutManager=new StaggeredGridLayoutManager(spanCount,StaggeredGridLayoutManager.VERTICAL);
             recycleView.setLayoutManager(layoutManager);
@@ -399,7 +399,7 @@ public class RecycleViewTool {
 
 
 
-    public static void initDecoration(final RecyclerView recyclerView, final int spanCount, final int headCount,final int headPaddingDp, final int itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
+    public static void initDecoration(final RecyclerView recyclerView, final int spanCount, final int headCount,final double headPaddingDp, final double itemPaddingDp, final RecycleViewTool.OnItemSizeChange onItemSizeChange, final RecyclerView.ItemDecoration itemDecorationEnd){
         {//设置间隔
             RecycleViewTool.removeAllDecoration(recyclerView);
 

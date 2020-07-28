@@ -238,7 +238,7 @@ public class StringTool {
         }
         public static List<String> parse(String src, String jiange){
             src=""+src;
-            return Arrays.asList( src.split(jiange));
+            return new ArrayList<>(Arrays.asList( src.split(jiange)));
         }
         @Override
         public String toString() {
