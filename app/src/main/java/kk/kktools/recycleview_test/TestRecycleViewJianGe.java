@@ -1,5 +1,6 @@
 package kk.kktools.recycleview_test;
 
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ public class TestRecycleViewJianGe extends KKParentFragment {
     public void initData() {
 
 
+//        parent.setBackgroundColor(Color.parseColor("#eeeeee"));
+        recycleView.setBackgroundColor(Color.parseColor("#eeeeee"));
         recycleView.setData(TestData.getTestStrList(10), R.layout.kk_test_recyclevew_jiange_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
@@ -35,7 +38,7 @@ public class TestRecycleViewJianGe extends KKParentFragment {
         });
 
         recycleView.setLayoutManager(new GridLayoutManager(getContext(),3));
-        recycleView.addItemDecoration(new KKDecorationSimple(3,0,10,1,R.color.colorAccent){
+        recycleView.addItemDecoration(new KKDecorationSimple(3,0,10,1,Color.BLACK){
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.getItemOffsets(outRect, view, parent, state);
@@ -44,7 +47,7 @@ public class TestRecycleViewJianGe extends KKParentFragment {
         });
         int padding=CommonTool.dip2px(10);
 //        recycleView.setPadding(padding,padding,padding, padding);
-    //    UiTool.setMargin(recycleView, padding, padding, padding, padding);
+        UiTool.setMargin(recycleView, padding, padding, padding, padding);
 
     }
 
