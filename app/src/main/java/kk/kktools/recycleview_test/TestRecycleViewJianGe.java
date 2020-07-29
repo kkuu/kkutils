@@ -2,6 +2,7 @@ package kk.kktools.recycleview_test;
 
 import android.graphics.Rect;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -35,6 +36,10 @@ public class TestRecycleViewJianGe extends KKParentFragment {
 
         recycleView.setLayoutManager(new GridLayoutManager(getContext(),4));
         recycleView.addItemDecoration(new KKDecorationSimple(4,0,10,1,R.color.colorAccent));
+        int padding=CommonTool.dip2px(10);
+//        recycleView.setPadding(padding,padding,padding, padding);
+        UiTool.setMargin(recycleView, padding, padding, padding, padding);
+
     }
 
 }
