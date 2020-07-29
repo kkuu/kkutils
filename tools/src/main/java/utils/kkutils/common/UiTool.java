@@ -351,6 +351,16 @@ public class UiTool {
     public static int getColorByResId(int colorResId){
         return ResourcesTool.getColor(colorResId);
     }
+
+    public static void setWHEqual(View view){
+        if(view==null)return;
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                UiTool.setWH(view, -100, view.getWidth());//设置正方形
+            }
+        });
+    }
     /***
      * 给控件设置w h
      * @param view

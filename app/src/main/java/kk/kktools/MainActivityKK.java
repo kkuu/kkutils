@@ -1,27 +1,11 @@
 package kk.kktools;
 
 import android.app.Dialog;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.style.DynamicDrawableSpan;
-import android.text.style.ImageSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.gif.GifDrawable;
-import com.bumptech.glide.request.target.CustomViewTarget;
-import com.bumptech.glide.request.transition.Transition;
-
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +13,7 @@ import douyin.DouYinFragment;
 import kk.kktools.animation.KKTestCanvas;
 import kk.kktools.color.TestColorFragmentKK;
 import kk.kktools.jinrong.JiSuanQi;
+import kk.kktools.recycleview_test.TestRecycleView;
 import kk.kktools.tab.TestTab;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.tuya.TestEditView;
@@ -36,7 +21,6 @@ import kk.kktools.viewpager2.ViewPager2Test;
 import kk.kktools.web.WebFragment;
 import utils.kkutils.AppTool;
 import utils.kkutils.HttpTool;
-import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
@@ -48,8 +32,6 @@ import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 import utils.kkutils.ui.daojishi.DaoJiShiTool;
-import utils.kkutils.ui.textview.HtmlTool;
-import utils.kkutils.ui.textview.SpanTextTool;
 import utils.kkutils.ui.video.douyin2.DouYinFragment2;
 import utils.kkutils.ui.webview.X5WebView;
 import utils.kkutils.update.Version;

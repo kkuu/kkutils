@@ -1,4 +1,4 @@
-package kk.kktools;
+package kk.kktools.recycleview_test;
 
 import android.graphics.Color;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import kk.kktools.R;
 import utils.kkutils.common.SaoMaTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
@@ -20,7 +21,7 @@ import utils.kkutils.ui.pullrefresh.KKRefreshLayout;
 import utils.kkutils.ui.textview.SpanTextTool;
 
 public class TestRecycleView extends KKParentFragment {
-    View btn_add_top;
+    View btn_add_top,btn_test_jiange;
     @Override
     public int initContentViewId() {
         return R.layout.kk_test_recyclevew;
@@ -69,6 +70,12 @@ public class TestRecycleView extends KKParentFragment {
 
     @Override
     public void initListener() {
+        btn_test_jiange.setOnClickListener(new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                new TestRecycleViewJianGe().go();
+            }
+        });
         btn_add_top.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
