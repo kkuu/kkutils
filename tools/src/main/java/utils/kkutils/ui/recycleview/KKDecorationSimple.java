@@ -61,7 +61,12 @@ public class KKDecorationSimple extends RecyclerView.ItemDecoration {
             {//竖直
                 for(int i=0;i<parent.getChildCount();i++){
                     View childAt = parent.getChildAt(i);
-                    c.drawRect(childAt.getRight()+padding/2, childAt.getTop()-padding/2, (float) (childAt.getRight()+padding/2+lineWidth),childAt.getBottom()+padding/2, paintLine);
+                    boolean lastLine = RecycleViewTool.isLastLine(parent.getChildCount(), i, spanCount);
+                    if(lastLine){
+                        c.drawRect(childAt.getRight()+padding/2, childAt.getTop()-padding, (float) (childAt.getRight()+padding/2+lineWidth),childAt.getBottom(), paintLine);
+                    }else {
+                        c.drawRect(childAt.getRight()+padding/2, childAt.getTop()-padding, (float) (childAt.getRight()+padding/2+lineWidth),childAt.getBottom()+padding/2, paintLine);
+                    }
                 }
             }
         }
