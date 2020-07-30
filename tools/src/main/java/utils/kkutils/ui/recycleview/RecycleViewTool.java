@@ -323,7 +323,6 @@ public class RecycleViewTool {
      * @param recyclerView
      * @param spanCount
      * @param headCount  占据一行的  head 数量
-     * @param paddingDp  间距
      * @param onItemSizeChange 用于可能需要根据item 宽来动态设置view 宽的情况
      * @param itemDecorationEnd 可用于自定义间隔， 默认可不传
      */
@@ -513,9 +512,20 @@ public class RecycleViewTool {
 
 
 
-
-
-
+    public static int getSpanCount(RecyclerView recyclerView){
+        if(recyclerView!=null){
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            if(layoutManager!=null){
+                if(recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager){
+                    return ((StaggeredGridLayoutManager) recyclerView.getLayoutManager()).getSpanCount();
+                }
+                if(recyclerView.getLayoutManager() instanceof GridLayoutManager){
+                    return ((GridLayoutManager) recyclerView.getLayoutManager()).getSpanCount();
+                }
+            }
+        }
+        return 1;
+    }
 
 
 
