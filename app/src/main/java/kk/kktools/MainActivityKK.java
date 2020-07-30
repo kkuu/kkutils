@@ -1,10 +1,16 @@
 package kk.kktools;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +38,7 @@ import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 import utils.kkutils.ui.daojishi.DaoJiShiTool;
+import utils.kkutils.ui.recycleview.KKDecoration;
 import utils.kkutils.ui.video.douyin2.DouYinFragment2;
 import utils.kkutils.ui.webview.X5WebView;
 import utils.kkutils.update.Version;
@@ -201,6 +208,17 @@ public class MainActivityKK extends KKParentActivity {
 
     public void refresh() {
         KKSimpleRecycleView recycleView = findViewById(R.id.recycleView);
+        recycleView.setLayoutManager(new GridLayoutManager(this, 3));
+        recycleView.setItemDecoration(new KKDecoration(3, 0, 10, 10, 1, Color.BLACK){
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+
+                TextView tv_main_title=view.findViewById(R.id.tv_main_title);
+               // UiTool.setWHEqual(tv_main_title);
+            }
+        });
+
         recycleView.setData(testItems, R.layout.activity_main_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView) {
