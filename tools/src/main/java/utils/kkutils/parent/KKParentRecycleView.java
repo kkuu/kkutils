@@ -19,6 +19,8 @@ import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.ui.pullrefresh.PageControl;
 import utils.kkutils.ui.pullrefresh.KKRefreshImp;
+import utils.kkutils.ui.recycleview.KKDecoration;
+import utils.kkutils.ui.recycleview.RecycleViewTool;
 
 /**
  * Created by ishare on 2016/6/7.
@@ -243,6 +245,10 @@ public class KKParentRecycleView extends RecyclerView {
 
 
 
+    public void setItemDecoration(ItemDecoration itemDecoration){
+        RecycleViewTool.removeAllDecoration(this);
+        addItemDecoration(itemDecoration);
+    }
 
 
 
