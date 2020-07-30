@@ -36,12 +36,12 @@ public class TestRecycleViewJianGe extends KKParentFragment {
             }
         });
 
-//        recycleView.setLayoutManager(new LinearLayoutManager(getContext(),3));
-        recycleView.addItemDecoration(new KKDecoration(1,0,10,20,3,Color.BLACK){
+        recycleView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recycleView.addItemDecoration(new KKDecoration(3,0,10,20,3,Color.BLACK){
 
             {
                 initAllShow();
-                setBoder(false, 0);
+              //  setBoder(false, 0);
             }
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
