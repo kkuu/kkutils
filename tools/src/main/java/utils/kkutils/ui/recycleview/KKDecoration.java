@@ -18,7 +18,47 @@ import utils.kkutils.common.LogTool;
 import utils.kkutils.common.ResourcesTool;
 import utils.kkutils.common.UiTool;
 
+/***
+ * RecyclerView 的间隔线
+ *
+ recycleView.setLayoutManager(new GridLayoutManager(getContext(),3));
+ recycleView.addItemDecoration(new KKDecoration(3,0,10,20,3,Color.BLACK){
+
+ {
+ initAllShow();
+ //                setBoder(false, 0);
+ showItemVLineAll=true;
+ }
+ @Override
+ public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+ super.getItemOffsets(outRect, view, parent, state);
+ UiTool.setWHEqual(view);
+ }
+ });
+
+ *
+ *
+ *
+ */
 public class KKDecoration extends RecyclerView.ItemDecoration {
+    /***
+     * 可调节参数
+     */
+    public int boderLinePadding=0;//边框线距离内容得间距
+    public boolean showBoder=false;//是否显示边框
+    public boolean showItemVLineAll;//是否显示所有得竖向得线，false 最后一排 空白得地方不划线， ture 要画
+
+    public Paint paintLine;//画笔
+    public int spanCount;//列数
+    public int headCount;//头部数量， 暂时没用到
+    public int paddingItem;//子项边距
+    public int paddingBoder;//容器边距
+    public int lineWidth;//线宽
+    List<Point> itemPadding;//存放每个item 的 outRect left，right
+
+
+
+
 
     public KKDecoration(int spanCount, int headCount, double paddingItemDp, double paddingBoderDp, int lineWidth, int lineColor) {
         this.spanCount = spanCount;
@@ -39,12 +79,15 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
         paddingItem=CommonTool.dip2px(10);
         paddingBoder=CommonTool.dip2px(20);
     }
-    /***
-     * 可调节参数
-     */
-    public int boderLinePadding=0;//边框线距离内容得间距
-    public boolean showBoder=false;//是否显示边框
 
+
+
+
+    /***
+     * 设置边框
+     * @param showBoder 是否显示边框
+     * @param boderLinePaddingDp 边框线距离内容得间距
+     */
     public void setBoder(boolean showBoder,int boderLinePaddingDp){
         this.showBoder=showBoder;
         this.boderLinePadding=CommonTool.dip2px(boderLinePaddingDp);
@@ -63,13 +106,7 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
 
 
 
-    public Paint paintLine;
-    public int spanCount;
-    public int headCount;
-    public int paddingItem;//子项边距
-    public int paddingBoder;//容器边距
-    public int lineWidth;
-    List<Point> itemPadding;
+
 
     /***
      * 设置view 为正方形
@@ -103,21 +140,61 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
             c.drawLine(w, startX,w, h, paintLine);//右
         }
     }
-    public void drawHLine(Canvas c, RecyclerView parent){
 
+    /**
+     * 画水平线
+     * @param c
+     * @param parent
+     */
+    public void drawHLine(Canvas c, RecyclerView parent){
+        int startX=paddingBoder-boderLinePadding;
+        int stopX=parent.getWidth()-paddingBoder+boderLinePadding;
+
+        if(spanCount==1){//只有一列， 用得是线性布局,直接把线拉满
+            startX=0;
+            stopX=parent.getWidth();
+        }
 
         {//水平
             int count=(int)(parent.getChildCount()*1.0/spanCount+0.9999999999);
             if(count>1){
-                for(int i=1;i<count;i++){
-                    int preLineIndex=(i-1)*spanCount+1;//用上一行的第一个来作为线的top
-                    View view = parent.getChildAt(preLineIndex);
+                for(int i=0;i<count-1;i++){
+                    View view = parent.getChildAt(i*spanCount);
                     int top=view.getBottom()+ paddingItem /2;
-                    c.drawLine(paddingBoder-boderLinePadding,top,parent.getWidth()-paddingBoder+boderLinePadding,top, paintLine);
+
+                    c.drawLine(startX,top,stopX,top, paintLine);
                 }
             }
         }
     }
+
+    /***
+     * 画所有竖向线， 空白item也画
+     * @param c
+     * @param parent
+     */
+    public void drawVLineAll(Canvas c, RecyclerView parent){
+        int startX=paddingBoder-paddingItem/2;
+        int startY=paddingBoder-boderLinePadding;
+        int w=parent.getWidth()-paddingBoder*2+paddingItem;
+
+
+        {//竖直
+            int itemW=w/spanCount;
+            for(int i=1;i<spanCount;i++){
+                startX+=itemW;
+
+                c.drawLine(startX, startY, startX, parent.getHeight()-paddingBoder+boderLinePadding, paintLine);
+
+            }
+        }
+
+    }
+    /***
+     * 画所有竖向线 空白item不画
+     * @param c
+     * @param parent
+     */
     public void drawVLine(Canvas c, RecyclerView parent){
 
         int childCount = parent.getChildCount();
@@ -156,7 +233,13 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
         if(paintLine!=null){
             drawBoderLine(c,parent);
             drawHLine(c, parent);
-            drawVLine(c, parent);
+
+
+            if(showItemVLineAll){//画所有竖线
+                drawVLineAll(c, parent);
+            }else {//画所有竖线,空白item 不画
+                drawVLine(c, parent);
+            }
         }
     }
 

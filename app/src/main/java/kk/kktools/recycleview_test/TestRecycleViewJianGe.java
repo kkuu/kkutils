@@ -41,17 +41,15 @@ public class TestRecycleViewJianGe extends KKParentFragment {
 
             {
                 initAllShow();
-              //  setBoder(false, 0);
+//                setBoder(false, 0);
+                showItemVLineAll=true;
             }
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.getItemOffsets(outRect, view, parent, state);
-               // UiTool.setWHEqual(view);
+                UiTool.setWHEqual(view);
             }
         });
-        int padding=CommonTool.dip2px(10);
-//        recycleView.setPadding(padding,padding,padding, padding);
-       // UiTool.setMargin(recycleView, padding, padding, padding, padding);
 
     }
 
