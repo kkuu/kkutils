@@ -125,7 +125,7 @@ public class ImgTool {
      */
     public static void loadImage(Context context, Object src, final ImageView imageView, int width, int height) {
         try {
-            if (src == null) return;
+//            if (src == null) return;//null 代表设置为空，所以不返回
             if(imageView==null)return;
             if (src instanceof Integer||(""+src).matches("[0-9]+")) {//本地资源文件就直接设置吧。。。 有gif再说
                 imageView.setImageResource(Integer.valueOf(""+src));
@@ -174,7 +174,7 @@ public class ImgTool {
             }
 
 
-            if (imageView == null || src == null) return;
+//            if (imageView == null || src == null) return;
             src = convertSrc(src);
             setUrlTag(src, imageView);//主要用于查看大图 所以后面才转换正式的
             src = convertSrc(src, width, height);
