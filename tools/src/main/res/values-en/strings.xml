@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">tools</string>
 
     <string name="REFRESH_FOOTER_PULLUP">Pull more</string>
     <string name="REFRESH_FOOTER_RELEASE">Release immediately loaded</string>
