@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">tools</string>
 
     <string name="REFRESH_FOOTER_PULLUP">上拉加载更多</string>
     <string name="REFRESH_FOOTER_RELEASE">释放立即加载</string>
