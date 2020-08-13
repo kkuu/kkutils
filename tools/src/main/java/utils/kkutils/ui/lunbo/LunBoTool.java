@@ -233,7 +233,13 @@ public class LunBoTool {
                 }
 
             }
-
+            boolean hasVideo=false;
+            for (LunBoData lunBoData : lunBoDatas) {
+                if(lunBoData.isVideo()){
+                    hasVideo=true;
+                }
+            }
+            boolean finalHasVideo = hasVideo;
             ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -258,7 +264,7 @@ public class LunBoTool {
                         if(tag instanceof  KVideoView){
                             ((KVideoView) tag).start();
                         }else {
-                            KVideoView.pauseAll();
+                           if(finalHasVideo) KVideoView.pauseAll();
                         }
                     } catch (Exception e) {
                         LogTool.ex(e);

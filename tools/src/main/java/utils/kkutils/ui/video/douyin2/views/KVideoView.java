@@ -157,8 +157,19 @@ public class KVideoView extends VideoView {
 
 
     @Override
+    public void release(){
+        try {
+            LogTool.s("播放release");
+            super.release();
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
+
+    @Override
     public void pause() {
         try {
+            LogTool.s("播放暂停");
             super.pause();
         } catch (Exception e) {
             LogTool.ex(e);
@@ -168,6 +179,7 @@ public class KVideoView extends VideoView {
     @Override
     public void resume() {
         try {
+            LogTool.s("播放resume");
             super.resume();
         } catch (Exception e) {
             LogTool.ex(e);
@@ -177,7 +189,7 @@ public class KVideoView extends VideoView {
     @Override
     public void start() {
         try {
-
+            LogTool.s("播放start");
             super.start();
         } catch (Exception e) {
             LogTool.ex(e);
