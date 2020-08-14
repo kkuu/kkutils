@@ -275,19 +275,51 @@ public class LunBoTool {
                 public void onPageScrollStateChanged(int state) {
                 }
             };
-            adsContainer.addOnPageChangeListener(onPageChangeListener);
-            if(isLoop){
-                adsContainer.setCurrentItem(beginPosition, false);
-            }else {
-                adsContainer.setCurrentItem(0, false);
-            }
-            onPageChangeListener.onPageSelected(adsContainer.getCurrentItem());
 
+            setPageChangeListener(isLoop,adsContainer,onPageChangeListener);
         } catch (Exception e) {
             LogTool.ex(e);
         }
 
     }
+
+    public static int key_page_change=ViewTool.initKey();
+    public static void setPageChangeListener(boolean isLoop, ViewPager adsContainer, ViewPager.OnPageChangeListener onPageChangeListener){
+        adsContainer.addOnPageChangeListener(onPageChangeListener);
+        if(isLoop){
+            adsContainer.setCurrentItem(beginPosition, false);
+        }else {
+            adsContainer.setCurrentItem(0, false);
+        }
+        onPageChangeListener.onPageSelected(adsContainer.getCurrentItem());
+        ViewTool.setTag(adsContainer,onPageChangeListener, key_page_change);
+    }
+    public static ViewPager.OnPageChangeListener getPageChangeListener(ViewPager adsContainer){
+        try {
+            return (ViewPager.OnPageChangeListener) ViewTool.getTag(adsContainer, key_page_change);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+        return null;
+    }
+
+    /**
+     *用于首页 里面有轮播的时候， 切换选项卡 时选择当前项，可以播放视频
+     * @param viewPager
+     * @param itemPosition  viewPager.getCurrentItem()
+     */
+    public static void onPageSelected(ViewPager viewPager,int itemPosition){
+        try {
+            getPageChangeListener(viewPager).onPageSelected(itemPosition);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+    }
+
+
+
+
+
     public static class LunBoData {
         public Object imageUrl = "";
         public LunBoClickListener lunBoClickListener;
