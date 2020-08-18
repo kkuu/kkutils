@@ -9,6 +9,11 @@
     tools:context=".MainActivityKK">
 
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_google"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></com.google.android.material.tabs.TabLayout>
+
     <utils.kkutils.ui.tablayout.KTabNormalLayout
         android:layout_marginBottom="10dp"
         android:paddingLeft="20dp"

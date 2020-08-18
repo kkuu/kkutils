@@ -7,6 +7,7 @@ import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.google.android.material.tabs.TabLayout;
 
 import org.xutils.db.table.TableEntity;
 
@@ -14,12 +15,14 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import kk.kktools.R;
 import kk.kktools.tuya.TestEditView;
 import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.ResourcesTool;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.ui.tablayout.KTabNormalLayout;
 
@@ -79,7 +82,23 @@ public class TestTab extends KKParentFragment {
         initDefaut();
 
 
+        initTabGoogle();
     }
+    TabLayout tab_google;
+    public void initTabGoogle(){
+        tab_google.addTab(tab_google.newTab().setText("Tab 1"));
+        tab_google.addTab(tab_google.newTab().setText("Tab 2"));
+        tab_google.addTab(tab_google.newTab().setText("Tab 3"));
+
+        tab_google.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tab_google.setTabTextColors(ResourcesTool.getColor(Color.parseColor("#E2231A")), ResourcesTool.getColor(Color.parseColor("#333333")));
+        tab_google.setSelectedTabIndicatorColor(ResourcesTool.getColor(Color.parseColor("#E2231A")));
+        ViewCompat.setElevation(tab_google, 10);
+        tab_google.setupWithViewPager(view_pager);
+
+    }
+
+
     ViewPager view_pager;
     public void initDefaut(){
         view_pager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
