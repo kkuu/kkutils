@@ -37,6 +37,22 @@
         app:tl_textUnselectColor="#646464"
         />
     <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tl_11"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#0D0C0E"
+        app:tl_indicator_style="NORMAL"
+        app:tl_indicator_margin_top="0dp"
+        app:tl_indicator_margin_bottom="0dp"
+        app:tl_indicator_margin_left="0dp"
+        app:tl_indicator_margin_right="0dp"
+        app:tl_tab_space_equal="false"
+        app:tl_textUnselectColor="#E4E4E6"
+        app:tl_textSelectColor="#E4E4E6"
+        app:tl_textsize="15dp"
+        app:tl_indicator_color="#59D0CF"
+        ></com.flyco.tablayout.SlidingTabLayout>
+    <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/tl_10"
         android:layout_width="match_parent"
         android:layout_height="42dp"

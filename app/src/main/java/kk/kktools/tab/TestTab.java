@@ -29,12 +29,13 @@ public class TestTab extends KKParentFragment {
     public int initContentViewId() {
         return R.layout.kk_test_tab;
     }
-    private String[] mTitles = {"首页", "消息", "联系人", "更多"};
+    private String[] mTitles = {"首页", "消息", "联系人", "更多1","更多2", "更多3", "更多4"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     KTabNormalLayout tab_guanzhu;
     CommonTabLayout tl_8;
     SlidingTabLayout tl_10;
     SegmentTabLayout tl_5;
+    SlidingTabLayout tl_11;
     @Override
     public void initData() {
         for (String title : mTitles) {
@@ -90,7 +91,7 @@ public class TestTab extends KKParentFragment {
 
             @Override
             public int getCount() {
-                return 3;
+                return 10;
             }
 
             @Nullable
@@ -101,6 +102,7 @@ public class TestTab extends KKParentFragment {
         });
         tl_8.setTabData(mTabEntities);
         tl_10.setViewPager(view_pager);
+        tl_11.setViewPager(view_pager);
         tl_5.setTabData(mTitles);
     }
 
