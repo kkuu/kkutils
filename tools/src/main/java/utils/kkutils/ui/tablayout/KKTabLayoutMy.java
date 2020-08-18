@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,7 +155,7 @@ public class KKTabLayoutMy extends FrameLayout {
         public void onInit(KKSimpleRecycleView recycleView, List<TabBean> tabBeanList, int position, View itemView, CompoundButton tab_btn){
             TabBean tabBean = tabBeanList.get(position);
 
-            tab_btn.setTextSize(kktab_textSize);
+            tab_btn.setTextSize(TypedValue.COMPLEX_UNIT_PX,kktab_textSize);
             UiTool.setTextView(tab_btn,tabBean.name);
             setColor(tab_btn,kktab_color_checked, kktab_color_not_checked);
 
