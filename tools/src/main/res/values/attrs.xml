@@ -35,6 +35,9 @@
         <attr name="kktab_color_not_checked" format="color" />        <!--没选中颜色-->
         <attr name="kktab_isScroll" format="boolean" />   <!--是否可以滚动-->
         <attr name="kktab_paddingRight" format="dimension" />   <!--item 的右边距-->
+
+        <attr name="kktab_isBoldOnChecked" format="boolean" />   <!--选中加粗-->
+        <attr name="kktab_textSize" format="dimension" />   <!--item 文字大小-->
     </declare-styleable>
 
 

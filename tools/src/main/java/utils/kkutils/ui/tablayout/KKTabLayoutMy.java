@@ -35,7 +35,8 @@ import utils.kkutils.ui.KKSimpleRecycleView;
  * 自定义的Tab
  */
 public class KKTabLayoutMy extends FrameLayout {
-
+    public  OnTabChecked onTabChecked;
+    KKSimpleRecycleView kkSimpleRecycleView;
 
     public KKTabLayoutMy(@NonNull Context context) {
         this(context,null);
@@ -57,6 +58,9 @@ public class KKTabLayoutMy extends FrameLayout {
             tabAttrs.kktab_color_not_checked=typedArray.getColor(R.styleable.KKTabLayoutMy_kktab_color_not_checked, tabAttrs.kktab_color_not_checked);
             tabAttrs.kktab_isScroll=typedArray.getBoolean(R.styleable.KKTabLayoutMy_kktab_isScroll, tabAttrs.kktab_isScroll);
             tabAttrs.kktab_paddingRight=typedArray.getDimension(R.styleable.KKTabLayoutMy_kktab_paddingRight, tabAttrs.kktab_paddingRight);
+            tabAttrs.kktab_isBoldOnChecked=typedArray.getBoolean(R.styleable.KKTabLayoutMy_kktab_isBoldOnChecked, tabAttrs.kktab_isBoldOnChecked);
+            tabAttrs.kktab_textSize=typedArray.getDimension(R.styleable.KKTabLayoutMy_kktab_textSize, tabAttrs.kktab_textSize);
+
         }
 
         init();
@@ -78,6 +82,10 @@ public class KKTabLayoutMy extends FrameLayout {
         setTabs(tabs);
     }
 
+    public TabAttrs getTabAttrs() {
+        return tabAttrs;
+    }
+
     TabAttrs tabAttrs=new TabAttrs();
 
     List<TabBean> tabs=new ArrayList<>();
@@ -95,19 +103,14 @@ public class KKTabLayoutMy extends FrameLayout {
     }
 
 
+    public void setOnTabChecked(OnTabChecked onTabChecked) {
+        this.onTabChecked = onTabChecked;
+    }
 
 
-
-
-    KKSimpleRecycleView kkSimpleRecycleView;
 
     public void refreshData(){
-        initTab(tabs, kkSimpleRecycleView, new OnTabChecked() {
-            @Override
-            public void onTabChecked(int index, CompoundButton compoundButton) {
-                CommonTool.showToast("gai");
-            }
-        });
+        initTab(tabs, kkSimpleRecycleView, onTabChecked);
     }
     public static class TabAttrs{
         public int kktab_bottomLineColor=Color.parseColor("#E2231A");
@@ -116,22 +119,34 @@ public class KKTabLayoutMy extends FrameLayout {
         public int kktab_color_not_checked=Color.parseColor("#333333");
         public boolean kktab_isScroll=true;
         public float kktab_paddingRight=CommonTool.dip2px(30);//isScroll=true 才生效
+        public boolean kktab_isBoldOnChecked=true;
+        public float kktab_textSize=CommonTool.dip2px(14);
 
-        public TabAttrs() {
-        }
-
-        public TabAttrs(int kktab_bottomLineColor, int kktab_bottomLineHeight, int kktab_color_checked, int kktab_color_not_checked, boolean kktab_isScroll, int kktab__paddingRight) {
+        public TabAttrs(int kktab_bottomLineColor, float kktab_bottomLineHeight, int kktab_color_checked, int kktab_color_not_checked, boolean kktab_isScroll, float kktab_paddingRight, boolean kktab_isBoldOnChecked, int kktab_textSize) {
             this.kktab_bottomLineColor = kktab_bottomLineColor;
             this.kktab_bottomLineHeight = kktab_bottomLineHeight;
             this.kktab_color_checked = kktab_color_checked;
             this.kktab_color_not_checked = kktab_color_not_checked;
             this.kktab_isScroll = kktab_isScroll;
-            this.kktab_paddingRight = kktab__paddingRight;
+            this.kktab_paddingRight = kktab_paddingRight;
+            this.kktab_isBoldOnChecked = kktab_isBoldOnChecked;
+            this.kktab_textSize = kktab_textSize;
+        }
+
+        public TabAttrs() {
         }
 
 
 
 
+
+
+        public void onCheckedChange(boolean isChecked, CompoundButton buttonView) {
+            buttonView.getPaint().setFakeBoldText(false);
+            if(kktab_isBoldOnChecked&&isChecked){
+                buttonView.getPaint().setFakeBoldText(true);
+            }
+        }
 
 
 
@@ -139,6 +154,7 @@ public class KKTabLayoutMy extends FrameLayout {
         public void onInit(KKSimpleRecycleView recycleView, List<TabBean> tabBeanList, int position, View itemView, CompoundButton tab_btn){
             TabBean tabBean = tabBeanList.get(position);
 
+            tab_btn.setTextSize(kktab_textSize);
             UiTool.setTextView(tab_btn,tabBean.name);
             setColor(tab_btn,kktab_color_checked, kktab_color_not_checked);
 
@@ -195,6 +211,7 @@ public class KKTabLayoutMy extends FrameLayout {
 
             textView.setTextColor(colorStateList);
         }
+
     }
     public static class  TabBean{
         public boolean isChecked;
@@ -219,9 +236,7 @@ public class KKTabLayoutMy extends FrameLayout {
         }
 
         public TabAttrs tabAttrs;
-        public void onInit(KKSimpleRecycleView recycleView, List<TabBean> tabBeanList, int position, View itemView, CompoundButton cb_shouye_title_tab) {
-            tabAttrs.onInit(recycleView, tabBeanList, position, itemView, cb_shouye_title_tab);
-        }
+
     }
     public static interface OnTabChecked{
         public  void onTabChecked(int index, CompoundButton compoundButton);
@@ -242,7 +257,7 @@ public class KKTabLayoutMy extends FrameLayout {
                 commonButtonTool.add(cb_shouye_title_tab);
                 cb_shouye_title_tab.setChecked(tabBean.isChecked);
 
-                tabBean.onInit(recycleView,tabBeanList,position,itemView,cb_shouye_title_tab);
+                tabBean.tabAttrs.onInit(recycleView,tabBeanList,position,itemView,cb_shouye_title_tab);
             }
         });
         commonButtonTool.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -255,6 +270,7 @@ public class KKTabLayoutMy extends FrameLayout {
                         onTabChecked.onTabChecked(commonButtonTool.getAllButtons().indexOf(buttonView),buttonView);
                     }
                 }
+                tag.tabAttrs.onCheckedChange(isChecked,buttonView);
             }
         });
 
