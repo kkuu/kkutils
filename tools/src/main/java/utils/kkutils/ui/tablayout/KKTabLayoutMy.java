@@ -72,7 +72,8 @@ public class KKTabLayoutMy extends FrameLayout {
         UiTool.setWH(kkSimpleRecycleView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
 
-        setTabs(new TabBean("测试1"),new TabBean("测试1"),new TabBean("测试1"),new TabBean("测试1"),new TabBean("测试1"),new TabBean("测试1"));
+        setTabs(new TabBean("测试1"),new TabBean("测试1"),new TabBean("测试1"),new TabBean("测试1"),
+                new TabBean("测试1"),new TabBean("测试1"),new TabBean("测试1"),new TabBean("测试1"),new TabBean("测试1"));
     }
 
     public void setTabAttrs(TabAttrs tabAttrs) {
