@@ -10,6 +10,8 @@
 
     <utils.kkutils.ui.tablayout.KKTabLayoutMy
         android:layout_width="match_parent"
+        app:kktab_textSize="30dp"
+        app:kktab_paddingRight="30dp"
         android:layout_height="50dp"></utils.kkutils.ui.tablayout.KKTabLayoutMy>
 
     <com.google.android.material.tabs.TabLayout

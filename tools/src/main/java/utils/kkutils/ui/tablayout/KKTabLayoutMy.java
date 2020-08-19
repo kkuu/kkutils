@@ -51,7 +51,7 @@ public class KKTabLayoutMy extends FrameLayout {
         super(context, attrs, defStyleAttr);
         if(attrs!=null){
             @SuppressLint("Recycle")
-            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.KKScrollView);
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.KKTabLayoutMy);
             tabAttrs =new TabAttrs();
             tabAttrs.kktab_bottomLineColor=typedArray.getColor(R.styleable.KKTabLayoutMy_kktab_bottomLineColor, tabAttrs.kktab_bottomLineColor);
             tabAttrs.kktab_bottomLineHeight=typedArray.getDimension(R.styleable.KKTabLayoutMy_kktab_bottomLineHeight, tabAttrs.kktab_bottomLineHeight);
@@ -160,7 +160,7 @@ public class KKTabLayoutMy extends FrameLayout {
             UiTool.setTextView(tab_btn,tabBean.name);
             setColor(tab_btn,kktab_color_checked, kktab_color_not_checked);
 
-            recycleView.post(new Runnable() {
+            tab_btn.post(new Runnable() {
                 @Override
                 public void run() {
                     int w=recycleView.getWidth();
@@ -249,6 +249,7 @@ public class KKTabLayoutMy extends FrameLayout {
         CommonButtonTool commonButtonTool=new CommonButtonTool();
         tabBeanList.get(0).isChecked=true;
         recycleView.setItemViewCacheSize(100);
+        recycleView.setLayoutCacheCount(0);
         recycleView.setData(tabBeanList, R.layout.kk_tab_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int typeTem, View itemView, KKSimpleRecycleView.WzViewHolder wzViewHolder) {
