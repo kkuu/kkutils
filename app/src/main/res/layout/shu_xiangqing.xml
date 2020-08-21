@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical"
+    android:background="#FAF9DE"
+    tools:context=".MainActivityKK">
+
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/tv_curr_zhang"
+        style="@style/kk_textview"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <utils.kkutils.ui.KKScrollView
+        android:id="@+id/shu_scrollview"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_shu_content"
+            style="@style/kk_textview"
+            android:textSize="17dp"
+            tools:text="放大斯洛伐克受打击了"
+            android:lineSpacingExtra="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TextView>
+
+    </utils.kkutils.ui.KKScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/btn_go_next"
+            android:text="下一章"
+            android:gravity="center"
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="match_parent"></TextView>
+        <TextView
+            android:id="@+id/btn_go_next_page"
+            android:text="下一页"
+            android:gravity="center"
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="match_parent"></TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

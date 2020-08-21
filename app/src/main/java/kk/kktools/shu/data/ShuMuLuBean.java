@@ -17,7 +17,7 @@ public class ShuMuLuBean implements Serializable {
     public int status;
     public String info;
     public MuLuItem data;
-
+    ShuSerachBean.BookInfo bookInfo;
     public List<MuLuItem > getAll(){
         List<MuLuItem > result=new ArrayList<>();
         getAllImp(data, result);
@@ -27,6 +27,7 @@ public class ShuMuLuBean implements Serializable {
     }
     public void getAllImp(MuLuItem muLuItem, List<MuLuItem > result){
         if(muLuItem==null)return;
+        muLuItem.parentId=bookInfo.Id;
         if(muLuItem.hasContent==1){
             result.add(muLuItem);
         }else {
@@ -38,7 +39,12 @@ public class ShuMuLuBean implements Serializable {
         }
 
     }
-    public static class MuLuItem {
+
+    public void setParent(ShuSerachBean.BookInfo bookInfo) {
+        this.bookInfo=bookInfo;
+    }
+
+    public static class MuLuItem implements Serializable{
         /**
          * id : 3017470
          * name : 序章
@@ -46,6 +52,7 @@ public class ShuMuLuBean implements Serializable {
          */
 
         public int id;
+        public int parentId;
         public String name;
         public int hasContent;
         public List<MuLuItem> list;

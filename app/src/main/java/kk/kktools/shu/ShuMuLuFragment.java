@@ -14,9 +14,11 @@ import kk.kktools.R;
 import kk.kktools.shu.data.ShuMuLuBean;
 import kk.kktools.shu.data.ShuSerachBean;
 import kk.kktools.shu.data.ShuTool;
+import kk.kktools.shu.data.ShuXiangQingBean;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.parent.KKParentFragment;
+import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 
 public class ShuMuLuFragment extends KKParentFragment {
@@ -39,6 +41,7 @@ public class ShuMuLuFragment extends KKParentFragment {
                 new ShuTool().mulu(bookInfo.Id, new HttpUiCallBack<ShuMuLuBean>() {
                     @Override
                     public void onSuccess(ShuMuLuBean data) {
+                        data.setParent(bookInfo);
                         refreshLayout.finishRefresh();
                         initList(data);
                     }
@@ -58,6 +61,12 @@ public class ShuMuLuFragment extends KKParentFragment {
 
                 ShuMuLuBean.MuLuItem muLuItem = list.get(position);
                 UiTool.setTextView(itemView,R.id.tv_shu_name, muLuItem.name);
+                itemView.setOnClickListener(new KKViewOnclickListener() {
+                    @Override
+                    public void onClickKK(View v) {
+                        ShuXiangQingFragment.byData(muLuItem).go();
+                    }
+                });
 
             }
         });
