@@ -316,11 +316,14 @@ public class UiTool {
                 }else {
                     textView.setText(StringTool.getNotNullText(text));
                 }
-                if(StringTool.isEmpty(""+text)){
-                    textView.setVisibility(View.INVISIBLE);
-                }else {
-                    textView.setVisibility(View.VISIBLE);
+                if(!(textView instanceof EditText)){
+                    if(StringTool.isEmpty(""+text)){
+                        textView.setVisibility(View.INVISIBLE);
+                    }else {
+                        textView.setVisibility(View.VISIBLE);
+                    }
                 }
+
             }
         } catch (Exception e) {
             LogTool.ex(e);
