@@ -1,0 +1,69 @@
+package kk.kktools.shu;
+
+import android.view.View;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.List;
+
+import kk.kktools.R;
+import kk.kktools.shu.data.ShuMuLuBean;
+import kk.kktools.shu.data.ShuSerachBean;
+import kk.kktools.shu.data.ShuTool;
+import utils.kkutils.common.UiTool;
+import utils.kkutils.http.HttpUiCallBack;
+import utils.kkutils.parent.KKParentFragment;
+import utils.kkutils.ui.KKSimpleRecycleView;
+
+public class ShuMuLuFragment extends KKParentFragment {
+    @Override
+    public int initContentViewId() {
+        return R.layout.shu_sousuo;
+    }
+
+    View btn_sousuo;
+    EditText et_sousuo;
+    @Override
+    public void initData() {
+        ShuSerachBean.BookInfo bookInfo= (ShuSerachBean.BookInfo) getArgument("bookInfo",new ShuSerachBean.BookInfo());
+        UiTool.setTextView(et_sousuo, bookInfo.Name);
+        btn_sousuo.setVisibility(View.GONE);
+        et_sousuo.setEnabled(false);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                new ShuTool().mulu(bookInfo.Id, new HttpUiCallBack<ShuMuLuBean>() {
+                    @Override
+                    public void onSuccess(ShuMuLuBean data) {
+                        refreshLayout.finishRefresh();
+                        initList(data);
+                    }
+                });
+            }
+        });
+        refreshLayout.autoRefresh();
+    }
+    public void initList(ShuMuLuBean data){
+
+        List<ShuMuLuBean.MuLuItem> list = data.getAll();
+
+        recycleView.setData(list, R.layout.shu_item, new KKSimpleRecycleView.KKRecycleAdapter() {
+            @Override
+            public void initData(int position, int type, View itemView, KKSimpleRecycleView.WzViewHolder wzViewHolder) {
+                super.initData(position, type, itemView, wzViewHolder);
+
+                ShuMuLuBean.MuLuItem muLuItem = list.get(position);
+                UiTool.setTextView(itemView,R.id.tv_shu_name, muLuItem.name);
+
+            }
+        });
+    }
+
+    public static KKParentFragment byData(ShuSerachBean.BookInfo bookInfo){
+        return new ShuMuLuFragment().addArgument("bookInfo",bookInfo);
+    }
+}

@@ -14,7 +14,7 @@ public class ShuSerachBean implements Serializable {
     public String info;
     public List<BookInfo> data;
 
-    public static class BookInfo {
+    public static class BookInfo implements Serializable{
         /**
          * Id : 563905
          * Name : 大梦主

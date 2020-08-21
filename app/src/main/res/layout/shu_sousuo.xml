@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical"
+    tools:context=".MainActivityKK">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <EditText
+            android:id="@+id/et_sousuo"
+            style="@style/kk_textview"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="14dp"
+            android:textColor="@color/kk_tv_h0"
+            android:hint="请输入"
+            android:layout_height="match_parent"></EditText>
+
+        <TextView
+            android:id="@+id/btn_sousuo"
+            android:gravity="center"
+            android:text="搜索"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"></TextView>
+    </LinearLayout>
+
+    <View style="@style/kk_line_h"></View>
+    <utils.kkutils.ui.pullrefresh.KKRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <utils.kkutils.ui.KKSimpleRecycleView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleView>
+    </utils.kkutils.ui.pullrefresh.KKRefreshLayout>
+</LinearLayout>

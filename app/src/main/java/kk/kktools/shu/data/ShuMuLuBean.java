@@ -1,7 +1,11 @@
 package kk.kktools.shu.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import utils.kkutils.common.CollectionsTool;
 
 public class ShuMuLuBean implements Serializable {
     /**
@@ -14,7 +18,26 @@ public class ShuMuLuBean implements Serializable {
     public String info;
     public MuLuItem data;
 
+    public List<MuLuItem > getAll(){
+        List<MuLuItem > result=new ArrayList<>();
+        getAllImp(data, result);
+        Collections.reverse(result);
+        return result;
 
+    }
+    public void getAllImp(MuLuItem muLuItem, List<MuLuItem > result){
+        if(muLuItem==null)return;
+        if(muLuItem.hasContent==1){
+            result.add(muLuItem);
+        }else {
+            if(CollectionsTool.NotEmptyList(muLuItem.list)){
+                for (MuLuItem luItem : muLuItem.list) {
+                    getAllImp(luItem, result);
+                }
+            }
+        }
+
+    }
     public static class MuLuItem {
         /**
          * id : 3017470

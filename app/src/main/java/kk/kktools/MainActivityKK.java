@@ -20,6 +20,7 @@ import kk.kktools.animation.KKTestCanvas;
 import kk.kktools.color.TestColorFragmentKK;
 import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.recycleview_test.TestRecycleView;
+import kk.kktools.shu.ShuJiaFragment;
 import kk.kktools.tab.TestTab;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.tuya.TestEditView;
@@ -55,7 +56,7 @@ public class MainActivityKK extends KKParentActivity {
         TextView tv_span=findViewById(R.id.tv_span);
 
 
-
+        addItem("Boo",  new ShuJiaFragment(),null);
         addItem("计算器", new JiSuanQi(), null);
         addItem("测试大图", null, new KKViewOnclickListener() {
             @Override

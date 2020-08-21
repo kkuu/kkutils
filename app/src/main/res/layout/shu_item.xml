@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:orientation="vertical"
+    tools:context=".MainActivityKK">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_shu_name"
+            style="@style/kk_textview"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            tools:text="测试"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/tv_shu_zuixin"
+            style="@style/kk_textview"
+            tools:text="最新"
+            ></TextView>
+        <TextView
+            android:id="@+id/tv_shu_zuozhe"
+            style="@style/kk_textview"
+            android:textSize="12dp"
+            android:textColor="@color/kk_tv_h3"
+            tools:text="测试"
+            ></TextView>
+
+
+        <TextView android:visibility="gone" tools:visibility="visible"
+            android:id="@+id/tv_shu_jia"
+            style="@style/kk_textview"
+            android:text="加"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            ></TextView>
+    </LinearLayout>
+
+
+</LinearLayout>
