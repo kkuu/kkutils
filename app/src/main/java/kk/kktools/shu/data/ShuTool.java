@@ -1,8 +1,7 @@
-package kk.kktools.shu;
+package kk.kktools.shu.data;
 
 
 import utils.kkutils.HttpTool;
-import utils.kkutils.common.LogTool;
 import utils.kkutils.http.HttpRequest;
 import utils.kkutils.http.HttpUiCallBack;
 

@@ -4,7 +4,7 @@ import kk.kktools.R;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.ui.lunbo.LunBoTool;
 
-public class TestShuFragment extends KKParentFragment {
+public class ShuJiaFragment extends KKParentFragment {
     @Override
     public int initContentViewId() {
         return R.layout.kk_test_lunbo;

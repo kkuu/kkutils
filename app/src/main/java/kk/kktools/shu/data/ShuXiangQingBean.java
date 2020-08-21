@@ -1,4 +1,4 @@
-package kk.kktools.shu;
+package kk.kktools.shu.data;
 
 import java.io.Serializable;
 
