@@ -32,6 +32,7 @@ import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKImageView;
 import utils.kkutils.ui.bigimage.PinchImageView;
 import utils.kkutils.ui.video.douyin2.views.KVideoView;
+import utils.kkutils.ui.video.douyin2.views.KVideoViewNormal;
 
 /***
  * 用于轮播的
@@ -399,10 +400,10 @@ public class LunBoTool {
                 public View getView(ViewGroup container, LunBoData lunBoData, int position, boolean isLoop, boolean imageCanScale) {
                     try {
                         if(LunBoTool.isVideo(""+lunBoData.imageUrl)){
-                            final KVideoView videoView=new KVideoView(container.getContext());
-                            StandardVideoController standardVideoController = new StandardVideoController(container.getContext());
-                            standardVideoController.addDefaultControlComponent("", false);
-                            videoView.setVideoController(standardVideoController);
+                            final KVideoView videoView=new KVideoViewNormal(container.getContext());
+//                            StandardVideoController standardVideoController = new StandardVideoController(container.getContext());
+//                            standardVideoController.addDefaultControlComponent("", false);
+//                            videoView.setVideoController(standardVideoController);
 
                             videoView.setUrl(""+lunBoData.imageUrl);
                             container.addView(videoView);
