@@ -1,16 +1,20 @@
 package kk.kktools.shu;
 
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import kk.kktools.R;
 import kk.kktools.shu.data.ShuSerachBean;
+import utils.kkutils.common.UiTool;
 import utils.kkutils.db.MapDB;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
+import utils.kkutils.ui.dialog.DialogSimple;
+import utils.kkutils.ui.dialog.DialogTool;
 import utils.kkutils.ui.lunbo.LunBoTool;
 
 public class ShuJiaFragment extends KKParentFragment {
@@ -47,8 +51,37 @@ public class ShuJiaFragment extends KKParentFragment {
                 super.initData(position, type, itemView, wzViewHolder);
                 ShuSerachBean.BookInfo bookInfo = bookInfoList.get(position);
                 ShuSouSuoFragment.initItem(bookInfo, itemView);
+
+
+                TextView tv_shu_control = itemView.findViewById(R.id.tv_shu_control);
+                UiTool.setTextView(tv_shu_control, "删除");
+                tv_shu_control.setOnClickListener(new KKViewOnclickListener() {
+                    @Override
+                    public void onClickKK(View v) {
+                        DialogSimple.showTiShiDialog("提示", "是否删除", "删除", new KKViewOnclickListener() {
+                            @Override
+                            public void onClickKK(View v) {
+                                ShuJiaFragment.delete(bookInfo);
+                                loadData();
+                            }
+                        },"取消", null);
+                    }
+                });
+
             }
         });
+    }
+
+    private static void delete(ShuSerachBean.BookInfo bookInfo) {
+        List<ShuSerachBean.BookInfo> bookInfoList = getBookInfoList();
+        for (int i = 0; i < bookInfoList.size(); i++) {
+            ShuSerachBean.BookInfo bookInfo1 = bookInfoList.get(i);
+            if(bookInfo1.Id==bookInfo.Id){
+                bookInfoList.remove(bookInfo1);
+                i--;
+            }
+        }
+        MapDB.saveObj(true, "book", bookInfoList);
     }
 
     public static List<ShuSerachBean.BookInfo> getBookInfoList() {

@@ -2,6 +2,7 @@ package kk.kktools.shu;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -62,9 +63,9 @@ public class ShuSouSuoFragment extends KKParentFragment {
                 ShuSerachBean.BookInfo bookInfo = list.get(position);
                 initItem(bookInfo,itemView);
 
-                View tv_shu_jia = itemView.findViewById(R.id.tv_shu_jia);
-                tv_shu_jia.setVisibility(View.VISIBLE);
-                tv_shu_jia.setOnClickListener(new KKViewOnclickListener() {
+                TextView tv_shu_control = itemView.findViewById(R.id.tv_shu_control);
+                UiTool.setTextView(tv_shu_control, "添加");
+                tv_shu_control.setOnClickListener(new KKViewOnclickListener() {
                     @Override
                     public void onClickKK(View v) {
                         ShuJiaFragment.add(bookInfo);

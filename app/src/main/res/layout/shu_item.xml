@@ -9,39 +9,46 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_shu_name"
-            style="@style/kk_textview"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            tools:text="测试"
-            ></TextView>
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_shu_name"
+                style="@style/kk_textview"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                tools:text="测试"
+                ></TextView>
 
-        <TextView
-            android:id="@+id/tv_shu_zuixin"
-            style="@style/kk_textview"
-            tools:text="最新"
-            ></TextView>
-        <TextView
-            android:id="@+id/tv_shu_zuozhe"
-            style="@style/kk_textview"
-            android:textSize="12dp"
-            android:textColor="@color/kk_tv_h3"
-            tools:text="测试"
-            ></TextView>
+            <TextView
+                android:id="@+id/tv_shu_zuixin"
+                style="@style/kk_textview"
+                tools:text="最新"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                ></TextView>
+            <TextView
+                android:id="@+id/tv_shu_zuozhe"
+                style="@style/kk_textview"
+                android:textSize="12dp"
+                android:textColor="@color/kk_tv_h3"
+                tools:text="测试"
+                ></TextView>
+
+        </LinearLayout>
 
 
-        <TextView android:visibility="gone" tools:visibility="visible"
-            android:id="@+id/tv_shu_jia"
+
+        <TextView  tools:visibility="visible"
+            android:id="@+id/tv_shu_control"
             style="@style/kk_textview"
-            android:text="加"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            tools:text="加"
+           android:padding="20dp"
             android:gravity="center"
             ></TextView>
     </LinearLayout>
