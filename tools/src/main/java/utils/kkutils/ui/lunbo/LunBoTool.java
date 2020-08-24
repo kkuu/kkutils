@@ -181,7 +181,7 @@ public class LunBoTool {
 
                     if(!init){//第一次初始化才播放视频
                         init=true;
-                        if(positionIn==0&&view instanceof  KVideoView){
+                        if(autoStartVideo&&positionIn==0&&view instanceof  KVideoView){
                             ((KVideoView) view).start();
                         }
                     }
