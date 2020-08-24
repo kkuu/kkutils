@@ -8,6 +8,7 @@ import java.util.List;
 
 import kk.kktools.R;
 import kk.kktools.shu.data.ShuSerachBean;
+import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.db.MapDB;
 import utils.kkutils.parent.KKParentFragment;
@@ -96,6 +97,7 @@ public class ShuJiaFragment extends KKParentFragment {
         List<ShuSerachBean.BookInfo> bookInfoList = getBookInfoList();
         bookInfoList.add(0, bookInfo);
         MapDB.saveObj(true, "book", bookInfoList);
+        CommonTool.showToast("添加成功");
     }
 
 }
