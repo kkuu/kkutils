@@ -41,7 +41,10 @@ public class LunBoTool {
     public static final int maxCount = 3000;
     public static final int beginPosition = maxCount / 2;
     static final int key = ViewTool.initKey();
-
+    /***
+     * 轮播是否自动播放视频
+     */
+    public static boolean autoStartVideo=true;
 
 
     public static void initAds(final View parent, final int vg_lunbo_content, final int vg_lunbo_btns, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas) {
@@ -261,7 +264,7 @@ public class LunBoTool {
                         }
 
                         Object tag =viewMap.get(positionIn);//viewList.get(positionIn);
-                        if(tag instanceof  KVideoView){
+                        if(autoStartVideo&&(tag instanceof  KVideoView)){
                             ((KVideoView) tag).start();
                         }else {
                            if(finalHasVideo) KVideoView.pauseAll();
@@ -282,6 +285,8 @@ public class LunBoTool {
         }
 
     }
+
+
 
     public static int key_page_change=ViewTool.initKey();
     public static void setPageChangeListener(boolean isLoop, ViewPager adsContainer, ViewPager.OnPageChangeListener onPageChangeListener){
