@@ -5,7 +5,10 @@ import java.util.List;
 
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.db.MapDB;
+import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.parent.KKParentActivity;
+import utils.kkutils.ui.dialog.DialogSimple;
+import utils.kkutils.ui.dialog.DialogTool;
 
 public class ShuDataLocal {
     public static void delete(ShuInfoBean.BookInfo bookInfo) {
@@ -55,5 +58,24 @@ public class ShuDataLocal {
         muLuItem.pageY=Integer.valueOf(split[1]);
         muLuItem.name=bookInfo.Name;
         return muLuItem;
+    }
+
+    /***
+     * 缓存之后章节
+     * @param parentId
+     * @param id
+     */
+    public static void cache(int parentId, int id) {
+        CommonTool.showToast("缓存开始");
+        new ShuTool().xiangQing(parentId, id, new HttpUiCallBack<ShuXiangQingBean>() {
+            @Override
+            public void onSuccess(ShuXiangQingBean data) {
+                if(data.data.nid>0){
+                    cache(parentId, data.data.nid);
+                }else {
+                    DialogSimple.showTiShiDialog("缓存完成", "", "确定", null, "", null);
+                }
+            }
+        });
     }
 }

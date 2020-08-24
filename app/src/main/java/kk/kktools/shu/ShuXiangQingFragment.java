@@ -1,5 +1,6 @@
 package kk.kktools.shu;
 
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import utils.kkutils.ui.KKScrollView;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.KKViewPager;
 import utils.kkutils.ui.StatusBarTool;
+import utils.kkutils.ui.dialog.DialogSimple;
 import utils.kkutils.ui.dialog.DialogTool;
 
 public class ShuXiangQingFragment extends KKParentFragment {
@@ -44,7 +46,7 @@ public class ShuXiangQingFragment extends KKParentFragment {
     View btn_go_next,btn_go_next_page;
     TextView tv_shu_content;
     KKScrollView shu_scrollview;
-    View tv_go_mulu;
+    View tv_go_mulu,tv_go_goshezhi;
     @Override
     public void initData() {
          muLuItem = (ShuMuLuBean.MuLuItem) getArgument("muLuItem", new ShuMuLuBean.MuLuItem());
@@ -57,6 +59,8 @@ public class ShuXiangQingFragment extends KKParentFragment {
             public void onClickKK(View v) {
                 if(xiangQingBean.data.nid>0){
                     loadData(muLuItem.parentId, xiangQingBean.data.nid);
+                }else {
+                    CommonTool.showToast("当前已经是最好一页");
                 }
             }
         });
@@ -74,6 +78,29 @@ public class ShuXiangQingFragment extends KKParentFragment {
                 bookInfo.Name=muLuItem.name;
                 ShuMuLuFragment.byData(bookInfo).go();
                 getActivity().finish();
+            }
+        });
+        tv_go_goshezhi.setOnClickListener(new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                showSheZhi(muLuItem);
+            }
+        });
+    }
+
+
+    public static void showSheZhi(ShuMuLuBean.MuLuItem muLuItem){
+        CharSequence [] items=new CharSequence[]{
+                "缓存之后"
+        };
+        DialogTool.showSingleChoiceDialog("设置", items, "确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(which==0){
+                    ShuDataLocal.cache(muLuItem.parentId,muLuItem.id);
+                }
+
+
             }
         });
     }

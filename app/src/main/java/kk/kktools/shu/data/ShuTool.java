@@ -21,7 +21,7 @@ public class ShuTool {
     }
     public void xiangQing(int id,int contentId,HttpUiCallBack<ShuXiangQingBean> callBack){
         String urlStr=getPath(id)+""+contentId+".html";
-        HttpRequest.url(urlStr).send(ShuXiangQingBean.class, callBack);
+        HttpRequest.url(urlStr).setUseCache(true).send(ShuXiangQingBean.class, callBack);
     }
     public String getPath(int id){
         int parent= (int) Math.ceil(id*1.0/1000);
