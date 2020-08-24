@@ -52,7 +52,7 @@ public class ShuMuLuBean extends DataParent {
          * name : 序章
          * hasContent : 1
          */
-        public Integer pageY;//当前位置
+        public int pageY;//当前位置
         public int parentId;//哪本书
 
 

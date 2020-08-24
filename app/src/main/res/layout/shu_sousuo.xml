@@ -37,6 +37,8 @@
         android:layout_height="match_parent">
         <utils.kkutils.ui.KKSimpleRecycleView
             android:id="@+id/recycleView"
+
+            style="@style/kk_book_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleView>
     </utils.kkutils.ui.pullrefresh.KKRefreshLayout>

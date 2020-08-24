@@ -73,6 +73,7 @@ public class ShuXiangQingFragment extends KKParentFragment {
                 bookInfo.Id=muLuItem.parentId;
                 bookInfo.Name=muLuItem.name;
                 ShuMuLuFragment.byData(bookInfo).go();
+                getActivity().finish();
             }
         });
     }

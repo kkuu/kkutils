@@ -11,4 +11,14 @@
         <item name="android:max">100</item>
         <item name="android:progress">10</item>
     </style>
+
+    <style name="kk_book_scrollview">
+        <item name="android:padding">15dp</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:scrollbarSize">2dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
 </resources>
