@@ -7,10 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kk.kktools.R;
+import kk.kktools.shu.data.ShuDataLocal;
+import kk.kktools.shu.data.ShuMuLuBean;
 import kk.kktools.shu.data.ShuSerachBean;
+import kk.kktools.shu.data.ShuTool;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.db.MapDB;
+import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
@@ -45,7 +49,13 @@ public class ShuJiaFragment extends KKParentFragment {
     }
 
     public void loadData() {
-        List<ShuSerachBean.BookInfo> bookInfoList = getBookInfoList();
+        List<ShuSerachBean.BookInfo> bookInfoList = ShuDataLocal.getBookInfoList();
+
+        for (ShuSerachBean.BookInfo bookInfo : bookInfoList) {
+            initCache(bookInfo);
+        }
+
+
         recycleView.setData(bookInfoList, R.layout.shu_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView, KKSimpleRecycleView.WzViewHolder wzViewHolder) {
@@ -62,7 +72,7 @@ public class ShuJiaFragment extends KKParentFragment {
                         DialogSimple.showTiShiDialog("提示", "是否删除", "删除", new KKViewOnclickListener() {
                             @Override
                             public void onClickKK(View v) {
-                                ShuJiaFragment.delete(bookInfo);
+                                ShuDataLocal.delete(bookInfo);
                                 loadData();
                             }
                         },"取消", null);
@@ -72,32 +82,15 @@ public class ShuJiaFragment extends KKParentFragment {
             }
         });
     }
+    public void initCache(ShuSerachBean.BookInfo bookInfo){
+            new ShuTool().mulu(bookInfo.Id, new HttpUiCallBack<ShuMuLuBean>() {
+                @Override
+                public void onSuccess(ShuMuLuBean data) {
 
-    private static void delete(ShuSerachBean.BookInfo bookInfo) {
-        List<ShuSerachBean.BookInfo> bookInfoList = getBookInfoList();
-        for (int i = 0; i < bookInfoList.size(); i++) {
-            ShuSerachBean.BookInfo bookInfo1 = bookInfoList.get(i);
-            if(bookInfo1.Id==bookInfo.Id){
-                bookInfoList.remove(bookInfo1);
-                i--;
-            }
-        }
-        MapDB.saveObj(true, "book", bookInfoList);
+                }
+            });
     }
 
-    public static List<ShuSerachBean.BookInfo> getBookInfoList() {
-        List<ShuSerachBean.BookInfo> book = MapDB.loadObjList("book", ShuSerachBean.BookInfo.class);
-        if (book == null) {
-            return new ArrayList<>();
-        }
-        return book;
-    }
 
-    public static void add(ShuSerachBean.BookInfo bookInfo) {
-        List<ShuSerachBean.BookInfo> bookInfoList = getBookInfoList();
-        bookInfoList.add(0, bookInfo);
-        MapDB.saveObj(true, "book", bookInfoList);
-        CommonTool.showToast("添加成功");
-    }
 
 }

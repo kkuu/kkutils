@@ -12,6 +12,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.List;
 
 import kk.kktools.R;
+import kk.kktools.shu.data.ShuDataLocal;
 import kk.kktools.shu.data.ShuSerachBean;
 import kk.kktools.shu.data.ShuTool;
 import utils.kkutils.common.UiTool;
@@ -68,7 +69,7 @@ public class ShuSouSuoFragment extends KKParentFragment {
                 tv_shu_control.setOnClickListener(new KKViewOnclickListener() {
                     @Override
                     public void onClickKK(View v) {
-                        ShuJiaFragment.add(bookInfo);
+                        ShuDataLocal.add(bookInfo);
                     }
                 });
             }
