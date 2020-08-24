@@ -68,6 +68,7 @@ public class ShuMuLuFragment extends KKParentFragment {
                     @Override
                     public void onClickKK(View v) {
                         ShuXiangQingFragment.byData(muLuItem).go();
+                        getActivity().finish();
                     }
                 });
 

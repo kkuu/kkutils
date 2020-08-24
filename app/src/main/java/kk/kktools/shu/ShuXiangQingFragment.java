@@ -99,6 +99,8 @@ public class ShuXiangQingFragment extends KKParentFragment {
                     shu_scrollview.scrollTo(0, 0);
                 }
 
+                //预加载下一页
+                new ShuTool().xiangQing(xiangQingBean.data.id, xiangQingBean.data.nid, null);
 
             }
         });
