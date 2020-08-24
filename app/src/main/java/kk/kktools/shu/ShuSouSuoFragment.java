@@ -1,5 +1,6 @@
 package kk.kktools.shu;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import java.util.List;
 import kk.kktools.R;
 import kk.kktools.shu.data.ShuDataLocal;
 import kk.kktools.shu.data.ShuInfoBean;
+import kk.kktools.shu.data.ShuMuLuBean;
 import kk.kktools.shu.data.ShuSerachBean;
 import kk.kktools.shu.data.ShuTool;
 import utils.kkutils.common.UiTool;
@@ -95,6 +97,12 @@ public class ShuSouSuoFragment extends KKParentFragment {
                 ShuMuLuFragment.byData(bookInfo).go();
             }
         });
+        ShuMuLuBean.MuLuItem preMuLuInfo = ShuDataLocal.getPreMuLuInfo(bookInfo);
+        if(preMuLuInfo.id<bookInfo.LastChapterId){
+            UiTool.setTextColor(itemView.findViewById(R.id.tv_shu_name), Color.RED);
+        }else {
+            UiTool.setTextColor(itemView.findViewById(R.id.tv_shu_name), R.color.kk_tv_h0);
+        }
     }
 
 
