@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kk.kktools.R;
+import kk.kktools.shu.data.ShuDataLocal;
+import kk.kktools.shu.data.ShuInfoBean;
 import kk.kktools.shu.data.ShuMuLuBean;
 import kk.kktools.shu.data.ShuSerachBean;
 import kk.kktools.shu.data.ShuTool;
@@ -42,6 +44,7 @@ public class ShuXiangQingFragment extends KKParentFragment {
     View btn_go_next,btn_go_next_page;
     TextView tv_shu_content;
     KKScrollView shu_scrollview;
+    View tv_go_mulu;
     @Override
     public void initData() {
          muLuItem = (ShuMuLuBean.MuLuItem) getArgument("muLuItem", new ShuMuLuBean.MuLuItem());
@@ -63,6 +66,15 @@ public class ShuXiangQingFragment extends KKParentFragment {
                 shu_scrollview.scrollBy(0, shu_scrollview.getHeight()-shu_scrollview.getPaddingTop()*2- CommonTool.dip2px(10));
             }
         });
+        tv_go_mulu.setOnClickListener(new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                ShuInfoBean.BookInfo bookInfo=new ShuInfoBean.BookInfo();
+                bookInfo.Id=muLuItem.parentId;
+                bookInfo.Name=muLuItem.name;
+                ShuMuLuFragment.byData(bookInfo).go();
+            }
+        });
     }
     ShuXiangQingBean xiangQingBean;
     public void loadData(int parentId, int id){
@@ -75,8 +87,29 @@ public class ShuXiangQingFragment extends KKParentFragment {
                 UiTool.setTextView(parent,R.id.tv_curr_zhang,xiangQingBean.data.name+"   "+xiangQingBean.data.cname);
                 UiTool.setTextView(tv_shu_content, data.data.content);
 
+                if(xiangQingBean.data.cid==muLuItem.id){
+                    shu_scrollview.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            shu_scrollview.scrollTo(0, muLuItem.pageY);
+                        }
+                    });
+                }else {
+                    shu_scrollview.scrollTo(0, 0);
+                }
+
+
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        saveCurr();
+    }
+    public void saveCurr(){
+        ShuDataLocal.savePage(xiangQingBean,shu_scrollview.getScrollY());
     }
 
     public static KKParentFragment byData(ShuMuLuBean.MuLuItem muLuItem) {

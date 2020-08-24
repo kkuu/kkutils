@@ -41,4 +41,19 @@ public class ShuDataLocal {
     public static void save() {
         MapDB.saveObj(true, "book", bookInfoList);
     }
+
+    public static void savePage(ShuXiangQingBean xiangQingBean, int scrollY) {
+        String key=""+xiangQingBean.data.id;//+"-"+xiangQingBean.data.cid;
+        MapDB.saveObj(true, key,xiangQingBean.data.cid+"="+scrollY);
+    }
+    public static ShuMuLuBean.MuLuItem getPreMuLuInfo(ShuInfoBean.BookInfo bookInfo) {
+        String s = MapDB.loadObjByDefault("" + bookInfo.Id, String.class, bookInfo.FirstChapterId + "=" + 0);//默认第一章位置 0
+        String[] split = s.split("=");
+        ShuMuLuBean.MuLuItem muLuItem=new ShuMuLuBean.MuLuItem();
+        muLuItem.id=Integer.valueOf(split[0]);
+        muLuItem.parentId=bookInfo.Id;
+        muLuItem.pageY=Integer.valueOf(split[1]);
+        muLuItem.name=bookInfo.Name;
+        return muLuItem;
+    }
 }

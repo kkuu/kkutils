@@ -10,10 +10,14 @@
     <TextView
         android:id="@+id/tv_go_sousuo"
         style="@style/kk_textview"
-        android:text="搜"
+        android:text="搜" android:layout_gravity="right"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="40dp"></TextView>
+    <View style="@style/kk_line_h"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        ></View>
     <utils.kkutils.ui.pullrefresh.KKRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"

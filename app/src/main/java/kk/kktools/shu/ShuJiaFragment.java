@@ -84,6 +84,12 @@ public class ShuJiaFragment extends KKParentFragment {
                         },"取消", null);
                     }
                 });
+                itemView.setOnClickListener(new KKViewOnclickListener() {
+                    @Override
+                    public void onClickKK(View v) {
+                        ShuXiangQingFragment.byData(ShuDataLocal.getPreMuLuInfo(bookInfo)).go();
+                    }
+                });
 
             }
         });

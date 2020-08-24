@@ -14,8 +14,11 @@
             style="@style/kk_textview"
             android:layout_weight="1"
             android:layout_width="0dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:textSize="14dp"
             android:textColor="@color/kk_tv_h0"
+            android:background="@null"
             android:hint="请输入"
             android:layout_height="match_parent"></EditText>
 

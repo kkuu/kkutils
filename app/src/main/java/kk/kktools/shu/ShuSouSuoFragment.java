@@ -18,6 +18,7 @@ import kk.kktools.shu.data.ShuSerachBean;
 import kk.kktools.shu.data.ShuTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.http.HttpUiCallBack;
+import utils.kkutils.parent.KKParentActivity;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
@@ -70,7 +71,15 @@ public class ShuSouSuoFragment extends KKParentFragment {
                 tv_shu_control.setOnClickListener(new KKViewOnclickListener() {
                     @Override
                     public void onClickKK(View v) {
-                        ShuDataLocal.add(bookInfo);
+                        KKParentActivity.showWaitingDialogStac("");
+                        new ShuTool().info(bookInfo.Id, new HttpUiCallBack<ShuInfoBean>() {
+                            @Override
+                            public void onSuccess(ShuInfoBean data) {
+                                KKParentActivity.hideWaitingDialogStac();
+                                ShuDataLocal.add(data.data);
+                                getActivity().finish();
+                            }
+                        });
                     }
                 });
             }

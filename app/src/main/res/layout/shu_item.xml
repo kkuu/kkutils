@@ -48,7 +48,8 @@
             android:id="@+id/tv_shu_control"
             style="@style/kk_textview"
             tools:text="加"
-           android:padding="20dp"
+            android:layout_width="100dp"
+           android:padding="10dp"
             android:gravity="center"
             ></TextView>
     </LinearLayout>

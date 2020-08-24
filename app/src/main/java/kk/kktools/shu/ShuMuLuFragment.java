@@ -1,6 +1,7 @@
 package kk.kktools.shu;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import kk.kktools.shu.data.ShuMuLuBean;
 import kk.kktools.shu.data.ShuSerachBean;
 import kk.kktools.shu.data.ShuTool;
 import kk.kktools.shu.data.ShuXiangQingBean;
+import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.parent.KKParentFragment;
@@ -68,6 +70,9 @@ public class ShuMuLuFragment extends KKParentFragment {
                         ShuXiangQingFragment.byData(muLuItem).go();
                     }
                 });
+
+                UiTool.setWH(itemView, ViewGroup.LayoutParams.MATCH_PARENT, CommonTool.dip2px(50));
+                itemView.findViewById(R.id.tv_shu_zuixin).setVisibility(View.GONE);
 
             }
         });
