@@ -11,6 +11,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.List;
 
 import kk.kktools.R;
+import kk.kktools.shu.data.ShuInfoBean;
 import kk.kktools.shu.data.ShuMuLuBean;
 import kk.kktools.shu.data.ShuSerachBean;
 import kk.kktools.shu.data.ShuTool;
@@ -31,7 +32,7 @@ public class ShuMuLuFragment extends KKParentFragment {
     EditText et_sousuo;
     @Override
     public void initData() {
-        ShuSerachBean.BookInfo bookInfo= (ShuSerachBean.BookInfo) getArgument("bookInfo",new ShuSerachBean.BookInfo());
+        ShuInfoBean.BookInfo bookInfo= (ShuInfoBean.BookInfo) getArgument("bookInfo",new ShuInfoBean.BookInfo());
         UiTool.setTextView(et_sousuo, bookInfo.Name);
         btn_sousuo.setVisibility(View.GONE);
         et_sousuo.setEnabled(false);
@@ -72,7 +73,7 @@ public class ShuMuLuFragment extends KKParentFragment {
         });
     }
 
-    public static KKParentFragment byData(ShuSerachBean.BookInfo bookInfo){
+    public static KKParentFragment byData(ShuInfoBean.BookInfo bookInfo){
         return new ShuMuLuFragment().addArgument("bookInfo",bookInfo);
     }
 }

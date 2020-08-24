@@ -6,8 +6,9 @@ import java.util.Collections;
 import java.util.List;
 
 import utils.kkutils.common.CollectionsTool;
+import utils.kkutils.json.JsonDataParent;
 
-public class ShuMuLuBean implements Serializable {
+public class ShuMuLuBean extends DataParent {
     /**
      * status : 1
      * info : success
@@ -17,7 +18,7 @@ public class ShuMuLuBean implements Serializable {
     public int status;
     public String info;
     public MuLuItem data;
-    ShuSerachBean.BookInfo bookInfo;
+    ShuInfoBean.BookInfo bookInfo;
     public List<MuLuItem > getAll(){
         List<MuLuItem > result=new ArrayList<>();
         getAllImp(data, result);
@@ -40,9 +41,10 @@ public class ShuMuLuBean implements Serializable {
 
     }
 
-    public void setParent(ShuSerachBean.BookInfo bookInfo) {
+    public void setParent(ShuInfoBean.BookInfo bookInfo) {
         this.bookInfo=bookInfo;
     }
+
 
     public static class MuLuItem implements Serializable{
         /**

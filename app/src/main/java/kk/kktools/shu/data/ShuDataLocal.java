@@ -5,33 +5,40 @@ import java.util.List;
 
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.db.MapDB;
+import utils.kkutils.parent.KKParentActivity;
 
 public class ShuDataLocal {
-    public static void delete(ShuSerachBean.BookInfo bookInfo) {
-        List<ShuSerachBean.BookInfo> bookInfoList = getBookInfoList();
+    public static void delete(ShuInfoBean.BookInfo bookInfo) {
+        List<ShuInfoBean.BookInfo> bookInfoList = getBookInfoList();
         for (int i = 0; i < bookInfoList.size(); i++) {
-            ShuSerachBean.BookInfo bookInfo1 = bookInfoList.get(i);
+            ShuInfoBean.BookInfo bookInfo1 = bookInfoList.get(i);
             if(bookInfo1.Id==bookInfo.Id){
                 bookInfoList.remove(bookInfo1);
                 i--;
             }
         }
-        MapDB.saveObj(true, "book", bookInfoList);
+        save();
     }
 
-    public static List<ShuSerachBean.BookInfo> getBookInfoList() {
-        List<ShuSerachBean.BookInfo> book = MapDB.loadObjList("book", ShuSerachBean.BookInfo.class);
-        if (book == null) {
+    public static List<ShuInfoBean.BookInfo> bookInfoList;
+    public static List<ShuInfoBean.BookInfo> getBookInfoList() {
+        bookInfoList = MapDB.loadObjList("book", ShuInfoBean.BookInfo.class);
+        if (bookInfoList == null) {
             return new ArrayList<>();
         }
-        return book;
+        return bookInfoList;
     }
 
-    public static void add(ShuSerachBean.BookInfo bookInfo) {
-        List<ShuSerachBean.BookInfo> bookInfoList = getBookInfoList();
+    public static void add(ShuInfoBean.BookInfo bookInfo) {
+        KKParentActivity.showWaitingDialogStac("");
+        List<ShuInfoBean.BookInfo> bookInfoList = getBookInfoList();
         bookInfoList.add(0, bookInfo);
-        MapDB.saveObj(true, "book", bookInfoList);
+        save();
         CommonTool.showToast("添加成功");
+        KKParentActivity.hideWaitingDialogStac();
     }
 
+    public static void save() {
+        MapDB.saveObj(true, "book", bookInfoList);
+    }
 }

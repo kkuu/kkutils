@@ -2,7 +2,7 @@ package kk.kktools.shu.data;
 
 import java.io.Serializable;
 
-public class ShuXiangQingBean implements Serializable {
+public class ShuXiangQingBean  extends DataParent {
     /**
      * status : 1
      * info : success

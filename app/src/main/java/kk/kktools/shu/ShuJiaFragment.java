@@ -8,6 +8,7 @@ import java.util.List;
 
 import kk.kktools.R;
 import kk.kktools.shu.data.ShuDataLocal;
+import kk.kktools.shu.data.ShuInfoBean;
 import kk.kktools.shu.data.ShuMuLuBean;
 import kk.kktools.shu.data.ShuSerachBean;
 import kk.kktools.shu.data.ShuTool;
@@ -49,18 +50,23 @@ public class ShuJiaFragment extends KKParentFragment {
     }
 
     public void loadData() {
-        List<ShuSerachBean.BookInfo> bookInfoList = ShuDataLocal.getBookInfoList();
+        List<ShuInfoBean.BookInfo> bookInfoList = ShuDataLocal.getBookInfoList();
 
-        for (ShuSerachBean.BookInfo bookInfo : bookInfoList) {
+        for (ShuInfoBean.BookInfo bookInfo : bookInfoList) {
             initCache(bookInfo);
         }
 
 
+        initList();
+
+    }
+    public void initList(){
+        List<ShuInfoBean.BookInfo> bookInfoList = ShuDataLocal.getBookInfoList();
         recycleView.setData(bookInfoList, R.layout.shu_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView, KKSimpleRecycleView.WzViewHolder wzViewHolder) {
                 super.initData(position, type, itemView, wzViewHolder);
-                ShuSerachBean.BookInfo bookInfo = bookInfoList.get(position);
+                ShuInfoBean.BookInfo bookInfo = bookInfoList.get(position);
                 ShuSouSuoFragment.initItem(bookInfo, itemView);
 
 
@@ -82,11 +88,21 @@ public class ShuJiaFragment extends KKParentFragment {
             }
         });
     }
-    public void initCache(ShuSerachBean.BookInfo bookInfo){
+    public void initCache(ShuInfoBean.BookInfo bookInfo){
             new ShuTool().mulu(bookInfo.Id, new HttpUiCallBack<ShuMuLuBean>() {
                 @Override
                 public void onSuccess(ShuMuLuBean data) {
 
+                }
+            });
+            new ShuTool().info(bookInfo.Id, new HttpUiCallBack<ShuInfoBean>() {
+                @Override
+                public void onSuccess(ShuInfoBean data) {
+                    bookInfo.LastChapter=data.data.LastChapter;
+                    bookInfo.LastChapterId=data.data.LastChapterId;
+                    bookInfo.LastTime=data.data.LastTime;
+                    ShuDataLocal.save();
+                    initList();
                 }
             });
     }
