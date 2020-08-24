@@ -25,7 +25,9 @@ public class ShuDataLocal {
 
     public static List<ShuInfoBean.BookInfo> bookInfoList;
     public static List<ShuInfoBean.BookInfo> getBookInfoList() {
-        bookInfoList = MapDB.loadObjList("book", ShuInfoBean.BookInfo.class);
+        if(bookInfoList==null){
+            bookInfoList = MapDB.loadObjList("book", ShuInfoBean.BookInfo.class);
+        }
         if (bookInfoList == null) {
             return new ArrayList<>();
         }
