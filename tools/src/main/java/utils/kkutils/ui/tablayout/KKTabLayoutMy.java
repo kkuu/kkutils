@@ -153,6 +153,7 @@ public class KKTabLayoutMy extends FrameLayout {
 
 
 
+
         public void onInit(KKSimpleRecycleView recycleView, List<TabBean> tabBeanList, int position, View itemView, CompoundButton tab_btn){
             TabBean tabBean = tabBeanList.get(position);
 
@@ -160,23 +161,36 @@ public class KKTabLayoutMy extends FrameLayout {
             UiTool.setTextView(tab_btn,tabBean.name);
             setColor(tab_btn,kktab_color_checked, kktab_color_not_checked);
 
-            tab_btn.post(new Runnable() {
+            if(itemView.getTag()==null){
+                itemView.setTag("1");
+                tab_btn.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {//改变宽度放这里面， 免得闪烁
+                    @Override
+                    public void onViewAttachedToWindow(View v) {
+                        int w=recycleView.getWidth();
+                        int h=recycleView.getHeight();
+
+                        if(kktab_isScroll){//滚动模式
+                            tab_btn.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
+                            UiTool.setWH(tab_btn,  ViewGroup.LayoutParams.WRAP_CONTENT, h);
+                            itemView.setPadding(0, 0, (int) kktab_paddingRight, 0);
+
+                        }else {//平分模式
+                            int wTab=w/tabBeanList.size();
+                            UiTool.setWH(tab_btn, wTab, h);
+                            tab_btn.setGravity(Gravity.CENTER);
+                        }
+                    }
+                    @Override
+                    public void onViewDetachedFromWindow(View v) {
+
+                    }
+                });
+            }
+
+
+            tab_btn.post(new Runnable() {//获取宽度要放这里面
                 @Override
                 public void run() {
-                    int w=recycleView.getWidth();
-                    int h=recycleView.getHeight();
-
-                    if(kktab_isScroll){//滚动模式
-                        tab_btn.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
-                        UiTool.setWH(tab_btn,  ViewGroup.LayoutParams.WRAP_CONTENT, h);
-                        tab_btn.setPadding(0, 0, (int) kktab_paddingRight, 0);
-
-                    }else {//平分模式
-                        int wTab=w/tabBeanList.size();
-                        UiTool.setWH(tab_btn, wTab, h);
-                        tab_btn.setGravity(Gravity.CENTER);
-                    }
-
                     tab_btn.setCompoundDrawables(null, null, null,
                             getDrawableBottom(tab_btn.getWidth())
                     );
@@ -255,7 +269,7 @@ public class KKTabLayoutMy extends FrameLayout {
         tabBeanList.get(0).isChecked=true;
         recycleView.setItemViewCacheSize(100);
         recycleView.setLayoutCacheCount(0);
-        recycleView.getRecycledViewPool().clear();
+//        recycleView.getRecycledViewPool().clear();
         recycleView.setData(tabBeanList, R.layout.kk_tab_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int typeTem, View itemView, KKSimpleRecycleView.WzViewHolder wzViewHolder) {
@@ -266,6 +280,7 @@ public class KKTabLayoutMy extends FrameLayout {
                 commonButtonTool.add(cb_shouye_title_tab);
                 cb_shouye_title_tab.setChecked(tabBean.isChecked);
 
+                tabBean.tabAttrs.onCheckedChange(cb_shouye_title_tab.isChecked(), cb_shouye_title_tab);
                 tabBean.tabAttrs.onInit(recycleView,tabBeanList,position,itemView,cb_shouye_title_tab);
             }
         });
