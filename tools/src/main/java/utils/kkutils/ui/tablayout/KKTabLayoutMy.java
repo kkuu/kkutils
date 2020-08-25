@@ -112,7 +112,7 @@ public class KKTabLayoutMy extends FrameLayout {
 
 
     public void refreshData(){
-        initTab(tabs, kkSimpleRecycleView, onTabChecked);
+        initTab(tabs, kkSimpleRecycleView);
     }
     public static class TabAttrs{
         public int kktab_bottomLineColor=Color.parseColor("#E2231A");
@@ -249,7 +249,7 @@ public class KKTabLayoutMy extends FrameLayout {
         public  void onTabChecked(List<TabBean> tabBeanList,int index,TabBean tabBean, CompoundButton compoundButton);
     }
 
-    public static void initTab(List<TabBean> tabBeanList, KKSimpleRecycleView recycleView, OnTabChecked onTabChecked){
+    public  void initTab(List<TabBean> tabBeanList, KKSimpleRecycleView recycleView){
         recycleView.setLayoutManager(new LinearLayoutManager(recycleView.getContext(),RecyclerView.HORIZONTAL,false));
         CommonButtonTool commonButtonTool=new CommonButtonTool();
         tabBeanList.get(0).isChecked=true;
