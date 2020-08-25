@@ -2,6 +2,7 @@ package utils.kkutils.ui.textview;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
@@ -48,7 +49,7 @@ public class SpanAsyncDrawable extends Drawable implements Drawable.Callback{
         if (mDrawable != null) {
             return mDrawable.getOpacity();
         }
-        return 0;
+        return PixelFormat.UNKNOWN;
     }
 
     public void setDrawable(Drawable drawable) {
@@ -65,7 +66,7 @@ public class SpanAsyncDrawable extends Drawable implements Drawable.Callback{
     public void invalidateDrawable(Drawable who) {
         for (Callback callback : callbackList) {
             try {
-                callback.invalidateDrawable(who);
+                if(callback!=null)callback.invalidateDrawable(who);
             }catch (Exception e){
                 LogTool.ex(e);
             }
@@ -79,7 +80,7 @@ public class SpanAsyncDrawable extends Drawable implements Drawable.Callback{
     public void scheduleDrawable(Drawable who, Runnable what, long when) {
         for (Callback callback : callbackList) {
             try {
-                callback.scheduleDrawable(who, what, when);
+                if(callback!=null)callback.scheduleDrawable(who, what, when);
             }catch (Exception e){
                 LogTool.ex(e);
             }
@@ -93,7 +94,7 @@ public class SpanAsyncDrawable extends Drawable implements Drawable.Callback{
     public void unscheduleDrawable(Drawable who, Runnable what) {
         for (Callback callback : callbackList) {
             try {
-                callback.unscheduleDrawable(who, what);
+                if(callback!=null)callback.unscheduleDrawable(who, what);
             }catch (Exception e){
                 LogTool.ex(e);
             }
@@ -104,6 +105,7 @@ public class SpanAsyncDrawable extends Drawable implements Drawable.Callback{
     }
     public List<Drawable.Callback> callbackList=new ArrayList<>();
     public void addCallBack(Drawable.Callback callback){
+        if(callback==null)return;
         if(callbackList.size()>70){
             callbackList.remove(callbackList.size()-1);
         }

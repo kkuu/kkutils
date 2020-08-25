@@ -5,10 +5,12 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -213,7 +215,10 @@ public class RecycleViewTool {
                         tabTitle.setVisibility(View.VISIBLE);
                         preY=tabTitle.getY();
                     }else {
-                        int firstVisibleItemPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+
+                        int firstVisibleItemPosition = findFirstVisibleItemPosition(recyclerView);
+
+
                         if(firstVisibleItemPosition<tabInRecyleViewIndex){//第一个可见得 比tab 得还小， 说明占位tab 在底部下面去了，直接隐藏外面得tab
                             tabTitle.setVisibility(View.INVISIBLE);
                         }else {//占位tab 在顶部上面去了， 固定外面tab 在顶部
@@ -228,7 +233,19 @@ public class RecycleViewTool {
         return resultList;
     }
 
-
+    public static int findFirstVisibleItemPosition(RecyclerView recyclerView){
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if(layoutManager instanceof GridLayoutManager){
+            return ((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
+        }
+        if(layoutManager instanceof StaggeredGridLayoutManager){
+            return ((StaggeredGridLayoutManager) layoutManager).findFirstVisibleItemPositions(null)[0];
+        }
+        if(layoutManager instanceof LinearLayoutManager){
+            return ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+        }
+        return -1;
+    }
 
 
 
