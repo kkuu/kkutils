@@ -221,8 +221,13 @@ public class KKTabLayoutMy extends FrameLayout {
         public Object data;
 
         public TabBean(String name) {
-            this.name = name;
+           this(name,null);
         }
+        public TabBean(String name,Object data) {
+            setName(name);
+            setData(data);
+        }
+
         public TabBean setName(String name){
             this.name=name;
             return this;
@@ -241,7 +246,7 @@ public class KKTabLayoutMy extends FrameLayout {
 
     }
     public static interface OnTabChecked{
-        public  void onTabChecked(int index, CompoundButton compoundButton);
+        public  void onTabChecked(List<TabBean> tabBeanList,int index,TabBean tabBean, CompoundButton compoundButton);
     }
 
     public static void initTab(List<TabBean> tabBeanList, KKSimpleRecycleView recycleView, OnTabChecked onTabChecked){
@@ -270,7 +275,8 @@ public class KKTabLayoutMy extends FrameLayout {
                 tag.isChecked=isChecked;
                 if(isChecked){
                     if(onTabChecked!=null){
-                        onTabChecked.onTabChecked(commonButtonTool.getAllButtons().indexOf(buttonView),buttonView);
+                        int index = commonButtonTool.getAllButtons().indexOf(buttonView);
+                        onTabChecked.onTabChecked(tabBeanList,index,tabBeanList.get(index),buttonView);
                     }
                 }
                 tag.tabAttrs.onCheckedChange(isChecked,buttonView);
