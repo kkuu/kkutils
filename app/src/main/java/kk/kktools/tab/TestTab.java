@@ -1,6 +1,8 @@
 package kk.kktools.tab;
 
 import android.graphics.Color;
+import android.view.View;
+import android.widget.CompoundButton;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SegmentTabLayout;
@@ -12,6 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import org.xutils.db.table.TableEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +27,8 @@ import kk.kktools.tuya.TestEditView;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.ResourcesTool;
 import utils.kkutils.parent.KKParentFragment;
+import utils.kkutils.parent.KKViewOnclickListener;
+import utils.kkutils.ui.tablayout.KKTabLayoutMy;
 import utils.kkutils.ui.tablayout.KTabNormalLayout;
 
 public class TestTab extends KKParentFragment {
@@ -39,8 +44,20 @@ public class TestTab extends KKParentFragment {
     SlidingTabLayout tl_10;
     SegmentTabLayout tl_5;
     SlidingTabLayout tl_11;
+    KKTabLayoutMy tab_my;
     @Override
     public void initData() {
+
+        parent.setOnClickListener(new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                tab_my. setTabs(new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),
+                        new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"));
+
+            }
+        });
+
+
         for (String title : mTitles) {
 //            mFragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + title));
 //            mFragments2.add(SimpleCardFragment.getInstance("Switch Fragment " + title));

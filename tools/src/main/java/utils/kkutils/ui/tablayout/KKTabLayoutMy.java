@@ -255,6 +255,7 @@ public class KKTabLayoutMy extends FrameLayout {
         tabBeanList.get(0).isChecked=true;
         recycleView.setItemViewCacheSize(100);
         recycleView.setLayoutCacheCount(0);
+        recycleView.getRecycledViewPool().clear();
         recycleView.setData(tabBeanList, R.layout.kk_tab_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int typeTem, View itemView, KKSimpleRecycleView.WzViewHolder wzViewHolder) {
