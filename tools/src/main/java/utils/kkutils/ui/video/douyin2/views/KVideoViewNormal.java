@@ -30,13 +30,17 @@ import utils.kkutils.ImgTool;
 import utils.kkutils.R;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UiTool;
+import utils.kkutils.ui.lunbo.LunBoTool;
 import utils.kkutils.ui.video.douyin2.library.cache.PreloadManager;
 
 /***
  * 普通播放用的
  */
 public class KVideoViewNormal extends KVideoView {
-
+    /***
+     * 播放按钮图片
+     */
+    public static int res_play_img=R.drawable.kk_video_icon_play;
 
     public KVideoViewNormal(@NonNull Context context) {
         super(context);
@@ -55,6 +59,18 @@ public class KVideoViewNormal extends KVideoView {
         StandardVideoController standardVideoController = new StandardVideoController(getContext());
         standardVideoController.addDefaultControlComponent("", false);
         setVideoController(standardVideoController);
+
+        setPlayImg();
+    }
+    public void setPlayImg(){
+        ImageView start_play = findViewById(R.id.start_play);
+        start_play.setBackgroundResource(res_play_img);
+
+
+        ImageView iv_replay=findViewById(R.id.iv_replay);
+        iv_replay.setPadding(0, 0, 0, 0);
+        iv_replay.setBackgroundResource(0);
+        iv_replay.setImageResource(res_play_img);
     }
 
     @Override
