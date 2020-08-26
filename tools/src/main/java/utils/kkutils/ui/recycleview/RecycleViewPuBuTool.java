@@ -14,7 +14,7 @@ import utils.kkutils.common.UiTool;
 public class RecycleViewPuBuTool {
 
     /**
-     * 暂时两列
+     * 暂时两列  需要在initData 中调用  initPuBuLiuSpanItemPadding 设置间距
      * @param recycleView
      * @param itemPaddingDp
      * @param onItemSizeChange
