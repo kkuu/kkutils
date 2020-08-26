@@ -157,7 +157,7 @@ public class SpanTextTool {
         }
         Drawable.Callback callback = (Drawable.Callback) ViewTool.getTag(textView, gif_key);
         SpanAsyncDrawable spanDrawable  = map.get(drawableId);
-        if(spanDrawable!=null){
+        if(spanDrawable!=null&&spanDrawable.getmDrawable()!=null){
             spanDrawable.addCallBack( callback);
             return getImageSpan(spanDrawable);
         }

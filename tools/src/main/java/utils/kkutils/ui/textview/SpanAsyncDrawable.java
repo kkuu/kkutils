@@ -21,6 +21,10 @@ import utils.kkutils.common.LogTool;
  */
 public class SpanAsyncDrawable extends Drawable implements Drawable.Callback{
 
+    public Drawable getmDrawable() {
+        return mDrawable;
+    }
+
     private Drawable mDrawable;
 
     @Override
