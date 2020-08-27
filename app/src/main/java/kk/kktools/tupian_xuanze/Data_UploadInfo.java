@@ -27,12 +27,6 @@ public class Data_UploadInfo extends JsonDataParent {
 
 
     public static class DataBean {
-        /**
-         * OSSAccessKeyId : LTAI4GBF83pMYZSzgoyrT8mt
-         * Signature : MKY4xlo/w2BwPYsSWjf6291fVw0=
-         * url : http://linpublic.oss-cn-beijing.aliyuncs.com
-         * policy : eyJleHBpcmF0aW9uIjogIjIxMjAtMDEtMDFUMTI6MDA6MDAuMDAwWiIsImNvbmRpdGlvbnMiOiBbWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDAsIDEwNDg1NzYwMF1dfQ==
-         */
 
         public String OSSAccessKeyId;
         public String Signature;
