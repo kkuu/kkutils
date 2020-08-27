@@ -122,8 +122,7 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
             transaction.show(fragment);
         }
         currentFragment = fragment;
-        transaction.addToBackStack("" + fragment);
-        transaction.commit();
+        transaction.commitNow();
     }
 
     @Override
@@ -140,12 +139,21 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
         }
 
 
-        if (getSupportFragmentManager().getBackStackEntryCount() < 2) {
+        if (getAddCount()<1) {
             finish();
         } else {
             super.onBackPressed();
         }
 
+    }
+    public int getAddCount(){
+        int count=0;
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            if(fragment.isAdded()){
+                count++;
+            }
+        }
+        return count;
     }
 
     public OnBackPressedListener getOnBackPressedListener() {
