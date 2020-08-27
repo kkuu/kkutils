@@ -11,6 +11,8 @@ import kk.kktools.R;
 import utils.kkutils.ImgTool;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.http.HttpUiCallBack;
+import utils.kkutils.parent.KKParentActivity;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.takephoto.TakeMediaTool;
@@ -24,6 +26,7 @@ public class KKChooseImgFragmentKK extends KKParentFragment {
     }
 
     ImageView image_touxiang;
+    View btn_upload;
     @Override
     public void initData() {
 
@@ -48,6 +51,32 @@ public class KKChooseImgFragmentKK extends KKParentFragment {
 //                    }
 //                });
 
+            }
+        });
+        btn_upload.setOnClickListener(new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                upData();
+            }
+        });
+    }
+    public void upData(){
+        KKParentActivity.showWaitingDialogStac("获取上传信息");
+        Data_UploadInfo.load(new HttpUiCallBack<Data_UploadInfo>() {
+            @Override
+            public void onSuccess(Data_UploadInfo data) {
+                KKParentActivity.hideWaitingDialogStac();
+                if(data.isDataOkAndToast()){
+                    KKParentActivity.showWaitingDialogStac("正在上传");
+                    Data_Upload.load(data,TakePhotoSimpleFragment.getSelectPhotos(getChildFragmentManager()).get(0), new HttpUiCallBack<Data_Upload>() {
+                        @Override
+                        public void onSuccess(Data_Upload data) {
+                            KKParentActivity.hideWaitingDialogStac();
+                            CommonTool.showToast("上传成功");
+                            ImgTool.loadImage(data.path, parent.findViewById(R.id.image_server));
+                        }
+                    });
+                }
             }
         });
     }

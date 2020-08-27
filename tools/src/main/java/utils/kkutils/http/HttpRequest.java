@@ -4,6 +4,7 @@ package utils.kkutils.http;
 import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -31,9 +32,9 @@ public class HttpRequest {
     private boolean cancelFast = true; // 是否可以被立即停止, true: 为请求创建新的线程, 取消时请求线程被立即中断.
     private boolean useCache = false;//是否启用缓存
     private RequestMethod requestMethod = RequestMethod.GET;
-    public static Map<String, Object> queryDefaultMap = new TreeMap<String, Object>();//默认参数
-    private Map<String, Object> queryMap = new TreeMap<String, Object>();
-    private Map<String, String> headerMap = new TreeMap<String, String>();
+    public static Map<String, Object> queryDefaultMap = new LinkedHashMap<>();//默认参数
+    private Map<String, Object> queryMap = new LinkedHashMap<String, Object>();
+    private Map<String, String> headerMap = new LinkedHashMap<String, String>();
     private String bodyCountent = "";//发送内容就是一个字符串
     private Class responseClass;//返回数据的class
     String[]excludeCacheParams;//缓存key  不包含字段

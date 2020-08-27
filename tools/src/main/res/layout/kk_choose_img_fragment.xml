@@ -13,6 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" android:orientation="vertical">
 
+        <TextView style="@style/kk_textview"
+            android:id="@+id/btn_upload"
+            android:text="上传"
+            android:padding="10dp"
+
+            ></TextView>
         <RelativeLayout android:background="@color/baise"
             android:id="@+id/vg_fabu_tupian"
             tools:layout_height="110dp"
@@ -32,6 +38,12 @@
             android:layout_width="100dp"
             android:layout_height="100dp"></ImageView>
 
+
+        <ImageView
+            android:scaleType="centerInside"
+            android:id="@+id/image_server" android:background="#eee"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ImageView>
     </LinearLayout>
 
 
