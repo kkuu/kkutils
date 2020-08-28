@@ -4,7 +4,12 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Build;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -25,6 +30,10 @@ import utils.kkutils.common.LogTool;
 
 public class KKParentActivity extends FragmentActivity implements Serializable {
     ProgressDialog progressDialog;
+    /***
+     * 当前界面需要fragment 为内容
+     */
+    public boolean needFragment=true;
 
     /***
      * 透明状态栏
@@ -44,6 +53,29 @@ public class KKParentActivity extends FragmentActivity implements Serializable {
             window.setStatusBarColor(color);
         }
     }
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        try {
+            super.onCreate(savedInstanceState);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(needFragment){//需要fragment ，但是内容没有显示出来，就重新初始化
+            if(getAddFragmentHasViewCount()<1){
+                onCreate(null);
+            }
+        }
+    }
+
     /***
      * 半透明状态栏
      */
