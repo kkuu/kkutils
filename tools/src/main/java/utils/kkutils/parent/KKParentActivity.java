@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import java.io.Serializable;
 
 import androidx.core.app.ComponentActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import utils.kkutils.AppTool;
 import utils.kkutils.R;
@@ -86,7 +87,15 @@ public class KKParentActivity extends FragmentActivity implements Serializable {
     public void initData() {
 
     }
-
+    public int getAddFragmentHasViewCount(){
+        int count=0;
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            if(fragment.isAdded()&&fragment.getView()!=null){
+                count++;
+            }
+        }
+        return count;
+    }
     /***
      * 显示一个弹出框
      *

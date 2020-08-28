@@ -139,21 +139,12 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
         }
 
 
-        if (getAddCount()<1) {
+        if (getAddFragmentHasViewCount()<1) {
             finish();
         } else {
             super.onBackPressed();
         }
 
-    }
-    public int getAddCount(){
-        int count=0;
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            if(fragment.isAdded()){
-                count++;
-            }
-        }
-        return count;
     }
 
     public OnBackPressedListener getOnBackPressedListener() {
