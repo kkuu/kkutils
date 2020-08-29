@@ -51,6 +51,7 @@ public class AppTool {
             LogTool.s("签名SHA1  "+ AppUtils.getAppSignatureSHA1());
             LogTool.s("签名MD5  "+AppUtils.getAppSignatureMD5());
             LogTool.s("签名MD5  "+AppUtils.getAppSignatureMD5().toLowerCase().replace(":",""));
+            LogTool.s("签名SHA256  "+AppUtils.getAppSignatureSHA256());
             initUiHander();
             initRecycleLife();
             ImgTool.init(application, 0, 0);

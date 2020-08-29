@@ -55,7 +55,7 @@ public class MainActivityKK extends KKParentActivity {
 
         TextView tv_span=findViewById(R.id.tv_span);
 
-
+        testItems.clear();
         addItem("Boo",  new ShuJiaFragment(),null);
         addItem("计算器", new JiSuanQi(), null);
         addItem("测试大图", null, new KKViewOnclickListener() {
