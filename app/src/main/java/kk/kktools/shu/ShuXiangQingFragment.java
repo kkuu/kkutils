@@ -1,6 +1,7 @@
 package kk.kktools.shu;
 
 import android.content.DialogInterface;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class ShuXiangQingFragment extends KKParentFragment {
 
 
     ShuMuLuBean.MuLuItem muLuItem;
-    View btn_go_next,btn_go_next_page;
+    View btn_go_next,btn_go_pre;
     TextView tv_shu_content;
     KKScrollView shu_scrollview;
     View tv_go_mulu,tv_go_goshezhi;
@@ -60,14 +61,18 @@ public class ShuXiangQingFragment extends KKParentFragment {
                 if(xiangQingBean.data.nid>0){
                     loadData(muLuItem.parentId, xiangQingBean.data.nid);
                 }else {
-                    CommonTool.showToast("当前已经是最好一页");
+                    CommonTool.showToast("当前已经是最后一章");
                 }
             }
         });
-        btn_go_next_page.setOnClickListener(new KKViewOnclickListener() {
+        btn_go_pre.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
-                shu_scrollview.scrollBy(0, shu_scrollview.getHeight()-shu_scrollview.getPaddingTop()*2- CommonTool.dip2px(10));
+                if(xiangQingBean.data.pid>0){
+                    loadData(muLuItem.parentId, xiangQingBean.data.pid);
+                }else {
+                    CommonTool.showToast("当前已经是第一章");
+                }
             }
         });
         tv_go_mulu.setOnClickListener(new KKViewOnclickListener() {
@@ -86,6 +91,37 @@ public class ShuXiangQingFragment extends KKParentFragment {
                 showSheZhi(muLuItem);
             }
         });
+        initClickPage();
+    }
+    public void initClickPage(){
+        shu_scrollview.setOnTouchListener(new View.OnTouchListener() {
+            float downY=0;
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        downY=event.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(event.getY()-downY<10){//点击
+                            goScroll(event.getY()>shu_scrollview.getHeight()/2);
+                        }
+
+                        break;
+                }
+
+                return false;
+            }
+        });
+    }
+    public void goScroll(boolean next){
+        int scrollY=shu_scrollview.getHeight()-shu_scrollview.getPaddingTop()*2- CommonTool.dip2px(10);
+        if(next){
+            shu_scrollview.scrollBy(0, scrollY);
+        }else {
+            shu_scrollview.scrollBy(0, -scrollY);
+        }
+
     }
 
 
