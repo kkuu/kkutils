@@ -3,12 +3,14 @@ package kk.kktools.shu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.Collections;
 import java.util.List;
 
 import kk.kktools.R;
@@ -30,13 +32,24 @@ public class ShuMuLuFragment extends KKParentFragment {
         return R.layout.shu_sousuo;
     }
 
-    View btn_sousuo;
+    TextView btn_sousuo;
     EditText et_sousuo;
+    public boolean fanxu=false;
+    ShuInfoBean.BookInfo bookInfo;
     @Override
     public void initData() {
-        ShuInfoBean.BookInfo bookInfo= (ShuInfoBean.BookInfo) getArgument("bookInfo",new ShuInfoBean.BookInfo());
+        bookInfo= (ShuInfoBean.BookInfo) getArgument("bookInfo",new ShuInfoBean.BookInfo());
+
         UiTool.setTextView(et_sousuo, bookInfo.Name);
-        btn_sousuo.setVisibility(View.GONE);
+        btn_sousuo.setText("反序");
+        btn_sousuo.setOnClickListener(new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                fanxu=!fanxu;
+                initList();
+            }
+        });
+
         et_sousuo.setEnabled(false);
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -46,17 +59,30 @@ public class ShuMuLuFragment extends KKParentFragment {
                     public void onSuccess(ShuMuLuBean data) {
                         data.setParent(bookInfo);
                         refreshLayout.finishRefresh();
-                        initList(data);
+                        shuMuLuBean=data;
+                        initList();
                     }
                 });
             }
         });
         refreshLayout.autoRefresh();
     }
-    public void initList(ShuMuLuBean data){
+    ShuMuLuBean shuMuLuBean;
+    public void initList(){
 
-        List<ShuMuLuBean.MuLuItem> list = data.getAll();
-
+        List<ShuMuLuBean.MuLuItem> list = shuMuLuBean.getAll();
+        if(fanxu){
+            Collections.reverse(list);
+        }
+        int position=0;
+        if(bookInfo.currReadId>0){
+            for (ShuMuLuBean.MuLuItem muLuItem : list) {
+                if(muLuItem.id==bookInfo.currReadId){
+                    position=list.indexOf(muLuItem);
+                    break;
+                }
+            }
+        }
         recycleView.setData(list, R.layout.shu_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView, KKSimpleRecycleView.WzViewHolder wzViewHolder) {
@@ -77,6 +103,7 @@ public class ShuMuLuFragment extends KKParentFragment {
 
             }
         });
+        recycleView.scrollToPosition(position);
     }
 
     public static KKParentFragment byData(ShuInfoBean.BookInfo bookInfo){

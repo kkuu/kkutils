@@ -81,6 +81,8 @@ public class ShuXiangQingFragment extends KKParentFragment {
                 ShuInfoBean.BookInfo bookInfo=new ShuInfoBean.BookInfo();
                 bookInfo.Id=muLuItem.parentId;
                 bookInfo.Name=muLuItem.name;
+                bookInfo.currReadId=xiangQingBean.data.cid;
+
                 ShuMuLuFragment.byData(bookInfo).go();
                 getActivity().finish();
             }

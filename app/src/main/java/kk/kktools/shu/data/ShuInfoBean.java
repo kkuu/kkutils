@@ -34,6 +34,8 @@ public class ShuInfoBean extends DataParent {
          * BookVote : {"BookId":146769,"TotalScore":6050,"VoterCount":669,"Score":9}
          */
 
+        public int currReadId;//当前阅读id，用于跳转
+
         public int Id;
         public String Name;
         public String Img;
