@@ -7,22 +7,24 @@ import android.util.DisplayMetrics;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
+import utils.kkutils.common.LogTool;
+import utils.kkutils.common.ViewTool;
 
 /***
  * 控制 smoothScrollToPosition 的滑动速度的
  *
  */
-public class ScroolSpeedLinerLayoutManager extends LinearLayoutManager {
+public class SpeedLinerLayoutManager extends LinearLayoutManager {
 
-    public ScroolSpeedLinerLayoutManager(Context context) {
+    public SpeedLinerLayoutManager(Context context) {
         super(context);
     }
 
-    public ScroolSpeedLinerLayoutManager(Context context, int orientation, boolean reverseLayout) {
+    public SpeedLinerLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
     }
 
-    public ScroolSpeedLinerLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SpeedLinerLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -41,19 +43,36 @@ public class ScroolSpeedLinerLayoutManager extends LinearLayoutManager {
      * @param delayMillis
      * @param stepPosition
      */
-    public static void startAutoScrollPositon(RecyclerView recyclerView,int delayMillis,int stepPosition){
-        recyclerView.postDelayed(new Runnable() {
-            int position=-1;
+    public static void startAutoScrollPositon(RecyclerView recyclerView, int delayMillis, int stepPosition){
+        stopAutoScrollPosition(recyclerView);
+        Runnable runnable = new Runnable() {
+            int position = -1;
+
             @Override
             public void run() {
-                position=stepPosition;
+                position += stepPosition;
                 recyclerView.smoothScrollToPosition(position);
-                if(recyclerView.getAdapter().getItemCount()>position){
-                    recyclerView.postDelayed(this,delayMillis);
+                LogTool.s("自动滚动：" + position + "    " + recyclerView.getAdapter().getItemCount());
+                if (recyclerView.getAdapter().getItemCount() > position) {
+                    recyclerView.postDelayed(this, delayMillis);
                 }
             }
-        },delayMillis);
+        };
+        recyclerView.postDelayed(runnable,1);
+        ViewTool.setTag(recyclerView,runnable,key_recycleview_auto_scroll);
     }
+
+    /***
+     * 停止自动滚动
+     * @param recyclerView
+     */
+    public static void stopAutoScrollPosition(RecyclerView recyclerView){
+        Object tag = ViewTool.getTag(recyclerView,key_recycleview_auto_scroll);
+        if(tag!=null&& tag instanceof Runnable){
+            recyclerView.removeCallbacks((Runnable) tag);
+        }
+    }
+    static  final  int key_recycleview_auto_scroll= ViewTool.initKey();
     /***
      * 控制 smoothScrollToPosition 的滑动速度的
      * @param layoutManager
@@ -61,7 +80,7 @@ public class ScroolSpeedLinerLayoutManager extends LinearLayoutManager {
      * @param speed
      * @param position
      */
-    public static void startSmoothScroll(RecyclerView.LayoutManager layoutManager,Context context, float speed, int position){
+    public static void startSmoothScroll(RecyclerView.LayoutManager layoutManager, Context context, float speed, int position){
         LinearSmoothScroller linearSmoothScroller =
                 new LinearSmoothScroller(context) {
                     @Override
