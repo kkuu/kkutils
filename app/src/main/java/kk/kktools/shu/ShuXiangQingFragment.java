@@ -21,6 +21,7 @@ import kk.kktools.shu.data.ShuSerachBean;
 import kk.kktools.shu.data.ShuTool;
 import kk.kktools.shu.data.ShuXiangQingBean;
 import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.MathTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.db.MapDB;
 import utils.kkutils.http.HttpUiCallBack;
@@ -105,7 +106,7 @@ public class ShuXiangQingFragment extends KKParentFragment {
                         downY=event.getY();
                         break;
                     case MotionEvent.ACTION_UP:
-                        if(event.getY()-downY<10){//点击
+                        if(Math.abs(event.getY()-downY) <10){//点击
                             goScroll(event.getY()>shu_scrollview.getHeight()/2);
                         }
 
