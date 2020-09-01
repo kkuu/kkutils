@@ -42,13 +42,15 @@ public class ScroolSpeedLinerLayoutManager extends LinearLayoutManager {
      * @param stepPosition
      */
     public static void startAutoScrollPositon(RecyclerView recyclerView,int delayMillis,int stepPosition){
-
         recyclerView.postDelayed(new Runnable() {
             int position=-1;
             @Override
             public void run() {
                 position=stepPosition;
-                recyclerView.postDelayed(this,delayMillis);
+                recyclerView.smoothScrollToPosition(position);
+                if(recyclerView.getAdapter().getItemCount()>position){
+                    recyclerView.postDelayed(this,delayMillis);
+                }
             }
         },delayMillis);
     }
