@@ -30,6 +30,7 @@ import utils.kkutils.AppTool;
 import utils.kkutils.HttpTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.TestData;
+import utils.kkutils.common.TimeTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.http.HttpRequest;
 import utils.kkutils.http.HttpUiCallBack;
@@ -54,6 +55,8 @@ public class MainActivityKK extends KKParentActivity {
         setContentView(R.layout.activity_main);
 
         TextView tv_span=findViewById(R.id.tv_span);
+
+
 
         testItems.clear();
         addItem("Boo",  new ShuJiaFragment(),null);

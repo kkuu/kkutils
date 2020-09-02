@@ -98,7 +98,7 @@ public class TimeTool {
      * @return
      */
     public static int[] splitTimes(long timeCha) {
-        int[] splitTime = new int[4];
+        int[] splitTime = new int[5];
         try {
 
             long miao = 1000;
@@ -111,10 +111,12 @@ public class TimeTool {
             int hour = (int) ((timeCha % tian) / shi);
             int minute = (int) ((timeCha % shi) / fen);
             int second = (int) ((timeCha % fen) / miao);
+            int milliSecond = (int) ((timeCha % miao) );
             splitTime[0] = day;
             splitTime[1] = hour;
             splitTime[2] = minute;
             splitTime[3] = second;
+            splitTime[4] = milliSecond;
         } catch (Exception e) {
             e.printStackTrace();
         }

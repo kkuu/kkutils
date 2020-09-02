@@ -9,28 +9,85 @@ import utils.kkutils.common.TimeTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.common.ViewTool;
 
+/***
+ *  倒计时显示
+ *
+ *
+ *         DaoJiShiTool.startDaoJiShiMillisecond(tv_span, 1000 * 60, 100, new DaoJiShiTool.OnSetTime() {
+ *             @Override
+ *             public void onSet(TextView tv, long second) {
+ *                 tv.setText(""+ DaoJiShiTool.getDaoJiShi_Long_millis(second));
+ *             }
+ *         });
+ *
+ * //        DaoJiShiTool.startDaoJiShi(tv_span, 90, new DaoJiShiTool.OnSetTime() {
+ * //            @Override
+ * //            public void onSet(TextView tv, long second) {
+ * //                tv.setText(""+second);
+ * //            }
+ * //        });
+ *
+ */
 public class DaoJiShiTool {
     public interface OnSetTime{
-        public void onSet(TextView tv, int second);
+        /***
+         *
+         * @param tv
+         * @param secondOrMilliSceond  秒或者毫秒，看调用的哪一个方法
+         */
+        public void onSet(TextView tv, long secondOrMilliSceond);
     }
    static int keyRunable= ViewTool.initKey();
 
+    /**
+     * 秒钟倒计时
+     * @param tv_daojishi
+     * @param secondIn
+     * @param onSetTime
+     */
     public static void startDaoJiShi(TextView tv_daojishi,int secondIn,OnSetTime onSetTime ){
         try {
-            tv_daojishi.setTag(secondIn);
+            startDaoJiShiMillisecond(tv_daojishi, secondIn * 1000, 1000, new OnSetTime() {
+                @Override
+                public void onSet(TextView tv, long second) {
+                    if (onSetTime != null) {
+                        onSetTime.onSet(tv_daojishi, second/1000);
+                    } else {
+                        UiTool.setTextView(tv_daojishi, getDaoJiShi_Long(second ));
+                    }
+                }
+
+            });
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
+    }
+
+    /***
+     * 毫秒倒计时
+     * @param tv_daojishi
+     * @param millisecond 起始时间
+     * @param millisecondStep 每次间隔
+     * @param onSetTime  回调
+     */
+    public static void startDaoJiShiMillisecond (TextView tv_daojishi,long millisecond,long millisecondStep,OnSetTime onSetTime ){
+        try {
+            tv_daojishi.setTag(millisecond);
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    int second = (int) tv_daojishi.getTag();
+                    long second = (long) tv_daojishi.getTag();
                     if (onSetTime != null) {
                         onSetTime.onSet(tv_daojishi, second);
                     } else {
-                        UiTool.setTextView(tv_daojishi, getDaoJiShi_Long(second * 1000));
+                        UiTool.setTextView(tv_daojishi, getDaoJiShi_Long(second ));
                     }
                     LogTool.s("倒计时：" + second);
                     if (second > 0) {
-                        tv_daojishi.setTag(--second);
-                        tv_daojishi.postDelayed(this, 1000);
+                        second=second-millisecondStep;
+                        tv_daojishi.setTag(second);
+                        tv_daojishi.postDelayed(this, millisecondStep);
                     }
                 }
             };
@@ -43,6 +100,8 @@ public class DaoJiShiTool {
         }
 
     }
+
+
     public static void stopDaoJiShi(TextView tv_daojishi ){
         try {
             Object tag = tv_daojishi.getTag(keyRunable);
@@ -85,5 +144,19 @@ public class DaoJiShiTool {
         }
         return "";
     }
-
+    /***
+     * 342:16:24.8
+     * @param timeMillis
+     * @return
+     */
+    public static String getDaoJiShi_Long_millis(long timeMillis){
+        try {
+            int[] ints = TimeTool.splitTimes(timeMillis);
+            ints[1]=ints[1]+ints[0]*24;
+            return String.format("%02d:%02d:%02d.%1d", ints[1],ints[2],ints[3],ints[4]/100);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+        return "";
+    }
 }
