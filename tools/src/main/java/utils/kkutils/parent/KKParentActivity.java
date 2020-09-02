@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 import utils.kkutils.AppTool;
 import utils.kkutils.R;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.ViewTool;
 
 /**
  * Created by kk on 2017/3/23.
@@ -59,6 +60,7 @@ public class KKParentActivity extends FragmentActivity implements Serializable {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
+            ViewTool.initViews(getWindow().getDecorView(),this,null);
         }catch (Exception e){
             LogTool.ex(e);
         }
