@@ -36,11 +36,7 @@ repositories{
 dependencies {
     compileOnly fileTree(include: [ '*.aar'], dir: 'libs')//需要自己导入  alipaySdk_15.5.9_20181123210601.aar
 
-    implementation 'com.github.sunhapper.SpEditTool:SpEditText:1.0.4'
-    //help to create gif drawable use Glide
-    implementation 'com.github.sunhapper.SpEditTool:SpGlideDrawable:1.0.4'
-    //help to create gif drawable use AndroidGifDrawable
-    implementation 'com.github.sunhapper.SpEditTool:SpGifDrawable:1.0.4'
+
 
     api fileTree(include: ['*.jar'], dir: 'libs')
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////utils
