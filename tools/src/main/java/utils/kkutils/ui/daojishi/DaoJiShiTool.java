@@ -45,7 +45,7 @@ public class DaoJiShiTool {
      * @param secondIn
      * @param onSetTime
      */
-    public static void startDaoJiShi(TextView tv_daojishi,int secondIn,OnSetTime onSetTime ){
+    public static void startDaoJiShi(TextView tv_daojishi,long secondIn,OnSetTime onSetTime ){
         try {
             startDaoJiShiMillisecond(tv_daojishi, secondIn * 1000, 1000, new OnSetTime() {
                 @Override
