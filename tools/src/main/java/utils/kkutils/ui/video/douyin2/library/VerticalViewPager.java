@@ -1670,7 +1670,7 @@ public class VerticalViewPager extends ViewGroup {
         final int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             final int layerType = enable ?
-                    ViewCompat.LAYER_TYPE_HARDWARE : ViewCompat.LAYER_TYPE_NONE;
+                    View.LAYER_TYPE_HARDWARE : View.LAYER_TYPE_NONE;
             ViewCompat.setLayerType(getChildAt(i), layerType, null);
         }
     }
@@ -2612,7 +2612,7 @@ public class VerticalViewPager extends ViewGroup {
     @Override
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
         // Dispatch scroll events from this ViewPager.
-        if (event.getEventType() == TYPE_VIEW_SCROLLED) {
+        if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_SCROLLED) {
             return super.dispatchPopulateAccessibilityEvent(event);
         }
 
@@ -2660,7 +2660,7 @@ public class VerticalViewPager extends ViewGroup {
             event.setClassName(ViewPager.class.getName());
             final AccessibilityRecordCompat recordCompat = AccessibilityRecordCompat.obtain();
             recordCompat.setScrollable(canScroll());
-            if (event.getEventType() == TYPE_VIEW_SCROLLED
+            if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_SCROLLED
                     && mAdapter != null) {
                 recordCompat.setItemCount(mAdapter.getCount());
                 recordCompat.setFromIndex(mCurItem);
