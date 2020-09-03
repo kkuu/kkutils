@@ -83,7 +83,7 @@ public class DaoJiShiTool {
                     } else {
                         UiTool.setTextView(tv_daojishi, getDaoJiShi_Long(second ));
                     }
-                    LogTool.s("倒计时：" + second);
+//                    LogTool.s("倒计时：" + second);
                     if (second > 0) {
                         second=second-millisecondStep;
                         tv_daojishi.setTag(second);
