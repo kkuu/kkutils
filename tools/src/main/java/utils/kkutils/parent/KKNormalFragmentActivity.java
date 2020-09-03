@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.widget.FrameLayout;
 
+import java.util.List;
+
 import utils.kkutils.AppTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.ViewTool;
@@ -38,19 +40,7 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
      */
     OnBackPressedListener onBackPressedListener;
 
-    /***
-     * 跳转到一个Fragment
-     */
-    private void go(Fragment fragment, boolean inCurrActivity) {
-        if (inCurrActivity) {//就在当前页面 ， 不跳转
-            if (AppTool.currActivity instanceof KKNormalFragmentActivity) {
-                ((KKNormalFragmentActivity) AppTool.currActivity).setFragment(fragment);
-            }
-        } else {
-            go(fragment);
-        }
 
-    }
 
     /***
      * 跳转到一个Fragment
@@ -104,6 +94,7 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
                 Bundle arguments = getIntent().getBundleExtra("arguments");
                 Fragment fragment = fragmentClass.newInstance();
                 fragment.setArguments(arguments);
+                removeAllFragment();
                 setFragment(fragment);
             }
         } catch (Exception e) {
@@ -111,7 +102,20 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
         }
     }
 
-    void setFragment(Fragment fragment) {
+    public void removeAllFragment(){
+        try {
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            for(Fragment fragment:fragments){
+                fragmentTransaction.remove(fragment);
+            }
+            fragmentTransaction.commitNow();
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
+    }
+    public void setFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (currentFragment != null) {
             transaction.hide(currentFragment);
