@@ -232,7 +232,35 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
 
 
 
-
+    /***
+     * 给指定btn 绑定一个fragment
+     * @param btn
+     * @param fragment
+     */
+    public static void bindFragmentBtn(View btn, final KKParentFragment fragment){
+        if(btn!=null)
+            btn.setOnClickListener(new KKViewOnclickListener() {
+                @Override
+                public void onClickKK(View v) {
+                    if(fragment!=null)fragment.go();
+                }
+            });
+    }
+    /***
+     * 给指定btn 绑定一个fragment  并且跳转后退出
+     * @param btn
+     * @param fragment
+     */
+    public  void bindFragmentBtnAndFinish(View btn, final KKParentFragment fragment){
+        if(btn!=null&&fragment!=null)
+            btn.setOnClickListener(new KKViewOnclickListener() {
+                @Override
+                public void onClickKK(View v) {
+                    fragment.go();
+                    getActivity().finish();
+                }
+            });
+    }
 
 
     public void go() {
