@@ -47,7 +47,7 @@ public class TestTab extends KKParentFragment {
         parent.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
-                tab_my.setTabBeanList(new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),
+                tab_my.setTabsList(new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),
                         new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"));
 
                 tab_my.setChecked(2);

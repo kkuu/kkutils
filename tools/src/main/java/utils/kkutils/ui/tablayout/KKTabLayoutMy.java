@@ -74,7 +74,7 @@ public class KKTabLayoutMy extends FrameLayout {
         UiTool.setWH(recycleView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
 
-        setTabBeanList(new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"),
+        setTabsList(new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"),
                 new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"));
     }
 
@@ -83,7 +83,7 @@ public class KKTabLayoutMy extends FrameLayout {
         for (TabBean tab : tabBeanList) {
             tab.tabAttrs = tabAttrs;
         }
-        setTabs(tabBeanList);
+        setTabsList(tabBeanList);
     }
 
     public TabAttrs getTabAttrs() {
@@ -94,12 +94,12 @@ public class KKTabLayoutMy extends FrameLayout {
 
     List<TabBean> tabBeanList = new ArrayList<>();
 
-    public void setTabBeanList(TabBean... tabsArrays) {
+    public void setTabsList(TabBean... tabsArrays) {
         tabBeanList = new ArrayList<>(Arrays.asList(tabsArrays));
-        setTabs(tabBeanList);
+        setTabsList(tabBeanList);
     }
 
-    public void setTabs(List<TabBean> tabsIn) {
+    public void setTabsList(List<TabBean> tabsIn) {
         if (tabsIn == null) tabsIn = new ArrayList<>();
         tabBeanList = tabsIn;
         for (TabBean tab : tabBeanList) {
