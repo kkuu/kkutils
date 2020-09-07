@@ -47,13 +47,12 @@ public class RecycleViewAutoScroolTool {
         stopAutoScroll(recyclerView);
 
         //设置滚动的layoutManager
-        if(recyclerView.getLayoutManager() instanceof SpeedLinerLayoutManager){
+        if(!(recyclerView.getLayoutManager() instanceof SpeedLinerLayoutManager)){
             recyclerView.setLayoutManager(new SpeedLinerLayoutManager(recyclerView.getContext()));
         }
 
         Runnable runnable = new Runnable() {
             int position = -1;
-
             @Override
             public void run() {
                 position += stepPosition;
@@ -64,7 +63,7 @@ public class RecycleViewAutoScroolTool {
                 }
             }
         };
-        recyclerView.postDelayed(runnable,1);
+        recyclerView.post(runnable);
         ViewTool.setTag(recyclerView,runnable,key_recycleview_auto_scroll);
     }
 
