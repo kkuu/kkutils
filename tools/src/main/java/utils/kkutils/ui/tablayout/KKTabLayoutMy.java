@@ -294,11 +294,26 @@ public class KKTabLayoutMy extends FrameLayout {
         }
 
     }
+    public void initDefalutChecked() {
+        try {
+            boolean hasChecked=false;
+            for (TabBean tab : tabBeanList) {
+                if(tab.isChecked){
+                    hasChecked=true;
+                }
+            }
+            if(!hasChecked){
+                tabBeanList.get(0).isChecked=true;
+            }
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
 
+    }
     public void initTabList() {
         recycleView.setLayoutManager(new LinearLayoutManager(recycleView.getContext(), RecyclerView.HORIZONTAL, false));
         commonButtonTool = new CommonButtonTool();
-        setChecked(0);
+       initDefalutChecked();
         recycleView.setItemViewCacheSize(100);
         recycleView.setLayoutCacheCount(0);
 //        recycleView.getRecycledViewPool().clear();
