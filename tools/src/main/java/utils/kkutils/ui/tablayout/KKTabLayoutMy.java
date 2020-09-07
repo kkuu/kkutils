@@ -325,6 +325,8 @@ public class KKTabLayoutMy extends FrameLayout {
                 CompoundButton cb_shouye_title_tab = itemView.findViewById(R.id.cb_tab_item);
                 cb_shouye_title_tab.setTag(tabBean);
                 commonButtonTool.add(cb_shouye_title_tab);
+
+                cb_shouye_title_tab.setChecked(false);//这样才能保证下面每次设置都能调用改变
                 cb_shouye_title_tab.setChecked(tabBean.isChecked);
 
                 tabBean.tabAttrs.onCheckedChange(cb_shouye_title_tab.isChecked(), cb_shouye_title_tab);
