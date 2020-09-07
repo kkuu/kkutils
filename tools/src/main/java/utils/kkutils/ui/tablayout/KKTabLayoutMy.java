@@ -38,7 +38,7 @@ import utils.kkutils.ui.KKSimpleRecycleView;
  */
 public class KKTabLayoutMy extends FrameLayout {
     public OnTabChecked onTabChecked;
-    KKSimpleRecycleView kkSimpleRecycleView;
+    KKSimpleRecycleView recycleView;
 
     public KKTabLayoutMy(@NonNull Context context) {
         this(context, null);
@@ -69,21 +69,21 @@ public class KKTabLayoutMy extends FrameLayout {
     }
 
     public void init() {
-        kkSimpleRecycleView = new KKSimpleRecycleView(getContext());
-        addView(kkSimpleRecycleView);
-        UiTool.setWH(kkSimpleRecycleView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        recycleView = new KKSimpleRecycleView(getContext());
+        addView(recycleView);
+        UiTool.setWH(recycleView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
 
-        setTabs(new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"),
+        setTabBeanList(new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"),
                 new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"), new TabBean("测试1"));
     }
 
     public void setTabAttrs(TabAttrs tabAttrs) {
         this.tabAttrs = tabAttrs;
-        for (TabBean tab : tabs) {
+        for (TabBean tab : tabBeanList) {
             tab.tabAttrs = tabAttrs;
         }
-        setTabs(tabs);
+        setTabs(tabBeanList);
     }
 
     public TabAttrs getTabAttrs() {
@@ -92,17 +92,17 @@ public class KKTabLayoutMy extends FrameLayout {
 
     TabAttrs tabAttrs = new TabAttrs();
 
-    List<TabBean> tabs = new ArrayList<>();
+    List<TabBean> tabBeanList = new ArrayList<>();
 
-    public void setTabs(TabBean... tabsArrays) {
-        tabs = new ArrayList<>(Arrays.asList(tabsArrays));
-        setTabs(tabs);
+    public void setTabBeanList(TabBean... tabsArrays) {
+        tabBeanList = new ArrayList<>(Arrays.asList(tabsArrays));
+        setTabs(tabBeanList);
     }
 
     public void setTabs(List<TabBean> tabsIn) {
         if (tabsIn == null) tabsIn = new ArrayList<>();
-        tabs = tabsIn;
-        for (TabBean tab : tabs) {
+        tabBeanList = tabsIn;
+        for (TabBean tab : tabBeanList) {
             if (tab.tabAttrs == null) tab.setTabAttrs(tabAttrs);
         }
         refreshData();
@@ -115,7 +115,7 @@ public class KKTabLayoutMy extends FrameLayout {
 
 
     public void refreshData() {
-        initTab(tabs, kkSimpleRecycleView);
+        initTabList();
     }
 
     public static class TabAttrs {
@@ -211,7 +211,10 @@ public class KKTabLayoutMy extends FrameLayout {
             drawable.addState(new int[]{android.R.attr.state_checked}, gradientDrawable);
 
             GradientDrawable noChecked = new GradientDrawable();
+            noChecked.setSize(w, (int) kktab_bottomLineHeight);
             noChecked.setBounds(gradientDrawable.getBounds());
+
+
             drawable.addState(new int[]{-android.R.attr.state_checked}, noChecked);
             drawable.setBounds(gradientDrawable.getBounds());
             return drawable;
@@ -281,17 +284,21 @@ public class KKTabLayoutMy extends FrameLayout {
      */
     public void setChecked(int index) {
         try {
-            getCommonButtonTool().getAllButtons().get(index).setChecked(true);
+            for (TabBean tab : tabBeanList) {
+                tab.isChecked=false;
+            }
+            tabBeanList.get(index).isChecked=true;
+            recycleView.getAdapter().notifyDataSetChanged();
         } catch (Exception e) {
             LogTool.ex(e);
         }
 
     }
 
-    public void initTab(List<TabBean> tabBeanList, KKSimpleRecycleView recycleView) {
+    public void initTabList() {
         recycleView.setLayoutManager(new LinearLayoutManager(recycleView.getContext(), RecyclerView.HORIZONTAL, false));
         commonButtonTool = new CommonButtonTool();
-        tabBeanList.get(0).isChecked = true;
+        setChecked(0);
         recycleView.setItemViewCacheSize(100);
         recycleView.setLayoutCacheCount(0);
 //        recycleView.getRecycledViewPool().clear();

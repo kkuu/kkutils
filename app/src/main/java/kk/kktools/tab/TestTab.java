@@ -2,7 +2,6 @@ package kk.kktools.tab;
 
 import android.graphics.Color;
 import android.view.View;
-import android.widget.CompoundButton;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SegmentTabLayout;
@@ -11,10 +10,7 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.android.material.tabs.TabLayout;
 
-import org.xutils.db.table.TableEntity;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,13 +43,14 @@ public class TestTab extends KKParentFragment {
     KKTabLayoutMy tab_my;
     @Override
     public void initData() {
-
+        tab_my.setChecked(3);
         parent.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
-                tab_my. setTabs(new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),
+                tab_my.setTabBeanList(new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),
                         new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"),new KKTabLayoutMy.TabBean("测试1"));
 
+                tab_my.setChecked(2);
             }
         });
 
