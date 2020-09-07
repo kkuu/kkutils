@@ -21,7 +21,6 @@ public class RecycleViewAutoScroolTool {
         Runnable runnable = new Runnable() {
             public void run() {
                 recyclerView.scrollBy(0,stepY);
-                LogTool.s("滚动"+recyclerView.getScrollY());
                 recyclerView.postDelayed(this,delayMillis);
             }
         };
@@ -57,7 +56,6 @@ public class RecycleViewAutoScroolTool {
             public void run() {
                 position += stepPosition;
                 recyclerView.smoothScrollToPosition(position);
-                LogTool.s("自动滚动：" + position + "    " + recyclerView.getAdapter().getItemCount());
                 if (recyclerView.getAdapter().getItemCount() > position) {
                     recyclerView.postDelayed(this, delayMillis);
                 }
