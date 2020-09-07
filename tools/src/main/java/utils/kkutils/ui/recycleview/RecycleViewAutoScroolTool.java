@@ -17,7 +17,7 @@ public class RecycleViewAutoScroolTool {
     public static void startAutoScrollY(final RecyclerView recyclerView, final int delayMillis, final int stepY) {
         setCanNotTouch(recyclerView);
         stopAutoScroll(recyclerView);
-
+        recyclerView.scrollTo(0,0);//回到最初位置
         Runnable runnable = new Runnable() {
             public void run() {
                 recyclerView.scrollBy(0,stepY);
@@ -44,7 +44,7 @@ public class RecycleViewAutoScroolTool {
     public static void startAutoScrollPositon(RecyclerView recyclerView, int delayMillis, int stepPosition){
         setCanNotTouch(recyclerView);
         stopAutoScroll(recyclerView);
-
+        recyclerView.scrollToPosition(0);//回到最初位置
         //设置滚动的layoutManager
         if(!(recyclerView.getLayoutManager() instanceof SpeedLinerLayoutManager)){
             recyclerView.setLayoutManager(new SpeedLinerLayoutManager(recyclerView.getContext()));
