@@ -46,6 +46,11 @@ public class RecycleViewAutoScroolTool {
         setCanNotTouch(recyclerView);
         stopAutoScroll(recyclerView);
 
+        //设置滚动的layoutManager
+        if(recyclerView.getLayoutManager() instanceof SpeedLinerLayoutManager){
+            recyclerView.setLayoutManager(new SpeedLinerLayoutManager(recyclerView.getContext()));
+        }
+
         Runnable runnable = new Runnable() {
             int position = -1;
 
