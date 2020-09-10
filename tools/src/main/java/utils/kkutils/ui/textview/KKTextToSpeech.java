@@ -8,6 +8,9 @@ import utils.kkutils.common.LogTool;
 
 public class KKTextToSpeech {
 
+    public static void textToSpeech(String text){
+        new KKTextToSpeech(text);
+    }
 
     TextToSpeech mTTS;
     public KKTextToSpeech(String text){
