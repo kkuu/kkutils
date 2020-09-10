@@ -8,6 +8,7 @@ import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.StringTool;
 import utils.kkutils.common.thread.ThreadTool;
+import utils.kkutils.json.JsonDataParent;
 
 public abstract class HttpUiCallBack<T> {
     public abstract void onSuccess(T data);
@@ -52,7 +53,13 @@ public abstract class HttpUiCallBack<T> {
                             {//本地没有缓存，或者和缓存的数据不一样 那必须返回数据
                                 userResultData=true;
                                 resultData = (T) httpRequest.getResponseData();
-                                httpRequest.saveToLocalCache();
+                                if(resultData!=null && resultData instanceof JsonDataParent){//json 数据需要 数据正确才缓存
+                                    if(((JsonDataParent) resultData).isDataOk()){
+                                        httpRequest.saveToLocalCache();
+                                    }
+                                }else {
+                                    httpRequest.saveToLocalCache();
+                                }
                             }
                         }
                     }catch (Exception e){

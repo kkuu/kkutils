@@ -41,6 +41,7 @@ import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 import utils.kkutils.ui.daojishi.DaoJiShiTool;
 import utils.kkutils.ui.recycleview.KKDecoration;
+import utils.kkutils.ui.textview.KKTextToSpeech;
 import utils.kkutils.ui.video.douyin2.DouYinFragment2;
 import utils.kkutils.ui.webview.X5WebView;
 import utils.kkutils.update.Version;
@@ -71,6 +72,7 @@ public class MainActivityKK extends KKParentActivity {
         addItem("测试CoordinatorLayout,和选择收货地址", null, new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
+                KKTextToSpeech.textToSpeech_after_jinbi("支付宝到账。101元");
                 new TestCoordinatorLayoutFragmentKK().go();
             }
         });
