@@ -3,6 +3,7 @@ package kk.kktools;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import douyin.DouYinFragment;
@@ -29,6 +34,8 @@ import kk.kktools.web.WebFragment;
 import utils.kkutils.AppTool;
 import utils.kkutils.HttpTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.MathTool;
+import utils.kkutils.common.StringTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.TimeTool;
 import utils.kkutils.common.UiTool;
@@ -80,6 +87,7 @@ public class MainActivityKK extends KKParentActivity {
         addItem("测试视频播放", new TestRecycleView(), new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
+                play();
                 // KKVideoPlayer.go();
             }
         });
@@ -140,6 +148,22 @@ public class MainActivityKK extends KKParentActivity {
         //testVersion();
 
         // testWeb();
+    }
+
+
+
+    public void play(){
+        HashMap<String ,Integer> mapNumVoice=new HashMap<>();
+        mapNumVoice.put("一",R.raw.n1);
+        mapNumVoice.put("二",R.raw.n2);
+        mapNumVoice.put("三",R.raw.n3);
+        mapNumVoice.put("四",R.raw.n4);
+
+        mapNumVoice.put("千",R.raw.q);
+        mapNumVoice.put("百",R.raw.b);
+        mapNumVoice.put("十",R.raw.s);
+
+        MathTool.NumberUtil.speak(4123,mapNumVoice);
     }
 
 

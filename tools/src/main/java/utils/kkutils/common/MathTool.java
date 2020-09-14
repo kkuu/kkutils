@@ -1,7 +1,13 @@
 package utils.kkutils.common;
 
+import android.media.MediaPlayer;
+
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import utils.kkutils.AppTool;
 
 /**
  * Created by ishare on 2016/6/23.
@@ -122,4 +128,174 @@ public class MathTool {
         return money*lilv*day/365/100;
     }
 
+
+    /***
+     * 数字 转中文读音字符串
+     * @param d
+     * @return
+     */
+    public static String numberToCN(double d){
+        return NumberUtil.bigDecimal2chineseNum(BigDecimal.valueOf(d));
+    }
+
+    /**
+     * 数字转换中文
+     *
+     * @author huangshuai
+     * @date 2019/11/22 0022
+     */
+    public static class NumberUtil {
+
+        private NumberUtil() { }
+
+        /**
+         * 中文数字
+         */
+        private static final String[] CN_NUM = {"零", "一", "二", "三", "四", "五", "六", "七", "八", "九"};
+
+        /**
+         * 中文数字单位
+         */
+        private static final String[] CN_UNIT = {"", "十", "百", "千", "万", "十", "百", "千", "亿", "十", "百", "千"};
+
+        /**
+         * 特殊字符：负
+         */
+        private static final String CN_NEGATIVE = "负";
+
+        /**
+         * 特殊字符：点
+         */
+        private static final String CN_POINT = "点";
+
+
+        /**
+         * int 转 中文数字
+         * 支持到int最大值
+         *
+         * @param intNum 要转换的整型数
+         * @return 中文数字
+         */
+        public static String int2chineseNum(int intNum) {
+            StringBuffer sb = new StringBuffer();
+            boolean isNegative = false;
+            if (intNum < 0) {
+                isNegative = true;
+                intNum *= -1;
+            }
+            int count = 0;
+            while(intNum > 0) {
+                sb.insert(0, CN_NUM[intNum % 10] + CN_UNIT[count]);
+                intNum = intNum / 10;
+                count++;
+            }
+
+            if (isNegative)
+                sb.insert(0, CN_NEGATIVE);
+
+
+            return sb.toString().replaceAll("零[千百十]", "零").replaceAll("零+万", "万")
+                    .replaceAll("零+亿", "亿").replaceAll("亿万", "亿零")
+                    .replaceAll("零+", "零").replaceAll("零$", "");
+        }
+
+        /**
+         * bigDecimal 转 中文数字
+         * 整数部分只支持到int的最大值
+         *
+         * @param bigDecimalNum 要转换的BigDecimal数
+         * @return 中文数字
+         */
+        public static String bigDecimal2chineseNum(BigDecimal bigDecimalNum) {
+            if (bigDecimalNum == null)
+                return CN_NUM[0];
+
+            StringBuffer sb = new StringBuffer();
+
+            //将小数点后面的零给去除
+            String numStr = bigDecimalNum.abs().stripTrailingZeros().toPlainString();
+
+            String[] split = numStr.split("\\.");
+            String integerStr = int2chineseNum(Integer.parseInt(split[0]));
+
+            sb.append(integerStr);
+
+            //如果传入的数有小数，则进行切割，将整数与小数部分分离
+            if (split.length == 2) {
+                //有小数部分
+                sb.append(CN_POINT);
+                String decimalStr = split[1];
+                char[] chars = decimalStr.toCharArray();
+                for (int i = 0; i < chars.length; i++) {
+                    int index = Integer.parseInt(String.valueOf(chars[i]));
+                    sb.append(CN_NUM[index]);
+                }
+            }
+
+            //判断传入数字为正数还是负数
+            int signum = bigDecimalNum.signum();
+            if (signum == -1) {
+                sb.insert(0, CN_NEGATIVE);
+            }
+
+            return sb.toString();
+        }
+
+
+        /***
+         * 读数字
+         * @param number 整数最大int
+         * @param mapNumVoice  中文字对应 声音文件，raw 下面的id
+         */
+        public static void speak(double number, Map<String ,Integer> mapNumVoice){
+            speak(bigDecimal2chineseNum(BigDecimal.valueOf(number)),mapNumVoice);
+        }
+        /***
+         * 读数字
+         * @param numberCn
+         * @param mapNumVoice  中文字对应 声音文件，raw 下面的id
+         */
+        public static void speak(String numberCn, Map<String ,Integer> mapNumVoice){
+
+            if(StringTool.isEmpty(numberCn))return;
+
+//            HashMap<String ,Integer> mapNumVoice=new HashMap<>();
+//            mapNumVoice.put("一",R.raw.n1);
+//            mapNumVoice.put("二",R.raw.n2);
+//            mapNumVoice.put("三",R.raw.n3);
+//            mapNumVoice.put("四",R.raw.n4);
+//
+//            mapNumVoice.put("千",R.raw.q);
+//            mapNumVoice.put("百",R.raw.b);
+//            mapNumVoice.put("十",R.raw.s);
+            char c = numberCn.charAt(0);
+            LogTool.s("播放"+ c);
+            MediaPlayer mediaPlayer = MediaPlayer.create(AppTool.getApplication(),mapNumVoice.get(""+c));
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    if(StringTool.notEmpty(numberCn)){
+                        speak(numberCn.substring(1),mapNumVoice);
+                    }
+                }
+            });
+            mediaPlayer.start();
+        }
+
+        /***
+         * 读单个声音
+         * @param id
+         * @param end
+         */
+         static void speak(int id,Runnable end){
+            MediaPlayer mediaPlayer = MediaPlayer.create(AppTool.getApplication(), id);
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    if(end!=null)end.run();
+                }
+            });
+            mediaPlayer.start();
+        }
+    }
 }
