@@ -1,6 +1,7 @@
 package utils.kkutils.common;
 
 import android.media.MediaPlayer;
+import android.os.Build;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -247,15 +248,15 @@ public class MathTool {
          * @param number 整数最大int
          * @param mapNumVoice  中文字对应 声音文件，raw 下面的id
          */
-        public static void speak(double number, Map<String ,Integer> mapNumVoice){
-            speak(bigDecimal2chineseNum(BigDecimal.valueOf(number)),mapNumVoice);
+        public static void speak(double number,String danwei, float speed, Map<String ,Integer> mapNumVoice){
+            speak(bigDecimal2chineseNum(BigDecimal.valueOf(number))+danwei,speed,mapNumVoice);
         }
         /***
          * 读数字
          * @param numberCn
          * @param mapNumVoice  中文字对应 声音文件，raw 下面的id
          */
-        public static void speak(String numberCn, Map<String ,Integer> mapNumVoice){
+        public static void speak(String numberCn, float speed,Map<String ,Integer> mapNumVoice){
 
             if(StringTool.isEmpty(numberCn))return;
 
@@ -271,11 +272,15 @@ public class MathTool {
             char c = numberCn.charAt(0);
             LogTool.s("播放"+ c);
             MediaPlayer mediaPlayer = MediaPlayer.create(AppTool.getApplication(),mapNumVoice.get(""+c));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(speed));
+            }
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
+                    mediaPlayer.release();
                     if(StringTool.notEmpty(numberCn)){
-                        speak(numberCn.substring(1),mapNumVoice);
+                        speak(numberCn.substring(1),speed,mapNumVoice);
                     }
                 }
             });

@@ -79,8 +79,10 @@ public class MainActivityKK extends KKParentActivity {
         addItem("测试CoordinatorLayout,和选择收货地址", null, new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
-                KKTextToSpeech.textToSpeech_after_jinbi("支付宝到账。101元");
-                new TestCoordinatorLayoutFragmentKK().go();
+//                KKTextToSpeech.textToSpeech_after_jinbi("支付宝到账。101元");
+                KKTextToSpeech.textToSpeech_after_jinbi("去拼拼到账 123456.0789元");
+
+//                new TestCoordinatorLayoutFragmentKK().go();
             }
         });
         addItem("测试recycleView", new TestRecycleView(), null);
@@ -153,17 +155,49 @@ public class MainActivityKK extends KKParentActivity {
 
 
     public void play(){
-        HashMap<String ,Integer> mapNumVoice=new HashMap<>();
-        mapNumVoice.put("一",R.raw.n1);
-        mapNumVoice.put("二",R.raw.n2);
-        mapNumVoice.put("三",R.raw.n3);
-        mapNumVoice.put("四",R.raw.n4);
 
-        mapNumVoice.put("千",R.raw.q);
-        mapNumVoice.put("百",R.raw.b);
-        mapNumVoice.put("十",R.raw.s);
 
-        MathTool.NumberUtil.speak(4123,mapNumVoice);
+        MediaPlayer mediaPlayer = MediaPlayer.create(AppTool.getApplication(), utils.kkutils.R.raw.jinbi_zhifubao);
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                MediaPlayer mediaPlayer = MediaPlayer.create(AppTool.getApplication(), utils.kkutils.R.raw.a_daozhang);
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+
+                        HashMap<String ,Integer> mapNumVoice=new HashMap<>();
+                        mapNumVoice.put("零",R.raw.a_0);
+                        mapNumVoice.put("一",R.raw.a_1);
+                        mapNumVoice.put("二",R.raw.a_2);
+                        mapNumVoice.put("三",R.raw.a_3);
+                        mapNumVoice.put("四",R.raw.a_4);
+                        mapNumVoice.put("五",R.raw.a_5);
+                        mapNumVoice.put("六",R.raw.a_6);
+                        mapNumVoice.put("七",R.raw.a_7);
+                        mapNumVoice.put("八",R.raw.a_8);
+                        mapNumVoice.put("九",R.raw.a_9);
+                        mapNumVoice.put("十",R.raw.a_10);
+                        mapNumVoice.put("百",R.raw.a_bai);
+                        mapNumVoice.put("千",R.raw.a_qian);
+                        mapNumVoice.put("万",R.raw.a_wan);
+                        mapNumVoice.put("亿",R.raw.a_yi);
+                        mapNumVoice.put("负",R.raw.a_fu);
+                        mapNumVoice.put("点",R.raw.a_dian);
+                        mapNumVoice.put("元",R.raw.a_yuan);
+
+                        MathTool.NumberUtil.speak(123456.0789,"元",1,mapNumVoice);
+                    }
+                });
+                mediaPlayer.start();
+
+
+            }
+        });
+        mediaPlayer.start();
+
+
+
     }
 
 

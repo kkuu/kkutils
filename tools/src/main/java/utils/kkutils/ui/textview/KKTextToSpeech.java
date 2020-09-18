@@ -19,13 +19,15 @@ public class KKTextToSpeech {
      * @param text
      */
     public static void textToSpeech_after_jinbi(String text){
-        MediaPlayer.create(AppTool.getApplication(), R.raw.jinbi_zhifubao).start();
-        AppTool.uiHandler.postDelayed(new Runnable() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(AppTool.getApplication(), R.raw.jinbi_zhifubao);
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
-            public void run() {
+            public void onCompletion(MediaPlayer mp) {
                 new KKTextToSpeech(text);
             }
-        },1000);
+        });
+        mediaPlayer.start();
+
     }
     TextToSpeech mTTS;
     public KKTextToSpeech(String text){
