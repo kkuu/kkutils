@@ -69,6 +69,10 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
         setLine(lineWidth, lineColor);
 
     }
+    public void setRecycleViewSingleDecoration(RecyclerView recycleView){
+        RecycleViewTool.removeAllDecoration(recycleView);
+        recycleView.addItemDecoration(this);
+    }
 
     /***
      * 所有内容都显示, 测试专用
