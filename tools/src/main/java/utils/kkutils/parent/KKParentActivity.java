@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,10 +32,7 @@ import utils.kkutils.common.ViewTool;
 
 public class KKParentActivity extends FragmentActivity implements Serializable {
     ProgressDialog progressDialog;
-    /***
-     * 当前界面需要fragment 为内容
-     */
-    public boolean needFragment=true;
+
 
     /***
      * 透明状态栏
@@ -66,16 +64,10 @@ public class KKParentActivity extends FragmentActivity implements Serializable {
         }
     }
 
-
-
+    public boolean saveIntance=false;//有些手机 fragment 的save不了，会白屏，最好不要开启，特别是首页tab 界面
     @Override
-    protected void onResume() {
-        super.onResume();
-        if(needFragment){//需要fragment ，但是内容没有显示出来，就重新初始化
-            if(getAddFragmentHasViewCount()<1){
-                onCreate(null);
-            }
-        }
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        if(saveIntance) super.onSaveInstanceState(outState);
     }
 
     /***
@@ -121,15 +113,7 @@ public class KKParentActivity extends FragmentActivity implements Serializable {
     public void initData() {
 
     }
-    public int getAddFragmentHasViewCount(){
-        int count=0;
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            if(fragment.isAdded()&&fragment.getView()!=null){
-                count++;
-            }
-        }
-        return count;
-    }
+
     /***
      * 显示一个弹出框
      *

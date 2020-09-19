@@ -143,12 +143,12 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
         }
 
 
-        if (getAddFragmentHasViewCount()<1) {
-            finish();
-        } else {
-            super.onBackPressed();
-        }
-
+//        if (getAddFragmentHasViewCount()<1) {
+//            finish();
+//        } else {
+//            super.onBackPressed();
+//        }
+        super.onBackPressed();
     }
 
     public OnBackPressedListener getOnBackPressedListener() {
