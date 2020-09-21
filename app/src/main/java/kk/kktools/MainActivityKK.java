@@ -186,7 +186,7 @@ public class MainActivityKK extends KKParentActivity {
                         mapNumVoice.put("点",R.raw.a_dian);
                         mapNumVoice.put("元",R.raw.a_yuan);
 
-                        MathTool.NumberUtil.speak(123456.0789,"元",1,mapNumVoice);
+                        MathTool.NumberUtil.speak(49.01,"元",2,mapNumVoice);
                     }
                 });
                 mediaPlayer.start();
