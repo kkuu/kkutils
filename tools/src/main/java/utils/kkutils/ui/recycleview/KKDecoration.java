@@ -79,9 +79,10 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
     }
 
 
-    public void setRecycleViewSingleDecoration(RecyclerView recycleView){
+    public KKDecoration setRecycleViewSingleDecoration(RecyclerView recycleView){
         RecycleViewTool.removeAllDecoration(recycleView);
         recycleView.addItemDecoration(this);
+        return this;
     }
 
     /***
