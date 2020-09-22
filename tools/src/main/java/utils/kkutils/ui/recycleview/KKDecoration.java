@@ -58,7 +58,7 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
 
 
 
-    public OnItemOffsetsChangeListener onItemOffsetsChangeListener;//可以在这里面修改布局宽高等
+    public OnItemOffsetsChangeListener onItemOffsetsChangeListener;//可以在这里面修改布局宽高等 如果要设置正方形 用  UiTool.setWHEqual(view);
 
 
 
