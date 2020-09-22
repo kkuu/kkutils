@@ -58,17 +58,27 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
 
 
 
+    public OnItemOffsetsChangeListener onItemOffsetsChangeListener;//可以在这里面修改布局宽高等
+
+
 
 
     public KKDecoration(int spanCount, int headCount, double paddingItemDp, double paddingBoderDp, int lineWidth, int lineColor) {
+        this(spanCount,headCount,paddingItemDp,paddingBoderDp,lineWidth,lineColor,null);
+    }
+
+    public KKDecoration(int spanCount, int headCount, double paddingItemDp, double paddingBoderDp, int lineWidth, int lineColor,OnItemOffsetsChangeListener onItemOffsetsChangeListener) {
         this.spanCount = spanCount;
         this.headCount = headCount;
         paddingItem =CommonTool.dip2px(paddingItemDp);
         paddingBoder=CommonTool.dip2px(paddingBoderDp);
-         itemPadding = getItemPadding(spanCount, paddingItem, paddingBoder);
+        itemPadding = getItemPadding(spanCount, paddingItem, paddingBoder);
+        this.onItemOffsetsChangeListener=onItemOffsetsChangeListener;
         setLine(lineWidth, lineColor);
 
     }
+
+
     public void setRecycleViewSingleDecoration(RecyclerView recycleView){
         RecycleViewTool.removeAllDecoration(recycleView);
         recycleView.addItemDecoration(this);
@@ -294,6 +304,15 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
         }catch (Exception e){
             LogTool.ex(e);
         }
+
+        try {
+            if(onItemOffsetsChangeListener!=null){
+                onItemOffsetsChangeListener.getItemOffsets(outRect,view,parent,state);
+            }
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
     }
     public static List<Point> getItemPadding(int span, int pItem, int pBoder){
         int pView=((span-1)*pItem+pBoder*2)/span;
@@ -307,6 +326,19 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
             list.add(p);
         }
         return list;
+    }
+
+
+    public static interface  OnItemOffsetsChangeListener{
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state);
+    }
+    public OnItemOffsetsChangeListener getOnItemOffsetsChangeListener() {
+        return onItemOffsetsChangeListener;
+    }
+
+    public KKDecoration setOnItemOffsetsChangeListener(OnItemOffsetsChangeListener onItemOffsetsChangeListener) {
+        this.onItemOffsetsChangeListener = onItemOffsetsChangeListener;
+        return this;
     }
 
 }
