@@ -2,6 +2,7 @@ package utils.kkutils;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.Utils;
+import com.tendcloud.tenddata.TCAgent;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -62,6 +64,22 @@ public class AppTool {
             X5WebView.init(application);
             LayoutInflaterTool.clearAll();
 
+            initTalkingData(application);
+
+        }
+    }
+    public static void initTalkingData(Context context){
+        try {//日志分析
+            TCAgent.init(context, "EE5EEAC9D24A3F712A1542682129BD13", "android");
+            TCAgent.setReportUncaughtExceptions(true);
+            LogTool.setOnExceptionLog(new LogTool.OnExceptionLog() {
+                @Override
+                public void onExceptionLog(Throwable e) {
+                    TCAgent.onError(context,e);
+                }
+            });
+        }catch (Exception e){
+            LogTool.ex(e);
         }
     }
 //    public static void initFileUriException(){

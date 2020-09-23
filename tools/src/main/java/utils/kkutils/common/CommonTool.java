@@ -254,7 +254,20 @@ public class CommonTool {
             return 0;
         }
     }
-
+    /**
+     * 获取版本号
+     *
+     * @return 当前应用的版本号
+     */
+    public static String getAppName() {
+        try {
+            Context context = AppTool.getApplication();
+            PackageManager manager = context.getPackageManager();
+            return ""+manager.getApplicationLabel(context.getApplicationInfo());
+        } catch (Exception e) {
+            return "";
+        }
+    }
     /***
      * 获取当前应用版本名称
      *

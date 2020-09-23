@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.PushbackInputStream;
 import java.io.StringWriter;
 
 import utils.kkutils.AppTool;
@@ -85,6 +86,24 @@ public class LogTool {
         return "";
     }
 
+    public static interface  OnExceptionLog{
+        public void onExceptionLog(Throwable e);
+    }
+
+    public static void setOnExceptionLog(OnExceptionLog onExceptionLog) {
+        LogTool.onExceptionLog = onExceptionLog;
+    }
+    public static class LogException extends RuntimeException{
+        public LogException(Throwable cause) {
+            super(cause);
+        }
+
+        @Override
+        public String toString() {
+            return  "日志异常"+CommonTool.getAppName()+"版本："+CommonTool.getVersion()+super.toString();
+        }
+    }
+    public static OnExceptionLog onExceptionLog;
     /**
      * **
      * 打印一个异常
@@ -92,7 +111,19 @@ public class LogTool {
      * @param
      */
     public static void ex(Throwable e) {
+        {
+            if(onExceptionLog!=null){//自定义异常操作， 比如上传到服务器
+                try {
+                    onExceptionLog.onExceptionLog(new LogException(e));
+                }catch (Exception e2){
+                    e2.printStackTrace();
+                }
+            }
+        }
+
         if (!debug) return;
+
+
         StringWriter writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
         e.printStackTrace(printWriter);
