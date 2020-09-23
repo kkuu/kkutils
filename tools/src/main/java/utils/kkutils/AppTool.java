@@ -70,6 +70,11 @@ public class AppTool {
 
         }
     }
+
+    /**
+     * 日志分析， 如果需要重新写id 就在  AppTool.init 之前调用  TCAgent.init(this, "D35D4C38EBD8431D93EA84575F7203E9", "android");
+     * @param context
+     */
     public static void initTalkingData(Context context){
         try {//日志分析
             TCAgent.init(context, "EE5EEAC9D24A3F712A1542682129BD13", "android");
