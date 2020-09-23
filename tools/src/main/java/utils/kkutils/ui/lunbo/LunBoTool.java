@@ -316,7 +316,10 @@ public class LunBoTool {
      */
     public static void onPageSelected(ViewPager viewPager,int itemPosition){
         try {
-            getPageChangeListener(viewPager).onPageSelected(itemPosition);
+            ViewPager.OnPageChangeListener pageChangeListener = getPageChangeListener(viewPager);
+            if(pageChangeListener!=null){
+                pageChangeListener.onPageSelected(itemPosition);
+            }
         }catch (Exception e){
             LogTool.ex(e);
         }
