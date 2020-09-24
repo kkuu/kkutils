@@ -161,6 +161,13 @@ public class KKRefreshLayout extends SmartRefreshLayout {
         bindLoadDataAndRefreshNotRefresh(pageControl,loadListDataInterface);
         loadListDataInterface.loadPageData(pageControl.init());
     }
+    public void bindLoadDataAndRefreshWithAnim( PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
+        if(pageControl==null)pageControl=new PageControl();
+        bindLoadDataAndRefreshNotRefresh(pageControl,loadListDataInterface);
+        autoRefresh();
+//        loadListDataInterface.loadPageData(pageControl.init());
+    }
+
     public void bindLoadDataAndRefreshNotRefresh( PageControl pageControl,final LoadListDataInterface loadListDataInterface) {
         if(pageControl==null)pageControl=new PageControl();
         final PageControl finalPageControl = pageControl;
