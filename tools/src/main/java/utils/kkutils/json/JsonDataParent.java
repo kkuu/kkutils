@@ -14,4 +14,10 @@ public abstract class JsonDataParent implements Serializable {
     public String msg = "";
     public abstract boolean isDataOk();
     public abstract boolean isDataOkAndToast() ;
+
+    /***
+     * 单纯判断 不要加任何其他的， 比如做UI 线程才能 做的事 ，跳转界面之类的
+     * @return
+     */
+    public abstract boolean isDataOkNotInUiThread();
 }

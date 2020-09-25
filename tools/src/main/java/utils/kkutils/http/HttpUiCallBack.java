@@ -54,7 +54,7 @@ public abstract class HttpUiCallBack<T> {
                                 userResultData=true;
                                 resultData = (T) httpRequest.getResponseData();
                                 if(resultData!=null && resultData instanceof JsonDataParent){//json 数据需要 数据正确才缓存
-                                    if(((JsonDataParent) resultData).isDataOk()){
+                                    if(((JsonDataParent) resultData).isDataOkNotInUiThread()){
                                         httpRequest.saveToLocalCache();
                                     }
                                 }else {
