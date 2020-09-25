@@ -24,6 +24,7 @@
         android:layout_height="match_parent">
         <utils.kkutils.ui.KKSimpleRecycleView
             android:id="@+id/recycleView"
+            app:maxHeight="400dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></utils.kkutils.ui.KKSimpleRecycleView>
     </utils.kkutils.ui.pullrefresh.KKRefreshLayout>

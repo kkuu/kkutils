@@ -1,6 +1,8 @@
 package utils.kkutils.parent;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Rect;
 
 import androidx.annotation.Nullable;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 
 import utils.kkutils.ImgTool;
+import utils.kkutils.R;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.ui.pullrefresh.PageControl;
@@ -47,20 +50,27 @@ public class KKParentRecycleView extends RecyclerView {
     private int mTouchSlop;
 
     public KKParentRecycleView(Context context) {
-        super(context);
-        init();
+        this(context,null);
     }
 
 
     public KKParentRecycleView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context, attrs,0);
     }
 
     public KKParentRecycleView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         final ViewConfiguration vc = ViewConfiguration.get(getContext());
         mTouchSlop = vc.getScaledTouchSlop();
+
+        if(attrs!=null){
+            @SuppressLint("Recycle")
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.KKScrollView);
+            maxHeight= (int) typedArray.getDimension(R.styleable.KKParentRecycleView_maxHeight, 0);
+        }
+
+
+
         init();
     }
 

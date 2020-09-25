@@ -44,7 +44,9 @@
     <declare-styleable name="KKScrollView">
         <attr name="maxHeight" > </attr>
     </declare-styleable>
-
+    <declare-styleable name="KKParentRecycleView">
+        <attr name="maxHeight" > </attr>
+    </declare-styleable>
 
     <declare-styleable name="RoundImageView">
         <attr name="radius" > </attr>

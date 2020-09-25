@@ -31,7 +31,6 @@ public class TestRecycleView extends KKParentFragment {
     @Override
     public void initData() {
         recycleView.setNestedScrollingEnabled(true);
-        recycleView.setMaxHeight(CommonTool.dip2px(300));
         refreshLayout.setRefreshPrimaryColor(Color.BLUE,Color.RED);
         refreshLayout.bindLoadDataAndRefresh(null, new KKRefreshLayout.LoadListDataInterface() {
             @Override
