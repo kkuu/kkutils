@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kk.kktools.R;
+import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.SaoMaTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.UiTool;
@@ -30,7 +31,7 @@ public class TestRecycleView extends KKParentFragment {
     @Override
     public void initData() {
         recycleView.setNestedScrollingEnabled(true);
-
+        recycleView.setMaxHeight(CommonTool.dip2px(300));
         refreshLayout.setRefreshPrimaryColor(Color.BLUE,Color.RED);
         refreshLayout.bindLoadDataAndRefresh(null, new KKRefreshLayout.LoadListDataInterface() {
             @Override

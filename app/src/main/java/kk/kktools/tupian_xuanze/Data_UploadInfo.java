@@ -16,13 +16,18 @@ public class Data_UploadInfo extends JsonDataParent {
 
     @Override
     public boolean isDataOk() {
-        return code==1;
+        return isDataOkNotInUiThread();
     }
 
     @Override
     public boolean isDataOkAndToast() {
         if(!isDataOk()) CommonTool.showToast(msg);
         return isDataOk();
+    }
+
+    @Override
+    public boolean isDataOkNotInUiThread() {
+        return code==1;
     }
 
 

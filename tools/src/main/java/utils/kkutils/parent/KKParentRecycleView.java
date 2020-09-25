@@ -369,14 +369,27 @@ public class KKParentRecycleView extends RecyclerView {
         this.wrapContentHeight = wrapContentHeight;
     }
 
+    public int maxHeight=-1;
+    /***
+     * 设置最大多高
+     * @param maxHeight
+     */
+    public void setMaxHeight(int maxHeight){
+        this.maxHeight=maxHeight;
+    }
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
         if (wrapContentHeight) {
-            int h = View.MeasureSpec.makeMeasureSpec(999999, View.MeasureSpec.AT_MOST);
-            super.onMeasure(widthMeasureSpec, h);
+            heightMeasureSpec= View.MeasureSpec.makeMeasureSpec(maxHeight>0?maxHeight:999999, View.MeasureSpec.AT_MOST);
         } else {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            if(maxHeight>0){
+                heightMeasureSpec=MeasureSpec.makeMeasureSpec(maxHeight,MeasureSpec.AT_MOST);
+            }
         }
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
     }
 
 

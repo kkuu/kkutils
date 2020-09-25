@@ -12,4 +12,9 @@ public class DataParent extends JsonDataParent {
     public boolean isDataOkAndToast() {
         return true;
     }
+
+    @Override
+    public boolean isDataOkNotInUiThread() {
+        return true;
+    }
 }

@@ -81,7 +81,7 @@ public class Data_Upload extends JsonDataParent {
 
     @Override
     public boolean isDataOk() {
-        return code==1;
+        return isDataOkNotInUiThread();
     }
 
     @Override
@@ -90,6 +90,11 @@ public class Data_Upload extends JsonDataParent {
         return isDataOk();
     }
 
+    @Override
+    public boolean isDataOkNotInUiThread() {
+
+            return code==1;
+    }
 
 
 }
