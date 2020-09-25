@@ -242,6 +242,7 @@ public class DialogTool {
      */
     public static void setDialogNoBg(Dialog dialog){
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().getDecorView().setPadding(0,0,0,0);
     }
 
     /***
