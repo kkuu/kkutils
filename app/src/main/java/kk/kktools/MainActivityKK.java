@@ -39,6 +39,7 @@ import utils.kkutils.common.StringTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.TimeTool;
 import utils.kkutils.common.UiTool;
+import utils.kkutils.common.ViewTool;
 import utils.kkutils.http.HttpRequest;
 import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.parent.KKParentActivity;
@@ -62,12 +63,11 @@ public class MainActivityKK extends KKParentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView tv_span=findViewById(R.id.tv_span);
+        ViewTool.initViews(getWindow().getDecorView(),this,null);
 
 
 
         testItems.clear();
-        addItem("Boo",  new ShuJiaFragment(),null);
         addItem("计算器", new JiSuanQi(), null);
         addItem("测试大图", null, new KKViewOnclickListener() {
             @Override
@@ -130,6 +130,15 @@ public class MainActivityKK extends KKParentActivity {
                 ShopTool.openUrl(url);
             }
         });
+
+        btn_go_shujia.setOnClickListener(new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                new ShuJiaFragment().go();
+            }
+        });
+
+        ShuJiaFragment.preLoad(null);
         refresh();
 
 
@@ -153,6 +162,7 @@ public class MainActivityKK extends KKParentActivity {
     }
 
 
+    View btn_go_shujia;
 
     public void play(){
 

@@ -11,9 +11,28 @@
     <TextView style="@style/kk_textview" android:id="@+id/tv_span"></TextView>
 
     <utils.kkutils.ui.KKSimpleRecycleView
-        android:id="@+id/recycleView"
+        android:id="@+id/recycleView" android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleView>
+        android:layout_height="0dp"></utils.kkutils.ui.KKSimpleRecycleView>
 
 
+    <View style="@style/kk_line_h"></View>
+    <utils.kkutils.ui.KKAutoLayout
+     android:layoutDirection="rtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/btn_go_shujia"
+            style="@style/kk_textview"
+            android:padding="20dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:text="boo">
+
+
+        </TextView>
+
+
+</utils.kkutils.ui.KKAutoLayout>
 </LinearLayout>

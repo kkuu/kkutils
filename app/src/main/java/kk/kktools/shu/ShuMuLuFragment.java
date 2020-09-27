@@ -34,7 +34,7 @@ public class ShuMuLuFragment extends KKParentFragment {
 
     TextView btn_sousuo;
     EditText et_sousuo;
-    public boolean fanxu=false;
+    public boolean fanxu=true;
     ShuInfoBean.BookInfo bookInfo;
     @Override
     public void initData() {
@@ -68,6 +68,7 @@ public class ShuMuLuFragment extends KKParentFragment {
         refreshLayout.autoRefresh();
     }
     ShuMuLuBean shuMuLuBean;
+    boolean isFirst=true;
     public void initList(){
 
         List<ShuMuLuBean.MuLuItem> list = shuMuLuBean.getAll();
@@ -75,14 +76,18 @@ public class ShuMuLuFragment extends KKParentFragment {
             Collections.reverse(list);
         }
         int position=0;
-        if(bookInfo.currReadId>0){
-            for (ShuMuLuBean.MuLuItem muLuItem : list) {
-                if(muLuItem.id==bookInfo.currReadId){
-                    position=list.indexOf(muLuItem);
-                    break;
+        if(isFirst){
+            isFirst=false;
+            if(bookInfo.currReadId>0){
+                for (ShuMuLuBean.MuLuItem muLuItem : list) {
+                    if(muLuItem.id==bookInfo.currReadId){
+                        position=list.indexOf(muLuItem);
+                        break;
+                    }
                 }
             }
         }
+
         recycleView.setData(list, R.layout.shu_item, new KKSimpleRecycleView.KKRecycleAdapter() {
             @Override
             public void initData(int position, int type, View itemView, KKSimpleRecycleView.WzViewHolder wzViewHolder) {

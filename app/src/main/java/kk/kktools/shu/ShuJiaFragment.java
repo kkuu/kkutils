@@ -50,16 +50,18 @@ public class ShuJiaFragment extends KKParentFragment {
     }
 
     public void loadData() {
-        List<ShuInfoBean.BookInfo> bookInfoList = ShuDataLocal.getBookInfoList();
 
-        for (ShuInfoBean.BookInfo bookInfo : bookInfoList) {
-            initCache(bookInfo);
-        }
-
-
+        preLoad(new Runnable() {
+            @Override
+            public void run() {
+                initList();
+            }
+        });
         initList();
 
     }
+
+
     public void initList(){
         List<ShuInfoBean.BookInfo> bookInfoList = ShuDataLocal.getBookInfoList();
         recycleView.setData(bookInfoList, R.layout.shu_item, new KKSimpleRecycleView.KKRecycleAdapter() {
@@ -94,7 +96,18 @@ public class ShuJiaFragment extends KKParentFragment {
             }
         });
     }
-    public void initCache(ShuInfoBean.BookInfo bookInfo){
+
+
+
+
+    public static void preLoad(Runnable refresh){
+        List<ShuInfoBean.BookInfo> bookInfoList = ShuDataLocal.getBookInfoList();
+        for (ShuInfoBean.BookInfo bookInfo : bookInfoList) {
+            initCache(bookInfo,refresh);
+        }
+    }
+
+    public static void initCache(ShuInfoBean.BookInfo bookInfo,Runnable refresh){
             new ShuTool().mulu(bookInfo.Id, new HttpUiCallBack<ShuMuLuBean>() {
                 @Override
                 public void onSuccess(ShuMuLuBean data) {
@@ -108,7 +121,7 @@ public class ShuJiaFragment extends KKParentFragment {
                     bookInfo.LastChapterId=data.data.LastChapterId;
                     bookInfo.LastTime=data.data.LastTime;
                     ShuDataLocal.save();
-                    initList();
+                    if(refresh!=null)refresh.run();
                 }
             });
     }
