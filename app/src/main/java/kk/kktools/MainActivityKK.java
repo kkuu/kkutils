@@ -156,7 +156,7 @@ public class MainActivityKK extends KKParentActivity {
 //        };
 //
 //         loadData(urlsDefault);
-        //testVersion();
+//        testVersion();
 
         // testWeb();
     }
@@ -244,9 +244,9 @@ public class MainActivityKK extends KKParentActivity {
     public void testVersion(){
         Version version=new Version();
         version.versionCode=100;
-        version.isHtml="1";
-        version.isForce="1";
-        version.updateUrl="https://hellowvideo.oss-cn-hongkong.aliyuncs.com/download/android/hello-video-app-8.apk";
+        version.isHtml="0";
+        version.isForce="0";
+        version.updateUrl="https://qupinpin.img.hdianzan.com/zhugechao-app/download/android/qupinpin-app-11.apk";
         Version.checkUpDate(this,version,null);
     }
 

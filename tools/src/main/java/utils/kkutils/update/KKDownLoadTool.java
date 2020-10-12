@@ -1,67 +1,88 @@
 package utils.kkutils.update;
 
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
+import org.jetbrains.annotations.NotNull;
+
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.StringTool;
+import utils.kkutils.http.HttpUiCallBack;
+import utils.kkutils.http.implement.HttpToolOkHttp;
 
 /**
  * Created by kk on 2016/5/18.
  */
 public class KKDownLoadTool {
-    static HashMap<Long ,Callback.Cancelable> downLoadMap=new HashMap<>();
+    static HashMap<Long ,Call> downLoadMap=new HashMap<>();
     static volatile  long downLoadId=0;
-    public static synchronized long downLoad(final String url,String localPath ,final DownLoadProgressListener downLoadProgressListener) {
-        RequestParams requestParams=new RequestParams(url);
-        if(StringTool.notEmpty(localPath))requestParams.setSaveFilePath(localPath);
-        requestParams.setCancelFast(true);
-        requestParams.setConnectTimeout(1000 * 60);//超时
-        requestParams.setReadTimeout(1000*99999999);//文件上传不限制，这个是文件上传的
-        Callback.Cancelable cancelable=x.http().get(requestParams, new Callback.ProgressCallback<File>() {
-            @Override
-            public void onWaiting() {
+    public static synchronized long downLoad(final String url,String localPath ,final DownLoadProgressListener listener) {
+        OkHttpClient client = new HttpToolOkHttp().getDefaultBuilder().build();
+        Request request = new Request.Builder().url(url).build();
+        Call call = client.newCall(request);
+        File file=new File(localPath);
+        long id=downLoadId++;
+        downLoadMap.put(id,call);
 
+        call.enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                LogTool.ex(e);
             }
 
             @Override
-            public void onStarted() {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if(!response.isSuccessful()){
+                    LogTool.ex(new Throwable("返回错误"+response.code()+"   "+response.message()));
+                }else {
+                    FileOutputStream fileOutputStream = null;
+                    InputStream inputStream = null;
+                    try {
+                        long total = response.body().contentLength();
+                        long sum = 0;
+                        inputStream = response.body().byteStream();
+                        fileOutputStream = new FileOutputStream(file);
+                        byte[] buffer = new byte[1024 * 1024];
+                        int len = 0;
+                        while ((len = inputStream.read(buffer)) != -1) {
+                            fileOutputStream.write(buffer, 0, len);
+                            if (listener != null) {
+                                sum += len;
+                                int progress = (int) (sum * 1.0f / total * 100);
+                                LogTool.s("下载"+total +"     "+sum);
+                                // 下载中
+                                listener.onProgress(id,url,localPath,total,sum,false);
+                            }
+                        }
+                        fileOutputStream.flush();
 
-            }
+                        listener.onProgress(id,url,localPath,total,sum,sum==total);
 
-            @Override
-            public void onLoading(long total, long current, boolean isDownloading) {
-                downLoadProgressListener.onProgress(1,url,"",total,current,false);
-                LogTool.s("下载中"+total+"   "+current);
-            }
 
-            @Override
-            public void onSuccess(File result) {
-                downLoadProgressListener.onProgress(1,url,result.getAbsolutePath(),0,0,true);
-                LogTool.s("下载完成"+result.getAbsolutePath());
-            }
+                    } catch (Exception e) {
+                        LogTool.ex(e);
+                    } finally {
+                        if (inputStream != null) {
+                            inputStream.close();
+                        }
+                        if (fileOutputStream != null) {
+                            fileOutputStream.close();
+                        }
+                    }
+                }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
 
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
 
             }
         });
-        long id=downLoadId++;
-        downLoadMap.put(id,cancelable);
         return id;
     }
 
@@ -72,7 +93,7 @@ public class KKDownLoadTool {
      */
     public static void removeDownLoad(long id) {
         try {
-            Callback.Cancelable cancelable=downLoadMap.get(id);
+            Call cancelable=downLoadMap.get(id);
             if(cancelable!=null)cancelable.cancel();
         }catch (Exception e){
             LogTool.ex(e);

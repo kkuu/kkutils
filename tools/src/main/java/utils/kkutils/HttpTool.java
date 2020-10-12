@@ -11,7 +11,7 @@ import utils.kkutils.http.HttpRequest;
 import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.http.InterfaceHttpTool;
 import utils.kkutils.http.implement.HttpToolOkHttp;
-import utils.kkutils.http.implement.HttpToolXutils;
+//import utils.kkutils.http.implement.HttpToolXutils;
 
 /**
  * Created by coder on 15/12/24.
