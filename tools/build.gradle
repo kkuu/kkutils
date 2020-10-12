@@ -56,27 +56,18 @@ dependencies {
 
     api 'com.google.android:flexbox:1.1.1'
 
-    // implementation (name: 'alipaySdk-15.5.9-20181123210601', ext: 'aar') 不能使用这种方式   要用：   implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
-    //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
-    //    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
-    //api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.1.6'
-    api 'com.tencent.tbs.tbssdk:sdk:43903'//x5webview 暂时不支持 api 29，android10
-    //x5webview
-//    api files('libs/tbs_sdk_thirdapp_v4.3.0.1072_43646_sharewithdownloadwithfile_withoutGame_obfs_20190429_175122.jar')
+    api 'com.tencent.tbs.tbssdk:sdk:43939'//x5webview 暂时不支持 api 29，android10
 
-//    api 'org.xutils:xutils:3.5.0'
+
     api 'com.google.code.gson:gson:2.8.6'
-
     api('com.squareup.okhttp3:okhttp:4.8.1')
+
 
     //图片加载
     api 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-//
-//    api 'com.github.bumptech.glide:glide:4.8.0'
-//    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation "com.github.bumptech.glide:okhttp-integration:4.11.0"
     annotationProcessor 'androidx.annotation:annotation:1.1.0'
 
@@ -88,27 +79,20 @@ dependencies {
     //身份证拾取
     api 'com.github.lvzhihao100:ORCamera:1.1'
 
-
     api 'com.google.zxing:core:3.4.0'
     api 'com.journeyapps:zxing-android-embedded:3.6.0'
 
 
-//
-//    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
-//    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
-
-//1.1.0 androidx 版本 //下拉刷新
+     //下拉刷新
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-11'
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-11'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
-
 
 
     //y验证码
     api 'com.justkiddingbaby:vercodeedittext:1.1.0'
     //密码输入框
     api 'com.github.maning0303:MNPasswordEditText:V1.0.2'
-
 
 
     //tablayout  比较全的tab效果
@@ -131,15 +115,8 @@ dependencies {
 //
     api 'com.github.dueeeke.dkplayer:dkplayer-java:3.2.6'
     api 'com.github.dueeeke.dkplayer:dkplayer-ui:3.2.6'
-//    api 'com.github.dueeeke.dkplayer:player-exo:3.2.6'
     api 'com.github.dueeeke.dkplayer:player-ijk:3.2.6'
     api 'com.github.dueeeke.dkplayer:videocache:3.2.6'
-
-//    api 'com.github.dueeeke.dkplayer:dkplayer-java:3.1.4'
-//    api 'com.github.dueeeke.dkplayer:dkplayer-ui:3.1.4'
-//    api 'com.github.dueeeke.dkplayer:player-exo:3.1.4'
-//    api 'com.github.dueeeke.dkplayer:player-ijk:3.1.4'
-//    api 'com.github.dueeeke.dkplayer:videocache:3.1.4'
 
 
 }
