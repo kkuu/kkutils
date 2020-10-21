@@ -12,6 +12,25 @@ import utils.kkutils.common.CommonTool;
 
 /***
  * view 滚动 里面图片也滚动的控件
+ *
+ *  recycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+ *             @Override
+ *             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+ *                 super.onScrollStateChanged(recyclerView, newState);
+ *             }
+ *             @Override
+ *             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+ *                 super.onScrolled(recyclerView, dx, dy);
+ *                 for(int i=0;i<recyclerView.getChildCount();i++){
+ *                     ImageViewScroll imgv_shouye_big=recyclerView.getChildAt(i).findViewById(R.id.imgv_shouye_big);
+ *                     if(imgv_shouye_big!=null){
+ *                         imgv_shouye_big.translateRefresh();
+ *                     }
+ *                 }
+ *             }
+ *         });
+ *
+ *
  */
 public class ImageViewScroll extends androidx.appcompat.widget.AppCompatImageView {
     public ImageViewScroll(Context context) {
