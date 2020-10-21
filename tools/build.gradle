@@ -10,7 +10,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -41,7 +41,7 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////utils
     //api (name:'tools-release', ext:'aar')
-
+    api 'androidx.multidex:multidex:2.0.1'//Androidx版
     api 'androidx.constraintlayout:constraintlayout:2.0.1'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
     api 'androidx.appcompat:appcompat:1.2.0'
