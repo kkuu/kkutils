@@ -59,8 +59,12 @@ public class TestShiPin extends KKParentFragment {
         btn_rotain.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
-               if(imgv_video.getRotation()==0) imgv_video.setRotation(90);
-                if(imgv_video.getRotation()==90) imgv_video.setRotation(0);
+               if(imgv_video.getRotation()==0){
+                   imgv_video.setRotation(90);
+               }
+               else {
+                   imgv_video.setRotation(0);
+               }
             }
         });
 
