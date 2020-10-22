@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".MainActivityKK">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <utils.kkutils.ui.video.douyin2.views.KVideoViewNormal
+            android:id="@+id/kvideo_left"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"></utils.kkutils.ui.video.douyin2.views.KVideoViewNormal>
+        <utils.kkutils.ui.video.douyin2.views.KVideoViewNormal
+            android:id="@+id/kvideo_right"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"></utils.kkutils.ui.video.douyin2.views.KVideoViewNormal>
+
+
+    </LinearLayout>
+
+</LinearLayout>

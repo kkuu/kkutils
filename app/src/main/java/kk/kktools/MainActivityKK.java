@@ -25,6 +25,7 @@ import kk.kktools.animation.KKTestCanvas;
 import kk.kktools.color.TestColorFragmentKK;
 import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.recycleview_test.TestRecycleView;
+import kk.kktools.shipin.TestShiPin;
 import kk.kktools.shu.ShuJiaFragment;
 import kk.kktools.tab.TestTab;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
@@ -89,7 +90,8 @@ public class MainActivityKK extends KKParentActivity {
         addItem("测试视频播放", new TestRecycleView(), new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
-                play();
+//                play();
+                new TestShiPin().go();
                 // KKVideoPlayer.go();
             }
         });

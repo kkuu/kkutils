@@ -31,7 +31,6 @@ import utils.kkutils.common.ViewTool;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKImageView;
 import utils.kkutils.ui.bigimage.PinchImageView;
-import utils.kkutils.ui.video.douyin2.views.KVideoView;
 import utils.kkutils.ui.video.douyin2.views.KVideoViewNormal;
 
 /***
@@ -182,8 +181,8 @@ public class LunBoTool {
 
                     if(!init){//第一次初始化才播放视频
                         init=true;
-                        if(autoStartVideo&&positionIn==0&&view instanceof  KVideoView){
-                            ((KVideoView) view).start();
+                        if(autoStartVideo&&positionIn==0&&view instanceof  KVideoViewNormal){
+                            ((KVideoViewNormal) view).start();
                         }
                     }
 
@@ -265,10 +264,10 @@ public class LunBoTool {
                         }
 
                         Object tag =viewMap.get(positionIn);//viewList.get(positionIn);
-                        if(autoStartVideo&&(tag instanceof  KVideoView)){
-                            ((KVideoView) tag).start();
+                        if(autoStartVideo&&(tag instanceof  KVideoViewNormal)){
+                            ((KVideoViewNormal) tag).start();
                         }else {
-                           if(finalHasVideo) KVideoView.pauseAll();
+                           if(finalHasVideo) KVideoViewNormal.pauseAll();
                         }
                     } catch (Exception e) {
                         LogTool.ex(e);
@@ -403,7 +402,7 @@ public class LunBoTool {
                 public View getView(ViewGroup container, LunBoData lunBoData, int position, boolean isLoop, boolean imageCanScale) {
                     try {
                         if(LunBoTool.isVideo(""+lunBoData.imageUrl)){
-                            final KVideoView videoView=new KVideoViewNormal(container.getContext());
+                            final KVideoViewNormal videoView=new KVideoViewNormal(container.getContext());
 //                            StandardVideoController standardVideoController = new StandardVideoController(container.getContext());
 //                            standardVideoController.addDefaultControlComponent("", false);
 //                            videoView.setVideoController(standardVideoController);

@@ -26,25 +26,24 @@ import utils.kkutils.common.BroadcastReceiverTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.ui.video.douyin2.library.cache.PreloadManager;
 
-public class KVideoView extends VideoView {
+public class KVideoView extends KVideoViewNormal {
+
+
     public KVideoView(@NonNull Context context) {
         super(context);
-        init();
     }
 
     public KVideoView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public KVideoView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
-
     }
-    public void init(){
-        initAutoPause();
-        addOnStateChangeListener(new OnStateChangeListener() {
+
+    @Override
+    public OnStateChangeListener getOnStateChangeListener() {
+        return new OnStateChangeListener() {
             @Override
             public void onPlayerStateChanged(int playerState) {
 
@@ -52,24 +51,9 @@ public class KVideoView extends VideoView {
 
             @Override
             public void onPlayStateChanged(int playState) {
-
-                /***
-                 *  //播放器的各种状态
-                 *     public static final int STATE_ERROR = -1;
-                 *     public static final int STATE_IDLE = 0;
-                 *     public static final int STATE_PREPARING = 1;
-                 *     public static final int STATE_PREPARED = 2;
-                 *     public static final int STATE_PLAYING = 3;
-                 *     public static final int STATE_PAUSED = 4;
-                 *     public static final int STATE_PLAYBACK_COMPLETED = 5;
-                 *     public static final int STATE_BUFFERING = 6;
-                 *     public static final int STATE_BUFFERED = 7;
-                 *     public static final int STATE_START_ABORT = 8;//开始播放中止
-                 */
-
                 if(playState==STATE_PREPARING||playState==STATE_PLAYING){
                     try {
-                        if(currVideoView!=null&&currVideoView!=KVideoView.this){
+                        if(currVideoView!=null&&currVideoView!=KVideoView.this){//自动停止上一个
                             currVideoView.pause();
                         }
                         currVideoView=KVideoView.this;
@@ -78,157 +62,18 @@ public class KVideoView extends VideoView {
                     }
                 }
             }
-        });
+        };
     }
 
     public static VideoView currVideoView;
 
-    public static void pauseAll(){
-        if(currVideoView!=null){
-            currVideoView.pause();
-        }
-    }
-
-    public BaseVideoController getController() {
-        return mVideoController;
-    }
-
-    static {
-        //播放器配置，注意：此为全局配置，按需开启
-        VideoViewManager.setConfig(VideoViewConfig.newBuilder()
-                .setLogEnabled(BuildConfig.DEBUG)//调试的时候请打开日志，方便排错
-                .setPlayerFactory(IjkPlayerFactory.create())
-//                .setPlayerFactory(ExoMediaPlayerFactory.create())
-//                .setRenderViewFactory(SurfaceRenderViewFactory.create())
-//                .setEnableOrientation(true)
-//                .setEnableAudioFocus(false)
-//                .setScreenScaleType(VideoView.SCREEN_SCALE_MATCH_PARENT)
-//                .setAdaptCutout(false)
-//                .setPlayOnMobileNetwork(true)
-//                .setProgressManager(new ProgressManagerImpl())
-                .build());
-    }
-
-
-
-
-
-
-
-
-
-    /***
-     * 设置部分生命周期
-     */
-    public void initAutoPause() {
-        Lifecycle lifecycle=null;
-        if(AppTool.currActivity instanceof FragmentActivity){
-            lifecycle= ((FragmentActivity) AppTool.currActivity).getLifecycle();
-        }
-        if(AppTool.currActivity instanceof AppCompatActivity){
-            lifecycle= ((AppCompatActivity) AppTool.currActivity).getLifecycle();
-        }
-
-        if(lifecycle!=null){
-            lifecycle.addObserver(new LifecycleEventObserver() {
-                @Override
-                public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
-                    try {
-                        LogTool.s(source+""+  event);
-                        if (Lifecycle.Event.ON_PAUSE == event) {
-                            pause();
-                        }
-                        if (Lifecycle.Event.ON_RESUME == event) {
-                            resume();
-                        }
-                        //
-                        if (Lifecycle.Event.ON_DESTROY == event) {
-                            release();
-                            PreloadManager.getInstance(getContext()).removeAllPreloadTask();
-                        }
-                    }catch (Exception e){
-                        LogTool.ex(e);
-                    }
-                }
-            });
-        }
-
-    }
-
-
     @Override
-    public void release(){
-        try {
-            LogTool.s("播放release");
-            super.release();
-        } catch (Exception e) {
-            LogTool.ex(e);
-        }
+    public void initDefalutController() {
+        //不要默认controller
     }
 
     @Override
-    public void pause() {
-        try {
-            LogTool.s("播放暂停");
-            super.pause();
-        } catch (Exception e) {
-            LogTool.ex(e);
-        }
+    public void autoLoadThumb(String url) {
+        //不要自动加载， 主要是图片缩放
     }
-
-    @Override
-    public void resume() {
-        try {
-            LogTool.s("播放resume");
-            super.resume();
-        } catch (Exception e) {
-            LogTool.ex(e);
-        }
-    }
-
-    @Override
-    public void start() {
-        try {
-            LogTool.s("播放start");
-            super.start();
-        } catch (Exception e) {
-            LogTool.ex(e);
-        }
-    }
-
-
-
-
-    @Override
-    public void stopFullScreen() {
-
-        try {
-            super.stopFullScreen();
-        } catch (Exception e) {
-            LogTool.ex(e);
-        }
-    }
-
-    @Override
-    public void stopNestedScroll() {
-
-        try {
-            super.stopNestedScroll();
-        } catch (Exception e) {
-            LogTool.ex(e);
-        }
-    }
-
-    @Override
-    public void stopTinyScreen() {
-
-        try {
-            super.stopTinyScreen();
-        } catch (Exception e) {
-            LogTool.ex(e);
-        }
-    }
-
-
-
 }
