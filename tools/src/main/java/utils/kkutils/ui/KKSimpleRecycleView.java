@@ -142,8 +142,8 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
         }
         this.holderClass = holderClass;
         if (KKRecycleAdapter != null) this.kkRecycleAdapter = KKRecycleAdapter;
-        adapter.notifyDataSetChanged();
-
+//        adapter.notifyDataSetChanged();
+        this.adapter.notifyItemRangeChanged(0,datas.size());
     }
 
     public void addData(int position, Object data) {

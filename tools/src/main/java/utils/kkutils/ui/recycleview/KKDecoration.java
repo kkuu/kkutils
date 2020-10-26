@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.ResourcesTool;
 import utils.kkutils.common.UiTool;
+import utils.kkutils.ui.KKSimpleRecycleView;
 
 /***
  * RecyclerView 的间隔线
@@ -67,7 +69,7 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
         this(spanCount,headCount,paddingItemDp,paddingBoderDp,lineWidth,lineColor,null);
     }
 
-    public KKDecoration(int spanCount, int headCount, double paddingItemDp, double paddingBoderDp, int lineWidth, int lineColor,OnItemOffsetsChangeListener onItemOffsetsChangeListener) {
+    public KKDecoration(int spanCount, int headCount, double paddingItemDp, double paddingBoderDp, int lineWidth, int lineColor, OnItemOffsetsChangeListener onItemOffsetsChangeListener) {
         this.spanCount = spanCount;
         this.headCount = headCount;
         paddingItem =CommonTool.dip2px(paddingItemDp);
@@ -75,7 +77,6 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
         itemPadding = getItemPadding(spanCount, paddingItem, paddingBoder);
         this.onItemOffsetsChangeListener=onItemOffsetsChangeListener;
         setLine(lineWidth, lineColor);
-
     }
 
 
@@ -272,6 +273,16 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
 
                 // 计算这个child 处于第几列
                 int column = (position) % spanCount;
+
+                {//瀑布流的 列索引可能和position 没关系， 用getSpanIndex
+                    RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+                    if(layoutManager instanceof StaggeredGridLayoutManager){
+                        column=((StaggeredGridLayoutManager.LayoutParams)view.getLayoutParams()).getSpanIndex();
+                    }
+                }
+
+
+
 //                outRect.left = (column * padding / spanCount);
 //                outRect.right = padding - (column + 1) * padding / spanCount;
 
@@ -341,5 +352,6 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
         this.onItemOffsetsChangeListener = onItemOffsetsChangeListener;
         return this;
     }
+
 
 }
