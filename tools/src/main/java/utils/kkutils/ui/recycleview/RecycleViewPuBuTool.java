@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.LogTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.ui.KKSimpleRecycleView;
 
@@ -32,15 +33,73 @@ public class RecycleViewPuBuTool {
                 }
             });
         }
-        //瀑布流 用缓存会导致 下一页 的时候 闪烁
-        recycleView.setItemViewCacheSize(0);
+
 
         if (recycleView.getLayoutManager() == null || !(recycleView.getLayoutManager() instanceof StaggeredGridLayoutManager)) {
             StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(spanCount, 1);
+            layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);//防止左右交错边距不对
+
             recycleView.setLayoutManager(layoutManager);
+
+            //防止第一行到顶部有空白区域
+            recycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+
+                    try {
+                        if(newState==RecyclerView.SCROLL_STATE_IDLE){
+                            RecyclerView.LayoutManager layoutManager1 = recyclerView.getLayoutManager();
+                            if(layoutManager1!=null&&layoutManager1 instanceof StaggeredGridLayoutManager){
+                                StaggeredGridLayoutManager staggeredGridLayoutManager= (StaggeredGridLayoutManager) layoutManager1;
+                                int[] firstVisibleItem = null;
+                                firstVisibleItem = staggeredGridLayoutManager.findFirstVisibleItemPositions(firstVisibleItem);
+                                if (firstVisibleItem != null && firstVisibleItem[0] <2) {
+                                    if(recyclerView.getAdapter()!=null){
+                                        recycleView.getAdapter().notifyDataSetChanged();
+                                    }
+                                }
+                            }
+                        }
+                    }catch (Exception e){
+                        LogTool.ex(e);
+                    }
+
+
+
+                }
+            });
+
         }
 
+
+
+
+        StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) recycleView.getLayoutManager();
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        recycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                //防止第一行到顶部有空白区域
+                if(newState==RecyclerView.SCROLL_STATE_IDLE){
+                    StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) recyclerView.getLayoutManager();
+                    int[] firstVisibleItem = null;
+                    firstVisibleItem = layoutManager.findFirstVisibleItemPositions(firstVisibleItem);
+                    if (firstVisibleItem != null && firstVisibleItem[0] <2) {
+                        if(recyclerView.getAdapter()!=null){
+                            recycleView.getAdapter().notifyDataSetChanged();
+                        }
+                    }
+                }
+
+
+            }
+        });
     }
+
+
 //    /**
 //     * 暂时两列  需要在initData 中调用  initPuBuLiuSpanItemPadding 设置间距
 //     * @param recycleView
