@@ -56,7 +56,7 @@ public class RecycleViewPuBuTool {
                                 firstVisibleItem = staggeredGridLayoutManager.findFirstVisibleItemPositions(firstVisibleItem);
                                 if (firstVisibleItem != null && firstVisibleItem[0] <2) {
                                     if(recyclerView.getAdapter()!=null){
-                                        recycleView.getAdapter().notifyDataSetChanged();
+                                        recyclerView.getAdapter().notifyItemRangeChanged(0,recyclerView.getAdapter().getItemCount());
                                     }
                                 }
                             }

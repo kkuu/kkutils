@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -189,6 +190,50 @@ public class RecycleViewTool {
         }
 
 
+        class Change{
+            public void  refresh(boolean onScroll){
+                if(onScroll){
+                    refreshImp();
+                }else {
+                    recycleView.post(new Runnable() {//防止 数据改变调用这里的时候界面还没变动获取位置不对
+                        @Override
+                        public void run() {
+                            refreshImp();
+                        }
+                    });
+                }
+            }
+            public void refreshImp(){
+                View tab = recycleView.findViewById(tabInRecyleViewResId);
+                if(tab!=null) {
+                    int[] tabLocation=new int[2];
+
+                    tab.getLocationInWindow(tabLocation);
+
+//                        LogTool.s("当前："+tabLocation[0]+"  "+tabLocation[1]+"   "+recycleViewLocation[1]+"   "+tab.getPivotY());
+
+                    if(tabLocation[1]<recycleViewLocation[1]){
+                        tabLocation[1]=recycleViewLocation[1];
+                    }
+                    tabTitle.setX(tabLocation[0]);
+                    tabTitle.setY(tabLocation[1]);
+                    tabTitle.bringToFront();
+                    tabTitle.setVisibility(View.VISIBLE);
+                }else {
+
+                    int firstVisibleItemPosition = findFirstVisibleItemPosition(recycleView);
+
+
+                    if(firstVisibleItemPosition<tabInRecyleViewIndex){//第一个可见得 比tab 得还小， 说明占位tab 在底部下面去了，直接隐藏外面得tab
+                        tabTitle.setVisibility(View.INVISIBLE);
+                    }else {//占位tab 在顶部上面去了， 固定外面tab 在顶部
+                        tabTitle.setVisibility(View.VISIBLE);
+                        tabTitle.setY(recycleViewLocation[1]);
+                    }
+                }
+            }
+        }
+        Change change=new Change();
 
         if(recycleView.getTag()==null){
             recycleView.setTag(1);//只添加一次scrolllistener
@@ -197,37 +242,47 @@ public class RecycleViewTool {
                 @Override
                 public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
-
-                    View tab = recyclerView.findViewById(tabInRecyleViewResId);
-                    if(tab!=null) {
-                        int[] tabLocation=new int[2];
-
-                        tab.getLocationInWindow(tabLocation);
-
-//                        LogTool.s("当前："+tabLocation[0]+"  "+tabLocation[1]+"   "+recycleViewLocation[1]+"   "+tab.getPivotY());
-
-                        if(tabLocation[1]<recycleViewLocation[1]){
-                            tabLocation[1]=recycleViewLocation[1];
-                        }
-                        tabTitle.setX(tabLocation[0]);
-                        tabTitle.setY(tabLocation[1]);
-                        tabTitle.bringToFront();
-                        tabTitle.setVisibility(View.VISIBLE);
-                        preY=tabTitle.getY();
-                    }else {
-
-                        int firstVisibleItemPosition = findFirstVisibleItemPosition(recyclerView);
-
-
-                        if(firstVisibleItemPosition<tabInRecyleViewIndex){//第一个可见得 比tab 得还小， 说明占位tab 在底部下面去了，直接隐藏外面得tab
-                            tabTitle.setVisibility(View.INVISIBLE);
-                        }else {//占位tab 在顶部上面去了， 固定外面tab 在顶部
-                            tabTitle.setVisibility(View.VISIBLE);
-                            tabTitle.setY(recycleViewLocation[1]);
-                        }
-                    }
+                    change.refresh(true);
                 }
             });
+
+            if(recycleView.getAdapter()!=null){
+                recycleView.getAdapter().registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        change.refresh(false);
+                    }
+
+                    @Override
+                    public void onItemRangeChanged(int positionStart, int itemCount) {
+                        super.onItemRangeChanged(positionStart, itemCount);
+                        change.refresh(false);
+                    }
+
+
+
+                    @Override
+                    public void onItemRangeInserted(int positionStart, int itemCount) {
+                        super.onItemRangeInserted(positionStart, itemCount);
+                        change.refresh(false);
+                    }
+
+                    @Override
+                    public void onItemRangeRemoved(int positionStart, int itemCount) {
+                        super.onItemRangeRemoved(positionStart, itemCount);
+                        change.refresh(false);
+                    }
+
+                    @Override
+                    public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+                        super.onItemRangeMoved(fromPosition, toPosition, itemCount);
+                        change.refresh(false);
+                    }
+                });
+            }else {
+                CommonTool.showToast("initRecycleViewTabBar  的adapter 不能为空");
+            }
 
         }
         return resultList;
