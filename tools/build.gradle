@@ -1,5 +1,7 @@
-apply plugin: 'com.android.library'
+//打包的时候 把build / libs 里面的tools-sources 放到实际工程里面， 设置源码就可以看见了
 
+
+apply plugin: 'com.android.library'
 android {
     compileSdkVersion 28
 
@@ -32,6 +34,8 @@ repositories{
         dirs 'libs'
     }
 }
+
+
 
 dependencies {
     compileOnly fileTree(include: [ '*.aar'], dir: 'libs')//需要自己导入  alipaySdk_15.5.9_20181123210601.aar
@@ -119,4 +123,32 @@ dependencies {
     api 'com.github.dueeeke.dkplayer:videocache:3.2.6'
 
 
+}
+
+
+
+
+// 指定编码
+tasks.withType(JavaCompile) {
+//     options.encoding = "UTF-8"
+}
+// 打包源码
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+// 制作文档(Javadoc)
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
