@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -319,7 +320,12 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
 
         try {
             if(onItemOffsetsChangeListener!=null){
-                onItemOffsetsChangeListener.getItemOffsets(outRect,view,parent,state);
+                int w=parent.getWidth();
+                if(w<1)w=parent.getMeasuredWidth();
+                int itemW= (int) ((w-paddingBoder*2-paddingItem*(spanCount-1))/spanCount);
+                boolean hasChange=view.getWidth()!=itemW;
+
+                onItemOffsetsChangeListener.getItemOffsets(outRect,view,parent,state,itemW,hasChange);
             }
         }catch (Exception e){
             LogTool.ex(e);
@@ -342,7 +348,7 @@ public class KKDecoration extends RecyclerView.ItemDecoration {
 
 
     public static interface  OnItemOffsetsChangeListener{
-        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state);
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state,int itemWidth,boolean hasChange);
     }
     public OnItemOffsetsChangeListener getOnItemOffsetsChangeListener() {
         return onItemOffsetsChangeListener;
