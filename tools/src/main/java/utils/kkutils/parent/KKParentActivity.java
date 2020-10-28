@@ -177,7 +177,6 @@ public class KKParentActivity extends FragmentActivity implements Serializable {
     }
 
 
-    public static Fragment currentFragment;
 
     /***
      * 主页切换的，平时不用
@@ -187,27 +186,37 @@ public class KKParentActivity extends FragmentActivity implements Serializable {
      */
     public synchronized void setFragment(Fragment fragment, int fragment_container_id, boolean isSingleInParent) {
         try {
-            if (currentFragment == fragment) return;
 
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            if (!fragment.isAdded()) {
-                transaction.add(fragment_container_id, fragment);
-            } else {
-                if (!fragment.isVisible()) transaction.show(fragment);
-            }
 
-            {
-//-----------------------------操作静态currentFragment 的时候小心， 可能  currentFragment 的 FragmentManager 不是当前这个了， 下面会报错-------------------------------------------
-                try {
-                    if (currentFragment != null && currentFragment != fragment) {
-                        if (currentFragment.getFragmentManager() == getSupportFragmentManager())
-                            transaction.hide(currentFragment);
-                    }
-                } catch (Exception e) {
-                    LogTool.ex(e);
+            {//先隐藏当前界面所有的
+                for (Fragment fragment1 : getSupportFragmentManager().getFragments()) {
+                    if(fragment!=fragment1)transaction.hide(fragment1);
                 }
             }
+
+
+            {//添加 或者显示 fragment
+                if (!fragment.isAdded()) {
+                    transaction.add(fragment_container_id, fragment);
+                } else {
+                    if (!fragment.isVisible()) transaction.show(fragment);
+                }
+            }
+
+
+//            {
+////-----------------------------操作静态currentFragment 的时候小心， 可能  currentFragment 的 FragmentManager 不是当前这个了， 下面会报错-------------------------------------------
+//                try {
+//                    if (currentFragment != null && currentFragment != fragment) {
+//                        if (currentFragment.getFragmentManager() == getSupportFragmentManager())
+//                            transaction.hide(currentFragment);
+//                    }
+//                } catch (Exception e) {
+//                    LogTool.ex(e);
+//                }
+//            }
 
 
             //设置当前界面是否只有一个fragment,  主要是针对tab里面的faragment 设置 resume 时机使用
@@ -216,11 +225,13 @@ public class KKParentActivity extends FragmentActivity implements Serializable {
             }
 
 
-            currentFragment = fragment;
             transaction.commitNow();
         } catch (Exception e) {
             LogTool.ex(e);
         }
 
     }
+
+
+
 }

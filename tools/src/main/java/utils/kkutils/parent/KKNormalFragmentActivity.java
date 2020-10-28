@@ -130,23 +130,28 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
 
     @Override
     public void onBackPressed() {
-        if(currentFragment!=null&&currentFragment instanceof KKParentFragment){
-            if(((KKParentFragment) currentFragment).onBackPressed()){
-                return;
+
+        try {
+            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                if(fragment instanceof  KKParentFragment){
+                    if(((KKParentFragment) fragment).onBackPressed()){
+                        return;
+                    }
+                }
             }
-        }
-        if (getOnBackPressedListener() != null) {
-            if (getOnBackPressedListener().onBackPressed()) {
-                return;
+
+
+
+            if (getOnBackPressedListener() != null) {
+                if (getOnBackPressedListener().onBackPressed()) {
+                    return;
+                }
             }
+        }catch (Exception e){
+            LogTool.ex(e);
         }
 
 
-//        if (getAddFragmentHasViewCount()<1) {
-//            finish();
-//        } else {
-//            super.onBackPressed();
-//        }
         super.onBackPressed();
     }
 
