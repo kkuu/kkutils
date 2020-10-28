@@ -42,6 +42,7 @@ public class RecycleViewPuBuTool {
             recycleView.setLayoutManager(layoutManager);
 
             //防止第一行到顶部有空白区域
+            recycleView.setItemViewCacheSize(0);//不加这一行 下面代码刷新的时候会跳动
             recycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
