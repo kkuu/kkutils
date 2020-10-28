@@ -34,7 +34,6 @@ import utils.kkutils.ui.StatusBarTool;
  */
 public  class KKNormalFragmentActivity extends KKParentActivity {
 
-    Fragment currentFragment = null;
     /***
      * 重新设置返回事件
      */
@@ -63,7 +62,7 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
     }
 
     /***
-     * @param fragment     要去向的fragment
+     * @param toFragment     要去向的fragment
      * @param fromFragment 由哪个 fragment 启动的
      */
     public void goForResult(Fragment toFragment, Fragment fromFragment, int requestCode) {
@@ -95,7 +94,7 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
                 Fragment fragment = fragmentClass.newInstance();
                 fragment.setArguments(arguments);
                 removeAllFragment();
-                setFragment(fragment);
+                setFragment(fragment,parentId,true);
             }
         } catch (Exception e) {
             LogTool.ex(e);
@@ -115,19 +114,19 @@ public  class KKNormalFragmentActivity extends KKParentActivity {
         }
 
     }
-    public void setFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (currentFragment != null) {
-            transaction.hide(currentFragment);
-        }
-        if (!fragment.isAdded()) {
-            transaction.add(parentId, fragment);
-        } else {
-            transaction.show(fragment);
-        }
-        currentFragment = fragment;
-        transaction.commitNow();
-    }
+//    public void setFragment(Fragment fragment) {
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        if (currentFragment != null) {
+//            transaction.hide(currentFragment);
+//        }
+//        if (!fragment.isAdded()) {
+//            transaction.add(parentId, fragment);
+//        } else {
+//            transaction.show(fragment);
+//        }
+//        currentFragment = fragment;
+//        transaction.commitNow();
+//    }
 
     @Override
     public void onBackPressed() {
