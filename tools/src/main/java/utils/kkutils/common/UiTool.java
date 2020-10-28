@@ -316,20 +316,34 @@ public class UiTool {
                 }else {
                     textView.setText(StringTool.getNotNullText(text));
                 }
-                if(!(textView instanceof EditText)){
-                    if(StringTool.isEmpty(""+text)){
-                        textView.setVisibility(View.INVISIBLE);
-                    }else {
-                        textView.setVisibility(View.VISIBLE);
-                    }
-                }
-
             }
         } catch (Exception e) {
             LogTool.ex(e);
         }
     }
+    public static void setTextViewGoneIfNull(View parent, int resId, Object text) {
+        try {
+            TextView textView = (TextView) parent.findViewById(resId);
+            setTextViewGoneIfNull(textView, text);
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
 
+    public static void setTextViewGoneIfNull(TextView textView, Object text) {
+        try {
+            if(textView!=null){
+               setTextView(textView,text);
+                if(StringTool.isEmpty(""+text)){
+                    textView.setVisibility(View.GONE);
+                }else {
+                    textView.setVisibility(View.VISIBLE);
+                }
+            }
+        } catch (Exception e) {
+            LogTool.ex(e);
+        }
+    }
     public static void setTextColor(TextView textView, int colorResId) {
         try {
             textView.setTextColor(getColorByResId(colorResId));
