@@ -56,10 +56,16 @@ public class ImageViewScroll extends androidx.appcompat.widget.AppCompatImageVie
         });
     }
 
-    float scale=1;
-    float centerX;//显示图片中间，需要移动的x  比如-100
-    float scrollAll;//最打滚动高度，  最小是0 贴合顶部， 最大是 -(drawableH-viewH)
-    float defaultScrollHeightScale=1.8f;//默认可移动高比 view 高  多少倍，就是包含看不见的部分
+    public float scale=1;
+    public float centerX;//显示图片中间，需要移动的x  比如-100
+    public float scrollAll;//最打滚动高度，  最小是0 贴合顶部， 最大是 -(drawableH-viewH)
+
+    public void setDefaultScrollHeightScale(float defaultScrollHeightScale) {
+        this.defaultScrollHeightScale = defaultScrollHeightScale;
+        initCrop();
+    }
+
+    public float defaultScrollHeightScale=1.8f;//默认可移动高比 view 高  多少倍，就是包含看不见的部分
     public void initCrop(){
         if(getDrawable()==null)return;
 

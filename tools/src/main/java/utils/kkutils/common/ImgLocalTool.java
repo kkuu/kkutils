@@ -4,7 +4,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -244,4 +248,78 @@ public class ImgLocalTool {
     public interface OnConvertSuccessListener {
         void succeed(File outFile);
     }
+
+
+    /***
+     * 缩放drawble  填充进  w h ，并且取最大图片 imageViewScroll里面用
+     * @param drawable
+     * @param w
+     * @param h
+     * @return
+     */
+    public static Drawable zoomDrawableFillWH(Drawable drawable, float w, float h) {
+        int drawableW = drawable.getIntrinsicWidth();
+        int drawableH =drawable.getIntrinsicHeight();
+        float scale=1;
+        {//初始话 是否需要拉伸
+            float minDrawableW=w;
+            float minDrawableH=h;
+            if(drawableW<minDrawableW||drawableH<minDrawableH){//需要拉伸
+                float scale1=minDrawableW/drawableW;
+                float scale2=minDrawableH/drawableH;
+                scale=Math.max(scale1,scale2);
+            }
+        }
+
+        return zoomDrawable(drawable,0,0,scale);
+    }
+    /***
+     *
+     * @param drawable
+     * @param w  指定宽 优先级最高
+     * @param h  指定高    w 需要设置0
+     * @param bi 指定缩放比   w h 设置0
+     * @return
+     */
+    public static Drawable zoomDrawable(Drawable drawable, float w, float h,float bi) {
+
+        float drawableW=drawable.getIntrinsicWidth();
+        float drawableH=drawable.getIntrinsicHeight();
+
+        float scale=1;
+        {//初始话 是否需要拉伸
+            if(w>0){
+                if(drawableW!=w){
+                    scale=w/drawableW;
+                }
+            }else if(h>0) {
+                if(drawableH!=h){
+                    scale=h/drawableH;
+                }
+            }else {
+                scale=bi;
+            }
+            w=drawableW*scale;
+            h=drawableH*scale;
+        }
+
+        if(scale==1)return drawable;
+
+        Bitmap oldbmp = drawableToBitmap(drawable);
+        Bitmap newbmp =Bitmap.createScaledBitmap(oldbmp,(int)w,(int)h,false);
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(AppTool.getApplication().getResources(), newbmp);
+        return bitmapDrawable;
+    }
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                : Bitmap.Config.RGB_565;
+        Bitmap bitmap = Bitmap.createBitmap(width, height, config);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, width, height);
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
 }

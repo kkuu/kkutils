@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -93,7 +94,16 @@ public class MathTool {
         if(num==(int)num)return ""+(int)num;
         return get2num(num);
     }
-
+    /**
+     * 格式化数字， 如果小数位没有就返回整数 逗号分割
+     * @return
+     */
+    public static String getMoneyStr(Object price){
+        double num=Double.valueOf(""+price);
+        DecimalFormat df = new DecimalFormat();
+        df.applyPattern(",###.##");// ,###.##  这个是有小数就显示没有就不显示，  如果要都显示用  ,###.00
+        return df.format(num);
+    }
 
     /***
      * 计算年利率
