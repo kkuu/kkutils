@@ -1,6 +1,9 @@
 package kk.kktools;
 
+import android.app.ActivityManager;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
@@ -34,6 +37,7 @@ import kk.kktools.viewpager2.ViewPager2Test;
 import kk.kktools.web.WebFragment;
 import utils.kkutils.AppTool;
 import utils.kkutils.HttpTool;
+import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.MathTool;
 import utils.kkutils.common.StringTool;
@@ -58,6 +62,7 @@ import utils.kkutils.zhifu.KKZhiFuUiTool;
 
 public class MainActivityKK extends KKParentActivity {
 
+    List<Object> list=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppTool.init(getApplication(), true);
@@ -130,6 +135,19 @@ public class MainActivityKK extends KKParentActivity {
                 String url="https://mobile.yangkeduo.com/app.html?use_reload=1&launch_url=duo_coupon_landing.html%3Fgoods_id%3D95338609834%26pid%3D10421334_140080857%26cpsSign%3DCC_200509_10421334_140080857_ec5843bacb7bd87c61f810a79da659a4%26duoduo_type%3D2&campaign=ddjb&cid=launch_dl_force_";
 
                 ShopTool.openUrl(url);
+
+
+            }
+        });
+
+        addItem("内存使用", null, new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                int [] tem=new int[1024*1024*10];
+                list.add(tem);
+                CommonTool.printMemory();
+
+
             }
         });
 

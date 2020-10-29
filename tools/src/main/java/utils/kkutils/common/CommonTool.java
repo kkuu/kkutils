@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import utils.kkutils.AppTool;
+import utils.kkutils.JsonTool;
 import utils.kkutils.db.MapDB;
 
 import static android.content.Context.ACTIVITY_SERVICE;
@@ -493,5 +494,33 @@ public class CommonTool {
 
 
 
+    public static void printMemory(){
+        try {
+
+
+//            //获得ActivityManager服务的对象
+//            ActivityManager activityManager = (ActivityManager)AppTool.getApplication().getSystemService(Context.ACTIVITY_SERVICE);
+//            //获得MemoryInfo对象
+//            ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo() ;
+//            //获得系统可用内存，保存在MemoryInfo对象上
+//            activityManager.getMemoryInfo(memoryInfo) ;
+//            long memSize = memoryInfo.availMem ;
+//            LogTool.s(JsonTool.toJsonStr(memoryInfo));
+//
+
+            //最大分配内存获取方法2
+            float maxMemory = (float) (Runtime.getRuntime().maxMemory() * 1.0/ (1024 * 1024));
+            //当前分配的总内存
+            float totalMemory = (float) (Runtime.getRuntime().totalMemory() * 1.0/ (1024 * 1024));
+            //剩余内存
+            float freeMemory = (float) (Runtime.getRuntime().freeMemory() * 1.0/ (1024 * 1024));
+
+            String tem="最大可用内存: "+maxMemory+"M  "+"当前已用内存: "+totalMemory+"M  "+"当前空闲内存: "+freeMemory+"M";
+            CommonTool.showToast(tem);
+
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+    }
 }
 
