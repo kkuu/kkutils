@@ -58,8 +58,8 @@ public class DatePickerView extends View {
     private Timer timer;
     private MyTimerTask mTask;
 
-    int textSelectedColor=Color.parseColor("#e42b45");//选中文字的颜色
-    int textNormalColor=Color.parseColor("#333333");//普通文字的颜色
+    public int textSelectedColor=Color.parseColor("#e42b45");//选中文字的颜色
+    public int textNormalColor=Color.parseColor("#333333");//普通文字的颜色
 
     public DatePickerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -155,7 +155,7 @@ public class DatePickerView extends View {
 
 
 
-    private void init() {
+    public void init() {
         timer = new Timer();
         mDataList = new ArrayList<>();
         for(int i=2010;i<2020;i++){

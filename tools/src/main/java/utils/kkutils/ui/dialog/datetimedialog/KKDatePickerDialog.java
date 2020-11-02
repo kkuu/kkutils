@@ -17,6 +17,7 @@ import java.util.List;
 
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
+import utils.kkutils.common.ResourcesTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.dialog.DialogTool;
@@ -31,8 +32,10 @@ public class KKDatePickerDialog extends RelativeLayout {
     public DatePickerView dp_shi;
     public DatePickerView dp_fen;
     public TextView tvTitle;
-    public int colorSelected=Color.parseColor("#e42b45");
-    public int colorNormal=Color.parseColor("#737373");
+
+
+    protected int colorSelected=Color.parseColor("#e42b45");
+    protected int colorNormal=Color.parseColor("#737373");
     public Calendar calendar=Calendar .getInstance();
     public Calendar maxCalendar=Calendar .getInstance();//最大时间
     public Calendar minCalendar=Calendar .getInstance();//最小时间
@@ -97,6 +100,13 @@ public class KKDatePickerDialog extends RelativeLayout {
         ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         setLayoutParams(layoutParams);
         addContent();
+    }
+    public void setColorSelected(int colorSelected) {
+        this.colorSelected = ResourcesTool.getColor(colorSelected);
+    }
+
+    public void setColorNormal(int colorNormal) {
+        this.colorNormal = ResourcesTool.getColor(colorNormal);
     }
 
 
@@ -350,6 +360,9 @@ public class KKDatePickerDialog extends RelativeLayout {
      */
     public DatePickerView addPickerDateItem(ViewGroup viewGroup,List<String> datas){
         DatePickerView datePickerView=new DatePickerView(getContext(),null);
+        datePickerView.textNormalColor=this.colorNormal;
+        datePickerView.textSelectedColor=this.colorSelected;
+        datePickerView.init();
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(0,-1,1);
         datePickerView.setLayoutParams(lp);
         datePickerView.setData(datas);

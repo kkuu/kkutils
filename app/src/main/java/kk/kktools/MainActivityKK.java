@@ -53,6 +53,7 @@ import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 import utils.kkutils.ui.daojishi.DaoJiShiTool;
+import utils.kkutils.ui.dialog.datetimedialog.KKDatePickerDialog;
 import utils.kkutils.ui.recycleview.KKDecoration;
 import utils.kkutils.ui.textview.KKTextToSpeech;
 import utils.kkutils.ui.video.douyin2.DouYinFragment2;
@@ -137,6 +138,10 @@ public class MainActivityKK extends KKParentActivity {
                 ShopTool.openUrl(url);
 
 
+//                KKDatePickerDialog kkDatePickerDialog = new KKDatePickerDialog(getBaseContext());
+//                kkDatePickerDialog.setColorSelected(R.color.kk_tv_h1);
+//                kkDatePickerDialog.setColorNormal(R.color.kk_tv_h3);
+//                kkDatePickerDialog .show();
             }
         });
 
