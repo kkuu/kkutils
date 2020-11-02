@@ -31,8 +31,8 @@ public class KKDatePickerDialog extends RelativeLayout {
     public DatePickerView dp_shi;
     public DatePickerView dp_fen;
     public TextView tvTitle;
-    int colorSelected=Color.parseColor("#e42b45");
-    int colorNormal=Color.parseColor("#737373");
+    public int colorSelected=Color.parseColor("#e42b45");
+    public int colorNormal=Color.parseColor("#737373");
     public Calendar calendar=Calendar .getInstance();
     public Calendar maxCalendar=Calendar .getInstance();//最大时间
     public Calendar minCalendar=Calendar .getInstance();//最小时间
@@ -48,7 +48,7 @@ public class KKDatePickerDialog extends RelativeLayout {
     public void setTitle(String title) {
         this.title = title;
     }
-    Dialog dialog;
+    public Dialog dialog;
 
     public  void show(){
         try {
