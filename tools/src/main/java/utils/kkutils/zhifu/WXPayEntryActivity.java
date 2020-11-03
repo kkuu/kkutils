@@ -4,7 +4,6 @@ package utils.kkutils.zhifu;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -12,7 +11,6 @@ import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
 
 import utils.kkutils.JsonTool;
 import utils.kkutils.common.CommonTool;
@@ -26,8 +24,10 @@ import utils.kkutils.common.LogTool;
  *
  */
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
-    public static IWXAPIEventHandler iwxapiEventHandler;
-    public static String APP_ID = "";
+    public static PayTool.OnPayResultListener onPayResultListener;
+
+
+    public static String APP_ID = "wx3e3070d549eb00f9";
     String msg = "";
     private IWXAPI api;
 
@@ -65,12 +65,33 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
             msg = "微信支付失败";
         }
         CommonTool.showToast(msg);
-        if (iwxapiEventHandler != null) {
-            iwxapiEventHandler.onResp(resp);
-        }
+        doResp(resp);
+
         finish();
 
 
+    }
+    public void doResp(BaseResp resp){
+        String msg = "";
+        LogTool.s("微信支付结果 :" + JsonTool.toJsonStr(resp));
+        if (resp.errCode == BaseResp.ErrCode.ERR_OK)//支付成功
+        {
+            msg = "微信支付成功";
+            try {
+                if (onPayResultListener != null) onPayResultListener.onSuccess(msg);
+            } catch (Exception e) {
+                LogTool.ex(e);
+            }
+        } else if (resp.errCode == BaseResp.ErrCode.ERR_USER_CANCEL) {
+            msg = "取消了支付";
+        } else {
+            msg = "微信支付失败";
+            try {
+                if (onPayResultListener != null) onPayResultListener.onFailure(msg);
+            } catch (Exception e) {
+                LogTool.ex(e);
+            }
+        }
     }
 
 }

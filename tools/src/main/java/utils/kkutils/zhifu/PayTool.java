@@ -93,38 +93,43 @@ public class PayTool {
                     .setMessage("未安装微信客户端，请下载最新版微信再来选择微信支付").show();
             return iwxapi;
         }
-        {//用于支付结果通知的
-            WXPayEntryActivity.APP_ID = appid;
-            WXPayEntryActivity.iwxapiEventHandler = new IWXAPIEventHandler() {
-                @Override
-                public void onReq(BaseReq baseReq) {
-                }
-
-                @Override
-                public void onResp(BaseResp resp) {
-                    String msg = "";
-                    LogTool.s("微信支付结果 :" + JsonTool.toJsonStr(resp));
-                    if (resp.errCode == BaseResp.ErrCode.ERR_OK)//支付成功
-                    {
-                        msg = "微信支付成功";
-                        try {
-                            if (onPayResultListener != null) onPayResultListener.onSuccess(msg);
-                        } catch (Exception e) {
-                            LogTool.ex(e);
-                        }
-                    } else if (resp.errCode == BaseResp.ErrCode.ERR_USER_CANCEL) {
-                        msg = "取消了支付";
-                    } else {
-                        msg = "微信支付失败";
-                        try {
-                            if (onPayResultListener != null) onPayResultListener.onFailure(msg);
-                        } catch (Exception e) {
-                            LogTool.ex(e);
-                        }
-                    }
-                }
-            };
+        {//wxapi包路径中实现WXPayEntryActivity类(包名或类名不一致会造成无法回调)  ，实际应用的时候  需要 用自己包里面的这个重新调用一下， 记得xml 里面配置
+            WXPayEntryActivity.APP_ID=appid;
+            WXPayEntryActivity.onPayResultListener=onPayResultListener;
         }
+
+//        {//用于支付结果通知的
+//            WXPayEntryActivity.APP_ID = appid;
+//            WXPayEntryActivity.iwxapiEventHandler = new IWXAPIEventHandler() {
+//                @Override
+//                public void onReq(BaseReq baseReq) {
+//                }
+//
+//                @Override
+//                public void onResp(BaseResp resp) {
+//                    String msg = "";
+//                    LogTool.s("微信支付结果 :" + JsonTool.toJsonStr(resp));
+//                    if (resp.errCode == BaseResp.ErrCode.ERR_OK)//支付成功
+//                    {
+//                        msg = "微信支付成功";
+//                        try {
+//                            if (onPayResultListener != null) onPayResultListener.onSuccess(msg);
+//                        } catch (Exception e) {
+//                            LogTool.ex(e);
+//                        }
+//                    } else if (resp.errCode == BaseResp.ErrCode.ERR_USER_CANCEL) {
+//                        msg = "取消了支付";
+//                    } else {
+//                        msg = "微信支付失败";
+//                        try {
+//                            if (onPayResultListener != null) onPayResultListener.onFailure(msg);
+//                        } catch (Exception e) {
+//                            LogTool.ex(e);
+//                        }
+//                    }
+//                }
+//            };
+//        }
 
 //        {//1.9的测试数据
 //            timeStamp="1469261112";
@@ -170,7 +175,7 @@ public class PayTool {
 
 
     public static abstract class OnPayResultListener {
-        void onSuccess(final String msg){
+        public void onSuccess(final String msg){
             AppTool.uiHandler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -183,7 +188,7 @@ public class PayTool {
             });
         }
 
-        void onFailure(final String msg){
+        public void onFailure(final String msg){
             AppTool.uiHandler.post(new Runnable() {
                 @Override
                 public void run() {
