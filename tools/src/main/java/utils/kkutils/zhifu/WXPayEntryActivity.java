@@ -16,6 +16,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import utils.kkutils.JsonTool;
 import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.LogTool;
 
 
 /***
@@ -25,7 +26,6 @@ import utils.kkutils.common.CommonTool;
  *
  */
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
-    private static final String TAG = "wz";
     public static IWXAPIEventHandler iwxapiEventHandler;
     public static String APP_ID = "";
     String msg = "";
@@ -52,7 +52,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(final BaseResp resp) {
-        Log.d(TAG, "onPayFinish, errCode = " + resp.errCode + "  " + JsonTool.toJsonStr(resp));
+        LogTool.s("onPayFinish, errCode = " + resp.errCode + "  " + JsonTool.toJsonStr(resp));
         if (resp.errCode == BaseResp.ErrCode.ERR_OK)//支付成功
         {
 
