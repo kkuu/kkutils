@@ -53,10 +53,10 @@ public class AppTool {
 
             initTalkingData(application);
 
-            LogTool.s("签名SHA1  "+ AppUtils.getAppSignatureSHA1());
-            LogTool.s("签名MD5  "+AppUtils.getAppSignatureMD5());
-            LogTool.s("签名MD5  "+AppUtils.getAppSignatureMD5().toLowerCase().replace(":",""));
-            LogTool.s("签名SHA256  "+AppUtils.getAppSignatureSHA256());
+            LogTool.s("签名SHA1  "+ AppUtils.getAppSignaturesSHA1());
+            LogTool.s("签名MD5  "+AppUtils.getAppSignaturesMD5());
+            LogTool.s("签名MD5  "+AppUtils.getAppSignaturesMD5().toString().toLowerCase().replace(":",""));
+            LogTool.s("签名SHA256  "+AppUtils.getAppSignaturesSHA256());
             initUiHander();
             initRecycleLife();
             ImgTool.init(application, 0, 0);

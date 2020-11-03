@@ -106,7 +106,7 @@ dependencies {
 
     //seekbar
     //很多的工具类
-    api 'com.blankj:utilcode:1.26.0'
+    api 'com.blankj:utilcodex:1.30.4'
 
     //底部导航栏
     api 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
