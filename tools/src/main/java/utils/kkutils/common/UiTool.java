@@ -412,6 +412,23 @@ public class UiTool {
         }
         setWH(view,w,h);
     }
+
+
+    /***
+     *
+     * @param view
+     * @param srcW  设计图宽
+     * @param srcH  设计图高
+     * @param widthPx  手机上面的实际宽度
+     */
+    public static void setWHBi(View view, double srcW,double srcH, double widthPx) {
+        double h1 =widthPx/(srcW/srcH) ;
+        UiTool.setWH(view, ViewGroup.LayoutParams.MATCH_PARENT, (int) h1);
+    }
+
+
+
+
     public static void setMargin(View view, int left,int top,int right,int bottom) {
         if (view == null) return;
         try {
