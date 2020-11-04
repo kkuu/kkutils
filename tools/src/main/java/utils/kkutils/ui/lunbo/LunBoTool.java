@@ -60,7 +60,7 @@ public class LunBoTool {
         try {
             ViewPager adsContainer = (ViewPager) parent.findViewById(vg_lunbo_content);
             LinearLayout vg_viewpager_btn = (LinearLayout) parent.findViewById(vg_lunbo_btns);
-            initAds(adsContainer, vg_viewpager_btn, lunbo_dot_layout_resid, cb_lunbo_dot, autoPlayDuration, lunBoDatas, isLoop,imageCanScale,null);
+            initAds(adsContainer, vg_viewpager_btn, lunbo_dot_layout_resid, cb_lunbo_dot, autoPlayDuration, lunBoDatas, isLoop,imageCanScale);
         } catch (Exception e) {
             LogTool.ex(e);
         }
@@ -98,7 +98,7 @@ public class LunBoTool {
      */
     public static void initAds(final ViewPager adsContainer, final LinearLayout vg_viewpager_btn, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas, final boolean imageCanScale) {
 
-        initAds(adsContainer,vg_viewpager_btn,lunbo_dot_layout_resid,cb_lunbo_dot,autoPlayDuration,lunBoDatas,!imageCanScale,imageCanScale,null);
+        initAds(adsContainer,vg_viewpager_btn,lunbo_dot_layout_resid,cb_lunbo_dot,autoPlayDuration,lunBoDatas,!imageCanScale,imageCanScale);
 
     }
     /***
@@ -112,19 +112,17 @@ public class LunBoTool {
      * @param  imageCanScale 查看大图用的
      *
      */
-    public static void initAds(final ViewPager adsContainer, final LinearLayout vg_viewpager_btn, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas,boolean isLoop, final boolean imageCanScale,LunBoToolGetView lunBoToolGetView) {
+    public static void initAds(final ViewPager adsContainer, final LinearLayout vg_viewpager_btn, final int lunbo_dot_layout_resid, final int cb_lunbo_dot, final int autoPlayDuration, List<LunBoData> lunBoDatas,boolean isLoop, final boolean imageCanScale) {
         try {
             if (lunBoDatas == null) lunBoDatas = new ArrayList<>();
             if (lunBoDatas.size() < 1) {
                 lunBoDatas.add(new LunBoData("",null));
             }
-            if(lunBoToolGetView==null)lunBoToolGetView=LunBoToolGetView.getDefault();
+
             final List<LunBoData> datasList = lunBoDatas;
-//
-//            final  List<View> viewList=new ArrayList<>();
-//            for(int i=0;i<100;i++){
-//                viewList.add(null);
-//            }
+
+
+
             Map<Integer,View> viewMap=new HashMap<>();
 
 
@@ -150,7 +148,6 @@ public class LunBoTool {
 
             }
 
-            LunBoToolGetView finalLunBoToolGetView = lunBoToolGetView;
             final PagerAdapter adAdapter = new PagerAdapter() {
                 @Override
                 public int getCount() {
@@ -172,7 +169,7 @@ public class LunBoTool {
                         positionIn = CommonTool.loopPosition(datasList.size(), beginPosition, positionIn);
                     }
                     final LunBoData lunBoData = datasList.get(positionIn);
-                    View view = finalLunBoToolGetView.getView(container, lunBoData, positionIn, isLoop, imageCanScale);
+                    View view = lunBoData.lunBoToolGetView.getView(container, lunBoData, positionIn, isLoop, imageCanScale);
                     if(view.getParent()==null){
                         container.addView(view);
                     }
@@ -340,7 +337,11 @@ public class LunBoTool {
             this.imageUrl =  imageUrl;
             this.lunBoClickListener = lunBoClickListener;
         }
-
+        public LunBoData(Object imageUrl,LunBoToolGetView lunBoToolGetView, LunBoClickListener lunBoClickListener) {
+            this.imageUrl =  imageUrl;
+            this.lunBoClickListener = lunBoClickListener;
+            setLunBoToolGetView(lunBoToolGetView);
+        }
         public static List<LunBoData> getTest() {
             List<LunBoData> lunBoDatas = new ArrayList<>();
             lunBoDatas.add(new LunBoData("http://vfx.mtime.cn/Video/2020/07/23/mp4/200723104850444893_1080.mp4"));
@@ -364,6 +365,12 @@ public class LunBoTool {
         public boolean isVideo(){
             return LunBoTool.isVideo(imageUrl);
         }
+
+        public void setLunBoToolGetView(LunBoToolGetView lunBoToolGetView) {
+           if(lunBoToolGetView!=null) this.lunBoToolGetView = lunBoToolGetView;
+        }
+
+        public LunBoToolGetView lunBoToolGetView=new LunBoToolGetView();
     }
 
     public static abstract class LunBoClickListener extends KKViewOnclickListener {
@@ -394,49 +401,41 @@ public class LunBoTool {
         return false;
 
     }
-    public static interface LunBoToolGetView{
-        public View getView(ViewGroup container,LunBoData lunBoData,int position,boolean isLoop,boolean imageCanScale);
-        public static LunBoToolGetView getDefault(){
-            return new LunBoToolGetView() {
-                @Override
-                public View getView(ViewGroup container, LunBoData lunBoData, int position, boolean isLoop, boolean imageCanScale) {
-                    try {
-                        if(LunBoTool.isVideo(""+lunBoData.imageUrl)){
-                            final KVideoViewNormal videoView=new KVideoViewNormal(container.getContext());
-//                            StandardVideoController standardVideoController = new StandardVideoController(container.getContext());
-//                            standardVideoController.addDefaultControlComponent("", false);
-//                            videoView.setVideoController(standardVideoController);
 
-                            videoView.setUrl(""+lunBoData.imageUrl);
-                            container.addView(videoView);
-//                            videoView.start();
-                            return videoView;
-                        }else {
-                            ImageView imageView = new KKImageView(container.getContext());//不能用 curractivity
-                            if (imageCanScale) {
-                                imageView = new PinchImageView(container.getContext());
-                            }
-                            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                            ImgTool.loadImage(lunBoData.imageUrl, imageView);
-                            if(lunBoData.lunBoClickListener!=null){
-                                imageView.setOnClickListener(new KKViewOnclickListener() {
-                                    @Override
-                                    public void onClickKK(View v) {
-                                        if (lunBoData.lunBoClickListener != null){
-                                            lunBoData.lunBoClickListener.onClickLunBo(v, lunBoData);
-                                        }
-                                    }
-                                });
-                            }
-                            return imageView;
-                        }
-                    }catch (Exception e){
-                        LogTool.ex(e);
+
+    public static class LunBoToolGetView{
+        public View getView(ViewGroup container, LunBoData lunBoData, int position, boolean isLoop, boolean imageCanScale) {
+            try {
+                if(LunBoTool.isVideo(""+lunBoData.imageUrl)){
+                    final KVideoViewNormal videoView=new KVideoViewNormal(container.getContext());
+                    videoView.setUrl(""+lunBoData.imageUrl);
+                    container.addView(videoView);
+                    return videoView;
+                }else {
+                    ImageView imageView = new KKImageView(container.getContext());//不能用 curractivity
+                    if (imageCanScale) {
+                        imageView = new PinchImageView(container.getContext());
                     }
-                    return new View(container.getContext());
+                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    ImgTool.loadImage(lunBoData.imageUrl, imageView);
+                    if(lunBoData.lunBoClickListener!=null){
+                        imageView.setOnClickListener(new KKViewOnclickListener() {
+                            @Override
+                            public void onClickKK(View v) {
+                                if (lunBoData.lunBoClickListener != null){
+                                    lunBoData.lunBoClickListener.onClickLunBo(v, lunBoData);
+                                }
+                            }
+                        });
+                    }
+                    return imageView;
                 }
-            };
+            }catch (Exception e){
+                LogTool.ex(e);
+            }
+            return new View(container.getContext());
         }
+
     }
 
 }
