@@ -145,7 +145,7 @@ public class ImgLocalTool {
      */
     public static File saveBmp2Gallery(Bitmap bmp, String picName) {
 
-        if(!PermissionTool.checkPermission("", Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+        if(!PermissionTool.checkPermissionMust( Manifest.permission.WRITE_EXTERNAL_STORAGE,null)){
             return null;
         }
 

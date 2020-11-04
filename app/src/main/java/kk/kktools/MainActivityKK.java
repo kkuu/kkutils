@@ -1,20 +1,31 @@
 package kk.kktools;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.blankj.utilcode.util.PermissionUtils;
+import com.blankj.utilcode.util.UtilsTransActivity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,9 +48,11 @@ import kk.kktools.viewpager2.ViewPager2Test;
 import kk.kktools.web.WebFragment;
 import utils.kkutils.AppTool;
 import utils.kkutils.HttpTool;
+import utils.kkutils.common.BroadcastReceiverTool;
 import utils.kkutils.common.CommonTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.MathTool;
+import utils.kkutils.common.PermissionTool;
 import utils.kkutils.common.StringTool;
 import utils.kkutils.common.TestData;
 import utils.kkutils.common.TimeTool;
@@ -53,6 +66,7 @@ import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 import utils.kkutils.ui.daojishi.DaoJiShiTool;
+import utils.kkutils.ui.dialog.DialogTool;
 import utils.kkutils.ui.dialog.datetimedialog.KKDatePickerDialog;
 import utils.kkutils.ui.recycleview.KKDecoration;
 import utils.kkutils.ui.textview.KKTextToSpeech;
@@ -137,6 +151,9 @@ public class MainActivityKK extends KKParentActivity {
 
                 ShopTool.openUrl(url);
 
+//                PermissionTool.test();
+
+
 
 //                KKDatePickerDialog kkDatePickerDialog = new KKDatePickerDialog(getBaseContext());
 //                kkDatePickerDialog.setColorSelected(R.color.kk_tv_h1);
@@ -185,6 +202,7 @@ public class MainActivityKK extends KKParentActivity {
 
         // testWeb();
     }
+
 
 
     View btn_go_shujia;
