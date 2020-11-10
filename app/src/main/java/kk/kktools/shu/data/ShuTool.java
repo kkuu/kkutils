@@ -8,7 +8,8 @@ import utils.kkutils.http.HttpUiCallBack;
 public class ShuTool {
     public String url = "https://infosxs.pysmei.com/";//url = "https://souxs.leeyegy.com/";
     public void search(String name, HttpUiCallBack<ShuSerachBean> callBack) {
-        String urlStr=url + "search.aspx?siteid=app2&" + "key=" + name;
+//        https://souxs.leeyegy.com/search.aspx?key=%E6%B2%A7%E5%85%83%E5%9B%BE&page=1&siteid=app2
+        String urlStr= "https://souxs.leeyegy.com/search.aspx?siteid=app2&page=1&" + "key=" + name;
         HttpRequest.url(urlStr).setUseCache(true).send(ShuSerachBean.class, callBack);
     }
     public void info(int id, HttpUiCallBack<ShuInfoBean> callBack) {
