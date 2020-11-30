@@ -60,6 +60,7 @@ import utils.kkutils.common.UiTool;
 import utils.kkutils.common.ViewTool;
 import utils.kkutils.http.HttpRequest;
 import utils.kkutils.http.HttpUiCallBack;
+import utils.kkutils.jni.GoogleCode;
 import utils.kkutils.parent.KKParentActivity;
 import utils.kkutils.parent.KKParentFragment;
 import utils.kkutils.parent.KKViewOnclickListener;
@@ -172,7 +173,18 @@ public class MainActivityKK extends KKParentActivity {
 
             }
         });
+        addItem("jni",null, new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                String test=GoogleCode.stringFromJNI(1286874120,6,"1f53de416ca79895086c64a7a2e5818a");
+                CommonTool.showToast("验证码"+test);
 
+                String test2=GoogleCode.stringFromJNI(1286874600,8,"25971966bac6e7c0dedcf1082a6ed266");
+                LogTool.s("验证码"+test2);
+                String test3=GoogleCode.stringFromJNI((int) (System.currentTimeMillis()/1000),8,"25971966bac6222a大e7c0dedcf1082a6ed266");
+                LogTool.s("验证码"+test3);
+            }
+        });
         btn_go_shujia.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
