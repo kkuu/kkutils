@@ -26,7 +26,12 @@ android {
 //            abiFilters "armeabi"
         }
     }
-
+    lintOptions{
+        //// 仅检查指定问题  这里空就是什么也不检查
+        check ""
+        //// 错误发生后停止gradle构建
+        abortOnError false
+    }
     buildTypes {
         release {
             minifyEnabled false
