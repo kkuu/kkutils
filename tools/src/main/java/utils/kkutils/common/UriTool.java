@@ -30,7 +30,13 @@ public class UriTool {
      * @return
      */
     public static Uri getUriWithFileProvider(File file){
-        Uri uriForFile = FileProvider.getUriForFile(AppTool.getApplication(), AppTool.getApplication().getPackageName() + ".fileprovider", file);
+        Uri uriForFile=null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uriForFile = FileProvider.getUriForFile(AppTool.getApplication(), AppTool.getApplication().getPackageName() + ".fileprovider", file);
+        } else {
+            uriForFile = Uri.fromFile(file);
+        }
+
         return uriForFile;
     }
     /***
