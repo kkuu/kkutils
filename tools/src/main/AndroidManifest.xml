@@ -16,7 +16,7 @@
 
 
 
-        <!--用于更新的-->
+        <!--用于更新 和图片拾取的-->
         <provider
             android:name=".common.KKFileProvider"
             android:authorities="${applicationId}.fileprovider"
