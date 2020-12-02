@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
+import com.bumptech.glide.annotation.Excludes;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.Key;
@@ -14,6 +15,7 @@ import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.load.engine.executor.GlideExecutor;
 import com.bumptech.glide.module.AppGlideModule;
+import com.bumptech.glide.module.LibraryGlideModule;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.lang.reflect.Field;
@@ -26,7 +28,7 @@ import utils.kkutils.common.LogTool;
  * abc on 2017/4/19.
  */
 @GlideModule
-public class GlideConfiguration extends AppGlideModule {
+public class KKGlideConfiguration extends LibraryGlideModule {
     public static Set<Integer> currCacheUrlList = new HashSet<>();
     public static boolean isCache(Object model) {
         if (model == null) return false;
