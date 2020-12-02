@@ -26,6 +26,11 @@ import utils.kkutils.common.LogTool;
 
 /**
  * abc on 2017/4/19.
+ *  * <p>LibraryGlideModules are called in no defined order. If LibraryGlideModules within an
+ *  * application conflict, {@link AppGlideModule}s can use the {@link
+ *  * com.bumptech.glide.annotation.Excludes} annotation to selectively remove one or more of the
+ *
+ *  主工程可以用  Excludes 去掉这个
  */
 @GlideModule
 public class KKGlideConfiguration extends LibraryGlideModule {
