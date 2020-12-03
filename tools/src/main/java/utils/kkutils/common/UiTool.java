@@ -21,7 +21,9 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.LinkMovementMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
@@ -31,6 +33,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +41,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import utils.kkutils.AppTool;
+import utils.kkutils.ImgTool;
 import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKToast;
 import utils.kkutils.ui.dialog.DialogSimple;
@@ -662,5 +666,25 @@ public class UiTool {
 
     }
 
+    /***
+     * 设置密码显示隐藏
+     * @param et_pwd  密码控件
+     * @param imgv_eye 显示隐藏Imageview
+     * @param drawableHideId  隐藏图标
+     * @param drawableShowId
+     */
+    public static void togglePwdVisible(EditText et_pwd, ImageView imgv_eye, int drawableHideId, int drawableShowId){
+        if (PasswordTransformationMethod.getInstance().equals(et_pwd.getTransformationMethod())) {
+            //设置EditText的密码为可见的
+            et_pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            ImgTool.loadImage(drawableShowId,imgv_eye);
+            et_pwd.setSelection(et_pwd.getText().length());
+        } else {
+            //设置密码为隐藏的
+            et_pwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            ImgTool.loadImage(drawableHideId,imgv_eye);
+            et_pwd.setSelection(et_pwd.getText().length());
+        }
+    }
 
 }
