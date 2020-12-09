@@ -48,6 +48,8 @@
         <attr name="maxHeight" > </attr>
     </declare-styleable>
 
+
+
     <declare-styleable name="RoundImageView">
         <attr name="radius" > </attr>
         <attr name="topLeftRadius"> </attr>
@@ -69,6 +71,16 @@
         <attr name="bottomLeftRadius" > </attr>
         <attr name="bottomRightRadius" > </attr>
     </declare-styleable>
+    <declare-styleable name="RoundFrameLayoutSimple">
+        <attr name="radius" > </attr>
+        <attr name="topLeftRadius"> </attr>
+        <attr name="topRightRadius"> </attr>
+        <attr name="bottomLeftRadius" > </attr>
+        <attr name="bottomRightRadius" > </attr>
+    </declare-styleable>
+
+
+
 
 
     <declare-styleable name="KKRatingBar">
