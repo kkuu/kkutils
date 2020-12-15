@@ -20,11 +20,11 @@ android {
             }
         }
 
-        ndk {
-            abiFilters "armeabi-v7a"
-            abiFilters "x86"
+//        ndk {
+//            abiFilters "armeabi-v7a"
+//            abiFilters "x86"
 //            abiFilters "armeabi"
-        }
+//        }
     }
     lintOptions{
         //// 仅检查指定问题  这里空就是什么也不检查

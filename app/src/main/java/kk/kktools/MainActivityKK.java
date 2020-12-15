@@ -58,6 +58,7 @@ import utils.kkutils.common.TestData;
 import utils.kkutils.common.TimeTool;
 import utils.kkutils.common.UiTool;
 import utils.kkutils.common.ViewTool;
+import utils.kkutils.encypt.goolecode.GoogleCodeJava;
 import utils.kkutils.http.HttpRequest;
 import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.jni.GoogleCode;
@@ -183,6 +184,9 @@ public class MainActivityKK extends KKParentActivity {
                 LogTool.s("验证码"+test2);
                 String test3=GoogleCode.stringFromJNI((int) (System.currentTimeMillis()/1000),8,"25971966bac6222a大e7c0dedcf1082a6ed266");
                 LogTool.s("验证码"+test3);
+
+
+                LogTool.s("验证码java:"+ GoogleCodeJava.test());
             }
         });
         btn_go_shujia.setOnClickListener(new KKViewOnclickListener() {
