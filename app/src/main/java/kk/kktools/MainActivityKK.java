@@ -157,13 +157,20 @@ public class MainActivityKK extends KKParentActivity {
 
 
 
-//                KKDatePickerDialog kkDatePickerDialog = new KKDatePickerDialog(getBaseContext());
-//                kkDatePickerDialog.setColorSelected(R.color.kk_tv_h1);
-//                kkDatePickerDialog.setColorNormal(R.color.kk_tv_h3);
-//                kkDatePickerDialog .show();
             }
         });
+        addItem("日期选择", null, new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
 
+                KKDatePickerDialog kkDatePickerDialog = new KKDatePickerDialog(getBaseContext());
+                kkDatePickerDialog.setColorSelected(R.color.kk_tv_h1);
+                kkDatePickerDialog.setColorNormal(R.color.kk_tv_h3);
+                kkDatePickerDialog .show();
+
+
+            }
+        });
         addItem("内存使用", null, new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
