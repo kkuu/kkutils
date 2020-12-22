@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/baise"
+    >
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <utils.kkutils.ui.KKSimpleRecycleView
+                android:id="@+id/recycleView"
+                tools:itemCount="5"
+                tools:listitem="@layout/kk_test_user_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></utils.kkutils.ui.KKSimpleRecycleView>
+
+
+            <utils.kkutils.ui.KKQuickIndexBar
+                android:id="@+id/quickIndexBar"
+                android:layout_gravity="right"
+                android:layout_width="30dp"
+                android:layout_height="match_parent">
+
+            </utils.kkutils.ui.KKQuickIndexBar>
+
+
+        </FrameLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

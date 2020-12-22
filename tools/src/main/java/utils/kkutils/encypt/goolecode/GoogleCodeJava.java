@@ -7,7 +7,7 @@ import utils.kkutils.encypt.Sm3;
 //import java.util.Arrays;
 
 public class GoogleCodeJava {
-		//ÅĞ¶ÏÊÇ·ñ´ó¶Ë
+		//åˆ¤æ–­æ˜¯å¦å¤§ç«¯
 	    public static boolean IsBigEndian()
 	    {
 			if(ByteOrder.nativeOrder()==ByteOrder.BIG_ENDIAN)
@@ -19,7 +19,7 @@ public class GoogleCodeJava {
 				return false;
 			}
 	    }
-	    //ÅĞ¶ÏÊÇ·ñĞ¡¶Ë
+	    //åˆ¤æ–­æ˜¯å¦å°ç«¯
 	    public static boolean IsLittleEndian()
 	    {
 	    	return !IsBigEndian();
@@ -29,7 +29,7 @@ public class GoogleCodeJava {
 	    {
 	    	return (x<<n)|(x>>(32-n)); 
 	    }
-	    //×Ö·û·´×ª
+	    //å­—ç¬¦åè½¬
 	    public static int Reverse32(int x)
 	    {
 	    	return ((x & 0x000000ff)<<24)| ((x & 0x0000ff00)<<8) | ((x & 0x00ff0000)>>8) | ((x & 0xff000000)>>24);	
@@ -90,7 +90,7 @@ public class GoogleCodeJava {
 		   	}
 		   	return b;
 	   }
-	   //21447901   ´ó¶ËÄ£Ê½
+	   //21447901   å¤§ç«¯æ¨¡å¼
 	   public static byte [] intTobytes(int num)
 	   {
 		   byte[] b=new byte[4];
@@ -100,7 +100,7 @@ public class GoogleCodeJava {
 		   b[3]=(byte)(num&0xff);
 		   return b;
 	   }
-	   // Ğ¡¶ËÄ£Ê½
+	   // å°ç«¯æ¨¡å¼
 	   public static byte [] intTobytesl(int num)
 	   {
 		   byte[] b=new byte[4];
@@ -226,11 +226,11 @@ public class GoogleCodeJava {
 	       //System.out.println("opt:" + opt);
 	       return x;
 	   }
-	    /****ÊäÈëT0 10Î»UTCÊ±¼ä
-	     ****ÊäÈë32Î»ÃÜÔ¿
-	     ****TcÎª60s
-	     ****NÎªÈ¡6Î»
-	     ****Êä³ö6Î»ÃÜÂë
+	    /****è¾“å…¥T0 10ä½UTCæ—¶é—´
+	     ****è¾“å…¥32ä½å¯†é’¥
+	     ****Tcä¸º60s
+	     ****Nä¸ºå–6ä½
+	     ****è¾“å‡º6ä½å¯†ç 
 	    *****/
 	    public  int getCode(int T0,String K) 
 	    {

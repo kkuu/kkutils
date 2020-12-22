@@ -42,6 +42,7 @@ import kk.kktools.recycleview_test.TestRecycleView;
 import kk.kktools.shipin.TestShiPin;
 import kk.kktools.shu.ShuJiaFragment;
 import kk.kktools.tab.TestTab;
+import kk.kktools.tongxunlu.UserRecordFragment;
 import kk.kktools.tupian_xuanze.KKChooseImgFragmentKK;
 import kk.kktools.tuya.TestEditView;
 import kk.kktools.viewpager2.ViewPager2Test;
@@ -145,7 +146,7 @@ public class MainActivityKK extends KKParentActivity {
         addItem("轮播", new TestLunBo(), null);
         addItem("进度条", new TestProgress(), null);
         addItem("抽奖", new TestChouJiang(), null);
-
+        addItem("通讯录", new UserRecordFragment(), null);
         addItem("拼多多", null, new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {

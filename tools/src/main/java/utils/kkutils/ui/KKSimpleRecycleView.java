@@ -259,23 +259,23 @@ public class KKSimpleRecycleView extends KKParentRecycleView {
 
     public static class WzViewHolder extends ViewHolder implements Serializable {
         public static final int keyHolderTag = 1;
-        KKSimpleRecycleView wzRecycleView;
+        KKSimpleRecycleView recycleView;
 
-        public WzViewHolder(KKSimpleRecycleView wzRecycleView, View itemView) {
+        public WzViewHolder(KKSimpleRecycleView recycleView, View itemView) {
             super(itemView);
-            this.wzRecycleView = wzRecycleView;
+            this.recycleView = recycleView;
             ViewTool.setTag(itemView, this, keyHolderTag);
             ViewTool.initViews(itemView, this, null);
         }
 
         public void initData(int position) {
             try {
-                int type = getItemViewType();
-                if (wzRecycleView.kkRecycleAdapter.isEmptyType(type)) {
-                    wzRecycleView.kkRecycleAdapter.initEmptyData(position, type, itemView);
+                int type = recycleView.getAdapter().getItemViewType(position);
+                if (recycleView.kkRecycleAdapter.isEmptyType(type)) {
+                    recycleView.kkRecycleAdapter.initEmptyData(position, type, itemView);
                 } else {
-                    wzRecycleView.kkRecycleAdapter.initData(position, type, itemView);
-                    wzRecycleView.kkRecycleAdapter.initData(position, type, itemView, this);
+                    recycleView.kkRecycleAdapter.initData(position, type, itemView);
+                    recycleView.kkRecycleAdapter.initData(position, type, itemView, this);
                 }
             } catch (Exception e) {
                 LogTool.ex(e);
