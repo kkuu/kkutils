@@ -2,8 +2,14 @@ package utils.kkutils.parent;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,12 +37,22 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
     boolean isUseCacheView = true;
     boolean isSingleInParent=true;//是否父类只有这一个可显示的界面  自定义生命周期用的， 和只有一个的分开
 
-
+    public KKParentFragment(){
+        super();
+        initLifeCycle();
+    }
+    public void initLifeCycle(){
+        getLifecycle().addObserver(new LifecycleEventObserver() {
+            @Override
+            public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
+                LogTool.printClassLine(event.name(),source);
+            }
+        });
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         currentFragment = this;
-        LogTool.printClassLine("onCreate", this);
     }
     @Override
     public void onStart() {
@@ -49,7 +65,6 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
         if (currentFragment == this) {
             currentFragment = null;
         }
-        LogTool.printClassLine("onDestroy", this);
     }
 
 
