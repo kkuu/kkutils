@@ -39,10 +39,10 @@ public abstract class KKParentFragment extends Fragment implements Serializable 
 
     public KKParentFragment(){
         super();
-        initLifeCycle();
+        initLifeCycleLog(this);
     }
-    public void initLifeCycle(){
-        getLifecycle().addObserver(new LifecycleEventObserver() {
+    public static void initLifeCycleLog(Fragment fragment){
+        if(fragment!=null)fragment.getLifecycle().addObserver(new LifecycleEventObserver() {
             @Override
             public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
                 LogTool.printClassLine(event.name(),source);

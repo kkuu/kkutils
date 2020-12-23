@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import utils.kkutils.AppTool;
+import utils.kkutils.parent.KKParentFragment;
 
 /**
  * Created by ishare on 2016/8/10.
@@ -84,6 +85,7 @@ public class BroadcastReceiverTool {
             Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(tag);
             if (fragment == null) {
                 fragment = new LiftFragment();
+                KKParentFragment.initLifeCycleLog(fragment);
                 activity.getSupportFragmentManager().beginTransaction().add(fragment, tag).commitAllowingStateLoss();
             }
 
