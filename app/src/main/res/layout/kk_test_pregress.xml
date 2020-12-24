@@ -31,7 +31,24 @@
            android:progress="30"
            ></ProgressBar>
 
-
+       <SeekBar
+           android:id="@+id/seekBar"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_vertical"
+           android:layout_marginEnd="8dp"
+           android:layout_marginStart="8dp"
+           android:background="@null"
+           android:max="100"
+           android:maxHeight="4dp"
+           android:minHeight="4dp"
+           android:paddingEnd="0dp"
+           android:paddingStart="0dp"
+           android:progress="50"
+           android:secondaryProgress="80"
+           android:progressDrawable="@drawable/kk_layer_progress_bar"
+           android:thumb="@drawable/kk_drawable_yuan_8_kafei"
+           android:thumbOffset="0dp" />
 
    </LinearLayout>
 </LinearLayout>
