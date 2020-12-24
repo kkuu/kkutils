@@ -123,6 +123,25 @@ public class TimeTool {
         return splitTime;
     }
 
+    /***
+     * 获取视频播放时间  00:00:00  只显示小时分钟秒
+     * @param timeLong
+     * @return
+     */
+    public static String getMediaTimeStr(long timeLong) {
+        StringBuffer sb=new StringBuffer();
+        //天， 小时，分钟， 秒 的数组
+        int[] times = TimeTool.splitTimes(timeLong);
+        if(times[1]>0){
+            sb.append(String.format("%02d:",times[1]+times[0]*24));
+        }
+        sb.append(String.format("%02d:",times[2]));
+        sb.append(String.format("%02d",times[3]));
+        return sb.toString();
+    }
+
+
+
     public static int[] daoJiShi(String dateString) {
         int[] splitTime = new int[4];
         try {
