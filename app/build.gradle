@@ -23,6 +23,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {//文件重复只使用第一个冲突的， gsy 和duee 播放冲突了
+        pickFirst '**'
+    }
+
 
 //可以让main 下面 含有res 的文件夹都变成资源目录，方便维护，比如，main/res-nongchang/layout  里面就可以放layout文件，
     def listSubFile = {
@@ -60,6 +64,12 @@ dependencies {
 
 
 //    implementation 'com.github.SharryChoo:SAlbum:1.0.2'
+
+
+
+    implementation 'com.shuyu:GSYVideoPlayer:8.0.0',{
+        exclude module: 'gsyvideoplayer-androidvideocache'//gsy 视频播放器， 加这一句是和duee 播放器冲突，单独使用的时候不加
+    }
 
 
     //#必选， 视频用到

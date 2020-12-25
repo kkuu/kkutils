@@ -11,7 +11,7 @@
         android:supportsRtl="true" >
 
 
-        <activity  android:name="utils.kkutils.parent.KKNormalFragmentActivity"  android:screenOrientation="portrait" />
+        <activity  android:name="utils.kkutils.parent.KKNormalFragmentActivity"  android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"/>
         <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"   android:screenOrientation="portrait" tools:replace="android:screenOrientation"></activity>
 
 

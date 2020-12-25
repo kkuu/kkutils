@@ -39,6 +39,7 @@ import kk.kktools.animation.KKTestCanvas;
 import kk.kktools.color.TestColorFragmentKK;
 import kk.kktools.jinrong.JiSuanQi;
 import kk.kktools.recycleview_test.TestRecycleView;
+import kk.kktools.shipin.TestGsyplayer;
 import kk.kktools.shipin.TestShiPin;
 import kk.kktools.shu.ShuJiaFragment;
 import kk.kktools.tab.TestTab;
@@ -118,6 +119,13 @@ public class MainActivityKK extends KKParentActivity {
                 // KKVideoPlayer.go();
             }
         });
+        addItem("测试gsy视频播放", new TestRecycleView(), new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                new TestGsyplayer().go();
+            }
+        });
+
         addItem("测试调色板",null, new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
