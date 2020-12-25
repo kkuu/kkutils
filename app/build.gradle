@@ -68,7 +68,7 @@ dependencies {
 
 
     implementation 'com.shuyu:GSYVideoPlayer:8.0.0',{
-        exclude module: 'gsyvideoplayer-androidvideocache'//gsy 视频播放器， 加这一句是和duee 播放器冲突，单独使用的时候不加
+        exclude module: 'gsyvideoplayer-androidvideocache'//gsy 视频播放器， 加这一句是和duee 播放器冲突，单独使用的时候不加   'com.shuyu:GSYVideoPlayer:8.0.0' 这个是  group:module:version 用冒号分开
     }
 
 
