@@ -35,6 +35,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import douyin.DouYinFragment;
+import kk.kktools.accessibilityTest.AccessibilityUtil;
+import kk.kktools.accessibilityTest.AutoQiangGouService;
 import kk.kktools.animation.KKTestCanvas;
 import kk.kktools.color.TestColorFragmentKK;
 import kk.kktools.jinrong.JiSuanQi;
@@ -205,6 +207,15 @@ public class MainActivityKK extends KKParentActivity {
                 LogTool.s("验证码java:"+ GoogleCodeJava.test());
             }
         });
+
+        addItem("抢购",null, new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                AccessibilityUtil.checkSetting(MainActivityKK.this, AutoQiangGouService.class); // "辅助功能"设置
+            }
+        });
+
+
         btn_go_shujia.setOnClickListener(new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
