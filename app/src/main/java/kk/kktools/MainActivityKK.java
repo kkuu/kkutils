@@ -26,7 +26,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.UtilsTransActivity;
+import com.lzy.okgo.callback.AbsCallback;
+import com.lzy.okgo.callback.Callback;
+import com.lzy.okgo.model.Progress;
+import com.lzy.okgo.model.Response;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,9 +42,14 @@ import java.util.List;
 import douyin.DouYinFragment;
 import kk.kktools.accessibilityTest.AccessibilityUtil;
 import kk.kktools.accessibilityTest.AutoQiangGouService;
+import kk.kktools.animation.ActivityAnimation1;
 import kk.kktools.animation.KKTestCanvas;
 import kk.kktools.color.TestColorFragmentKK;
+import kk.kktools.http.HttpOkGoConfig;
+import kk.kktools.http.HttpOkGoTool;
+import kk.kktools.http.KKCallBack;
 import kk.kktools.jinrong.JiSuanQi;
+import kk.kktools.p2p.Testp2pFragment;
 import kk.kktools.recycleview_test.TestRecycleView;
 import kk.kktools.shipin.TestGsyplayer;
 import kk.kktools.shipin.TestShiPin;
@@ -54,6 +64,7 @@ import utils.kkutils.AppTool;
 import utils.kkutils.HttpTool;
 import utils.kkutils.common.BroadcastReceiverTool;
 import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.FileTool;
 import utils.kkutils.common.LogTool;
 import utils.kkutils.common.MathTool;
 import utils.kkutils.common.PermissionTool;
@@ -212,6 +223,41 @@ public class MainActivityKK extends KKParentActivity {
             @Override
             public void onClickKK(View v) {
                 AccessibilityUtil.checkSetting(MainActivityKK.this, AutoQiangGouService.class); // "辅助功能"设置
+            }
+        });
+
+        addItem("okGo",null, new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                HttpOkGoConfig.initOkGo(getApplication());
+                HttpOkGoTool.get("https://www.baidu.com", new KKCallBack<String>(){
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        super.onSuccess(response);
+                        CommonTool.showToast(response.body());
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        CommonTool.showToast(response.getException());
+                    }
+                });
+                HttpOkGoTool.downLoad("https://down.qq.com/qqweb/QQ_1/android_apk/Android_8.5.5.5105_537066978.apk", FileTool.getCacheDir("apk").getAbsolutePath(),"qq",new KKCallBack<File>(){
+                    @Override
+                    public void onSuccess(Response<File> response) {
+                        super.onSuccess(response);
+                        CommonTool.showToast("下载完成"+response.body().length());
+                    }
+                });
+            }
+        });
+
+        addItem("p2p通信",new Testp2pFragment(), null);
+        addItem("转场动画", null, new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                ActivityAnimation1.go();
             }
         });
 

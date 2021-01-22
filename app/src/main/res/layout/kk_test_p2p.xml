@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/baise"
+    >
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView  style="@style/kk_textview" android:text="我的ip端口:" android:layout_marginRight="10dp"></TextView>
+            <TextView  android:id="@+id/tv_ip_my"  style="@style/kk_textview" android:text="127.0.0.1:80" android:layout_weight="1"></TextView>
+            <Button android:id="@+id/btn_copy" style="@style/kk_textview" android:text="复制"></Button>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView  style="@style/kk_textview" android:text="对方ip端口:" android:layout_marginRight="10dp"></TextView>
+            <EditText android:id="@+id/tv_remote_ip_port" style="@style/kk_textview" android:text="117.139.164.181:" android:layout_width="0dp" android:layout_weight="1" android:layout_height="50dp"></EditText>
+            <Button android:id="@+id/btn_connect" style="@style/kk_textview" android:text="发起连接"></Button>
+        </LinearLayout>
+
+
+        <EditText
+            android:background="#eee"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"></EditText>
+        <Button style="@style/kk_textview" android:text="发送" android:layout_gravity="right"></Button>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="收到的消息:"
+            android:layout_marginTop="10dp"
+            ></TextView>
+        <ScrollView
+            android:layout_width="match_parent" android:fillViewport="true"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_msg_recived"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                ></TextView>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

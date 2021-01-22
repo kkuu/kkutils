@@ -31,7 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity  android:name=".animation.ActivityAnimation1"  />
+        <activity  android:name=".animation.ActivityAnimation2"  />
 
         <!--测试抢购-->
         <service

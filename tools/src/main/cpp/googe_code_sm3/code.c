@@ -40,9 +40,8 @@ void hex_str_to_byte(char *hex_str, int length, unsigned char *result) {
 }
 
 int getCode(unsigned int time,int num,char  * pwd) {
-    printf("Hello, World!\n");
 
-    unsigned char X = 60;
+    unsigned char X = 30;
 
     unsigned int T0 = time, T;
 
@@ -115,7 +114,9 @@ int getCode(unsigned int time,int num,char  * pwd) {
 
     I = floorMod(I, pow(2,32));
     P = I % ((unsigned  int)pow(10,D)); // 10的D次方
-    printf("\nresult  %d\n", P);
+    printf("\nresult  %06d\n", P);//可能不足位数，实际使用的时候需要格式化一下 比如 1611038220 433556575255443555543333584A5A33  结果是 1213
+
+
 
     return P;
 }
