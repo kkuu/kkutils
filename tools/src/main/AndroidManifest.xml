@@ -5,6 +5,7 @@
     <application
         android:usesCleartextTraffic="true"
         android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:resizeableActivity="true"
         android:maxAspectRatio="2.1"
         android:allowBackup="true"
