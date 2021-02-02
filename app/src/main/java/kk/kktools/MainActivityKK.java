@@ -225,7 +225,13 @@ public class MainActivityKK extends KKParentActivity {
                 AccessibilityUtil.checkSetting(MainActivityKK.this, AutoQiangGouService.class); // "辅助功能"设置
             }
         });
+        addItem("权限",null, new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
 
+                PermissionTool.test();
+            }
+        });
         addItem("okGo",null, new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
