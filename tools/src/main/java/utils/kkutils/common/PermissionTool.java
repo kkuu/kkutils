@@ -36,31 +36,62 @@ public class PermissionTool {
 
 
     public static void test() {
-        PermissionTool.checkPermissionMust(new PermissionTool.PermissionListener() {
+
+        PermissionTool.checkPermissionMust(new PermissionListener() {
             @Override
             public void onGranted(List<String> granted) {
                 CommonTool.showToast("允许了");
             }
-
             @Override
             public boolean onDenied(List<String> denied) {
                 CommonTool.showToast("拒绝了");
                 return false;
             }
-        }, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE);
+
+        },Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE);
+
+//        boolean b = checkPermissionSimple(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE);
+//        CommonTool.showToast(b);
 
     }
 
-    public interface PermissionListener {
-        public void onGranted(List<String> granted);
+    public abstract static class PermissionListener {
+        public abstract void onGranted(List<String> granted);
 
-        public boolean onDenied(List<String> denied);
+        public  boolean onDenied(List<String> denied){return false;};
     }
 
+    /***
+     * 启动的时候可以用这个提示，只管请求，后续结果不管
+     * @param permission
+     * @return
+     */
+    public static boolean checkPermissionSimple( final String... permission) {
+        return checkPermissionMust(null,false,permission);
+    }
 
+    /***
+     * 请求必要权限
+     * @param permissionListener
+     * @param permission
+     * @return
+     */
     public static boolean checkPermissionMust(PermissionListener permissionListener, final String... permission) {
+        return checkPermissionMust(permissionListener,true,permission);
+    }
+
+    /***
+     * 请求必要权限
+     * @param permissionListener
+     * @param showSetDialog  是否弹出去设置提示框
+     * @param permission
+     * @return
+     */
+    public static boolean checkPermissionMust(PermissionListener permissionListener,boolean showSetDialog, final String... permission) {
+        if(permission==null||permission.length==0) return true;
+        Activity currActivity = AppTool.currActivity;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Activity currActivity = AppTool.currActivity;
+
             PermissionUtils.permission(permission)
                     .callback(new PermissionUtils.FullCallback() {
                         @Override
@@ -68,15 +99,12 @@ public class PermissionTool {
                             LogTool.s("权限允许了：" + granted);
                             if (permissionListener != null) permissionListener.onGranted(granted);
                         }
-
                         @Override
                         public void onDenied(@NonNull List<String> deniedForever, @NonNull List<String> denied) {
                             if (permissionListener != null) {
                                 if (permissionListener.onDenied(denied)) return;
                             }
                             if (denied != null && !denied.isEmpty()) {
-
-                                AppTool.currActivity = currActivity;
 
                                 Set<String> stringSet = new TreeSet<>();
                                 for (String s : denied) {
@@ -89,22 +117,26 @@ public class PermissionTool {
                                 }
                                 String permissionStr = sb.toString().substring(0, sb.length() - 1);
 
-                                DialogTool.initNormalQueDingDialog("提示", "请允许" + permissionStr + "权限","去设置", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        PermissionUtils.launchAppDetailsSettings();
-                                    }
-                                }, "取消").show();
+                                String msg="请允许" + permissionStr + "权限";
+                                if(showSetDialog){
+                                    AppTool.currActivity = currActivity;
+                                    DialogTool.initNormalQueDingDialog("提示", msg,"去设置", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            PermissionUtils.launchAppDetailsSettings();
+                                        }
+                                    }, "取消").show();
+                                }else {
+                                    //CommonTool.showToast(msg);
+                                }
+
                             }
                         }
                     })
                     .request();
         }
-        ;
         return PermissionUtils.isGranted(permission);
     }
-
-
 
 
     public static class PermissionStr {
