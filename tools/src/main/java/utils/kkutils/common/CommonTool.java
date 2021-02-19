@@ -2,6 +2,7 @@ package utils.kkutils.common;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.DeviceUtils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -521,6 +523,29 @@ public class CommonTool {
         }catch (Exception e){
             LogTool.ex(e);
         }
+    }
+
+    public static Application getApp() {
+        try {
+            Class activityThreadClass = Class.forName("android.app.ActivityThread");
+            Field sCurrentActivityThread = activityThreadClass.getDeclaredField("sCurrentActivityThread");
+            sCurrentActivityThread.setAccessible(true);
+            Object thread = sCurrentActivityThread.get(null);
+            Object app = activityThreadClass.getMethod("getApplication").invoke(thread);
+            if (app == null) {
+                return null;
+            }
+            return (Application) app;
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 
