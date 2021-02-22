@@ -1,14 +1,20 @@
 package utils.kkutils.db;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+
+
+import androidx.core.content.FileProvider;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,8 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 import utils.kkutils.common.CommonTool;
-import utils.kkutils.common.LogTool;
-import utils.kkutils.common.UriTool;
+import utils.kkutils.common.PermissionTool;
 
 
 /***
@@ -37,16 +42,25 @@ import utils.kkutils.common.UriTool;
  * MediaStore.Vedio: 存放视频信息
  *
  *
- * 上面几个 可以用 file 方式直接读写
+
  */
 public class MediaStorageTool {
     static final Uri urlExternal = MediaStore.Files.getContentUri("external");
     static final String RELATIVE_PATH="relative_path";//MediaStore.Files.FileColumns.RELATIVE_PATH
     static String fileParent="Documents";//sd 卡下的document
 
+    public static class  MediaFileProvider extends  FileProvider{
 
-    public static Context context= CommonTool.getApp();
+    }
 
+    public static Context context=null;
+
+    public static void init(Activity activity){
+        if(activity!=null){
+            PermissionTool.checkPermissionMust(null, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        context=CommonTool.getApp();
+    }
 
     public static void StringSave(String key,String content){
         Uri uri = MediaStorageTool.fileNew( "", key);
@@ -61,17 +75,24 @@ public class MediaStorageTool {
 
 
     public static Uri fileNew(String path,String name){
-
-
-
-        MediaFile mediaFile = fileFind( path, name);
-        if(mediaFile.uri==null){//没有文件 新插入一个
-            ContentValues contentValues=new ContentValues();
-            contentValues.put(RELATIVE_PATH,mediaFile.path);
-            contentValues.put(MediaStore.Files.FileColumns.DISPLAY_NAME, mediaFile.name);
-            contentValues.put(MediaStore.Files.FileColumns.MIME_TYPE, "application/java-archive");
-            context.getContentResolver().insert(urlExternal, contentValues);
+        if(context==null){
+            CommonTool.showToast("请先初始化 MediaStorageTool.context");
+            return null;
+        }
+        MediaFile mediaFile = new MediaFile();
+        try {
             mediaFile = fileFind( path, name);
+            if(mediaFile.uri==null){//没有文件 新插入一个
+                ContentValues contentValues=new ContentValues();
+                contentValues.put(RELATIVE_PATH,mediaFile.path);
+                contentValues.put(MediaStore.Files.FileColumns.DISPLAY_NAME, mediaFile.name);
+                contentValues.put(MediaStore.Files.FileColumns.MIME_TYPE, "application/java-archive");
+                context.getContentResolver().insert(urlExternal, contentValues);
+                mediaFile = fileFind( path, name);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return mediaFile.uri;
     }
@@ -98,11 +119,11 @@ public class MediaStorageTool {
                 File fileTem=new File(pathTem);
                 fileTem.mkdirs();
                 file.createNewFile();
-                LogTool.s("原始方式创建文件："+file.getAbsolutePath());
+//                LogTool.s("原始方式创建文件："+file.getAbsolutePath());
             }
 
             if(file.exists()){
-                Uri uri= UriTool.getUriWithFileProvider(file);
+                Uri uri= getUriWithFileProvider(file);
                 mediaFile.uri=uri;
                 return mediaFile;
             }
@@ -118,6 +139,21 @@ public class MediaStorageTool {
         }
 
         return mediaFile;
+    }
+    /***
+     * android 7.0 后暴露给其他app 的路径 要用这种uri
+     * @param file
+     * @return
+     */
+    public static Uri getUriWithFileProvider(File file){
+        Uri uriForFile=null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uriForFile = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
+        } else {
+            uriForFile = Uri.fromFile(file);
+        }
+
+        return uriForFile;
     }
     public static boolean fileWrite(Uri uri,String content){
         try {
@@ -138,7 +174,7 @@ public class MediaStorageTool {
             if(uri==null)return result;
 
             InputStream inputStream = context.getContentResolver().openInputStream(uri);
-             br=new BufferedReader(new InputStreamReader(inputStream));
+            br=new BufferedReader(new InputStreamReader(inputStream));
             StringBuffer stringBuffer=new StringBuffer();
             String line="";
             while ((line=br.readLine())!=null){
@@ -174,7 +210,7 @@ public class MediaStorageTool {
             String sql=(RELATIVE_PATH+"=? and "+MediaStore.Files.FileColumns.DISPLAY_NAME+"=?");
             ContentResolver mContentResolver = context.getContentResolver();
             Cursor external = mContentResolver.query(MediaStore.Files.getContentUri("external"), null, sql, new String[]{relativePath, displayName}, null);
-           return getFilesByCursor(external);
+            return getFilesByCursor(external);
 
         } catch (Exception e) {
             e.printStackTrace();
