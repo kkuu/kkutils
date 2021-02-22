@@ -5,8 +5,10 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,6 +64,7 @@ import utils.kkutils.parent.KKViewOnclickListener;
 import utils.kkutils.ui.KKSimpleRecycleView;
 import utils.kkutils.ui.bigimage.KKBigImgListFragment;
 import utils.kkutils.ui.daojishi.DaoJiShiTool;
+import utils.kkutils.ui.dialog.DialogTool;
 import utils.kkutils.ui.dialog.datetimedialog.KKDatePickerDialog;
 import utils.kkutils.ui.recycleview.KKDecoration;
 import utils.kkutils.ui.textview.KKTextToSpeech;
@@ -84,6 +87,17 @@ public class MainActivityKK extends KKParentActivity {
 
 
         testItems.clear();
+         addItem("推送别名", null, new KKViewOnclickListener() {
+            @Override
+            public void onClickKK(View v) {
+                DialogTool.initNormalInputDialog("设置别名", "", "确定", new DialogTool.OnDialogInputEnd() {
+                    @Override
+                    public void onInputEnd(EditText editText) {
+                        App.setAlias(editText.getContext(),editText.getText().toString().trim());
+                    }
+                },"",App.getAliasLocal(), InputType.TYPE_CLASS_TEXT).show();
+            }
+        });
         addItem("计算器", new JiSuanQi(), null);
         addItem("测试大图", null, new KKViewOnclickListener() {
             @Override
