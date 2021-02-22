@@ -41,26 +41,34 @@ import utils.kkutils.common.PermissionTool;
  *
  * MediaStore.Vedio: 存放视频信息
  *
+ * 需要
  *
+ *  PermissionTool.checkPermissionMust(null, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+ *
+ *
+ *     <provider
+ *             android:name=".common.KKFileProvider"
+ *             android:authorities="${applicationId}.fileprovider"
+ *             android:exported="false"
+ *             android:grantUriPermissions="true">
+ *             <meta-data
+ *                 android:name="android.support.FILE_PROVIDER_PATHS"
+ *                 android:resource="@xml/provider_paths" />
+ *         </provider>
 
  */
 public class MediaStorageTool {
     static final Uri urlExternal = MediaStore.Files.getContentUri("external");
     static final String RELATIVE_PATH="relative_path";//MediaStore.Files.FileColumns.RELATIVE_PATH
     static String fileParent="Documents";//sd 卡下的document
+    public static Context context=CommonTool.getApp();;
 
     public static class  MediaFileProvider extends  FileProvider{
 
     }
 
-    public static Context context=null;
 
-    public static void init(Activity activity){
-        if(activity!=null){
-            PermissionTool.checkPermissionMust(null, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-        context=CommonTool.getApp();
-    }
+
 
     public static void StringSave(String key,String content){
         Uri uri = MediaStorageTool.fileNew( "", key);
@@ -79,8 +87,11 @@ public class MediaStorageTool {
             CommonTool.showToast("请先初始化 MediaStorageTool.context");
             return null;
         }
+
         MediaFile mediaFile = new MediaFile();
         try {
+            PermissionTool.checkPermissionMust(null, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
             mediaFile = fileFind( path, name);
             if(mediaFile.uri==null){//没有文件 新插入一个
                 ContentValues contentValues=new ContentValues();
