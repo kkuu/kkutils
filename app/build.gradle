@@ -79,7 +79,7 @@ dependencies {
         exclude module: 'gsyvideoplayer-androidvideocache'//gsy 视频播放器， 加这一句是和duee 播放器冲突，单独使用的时候不加   'com.shuyu:GSYVideoPlayer:8.0.0' 这个是  group:module:version 用冒号分开
     }
 
-
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.68' //国密算法
     //#必选， 视频用到
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
 
