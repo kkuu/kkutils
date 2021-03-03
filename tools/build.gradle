@@ -134,6 +134,10 @@ dependencies {
     api 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
     api 'q.rorbin:badgeview:1.1.0'
 
+    //阴影
+    api 'com.github.amikoj:ShadowView:1.0.1'
+
+
     //视频播放的 要用可以打开
     //KKVideoPlayer
 //#必选， 视频用到
