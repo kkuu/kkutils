@@ -17,6 +17,7 @@ public class App extends KKParentApplication {
         setAlias(this,getAliasLocal());
     }
     public static void setAlias(Context context,String alias){
+        MiPushClient.unsetAlias(context,getAliasLocal(),null);
         MiPushClient.setAlias(context,alias,null);
         MapDB.saveObj(true,"alias",alias);
     }
