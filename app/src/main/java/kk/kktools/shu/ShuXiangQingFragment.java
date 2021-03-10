@@ -125,6 +125,7 @@ public class ShuXiangQingFragment extends KKParentFragment {
             shu_scrollview.scrollBy(0, -scrollY);
         }
 
+        saveCurr();
     }
 
 
@@ -138,7 +139,6 @@ public class ShuXiangQingFragment extends KKParentFragment {
                 if(which==0){
                     ShuDataLocal.cache(muLuItem.parentId,muLuItem.id);
                 }
-
 
             }
         });

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.kkutils.common.CommonTool;
+import utils.kkutils.common.LogTool;
 import utils.kkutils.db.MapDB;
 import utils.kkutils.http.HttpUiCallBack;
 import utils.kkutils.parent.KKParentActivity;
@@ -48,8 +49,14 @@ public class ShuDataLocal {
     }
 
     public static void savePage(ShuXiangQingBean xiangQingBean, int scrollY) {
-        String key=""+xiangQingBean.data.id;//+"-"+xiangQingBean.data.cid;
-        MapDB.saveObj(true, key,xiangQingBean.data.cid+"="+scrollY);
+        try {
+            if(xiangQingBean==null)return;
+            String key=""+xiangQingBean.data.id;//+"-"+xiangQingBean.data.cid;
+            MapDB.saveObj(true, key,xiangQingBean.data.cid+"="+scrollY);
+        }catch (Exception e){
+            LogTool.ex(e);
+        }
+
     }
     public static ShuMuLuBean.MuLuItem getPreMuLuInfo(ShuInfoBean.BookInfo bookInfo) {
         String s = MapDB.loadObjByDefault("" + bookInfo.Id, String.class, bookInfo.FirstChapterId + "=" + 0);//默认第一章位置 0
