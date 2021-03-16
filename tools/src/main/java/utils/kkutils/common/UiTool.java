@@ -396,6 +396,7 @@ public class UiTool {
     public static void setWH(View view, int w, int h) {
         if (view == null) return;
         try {
+            if(view.getWidth()==w&&view.getHeight()==h)return;
             ViewGroup.LayoutParams lp = view.getLayoutParams();
             if (lp == null) {
                 lp = new ViewGroup.LayoutParams(0, 0);
