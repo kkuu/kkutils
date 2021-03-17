@@ -152,7 +152,7 @@ public class ShuXiangQingFragment extends KKParentFragment {
                 KKParentActivity.hideWaitingDialogStac();
                 xiangQingBean=data;
                 UiTool.setTextView(parent,R.id.tv_curr_zhang,xiangQingBean.data.name+"   "+xiangQingBean.data.cname);
-                UiTool.setTextView(tv_shu_content, data.data.content);
+                UiTool.setTextView(tv_shu_content, data.data.content.replace("<br/>","\n"));
 
                 if(xiangQingBean.data.cid==muLuItem.id){
                     shu_scrollview.post(new Runnable() {
