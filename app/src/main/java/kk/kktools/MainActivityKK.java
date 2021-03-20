@@ -110,9 +110,9 @@ public class MainActivityKK extends KKParentActivity {
             @Override
             public void onClickKK(View v) {
 //                KKTextToSpeech.textToSpeech_after_jinbi("支付宝到账。101元");
-                KKTextToSpeech.textToSpeech_after_jinbi("去拼拼到账 123456.0789元");
+                //KKTextToSpeech.textToSpeech_after_jinbi("去拼拼到账 123456.0789元");
 
-//                new TestCoordinatorLayoutFragmentKK().go();
+                new TestCoordinatorLayoutFragmentKK().go();
             }
         });
         addItem("测试recycleView", new TestRecycleView(), null);
