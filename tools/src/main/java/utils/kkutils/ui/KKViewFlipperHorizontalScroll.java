@@ -10,11 +10,10 @@ import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
 import android.widget.ViewFlipper;
 
+import com.blankj.utilcode.util.LogUtils;
+
 /***
  * 可以竖向滚动的同时  如果控件过长 还可以水平滚动
- *
- *  添加完子控件后 调用这个方法开始
- *  {@link #beginStartScroll()}
  */
 public class KKViewFlipperHorizontalScroll extends ViewFlipper {
     OnShowListener onShowListener;
@@ -36,24 +35,18 @@ public class KKViewFlipperHorizontalScroll extends ViewFlipper {
         initDefaultAnim();
 
 
-        setOnShowListener(new KKViewFlipperHorizontalScroll.OnShowListener() {
-            @Override
-            public void onShow(View view) {
-                if(view instanceof KKHorizontalScroll){
-                    ((KKHorizontalScroll) view).startScroll();
-                }
-            }
-        });
-    }
-    public void initDefaultAnim(){
-        if(getInAnimation()==null){
 
-            int type=Animation.RELATIVE_TO_SELF;
-            TranslateAnimation animationIn = new TranslateAnimation(type,0,type,0,type,1,type,0);
+    }
+
+    public void initDefaultAnim() {
+        if (getInAnimation() == null) {
+
+            int type = Animation.RELATIVE_TO_SELF;
+            TranslateAnimation animationIn = new TranslateAnimation(type, 0, type, 0, type, 1, type, 0);
             animationIn.setDuration(500);
             setInAnimation(animationIn);
 
-            TranslateAnimation animationOut = new TranslateAnimation(type,0,type,0,type,0,type,-1);
+            TranslateAnimation animationOut = new TranslateAnimation(type, 0, type, 0, type, 0, type, -1);
             animationOut.setDuration(500);
             setOutAnimation(animationOut);
         }
@@ -71,17 +64,37 @@ public class KKViewFlipperHorizontalScroll extends ViewFlipper {
     @Override
     public void setDisplayedChild(int whichChild) {
         super.setDisplayedChild(whichChild);
-        if (onShowListener != null) onShowListener.onShow(getChildAt(getDisplayedChild()));
+        try {
+            //横向滚动
+            View view = getChildAt(getDisplayedChild());
+            ((KKHorizontalScroll) view).startScroll();
+
+//            for (int i = 0; i < getChildCount(); i++) {
+//                View child = getChildAt(i);
+//                if (child instanceof KKHorizontalScroll) {
+//                    if(child.equals(view)){
+//                        ((KKHorizontalScroll) child).startScroll();
+//                    }else {
+//                        ((KKHorizontalScroll) child).stopScroll();
+//                    }
+//                }
+//            }
+
+            if (onShowListener != null) onShowListener.onShow(view);
+        } catch (Exception e) {
+            LogUtils.e(e);
+        }
+
     }
 
     /***
      * 添加完子控件后 调用这个方法开始
      */
-    public void beginStartScroll(){
+    public void beginStartScroll() {
         try {
             KKHorizontalScroll scroll = (KKHorizontalScroll) getChildAt(0);
             scroll.startScroll();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         startFlipping();
@@ -90,12 +103,12 @@ public class KKViewFlipperHorizontalScroll extends ViewFlipper {
 
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
-        addViewInHorizontalScroll(child,index,params);
+        addViewInHorizontalScroll(child, index, params);
     }
 
-     void addViewInHorizontalScroll(View child, int index, ViewGroup.LayoutParams params) {
-        KKHorizontalScroll scroll=new KKHorizontalScroll(getContext());
-        ViewGroup.LayoutParams lp=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    void addViewInHorizontalScroll(View child, int index, ViewGroup.LayoutParams params) {
+        KKHorizontalScroll scroll = new KKHorizontalScroll(getContext());
+        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         scroll.setLayoutParams(lp);
         scroll.setFillViewport(true);
         scroll.addView(child);
@@ -103,21 +116,19 @@ public class KKViewFlipperHorizontalScroll extends ViewFlipper {
         scroll.setKKScrollChangeListener(new KKHorizontalScroll.ScrollChangeListener() {
             @Override
             public void onScrollChange(KKHorizontalScroll KKHorizontalScroll, KKHorizontalScroll.ScrollState scrollState) {
-                if(scrollState== KKViewFlipperHorizontalScroll.KKHorizontalScroll.ScrollState.stop){
+                if (scrollState == KKViewFlipperHorizontalScroll.KKHorizontalScroll.ScrollState.stop) {
                     showNext();
                     startFlipping();
                 }
-                if(scrollState== KKViewFlipperHorizontalScroll.KKHorizontalScroll.ScrollState.running){
+                if (scrollState == KKViewFlipperHorizontalScroll.KKHorizontalScroll.ScrollState.running) {
                     stopFlipping();
                 }
             }
 
         });
 
-        super.addView(scroll,index,params);
+        super.addView(scroll, index, params);
     }
-
-
 
 
     public static class KKHorizontalScroll extends HorizontalScrollView {
@@ -167,15 +178,21 @@ public class KKViewFlipperHorizontalScroll extends ViewFlipper {
         }
 
         Runnable scrollRunnable = new Runnable() {
-            int x = 5;
+            int x = 3;
+
             @Override
             public void run() {
-                scrollBy(x, 0);
-                if (getScrollX() != getMaxScrollX()) {
-                    handler.postDelayed(this, 30);
-                } else {
-                    stopScroll();
+                try {
+                    scrollBy(x, 0);
+                    if (getChildAt(0).isAttachedToWindow()&&getScrollX() != getMaxScrollX()) {
+                        handler.postDelayed(this, 30);
+                    } else {
+                        stopScroll();
+                    }
+                }catch (Exception e){
+                    LogUtils.e(e);
                 }
+
             }
         };
 
