@@ -138,7 +138,7 @@ dependencies {
 
     //阴影
     api 'com.github.amikoj:ShadowView:1.0.1'
-
+    api 'com.github.lihangleo2:ShadowLayout:3.2.0'//阴影,shape,selector
 
     //视频播放的 要用可以打开
     //KKVideoPlayer
