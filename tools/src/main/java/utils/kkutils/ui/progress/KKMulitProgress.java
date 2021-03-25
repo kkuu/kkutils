@@ -45,6 +45,7 @@ public class KKMulitProgress extends View {
     }
     public void setProgressList(List<MulitProgressData> listProgress) {
         this.listProgress = listProgress;
+        postInvalidate();
     }
     //进度数据
     public List<MulitProgressData> listProgress = new ArrayList<>();
