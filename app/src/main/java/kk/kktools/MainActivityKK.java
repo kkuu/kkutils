@@ -27,6 +27,7 @@ import kk.kktools.accessibilityTest.AccessibilityUtil;
 import kk.kktools.accessibilityTest.AutoQiangGouService;
 import kk.kktools.animation.ActivityAnimation1;
 import kk.kktools.animation.KKTestCanvas;
+import kk.kktools.canvas.TestXFerModeFragmentKK;
 import kk.kktools.color.TestColorFragmentKK;
 import kk.kktools.http.HttpOkGoConfig;
 import kk.kktools.http.HttpOkGoTool;
@@ -67,7 +68,6 @@ import utils.kkutils.ui.daojishi.DaoJiShiTool;
 import utils.kkutils.ui.dialog.DialogTool;
 import utils.kkutils.ui.dialog.datetimedialog.KKDatePickerDialog;
 import utils.kkutils.ui.recycleview.KKDecoration;
-import utils.kkutils.ui.textview.KKTextToSpeech;
 import utils.kkutils.ui.video.douyin2.DouYinFragment2;
 import utils.kkutils.ui.webview.X5WebView;
 import utils.kkutils.update.Version;
@@ -99,6 +99,8 @@ public class MainActivityKK extends KKParentActivity {
             }
         });
         addItem("计算器", new JiSuanQi(), null);
+        addItem("xferMode", new TestXFerModeFragmentKK(), null);
+
         addItem("测试大图", null, new KKViewOnclickListener() {
             @Override
             public void onClickKK(View v) {
