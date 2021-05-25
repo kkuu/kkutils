@@ -57,107 +57,124 @@ import utils.kkutils.common.PermissionTool;
  *         </provider>
 
  */
+
+/***
+ * android 11 提出了 分区存储， 存放外部文件不可以，所以可以用这个 来放到共享目录存放一些信息
+ * MediaStore.Files: 共享的文件,包括多媒体和非多媒体信息
+ *
+ * MediaStore.Audio: 存放音频信息
+ *
+ * MediaStore.Image: 存放图片信息
+ *
+ * MediaStore.Vedio: 存放视频信息
+ *
+ *
+
+ */
 public class MediaStorageTool {
     static final Uri urlExternal = MediaStore.Files.getContentUri("external");
-    static final String RELATIVE_PATH="relative_path";//MediaStore.Files.FileColumns.RELATIVE_PATH
-    static String fileParent="Documents";//sd 卡下的document
-    public static Context context=CommonTool.getApp();;
+    static final String RELATIVE_PATH = "relative_path";//MediaStore.Files.FileColumns.RELATIVE_PATH
+    static String fileParent = "Documents";//sd 卡下的document
 
-    public static class  MediaFileProvider extends  FileProvider{
+    public static class MediaFileProvider extends FileProvider {
+
+    }
+
+    public static Context context = CommonTool.getApp();
+
+    public static void init(Activity activity) {
+        if (activity != null) {
+            PermissionTool.checkPermissionMust(null, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            context = activity.getApplicationContext();
+        }
 
     }
 
 
-
-
-    public static void StringSave(String key,String content){
-        Uri uri = MediaStorageTool.fileNew( "", key);
-        MediaStorageTool.fileWrite(uri,content);
+    public static void StringSave(String key, String content,boolean append) {
+        Uri uri = MediaStorageTool.fileNew("", key);
+        MediaStorageTool.fileWrite(uri, content,append);
     }
-    public static String StringLoad(String key){
-        Uri uri = MediaStorageTool.fileNew( "", key);
-        String result = MediaStorageTool.fileRead( uri);
+    public static String StringLoad(String key) {
+        Uri uri = MediaStorageTool.fileNew("", key);
+        String result = MediaStorageTool.fileRead(uri);
         return result;
     }
 
 
-
-    public static Uri fileNew(String path,String name){
-        if(context==null){
-            CommonTool.showToast("请先初始化 MediaStorageTool.context");
+    public static Uri fileNew(String path, String name) {
+        if (context == null) {
             return null;
         }
-
         MediaFile mediaFile = new MediaFile();
         try {
-            PermissionTool.checkPermissionMust(null, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-            mediaFile = fileFind( path, name);
-            if(mediaFile.uri==null){//没有文件 新插入一个
-                ContentValues contentValues=new ContentValues();
-                contentValues.put(RELATIVE_PATH,mediaFile.path);
+            mediaFile = fileFind(path, name);
+            if (mediaFile.uri == null) {//没有文件 新插入一个
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(RELATIVE_PATH, mediaFile.path);
                 contentValues.put(MediaStore.Files.FileColumns.DISPLAY_NAME, mediaFile.name);
                 contentValues.put(MediaStore.Files.FileColumns.MIME_TYPE, "application/java-archive");
                 context.getContentResolver().insert(urlExternal, contentValues);
-                mediaFile = fileFind( path, name);
+                mediaFile = fileFind(path, name);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return mediaFile.uri;
     }
-    public static MediaFile fileFind(String path,String name){
-        if(TextUtils.isEmpty(path)) {
-            path="files";
-        }
-        if(!path.endsWith("/")){
-            path=path+"/";
-        }
-        String relativePath=fileParent+"/System/"+context.getPackageName()+"/"+path;
-        String displayName=name;
 
-        MediaFile mediaFile=new MediaFile();
-        mediaFile.path=relativePath;
-        mediaFile.name=displayName;
+    public static MediaFile fileFind(String path, String name) {
+        if (TextUtils.isEmpty(path)) {
+            path = "files";
+        }
+        if (!path.endsWith("/")) {
+            path = path + "/";
+        }
+        String relativePath = fileParent + "/System/" + context.getPackageName() + "/" + path;
+        String displayName = name;
+
+        MediaFile mediaFile = new MediaFile();
+        mediaFile.path = relativePath;
+        mediaFile.name = displayName;
 
 
         try {//默认用原生的file， 兼容低版本android
-            String pathTem= Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+relativePath;
+            String pathTem = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + relativePath;
 
-            File file=new File(pathTem,displayName+".jar");
-            if(!file.exists()){
-                File fileTem=new File(pathTem);
+            File file = new File(pathTem, displayName + ".jar");
+            if (!file.exists()) {
+                File fileTem = new File(pathTem);
                 fileTem.mkdirs();
                 file.createNewFile();
 //                LogTool.s("原始方式创建文件："+file.getAbsolutePath());
             }
 
-            if(file.exists()){
-                Uri uri= getUriWithFileProvider(file);
-                mediaFile.uri=uri;
+            if (file.exists()) {
+                Uri uri = getUriWithFileProvider(file);
+                mediaFile.uri = uri;
                 return mediaFile;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
-        List<MediaFile> list = MediaStorageTool.getFilesByPath(relativePath, displayName+".jar");
-        if(list.size()==1){
+        List<MediaFile> list = MediaStorageTool.getFilesByPath(relativePath, displayName + ".jar");
+        if (list.size() == 1) {
             return list.get(0);
         }
 
         return mediaFile;
     }
+
     /***
      * android 7.0 后暴露给其他app 的路径 要用这种uri
      * @param file
      * @return
      */
-    public static Uri getUriWithFileProvider(File file){
-        Uri uriForFile=null;
+    public static Uri getUriWithFileProvider(File file) {
+        Uri uriForFile = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             uriForFile = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
         } else {
@@ -166,38 +183,49 @@ public class MediaStorageTool {
 
         return uriForFile;
     }
-    public static boolean fileWrite(Uri uri,String content){
+
+    public static boolean fileWrite(Uri uri, String content,boolean append) {
+        OutputStream outputStream=null;
         try {
-            if(uri==null||content==null)return false;
-            OutputStream outputStream = context.getContentResolver().openOutputStream(uri);
+            if (uri == null || content == null) return false;
+            outputStream = context.getContentResolver().openOutputStream(uri,append?"wa":"w");
             outputStream.write(content.getBytes());
-            outputStream.close();
-        }catch (Exception e){
+            outputStream.flush();
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
-            return false;
+        }finally {
+            if(outputStream!=null){
+                try {
+                    outputStream.close();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
         }
-        return true;
+        return false;
     }
-    public static String fileRead(Uri uri){
-        String result="";
-        BufferedReader br=null;
+
+    public static String fileRead(Uri uri) {
+        String result = "";
+        BufferedReader br = null;
         try {
-            if(uri==null)return result;
+            if (uri == null) return result;
 
             InputStream inputStream = context.getContentResolver().openInputStream(uri);
-            br=new BufferedReader(new InputStreamReader(inputStream));
-            StringBuffer stringBuffer=new StringBuffer();
-            String line="";
-            while ((line=br.readLine())!=null){
+            br = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuffer stringBuffer = new StringBuffer();
+            String line = "";
+            while ((line = br.readLine()) != null) {
                 stringBuffer.append(line);
                 stringBuffer.append("\n");
             }
-            stringBuffer.deleteCharAt(stringBuffer.length()-1);
-            result=stringBuffer.toString();
-        }catch (Exception e){
+            stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+            result = stringBuffer.toString();
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if(br!=null){
+        } finally {
+            if (br != null) {
                 try {
                     br.close();
                 } catch (IOException e) {
@@ -214,11 +242,12 @@ public class MediaStorageTool {
      **/
     public static List<MediaFile> getFilesAll(Context context) {
 
-        return getFilesByCursor( context.getContentResolver().query(MediaStore.Files.getContentUri("external"), null, null, null, null));
+        return getFilesByCursor(context.getContentResolver().query(MediaStore.Files.getContentUri("external"), null, null, null, null));
     }
+
     public static List<MediaFile> getFilesByPath(String relativePath, String displayName) {
         try {
-            String sql=(RELATIVE_PATH+"=? and "+MediaStore.Files.FileColumns.DISPLAY_NAME+"=?");
+            String sql = (RELATIVE_PATH + "=? and " + MediaStore.Files.FileColumns.DISPLAY_NAME + "=?");
             ContentResolver mContentResolver = context.getContentResolver();
             Cursor external = mContentResolver.query(MediaStore.Files.getContentUri("external"), null, sql, new String[]{relativePath, displayName}, null);
             return getFilesByCursor(external);
@@ -228,10 +257,11 @@ public class MediaStorageTool {
         }
         return new ArrayList<>();
     }
+
     /**
      * 获取所有文件 使用 Cursor
      **/
-    public static List<MediaFile> getFilesByCursor( Cursor c) {
+    public static List<MediaFile> getFilesByCursor(Cursor c) {
         List<MediaFile> list = new ArrayList<>();
         // 扫描files文件库
         try {
@@ -246,7 +276,7 @@ public class MediaStorageTool {
             while (c.moveToNext()) {
                 String path = c.getString(columnIndexOrThrow_DATA);
                 String minType = c.getString(columnIndexOrThrow_MIME_TYPE);
-                Log.v("kk","path:" + path);
+                Log.v("kk", "path:" + path);
 
                 int position_do = path.lastIndexOf(".");
                 if (position_do == -1) {
@@ -268,7 +298,7 @@ public class MediaStorageTool {
                 mediaFile.size = size;
                 mediaFile.id = c.getLong(columnIndexOrThrow_ID);//tempId++) + "";
                 mediaFile.time = time;
-                mediaFile.uri=MediaStore.Files.getContentUri("external",mediaFile.id);
+                mediaFile.uri = MediaStore.Files.getContentUri("external", mediaFile.id);
 
                 list.add(mediaFile);
             }
@@ -281,8 +311,6 @@ public class MediaStorageTool {
         }
         return list;
     }
-
-
 
 
     public static class MediaFile {
@@ -306,3 +334,4 @@ public class MediaStorageTool {
     }
 
 }
+

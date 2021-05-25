@@ -124,7 +124,7 @@ public class MediaRecoderTool {
             if (surfaceView != null) {
                 if (!isOpenCamera) {
                     camera =openCamera();
-                    //camera.getParameters().setFocusMode("auto");
+
                     camera.setDisplayOrientation(rotation);
                     camera.setPreviewDisplay(surfaceView.getHolder());
                     setFocus();//必须在unlock之前
@@ -176,23 +176,27 @@ public class MediaRecoderTool {
      * 设置连续对焦，初始化的时候必须在  camera.unlock();之前调用
      */
     public void setFocus() {
+        camera.lock();//设置摄像机
         Camera.Parameters parameters = camera.getParameters();
         // parameters.setPictureFormat(PixelFormat.JPEG);
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);//1连续对焦
+  //      parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+//        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+//        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);//1连续对焦
 
-        List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();//获取所有支持的camera尺寸
-        LogTool.s("jxd","optionSize : mSurfaceView "+surfaceView.getWidth()+" * "+surfaceView.getHeight());
-        Camera.Size optionSize = getOptimalPreviewSize(sizeList, surfaceView.getHeight(), surfaceView.getWidth());//获取一个最为适配的camera.size
-        LogTool.s("jxd","optionSize : "+optionSize.width+" * "+optionSize.height);
-        parameters.setPreviewSize(optionSize.width,optionSize.height);//把camera.size赋值到parameters
-
+//        List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();//获取所有支持的camera尺寸
+//        LogTool.s("jxd","optionSize : mSurfaceView "+surfaceView.getWidth()+" * "+surfaceView.getHeight());
+//        Camera.Size optionSize = getOptimalPreviewSize(sizeList, surfaceView.getHeight(), surfaceView.getWidth());//获取一个最为适配的camera.size
+//        LogTool.s("jxd","optionSize : "+optionSize.width+" * "+optionSize.height);
+//        parameters.setPreviewSize(optionSize.width,optionSize.height);//把camera.size赋值到parameters
+//
 
 
 
         camera.setParameters(parameters);
         camera.startPreview();
         camera.cancelAutoFocus();// 2如果要实现连续的自动对焦，这一句必须加上
+
+        camera.unlock();
     }
     /**
      * 解决预览变形问题

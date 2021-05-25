@@ -27,6 +27,7 @@ import kk.kktools.accessibilityTest.AccessibilityUtil;
 import kk.kktools.accessibilityTest.AutoQiangGouService;
 import kk.kktools.animation.ActivityAnimation1;
 import kk.kktools.animation.KKTestCanvas;
+import kk.kktools.camera.TestCameraFragmentKK;
 import kk.kktools.canvas.TestXFerModeFragmentKK;
 import kk.kktools.color.TestColorFragmentKK;
 import kk.kktools.http.HttpOkGoConfig;
@@ -142,7 +143,7 @@ public class MainActivityKK extends KKParentActivity {
         addItem("测试抖音效果", new DouYinFragment(), null);
         addItem("测试抖音效果2", new DouYinFragment2(), null);
         addItem("viewpager2", new ViewPager2Test(), null);
-
+        addItem("摄像头", new TestCameraFragmentKK(), null);
         addItem("图片选择器", new KKChooseImgFragmentKK(), null);
         addItem("颜色选择器", new TestColorFragmentKK(), null);
         addItem("密码输入", new KKChooseImgFragmentKK(), new KKViewOnclickListener() {

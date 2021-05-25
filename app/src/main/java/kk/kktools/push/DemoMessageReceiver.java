@@ -1,11 +1,16 @@
 package kk.kktools.push;
 
 import android.annotation.SuppressLint;
+import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -61,6 +66,24 @@ public class DemoMessageReceiver extends PushMessageReceiver {
     private String mStartTime;
     private String mEndTime;
 
+    /**
+     * 播放通知声音
+     */
+    public static void playRingTone(Context context) {
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone rt = RingtoneManager.getRingtone(context, uri);
+        rt.play();
+    }
+
+    /**
+     * 手机震动一下
+     */
+    public static void playVibrate(Context context) {
+        Vibrator vibrator = (Vibrator) context.getSystemService(Service.VIBRATOR_SERVICE);
+        long[] vibrationPattern = new long[]{0, 180, 80, 120};
+        // 第一个参数为开关开关的时间，第二个参数是重复次数，振动需要添加权限
+        vibrator.vibrate(vibrationPattern, -1);
+    }
     @Override
     public void onReceivePassThroughMessage(Context context, MiPushMessage message) {
         LogTool.s(message);
@@ -103,6 +126,8 @@ public class DemoMessageReceiver extends PushMessageReceiver {
 
     @Override
     public void onNotificationMessageArrived(Context context, MiPushMessage message) {
+        playRingTone(context);
+        playVibrate(context);
         CommonTool.showToast(message.getContent());
 //        Log.v(DemoApplication.TAG,
 //                "onNotificationMessageArrived is called. " + message.toString());
