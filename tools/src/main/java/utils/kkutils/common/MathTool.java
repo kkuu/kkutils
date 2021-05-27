@@ -313,4 +313,16 @@ public class MathTool {
             mediaPlayer.start();
         }
     }
+
+
+    /**
+     * 保留指定小数位数 四舍五入
+     * @param in
+     * @param num
+     * @return
+     */
+    public static double baoLiuXiaoShu(double in,int num){
+        BigDecimal bigDecimal=new BigDecimal(in);
+        return  bigDecimal.setScale(num,BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
 }
